@@ -2,3 +2,8 @@
 	path = .bot
 	url = https://github.com/anishathalye/dotbot.git
 	ignore = dirty
+
+[submodule "ansi-arts"]
+	path = ansi-arts
+	url = https://github.com/latipun7/ansi-arts.git
+	ignore = dirty
