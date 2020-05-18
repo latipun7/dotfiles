@@ -1,0 +1,12 @@
+#!/bin/bash
+
+DEFAULT="sleman"
+CITY=""
+
+if [ $# -eq 0 ]; then
+  CITY=$DEFAULT
+else
+  CITY=$1
+fi
+
+curl -fsSL wttr.in/$CITY

@@ -1,0 +1,21 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+      force: true
+
+- clean: ["~", "~/.config"]
+
+- link:
+    ~/.ansi-arts:
+    ~/.bin: linux/bin
+    ~/.config/neofetch: linux/neofetch
+    ~/.gitconfig: linux/git/wsl.gitconfig
+    ~/.oh-my-zsh-custom: linux/oh-my-zsh
+    ~/.zshrc: linux/zsh/zshrc.zsh
+
+- create: [~/projects, ~/downloads]
+
+- shell:
+    - [git submodule sync --recursive, Synchronize the URLs of submodules]
+    - [git submodule update --init --recursive, Update the submodules]
