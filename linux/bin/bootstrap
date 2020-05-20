@@ -1,0 +1,74 @@
+#!/bin/bash
+#
+# Bootstrap packages (install packages)
+
+set -e
+
+echo ""
+
+info () {
+  echo -e "\n  \e[00;35m==>\e[0m $1 ℹ\n"
+}
+
+success () {
+  echo -e "\n\e[2K  \e[00;32m==>\e[0m $1 ✅\n"
+}
+
+fail () {
+  echo -e "\n\e[2K  \e[0;31m==>\e[0m $1 ❌\n"
+  echo ''
+  exit 1
+}
+
+info 'Update and upgrade packages from official source.list'
+sudo apt update && sudo apt full-upgrade -y
+success 'Upgraded successfully'
+
+# install homebrew if it's not installed otherwise update brew
+if hash brew 2>/dev/null; then
+  info 'Update brew formulas'
+  brew update
+  success 'Formulas updated'
+else
+  info 'Install homebrew (linuxbrew)'
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  success 'Homebrew (linuxbrew) installed successfully'
+fi
+
+info 'Install homebrew build dependencies and add brew to PATH'
+if [ -d "/home/linuxbrew/.linuxbrew" ]; then
+  sudo apt install build-essential -y
+  eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv);
+fi
+
+# make homebrew available in non-sudo installs
+[ -d "${HOME}/.linuxbrew" ] && eval $(${HOME}/.linuxbrew/bin/brew shellenv);
+success 'brew added to PATH and brew build dependencies installed successfully'
+
+# Installing stuff
+info 'Installing all fun stuff ...'
+
+# Install yarn
+[ ! hash yarn 2>/dev/null ] && curl -o- -L https://yarnpkg.com/install.sh | bash
+
+# Install OMZ if .oh-my-zsh directory not already in home
+[ ! -d "$HOME/.oh-my-zsh" ] && sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+
+# Install ponysay
+if [ ! -d "${HOME}/.ponysay" ]; then
+  git clone --depth 1 https://github.com/erkin/ponysay.git ${HOME}/.ponysay
+# else
+#   rm -rf ${HOME}/.ponysay
+#   git clone --depth 1 https://github.com/erkin/ponysay.git ${HOME}/.ponysay
+fi
+sudo apt install coreutils python3 -y
+cd ${HOME}/.ponysay
+sudo ./setup.py --freedom=partial --with-custom-env-python=`command -v python3` install
+
+# Install packages with brew
+if [ -s "${HOME}/Brewfile" ]; then
+  brew bundle --file=$HOME/Brewfile;
+else
+  fail "Brewfile not found on home directory."
+fi
+success 'All stuff installed and already up-to-date'

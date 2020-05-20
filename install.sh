@@ -2,7 +2,7 @@
 
 set -e
 
-CONFIG="wsl.conf.yml"
+CONFIG="install.conf.yml"
 DOTBOT_DIR=".bot"
 
 DOTBOT_BIN="bin/dotbot"
