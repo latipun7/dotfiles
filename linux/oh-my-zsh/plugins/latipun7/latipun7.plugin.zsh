@@ -75,6 +75,13 @@ if hash bat 2>/dev/null; then
 fi
 
 ########################
+#   ZSH Keybindings    #
+########################
+
+# C-backspace to delete previous word
+bindkey '^H' backward-kill-word
+
+########################
 #   ZSH Completions    #
 ########################
 

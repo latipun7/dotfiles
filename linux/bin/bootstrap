@@ -4,6 +4,8 @@
 
 set -e
 
+BREW_PREFIX=`brew --prefix`
+
 echo ""
 
 info () {
@@ -48,11 +50,14 @@ success 'brew added to PATH and brew build dependencies installed successfully'
 # Installing stuff
 info 'Installing all fun stuff ...'
 
+# Upgrade any already-installed formulae.
+brew upgrade
+
 # Install yarn
 [ ! hash yarn 2>/dev/null ] && curl -o- -L https://yarnpkg.com/install.sh | bash
 
 # Install OMZ if .oh-my-zsh directory not already in home
-[ ! -d "$HOME/.oh-my-zsh" ] && sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+[ ! -d "${HOME}/.oh-my-zsh" ] && sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 # Install ponysay
 if [ ! -d "${HOME}/.ponysay" ]; then
@@ -67,8 +72,19 @@ sudo ./setup.py --freedom=partial --with-custom-env-python=`command -v python3` 
 
 # Install packages with brew
 if [ -s "${HOME}/Brewfile" ]; then
-  brew bundle --file=$HOME/Brewfile;
+  brew bundle --file=${HOME}/Brewfile;
 else
   fail "Brewfile not found on home directory."
 fi
 success 'All stuff installed and already up-to-date'
+
+# Switch default shell to zsh from brew
+if ! grep -q "${BREW_PREFIX}/bin/zsh" /etc/shells; then
+  info 'Make zsh installed from brew to default shell'
+  echo "${BREW_PREFIX}/bin/zsh" | sudo tee -a /etc/shells
+  chsh -s "${BREW_PREFIX}/bin/zsh"
+  success 'zsh shell changed with brew installed'
+fi
+
+# Remove outdated versions from the cellar.
+brew cleanup

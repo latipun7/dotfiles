@@ -80,13 +80,13 @@ ZSH_CUSTOM=$HOME/.oh-my-zsh-custom
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  zsh-nvm
+  zsh-nvm # need as early as possible
   git
-  zsh-syntax-highlighting
   zsh-autosuggestions
   zsh-completions
   latipun7
-  fzf
+  fzf # need after latipun
+  zsh-syntax-highlighting # need to load last
 )
 
 source $ZSH/oh-my-zsh.sh

@@ -1,15 +1,21 @@
 tap "homebrew/bundle"
 tap "homebrew/core"
+
+# Build tools
+brew "gcc"
+
+# Utilities
 brew "bat"
+brew "fzf"
+brew "htop"
+brew "lsd"
+brew "midnight-commander"
+brew "zsh"
+
+# Games / Fun
 brew "cmatrix"
 brew "cowsay"
 brew "fortune"
-brew "fzf"
-brew "gcc"
-brew "htop"
 brew "lolcat"
-brew "lsd"
-brew "midnight-commander"
 brew "neofetch"
 brew "sl"
-brew "zsh"

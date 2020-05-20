@@ -37,8 +37,9 @@ This repo contains my personal configuration for Linux and Windows.
   **Tip**: If script won't run after cloning it, see the permission. Make sure it has
   execution permission for user, otherwise run `chmod u+x ~/.dotfiles/install.sh`
 
-- Exit current terminal session: `exit`
+- Exit current terminal session: `exit`, then start new terminal session.
 - Run `nvm install node` and then `bootstrap`.
+- `exit` and start new terminal session.
 - Now this configuration already installed in your machine.
 
 ## Resources
