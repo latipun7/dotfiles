@@ -87,4 +87,7 @@ if ! grep -q "${BREW_PREFIX}/bin/zsh" /etc/shells; then
 fi
 
 # Remove outdated versions from the cellar.
+info 'Cleanup outdated versions from brew cellar.'
 brew cleanup
+
+success 'All done!'
