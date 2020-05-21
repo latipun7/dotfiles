@@ -1,5 +1,6 @@
 [credential]
   helper = cache
+
 [user]
   name = LS
   email = latifsulistyo.me@gmail.com

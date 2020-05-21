@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 DEFAULT="sleman"
 CITY=""
@@ -9,4 +9,4 @@ else
   CITY=$1
 fi
 
-curl -fsSL wttr.in/$CITY
+curl -fsSL wttr.in/"$CITY"

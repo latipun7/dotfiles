@@ -1,22 +1,22 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # Bootstrap packages (install packages)
 
 set -e
 
-BREW_PREFIX=`brew --prefix`
+BREW_PREFIX=$(brew --prefix)
 
 echo ""
 
-info () {
+info() {
   echo -e "\n  \e[00;35m==>\e[0m $1 ℹ\n"
 }
 
-success () {
+success() {
   echo -e "\n\e[2K  \e[00;32m==>\e[0m $1 ✅\n"
 }
 
-fail () {
+fail() {
   echo -e "\n\e[2K  \e[0;31m==>\e[0m $1 ❌\n"
   echo ''
   exit 1
@@ -40,11 +40,11 @@ fi
 info 'Install homebrew build dependencies and add brew to PATH'
 if [ -d "/home/linuxbrew/.linuxbrew" ]; then
   sudo apt install build-essential -y
-  eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv);
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
 # make homebrew available in non-sudo installs
-[ -d "${HOME}/.linuxbrew" ] && eval $(${HOME}/.linuxbrew/bin/brew shellenv);
+[ -d "$HOME/.linuxbrew" ] && eval "$("$HOME/.linuxbrew/bin/brew" shellenv)"
 success 'brew added to PATH and brew build dependencies installed successfully'
 
 # Installing stuff
@@ -54,35 +54,35 @@ info 'Installing all fun stuff ...'
 brew upgrade
 
 # Install yarn
-[ ! hash yarn 2>/dev/null ] && curl -o- -L https://yarnpkg.com/install.sh | bash
+! hash yarn 2>/dev/null && curl -o- -L https://yarnpkg.com/install.sh | bash
 
 # Install OMZ if .oh-my-zsh directory not already in home
-[ ! -d "${HOME}/.oh-my-zsh" ] && sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+[ ! -d "$HOME/.oh-my-zsh" ] && sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 # Install ponysay
-if [ ! -d "${HOME}/.ponysay" ]; then
-  git clone --depth 1 https://github.com/erkin/ponysay.git ${HOME}/.ponysay
+if [ ! -d "$HOME/.ponysay" ]; then
+  git clone --depth 1 https://github.com/erkin/ponysay.git "$HOME/.ponysay"
 # else
 #   rm -rf ${HOME}/.ponysay
 #   git clone --depth 1 https://github.com/erkin/ponysay.git ${HOME}/.ponysay
 fi
 sudo apt install coreutils python3 -y
-cd ${HOME}/.ponysay
-sudo ./setup.py --freedom=partial --with-custom-env-python=`command -v python3` install
+cd "$HOME/.ponysay"
+sudo ./setup.py --freedom=partial --with-custom-env-python="$(command -v python3)" install
 
 # Install packages with brew
-if [ -s "${HOME}/Brewfile" ]; then
-  brew bundle --file=${HOME}/Brewfile;
+if [ -s "$HOME/Brewfile" ]; then
+  brew bundle --file="$HOME/Brewfile"
 else
   fail "Brewfile not found on home directory."
 fi
 success 'All stuff installed and already up-to-date'
 
 # Switch default shell to zsh from brew
-if ! grep -q "${BREW_PREFIX}/bin/zsh" /etc/shells; then
+if ! grep -q "$BREW_PREFIX/bin/zsh" /etc/shells; then
   info 'Make zsh installed from brew to default shell'
-  echo "${BREW_PREFIX}/bin/zsh" | sudo tee -a /etc/shells
-  chsh -s "${BREW_PREFIX}/bin/zsh"
+  echo "$BREW_PREFIX/bin/zsh" | sudo tee -a /etc/shells
+  chsh -s "$BREW_PREFIX/bin/zsh"
   success 'zsh shell changed with brew installed'
 fi
 

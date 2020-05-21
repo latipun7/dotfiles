@@ -1,14 +1,14 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 FILES=~/.ansi-arts/ponysay
 args=()
 
-for f in $(find "$FILES" -type f); do
-  args+=("-F $f")
-done
+while IFS= read -r file; do
+  args+=(-F "$file")
+done < <(find "$FILES" -type f)
 
 if hash fortune 2>/dev/null && hash ponysay 2>/dev/null; then
-  fortune | ponysay -W i -b round ${args[@]}
+  fortune | ponysay -W i -b round "${args[@]}"
 else
   echo -e "\e[1;35mfortune\e[0m and \e[1;35mponysay\e[0m are required packages.\nPlease install them."
   exit 1

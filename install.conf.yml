@@ -8,12 +8,12 @@
 
 - link:
     ~/.gitconfig:
-      if: "[[ `uname -a` == *Microsoft* ]]" # check if it is wsl linux
+      if: "[[ $(uname -a) == *Microsoft* ]]" # check if it is wsl linux
       path: linux/git/wsl.gitconfig
 
 - link:
     ~/.gitconfig:
-      if: "[[ `uname -a` != *Microsoft* ]]" # check if it is regular linux
+      if: "[[ $(uname -a) != *Microsoft* ]]" # check if it is regular linux
       path: linux/git/linux.gitconfig
 
 - link:
