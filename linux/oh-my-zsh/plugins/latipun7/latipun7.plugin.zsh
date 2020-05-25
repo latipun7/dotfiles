@@ -55,7 +55,7 @@ if hash bat 2>/dev/null; then
 fi
 
 # fzf base dir
-export FZF_BASE=`command -v fzf`
+export FZF_BASE=$(command -v fzf)
 
 ########################
 #        Aliases       #
