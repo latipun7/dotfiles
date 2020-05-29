@@ -1,32 +1,29 @@
+- clean: ["~", "~/.config"]
+
+#############################
+#          Common           #
+#############################
 - defaults:
     link:
       create: true
       relink: true
       force: true
 
-- clean: ["~", "~/.config"]
-
-- link:
-    ~/.gitconfig:
-      if: "[[ $(uname -a) == *Microsoft* ]]" # check if it is wsl linux
-      path: linux/git/wsl.gitconfig
-
-- link:
-    ~/.gitconfig:
-      if: "[[ $(uname -a) != *Microsoft* ]]" # check if it is regular linux
-      path: linux/git/linux.gitconfig
-
 - link:
     ~/.ansi-arts:
     ~/.bin: linux/bin
     ~/.config/neofetch: linux/neofetch
+    ~/.gitconfig: linux/git/linux.gitconfig
     ~/.oh-my-zsh-custom: linux/oh-my-zsh
     ~/.p10k.zsh: linux/zsh/p10k.zsh
     ~/.zshrc: linux/zsh/zshrc.zsh
     ~/Brewfile: linux/linuxbrew/Brewfile
 
+#############################
 - create: [~/projects, ~/downloads]
 
 - shell:
-    - [git submodule sync --recursive, Synchronize the URLs of submodules]
-    - [git submodule update --init --recursive, Update the submodules]
+    - [
+        '[[ "$(uname -a)" = *[M,m]icrosoft* ]] && sudo cp --remove-destination "linux/wsl/wsl.conf" /etc/wsl.conf',
+        Force re-copy wsl configs,
+      ]

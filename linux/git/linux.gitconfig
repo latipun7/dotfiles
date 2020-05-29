@@ -1,5 +1,5 @@
 [credential]
-  helper = cache
+  helper = libsecret
 
 [user]
   name = LS
