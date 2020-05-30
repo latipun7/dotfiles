@@ -26,20 +26,24 @@ This repo contains my personal configuration for Linux and Windows.
 - Support both normal linux or WSL.
 - _Windows dotfiles coming soon_.
 
+**Important**: You need [nerd font][nerd-fonts] in your terminal.
+Install the font of your choosing and use that font in your terminal.
+
 ## Installation
 
-- Clone this repo and run `install.sh` if you are on Linux.
+- If you are on Linux, run this command:
 
   ```bash
   git clone --recurse-submodules -j 8 https://github.com/latipun7/dotfiles.git ~/.dotfiles && ~/.dotfiles/install.sh
   ```
 
+  It clone this repo and then execute the install script for linux.
+
   **Tip**: If script won't run after cloning it, see the permission. Make sure it has
   execution permission for user, otherwise run `chmod u+x ~/.dotfiles/install.sh`
 
 - Exit current terminal session: `exit`, then start new terminal session.
-- Run `nvm install node` and then `bootstrap`.
-- `exit` and start new terminal session.
+- Run `nvm install node && nvm use node` and then `bootstrap`.
 - Now this configuration already installed in your machine.
 
 ## Resources
@@ -68,3 +72,4 @@ for performance. Suggestion and criticism are open.
 [anish]: https://github.com/anishathalye/dotfiles "Anish's dotfiles"
 [holman]: https://github.com/holman/dotfiles "Holman does dotfiles"
 [bash]: https://www.gnu.org/software/bash/manual/bash.html "Bash Manual"
+[nerd-fonts]: https://www.nerdfonts.com/ "NerdFonts"

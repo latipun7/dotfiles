@@ -4,19 +4,17 @@
 
 set -e
 
-BREW_PREFIX=$(brew --prefix)
-
 echo ""
 
-info() {
-  echo -e "\n  \e[00;35m==>\e[0m $1 ℹ\n"
+function info() {
+  echo -e "\n  \e[1;35m==>\e[0m $1 ℹ\n"
 }
 
-success() {
-  echo -e "\n\e[2K  \e[00;32m==>\e[0m $1 ✅\n"
+function success() {
+  echo -e "\n\e[2K  \e[0;32m==>\e[0m $1 ✅\n"
 }
 
-fail() {
+function fail() {
   echo -e "\n\e[2K  \e[0;31m==>\e[0m $1 ❌\n"
   echo ''
   exit 1
@@ -33,15 +31,13 @@ if hash brew 2>/dev/null; then
   success 'Formulas updated'
 else
   info 'Install homebrew (linuxbrew)'
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  CI=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   success 'Homebrew (linuxbrew) installed successfully'
 fi
 
 info 'Install homebrew build dependencies and add brew to PATH'
-if [ -d "/home/linuxbrew/.linuxbrew" ]; then
-  sudo apt install build-essential -y
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-fi
+sudo apt install build-essential -y
+[ -d "/home/linuxbrew/.linuxbrew" ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # make homebrew available in non-sudo installs
 [ -d "$HOME/.linuxbrew" ] && eval "$("$HOME/.linuxbrew/bin/brew" shellenv)"
@@ -54,19 +50,15 @@ info 'Installing all fun stuff ...'
 brew upgrade
 
 # Install yarn
-! hash yarn 2>/dev/null && curl -o- -L https://yarnpkg.com/install.sh | bash
-
-# Install OMZ if .oh-my-zsh directory not already in home
-[ ! -d "$HOME/.oh-my-zsh" ] && sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+hash node 2>/dev/null && ! hash yarn 2>/dev/null && curl -o- -L https://yarnpkg.com/install.sh | bash
 
 # Install ponysay
 if [ ! -d "$HOME/.ponysay" ]; then
   git clone --depth 1 https://github.com/erkin/ponysay.git "$HOME/.ponysay"
-# else
-#   rm -rf ${HOME}/.ponysay
-#   git clone --depth 1 https://github.com/erkin/ponysay.git ${HOME}/.ponysay
+else
+  git -C "$HOME/.ponysay" pull --depth 1
 fi
-sudo apt install coreutils python3 -y
+sudo apt install coreutils python3 gzip texinfo -y
 cd "$HOME/.ponysay"
 sudo ./setup.py --freedom=partial --with-custom-env-python="$(command -v python3)" install
 
@@ -78,16 +70,20 @@ else
 fi
 success 'All stuff installed and already up-to-date'
 
+# Remove outdated versions from the cellar.
+info 'Cleanup outdated versions from brew cellar.'
+brew cleanup
+
+# Install OMZ if .oh-my-zsh directory not already in home
+[ ! -d "$HOME/.oh-my-zsh" ] && sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc
+
 # Switch default shell to zsh from brew
+BREW_PREFIX=$(brew --prefix)
 if ! grep -q "$BREW_PREFIX/bin/zsh" /etc/shells; then
   info 'Make zsh installed from brew to default shell'
   echo "$BREW_PREFIX/bin/zsh" | sudo tee -a /etc/shells
   chsh -s "$BREW_PREFIX/bin/zsh"
-  success 'zsh shell changed with brew installed'
+  success 'Changed to zsh shell from brew installed zsh'
 fi
-
-# Remove outdated versions from the cellar.
-info 'Cleanup outdated versions from brew cellar.'
-brew cleanup
 
 success 'All done!'

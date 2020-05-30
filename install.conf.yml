@@ -24,6 +24,6 @@
 
 - shell:
     - [
-        '[[ "$(uname -a)" = *[M,m]icrosoft* ]] && sudo cp --remove-destination "linux/wsl/wsl.conf" /etc/wsl.conf',
+        '[[ "$(uname -a)" = *[Mm]icrosoft* ]] && sudo cp --remove-destination "linux/wsl/wsl.conf" /etc/wsl.conf',
         Force re-copy wsl configs,
       ]
