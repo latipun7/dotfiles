@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+directory=/e/Data/Fonts/@font-patcher
+
+if [ -d "$directory" ]; then
+  cd "$directory" || exit
+  fontforge -lang=py -script font-patcher "$@"
+fi

@@ -4,14 +4,17 @@ tap "homebrew/core"
 # Build tools
 brew "gcc"
 
-# Utilities
+# Replacements
 brew "bat"
+brew "lsd"
+brew "zsh"
+
+# Utilities
+brew "fontforge"
 brew "fzf"
 brew "htop"
-brew "lsd"
 brew "midnight-commander"
 brew "shellcheck"
-brew "zsh"
 
 # Games / Fun
 brew "cmatrix"
