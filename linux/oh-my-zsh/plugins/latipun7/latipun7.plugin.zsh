@@ -3,37 +3,6 @@
 ########################
 export PATH=$HOME/.bin:$PATH
 
-# linuxbrew PATH
-
-##- linux OS
-if [[ "$OSTYPE" == linux-gnu ]]; then
-
-  # make homebrew available in sudo linux install
-  if [ -d "/home/linuxbrew/.linuxbrew" ]; then
-    eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv);
-  fi
-
-  # make available in non sudo linux install
-  if [ -d "$HOME/.linuxbrew" ]; then
-    eval $($HOME/.linuxbrew/bin/brew shellenv);
-  fi
-
-##- macOS
-elif [[ "$OSTYPE" == darwin* ]]; then
-  # prevents error of % popping up in terminal on login
-  setopt PROMPT_CR
-  setopt PROMPT_SP
-  export PROMPT_EOL_MARK=""
-
-  # make homebrew available in sudo mac install
-  if [ -d "/usr/local/Cellar" ]; then
-    eval $(/usr/local/bin/brew shellenv);
-  fi
-
-else
-   echo "homebrew not available in the current OS type.";
-fi
-
 ########################
 #    Login Command     #
 ########################
