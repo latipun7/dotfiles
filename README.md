@@ -18,6 +18,11 @@ So, [fork it](https://github.com/latipun7/dotfiles/fork), customize to your pers
 settings, remove what you don't need, add what you need. Or create [new repo](https://github.com/new)
 and make this repo and other dotfiles repo as inspirations.
 
+### Screenshots
+
+![screenshot1-2020-05-31](./assets/screenshots/2020-05-31_13-00-45_WindowsTerminal.png)
+![screenshot2-2020-05-31](./assets/screenshots/2020-05-31_13-03-23_WindowsTerminal.png)
+
 ## What in this Repo
 
 This repo contains my personal configuration for Linux and Windows.
@@ -26,8 +31,9 @@ This repo contains my personal configuration for Linux and Windows.
 - Support both normal linux or WSL.
 - _Windows dotfiles coming soon_.
 
-**Important**: You need [nerd font][nerd-fonts] in your terminal.
+**Important**: You need [nerd fonts][nerd-fonts] in your terminal.
 Install the font of your choosing and use that font in your terminal.
+This repo already included [font that I personally use][my-font].
 
 ## Installation
 
@@ -73,3 +79,4 @@ for performance. Suggestion and criticism are open.
 [holman]: https://github.com/holman/dotfiles "Holman does dotfiles"
 [bash]: https://www.gnu.org/software/bash/manual/bash.html "Bash Manual"
 [nerd-fonts]: https://www.nerdfonts.com/ "NerdFonts"
+[my-font]: ./assets/fonts/Caskaydia%20Cove%20PL%20Regular%20Nerd%20Font%20Complete%20Windows%20Compatible.otf "CaskaydiaCove NF (self-patched)"
