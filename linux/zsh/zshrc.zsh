@@ -7,18 +7,15 @@ fi
 
 # Make linuxbrew PATH available before sourcing OMZ
 if [[ "$OSTYPE" = linux-gnu ]]; then
-  [ -d "/home/linuxbrew/.linuxbrew" ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
-  [ -d "$HOME/.linuxbrew" ] && eval "$($HOME/.linuxbrew/bin/brew shellenv)"
+  [ -d "/home/linuxbrew/.linuxbrew" ] &&
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  [ -d "$HOME/.linuxbrew" ] &&
+    eval "$($HOME/.linuxbrew/bin/brew shellenv)"
 elif [[ "$OSTYPE" = darwin* ]]; then
   [ -d "/usr/local/Cellar" ] && eval "$(/usr/local/bin/brew shellenv)"
 else
    echo "homebrew not available in the current OS type.";
 fi
-
-# ZSH-NVM Options: https://github.com/lukechilds/zsh-nvm#options
-export NVM_LAZY_LOAD=true
-export NVM_AUTO_USE=true
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -91,12 +88,12 @@ ZSH_CUSTOM=$HOME/.oh-my-zsh-custom
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  zsh-nvm # need as early as possible
+  latipun7
+  zsh-nvm # need after latipun & early for node/npm available for any other plugins
   git
+  fzf
   zsh-autosuggestions
   zsh-completions
-  latipun7
-  fzf # need after latipun
   zsh-syntax-highlighting # need to load last
 )
 

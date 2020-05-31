@@ -37,10 +37,12 @@ fi
 
 info 'Install homebrew build dependencies and add brew to PATH'
 sudo apt install build-essential -y
-[ -d "/home/linuxbrew/.linuxbrew" ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+[ -d "/home/linuxbrew/.linuxbrew" ] &&
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # make homebrew available in non-sudo installs
-[ -d "$HOME/.linuxbrew" ] && eval "$("$HOME/.linuxbrew/bin/brew" shellenv)"
+[ -d "$HOME/.linuxbrew" ] &&
+  eval "$("$HOME/.linuxbrew/bin/brew" shellenv)"
 success 'brew added to PATH and brew build dependencies installed successfully'
 
 # Installing stuff
@@ -50,7 +52,9 @@ info 'Installing all fun stuff ...'
 brew upgrade
 
 # Install yarn
-hash node 2>/dev/null && ! hash yarn 2>/dev/null && curl -o- -L https://yarnpkg.com/install.sh | bash
+hash node 2>/dev/null &&
+  ! hash yarn 2>/dev/null &&
+  curl -o- -L https://yarnpkg.com/install.sh | bash
 
 # Install ponysay
 if [ ! -d "$HOME/.ponysay" ]; then
@@ -60,7 +64,10 @@ else
 fi
 sudo apt install coreutils python3 gzip texinfo -y
 cd "$HOME/.ponysay"
-sudo ./setup.py --freedom=partial --with-custom-env-python="$(command -v python3)" install
+sudo ./setup.py \
+  --freedom=partial \
+  --with-custom-env-python="$(command -v python3)" \
+  install
 
 # Install packages with brew
 if [ -s "$HOME/Brewfile" ]; then
@@ -75,7 +82,9 @@ info 'Cleanup outdated versions from brew cellar.'
 brew cleanup
 
 # Install OMZ if .oh-my-zsh directory not already in home
-[ ! -d "$HOME/.oh-my-zsh" ] && sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc
+[ ! -d "$HOME/.oh-my-zsh" ] &&
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" \
+  "" --unattended --keep-zshrc
 
 # Switch default shell to zsh from brew
 BREW_PREFIX=$(brew --prefix)

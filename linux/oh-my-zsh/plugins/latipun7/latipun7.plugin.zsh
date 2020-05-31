@@ -6,7 +6,7 @@ export PATH=$HOME/.bin:$PATH
 ########################
 #    Login Command     #
 ########################
-chara
+hash chara 2>/dev/null && chara
 
 ########################
 #   General Tweaks     #
@@ -19,29 +19,27 @@ umask 022
 export EDITOR=vim
 
 # batman syntax highlight -> https://github.com/sharkdp/bat#man
-if hash bat 2>/dev/null; then
-  export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-fi
+hash bat 2>/dev/null && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-# fzf base dir
-export FZF_BASE=$(command -v fzf)
+# ZSH-NVM Options: https://github.com/lukechilds/zsh-nvm#options
+export NVM_LAZY_LOAD=true
+export NVM_AUTO_USE=true
 
 ########################
 #        Aliases       #
 ########################
 
 # lsd alias
-if hash bat 2>/dev/null; then
+if hash lsd 2>/dev/null; then
   alias ls=lsd
+  alias l='lsd -la --group-dirs first'
   alias ll='lsd -lA --group-dirs first --total-size'
   alias lll='lsd -la --group-dirs first --total-size'
-  alias lt='lsd --tree'
+  alias lt='lsd --tree -A --group-dirs first'
 fi
 
 # bat alias
-if hash bat 2>/dev/null; then
-  alias cat=bat
-fi
+hash bat 2>/dev/null && alias cat=bat
 
 ########################
 #   ZSH Keybindings    #
@@ -55,8 +53,7 @@ bindkey '^H' backward-kill-word
 ########################
 
 # brew completion
-if hash brew 2>/dev/null; then
-  fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
-fi
+hash brew 2>/dev/null &&
+  fpath=("$(brew --prefix)/share/zsh/site-functions" $fpath)
 
 autoload -Uz compinit && compinit
