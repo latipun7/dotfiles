@@ -12,13 +12,16 @@ hash chara 2>/dev/null && chara
 #   General Tweaks     #
 ########################
 
-# default file and folder permission to 755
+# default file and folder mask permission
 umask 022
+
+# default directory of this dotfiles
+export DOTFILES="$HOME/.files"
 
 # default editor
 export EDITOR=vim
 
-# batman syntax highlight -> https://github.com/sharkdp/bat#man
+# batman syntax highlight for man pages -> https://github.com/sharkdp/bat#man
 hash bat 2>/dev/null && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # ZSH-NVM Options: https://github.com/lukechilds/zsh-nvm#options
