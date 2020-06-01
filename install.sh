@@ -21,7 +21,7 @@ fi
 git -C "$DOTDIR" submodule sync --recursive
 git -C "$DOTDIR" submodule update --init --recursive
 
-"${DOTDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${DOTDIR}" -c "${CONFIG}" "${@}"
+"$DOTDIR/$DOTBOT_DIR/$DOTBOT_BIN" -d "$DOTDIR" -c "$DOTDIR/$CONFIG" "$@"
 
 function info() {
   echo -e "\n  \e[1;35m==>\e[0m $1 ℹ\n"
