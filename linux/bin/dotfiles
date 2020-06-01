@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -i|--install)
+      if [ -d "$HOME/.files" ]; then
+        "$HOME/.files/install.sh"
+      else
+        bash -c "$(curl -fsSL https://ruppy.io/install-dotfiles)"
+      fi
+      exit
+    ;;
+    -u|--update)
+      if [ -d "$HOME/.files" ]; then
+        git -C "$HOME/.files" pull
+      else
+        bash -c "$(curl -fsSL https://ruppy.io/install-dotfiles)"
+      fi
+      exit
+    ;;
+    *)
+      echo -e "\e[1;35mdotfiles\e[0m <\e[1;35m-i\e[0m|\e[1;35m--install\e[0m> to install dotfiles or \e[1;35mdotfiles\e[0m <\e[1;35m-u\e[0m|\e[1;35m--update\e[0m> to update dotfiles."
+      exit 1
+    ;;
+  esac
+done
+
+if [[ $# = 0 ]]; then
+  if [ -d "$HOME/.files" ]; then
+    "$HOME/.files/install.sh"
+  else
+    bash -c "$(curl -fsSL https://ruppy.io/install-dotfiles)"
+  fi
+fi

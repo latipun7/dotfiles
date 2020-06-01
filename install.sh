@@ -2,6 +2,11 @@
 
 set -e
 
+if [ ! -d "$HOME/.files" ]; then
+  git clone --recurse-submodules -j 8 https://github.com/latipun7/dotfiles.git "$HOME/.files"
+  chmod -R +x "$HOME/.files/install.sh" "$HOME/.files/linux/bin"
+fi
+
 CONFIG="install.conf.yml"
 DOTBOT_DIR=".bot"
 

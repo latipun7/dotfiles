@@ -37,20 +37,27 @@ This repo already included [font that I personally use][my-font].
 
 ## Installation
 
-- If you are on Linux, run this command:
+If you are on Linux, run this command to **install** this dotfiles:
+
+- Install this dotfiles:
 
   ```bash
-  git clone --recurse-submodules -j 8 https://github.com/latipun7/dotfiles.git ~/.dotfiles && ~/.dotfiles/install.sh
+  bash -c "$(curl -fsSL https://ruppy.io/install-dotfiles)"
   ```
 
-  It clone this repo and then execute the install script for linux.
-
-  **Tip**: If script won't run after cloning it, see the permission. Make sure it has
-  execution permission for user, otherwise run `chmod u+x ~/.dotfiles/install.sh`
-
-- Exit current terminal session: `exit`, then start new terminal session.
-- Run `nvm install node && nvm use node` and then `bootstrap`.
+- Exit current terminal session: `exit`, then start new terminal session
+- Run `nvm install node && nvm use node && bootstrap`
 - Now this configuration already installed in your machine.
+
+### Tips
+
+If you follow the steps above, you can runs the following commands:
+
+- Run `bootstrap` regularly to update apps/packages.
+- Run `dotfiles` or `dotfiles -i` or `dotfiles --install` to install.
+- Run `dotfiles -u` or `dotfiles --update` to update the dotfiles.
+- Run `chara` to see the characters saying some quotes.
+- Run `weather` or `weather "desired city"` to check weathers on that city.
 
 ## Resources
 
