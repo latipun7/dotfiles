@@ -22,5 +22,5 @@ brew "cowsay"
 brew "fortune"
 brew "lolcat"
 brew "neofetch"
-brew "ponysay"
+brew "ponysay", args: ["HEAD"]
 brew "sl"
