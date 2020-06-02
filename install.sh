@@ -14,7 +14,11 @@ else
 fi
 
 if [ ! -d "$HOME/.files" ]; then
-  git clone --recurse-submodules -j 8 https://github.com/latipun7/dotfiles.git "$DOTDIR"
+  git clone \
+    --recurse-submodules \
+    --shallow-submodules \
+    -j 7 \
+    https://github.com/latipun7/dotfiles.git "$DOTDIR"
   chmod -R +x "$DOTDIR/install.sh" "$DOTDIR/linux/bin"
 fi
 

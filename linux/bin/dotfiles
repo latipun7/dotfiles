@@ -1,21 +1,99 @@
 #!/usr/bin/env bash
 
+if [ -z "$DOTFILES" ]; then
+  DOTDIR="$HOME/.files"
+else
+  DOTDIR="$DOTFILES"
+fi
+
+BOTDIR="$DOTDIR/.bot"
+ANSIDIR="$DOTDIR/ansi-arts"
+P10KDIR="$DOTDIR/linux/oh-my-zsh/themes/powerlevel10k"
+AUTODIR="$DOTDIR/linux/oh-my-zsh/plugins/zsh-autosuggestions"
+COMPDIR="$DOTDIR/linux/oh-my-zsh/plugins/zsh-completions"
+NVMDIR="$DOTDIR/linux/oh-my-zsh/plugins/zsh-nvm"
+SYNTDIR="$DOTDIR/linux/oh-my-zsh/plugins/zsh-syntax-highlighting"
+
+function install_script() {
+  bash -c "$(curl -fsSL https://ruppy.io/install-dotfiles)"
+}
+
+function install() {
+  if [ -d "$DOTDIR" ]; then
+    "$DOTDIR/install.sh"
+  else
+    install_script
+  fi
+}
+
+function update() {
+  if [ -d "$DOTDIR" ]; then
+    if [[ $# -eq 1 ]]; then
+      git -C "$DOTDIR" pull
+      exit
+    fi
+
+    while [[ $# -gt 1 ]]; do
+      case "$2" in
+        bot|dotbot)
+          git -C "$BOTDIR" pull --depth 1
+          git -C "$BOTDIR" checkout FETCH_HEAD
+          exit
+        ;;
+        ansi|ansi-arts)
+          git -C "$ANSIDIR" pull --depth 1
+          git -C "$ANSIDIR" checkout FETCH_HEAD
+          exit
+        ;;
+        p10k|powerlevel10k)
+          git -C "$P10KDIR" pull --depth 1
+          git -C "$P10KDIR" checkout FETCH_HEAD
+          exit
+        ;;
+        autosuggestions|zsh-autosuggestions)
+          git -C "$AUTODIR" pull --depth 1
+          git -C "$AUTODIR" checkout FETCH_HEAD
+          exit
+        ;;
+        completions|zsh-completions)
+          git -C "$COMPDIR" pull --depth 1
+          git -C "$COMPDIR" checkout FETCH_HEAD
+          exit
+        ;;
+        nvm|zsh-nvm)
+          git -C "$NVMDIR" pull --depth 1
+          git -C "$NVMDIR" checkout FETCH_HEAD
+          exit
+        ;;
+        syntax|zsh-syntax|highlighting|zsh-syntax-highlighting)
+          git -C "$SYNTDIR" pull --depth 1
+          git -C "$SYNTDIR" checkout FETCH_HEAD
+          exit
+        ;;
+        *)
+          echo "Accepted value is bot, ansi, p10k, autosuggestions, completions, nvm, and syntax."
+          exit 1
+        ;;
+      esac
+    done
+  else
+    install_script
+  fi
+}
+
+
+if [[ $# -eq 0 ]]; then
+  install
+fi
+
 while [[ $# -gt 0 ]]; do
   case "$1" in
     -i|--install)
-      if [ -d "$HOME/.files" ]; then
-        "$HOME/.files/install.sh"
-      else
-        bash -c "$(curl -fsSL https://ruppy.io/install-dotfiles)"
-      fi
+      install
       exit
     ;;
     -u|--update)
-      if [ -d "$HOME/.files" ]; then
-        git -C "$HOME/.files" pull
-      else
-        bash -c "$(curl -fsSL https://ruppy.io/install-dotfiles)"
-      fi
+      update
       exit
     ;;
     *)
@@ -24,11 +102,3 @@ while [[ $# -gt 0 ]]; do
     ;;
   esac
 done
-
-if [[ $# = 0 ]]; then
-  if [ -d "$HOME/.files" ]; then
-    "$HOME/.files/install.sh"
-  else
-    bash -c "$(curl -fsSL https://ruppy.io/install-dotfiles)"
-  fi
-fi
