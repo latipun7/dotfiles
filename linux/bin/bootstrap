@@ -56,22 +56,9 @@ hash node 2>/dev/null &&
   ! hash yarn 2>/dev/null &&
   curl -o- -L https://yarnpkg.com/install.sh | bash
 
-# Install ponysay
-if [ ! -d "$HOME/.ponysay" ]; then
-  git clone --depth 1 https://github.com/erkin/ponysay.git "$HOME/.ponysay"
-else
-  git -C "$HOME/.ponysay" pull --depth 1
-fi
-sudo apt install coreutils python3 gzip texinfo -y
-cd "$HOME/.ponysay"
-sudo ./setup.py \
-  --freedom=partial \
-  --with-custom-env-python="$(command -v python3)" \
-  install
-
 # Install packages with brew
 if [ -s "$HOME/Brewfile" ]; then
-  brew bundle --file="$HOME/Brewfile"
+  brew bundle --file="$HOME/Brewfile" -v
 else
   fail "Brewfile not found on home directory."
 fi
