@@ -1,7 +1,7 @@
 ########################
 #   PATH environment   #
 ########################
-export PATH=$HOME/.bin:$PATH
+export PATH=$HOME/.bin:/usr/share/doc/git/contrib/credential/libsecret:$PATH
 
 ########################
 #    Login Command     #
@@ -31,6 +31,8 @@ export NVM_AUTO_USE=true
 ########################
 #        Aliases       #
 ########################
+
+alias psudo="sudo env \"PATH=$PATH\""
 
 # lsd alias
 if hash lsd 2>/dev/null; then

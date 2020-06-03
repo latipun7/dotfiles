@@ -6,6 +6,7 @@ tap "linuxbrew/xorg"
 brew "fontforge"
 brew "gcc@9"
 brew "imagemagick"
+brew "pkg-config"
 brew "shellcheck"
 
 # Libraries

@@ -68,6 +68,14 @@ success 'All stuff installed and already up-to-date'
 info 'Cleanup outdated versions from brew cellar.'
 brew cleanup
 
+# Git credentials libsecret
+FILE=/usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
+if [ ! -f "$FILE" ]; then
+  info 'Bind git credential manager to libsecret'
+  sudo env "PATH=$PATH" make -C /usr/share/doc/git/contrib/credential/libsecret
+  success 'Git credential libsecret success'
+fi
+
 # Install OMZ if .oh-my-zsh directory not already in home
 [ ! -d "$HOME/.oh-my-zsh" ] &&
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" \
