@@ -1,5 +1,6 @@
 tap "homebrew/bundle"
 tap "homebrew/core"
+tap "linuxbrew/xorg"
 
 # Development Utilities
 brew "fontforge"
