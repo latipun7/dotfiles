@@ -1,20 +1,24 @@
 tap "homebrew/bundle"
 tap "homebrew/core"
 
-# Build tools
-brew "gcc"
+# Development Utilities
+brew "fontforge"
+brew "gcc@9"
+brew "imagemagick"
+brew "shellcheck"
+
+# Libraries
+brew "libsecret"
 
 # Replacements
-brew "bat"
-brew "lsd"
-brew "zsh"
+brew "bat" # cat
+brew "lsd" # ls
+brew "zsh" # shell
 
 # Utilities
-brew "fontforge"
 brew "fzf"
 brew "htop"
 brew "midnight-commander"
-brew "shellcheck"
 
 # Games / Fun
 brew "cmatrix"

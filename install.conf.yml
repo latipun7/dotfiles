@@ -12,12 +12,12 @@
 - link:
     ~/.ansi-arts:
     ~/.bin: linux/bin
+    ~/.Brewfile: linux/linuxbrew/Brewfile
     ~/.config/neofetch: linux/neofetch
     ~/.gitconfig: linux/git/linux.gitconfig
     ~/.oh-my-zsh-custom: linux/oh-my-zsh
     ~/.p10k.zsh: linux/zsh/p10k.zsh
     ~/.zshrc: linux/zsh/zshrc.zsh
-    ~/Brewfile: linux/linuxbrew/Brewfile
 
 #############################
 - create: [~/projects, ~/downloads]

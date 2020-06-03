@@ -57,10 +57,10 @@ hash node 2>/dev/null &&
   curl -o- -L https://yarnpkg.com/install.sh | bash
 
 # Install packages with brew
-if [ -s "$HOME/Brewfile" ]; then
-  brew bundle --file="$HOME/Brewfile" -v
+if [ -s "$HOME/.Brewfile" ]; then
+  brew bundle --global -v
 else
-  fail "Brewfile not found on home directory."
+  fail ".Brewfile not found on home directory."
 fi
 success 'All stuff installed and already up-to-date'
 
