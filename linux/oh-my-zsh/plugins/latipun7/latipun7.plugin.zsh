@@ -19,7 +19,7 @@ umask 022
 export DOTFILES="$HOME/.files"
 
 # launch dbus use for git-credential-libsecret
-if [ -z "$DBUS_SESSION_BUS_ADDRESS"]; then
+if [ -z "$DBUS_SESSION_BUS_ADDRESS" ]; then
   eval "$(dbus-launch --sh-syntax)"
 fi
 
