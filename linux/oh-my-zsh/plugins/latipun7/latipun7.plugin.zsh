@@ -18,8 +18,14 @@ umask 022
 # default directory of this dotfiles
 export DOTFILES="$HOME/.files"
 
+# launch dbus use for git-credential-libsecret
+if [ -z "$DBUS_SESSION_BUS_ADDRESS"]; then
+  eval "$(dbus-launch --sh-syntax)"
+fi
+
 # default editor
 export EDITOR=vim
+export SUDO_EDITOR=vim
 
 # batman syntax highlight for man pages -> https://github.com/sharkdp/bat#man
 hash bat 2>/dev/null && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
