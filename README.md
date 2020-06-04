@@ -29,7 +29,7 @@ This repo contains my personal configuration for Linux and Windows.
 
 - Only support Ubuntu / Debian based Linux Distro with `apt`.
 - Support both normal linux or WSL.
-- _Windows dotfiles coming soon_.
+- _Windows dotfiles coming soon (Currently only some backup files, no automation)_.
 
 **Important**: You need [nerd fonts][nerd-fonts] in your terminal.
 Install the font of your choosing and use that font in your terminal.
