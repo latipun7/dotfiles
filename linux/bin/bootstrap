@@ -62,6 +62,19 @@ if [ -s "$HOME/.Brewfile" ]; then
 else
   fail ".Brewfile not found on home directory."
 fi
+
+# Python Modules
+pip3.8 install psutil
+
+# Install bashtop
+if [ -d "$HOME/.bashtop" ]; then
+  git -C "$HOME/.bashtop" fetch --depth 1
+  git -C "$HOME/.bashtop" checkout FETCH_HEAD
+else
+  git clone --depth 1 https://github.com/aristocratos/bashtop.git "$HOME/.bashtop"
+fi
+sudo env "PATH=$PATH" make -C "$HOME/.bashtop" install
+
 success 'All stuff installed and already up-to-date'
 
 # Remove outdated versions from the cellar.

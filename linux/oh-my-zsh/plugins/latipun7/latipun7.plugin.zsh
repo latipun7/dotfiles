@@ -3,6 +3,9 @@
 ########################
 export PATH=$HOME/.bin:/usr/share/doc/git/contrib/credential/libsecret:$PATH
 
+BREW_PYTHON_MODULES="$(brew --prefix)/lib/python3.8/site-packages/"
+export PYTHONPATH=$BREW_PYTHON_MODULES:$PYTHONPATH
+
 ########################
 #    Login Command     #
 ########################
@@ -37,7 +40,7 @@ hash bat 2>/dev/null && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 #        Aliases       #
 ########################
 
-alias psudo="sudo env \"PATH=$PATH\""
+alias psudo='sudo env "PATH=$PATH"'
 
 # lsd alias
 if hash lsd 2>/dev/null; then

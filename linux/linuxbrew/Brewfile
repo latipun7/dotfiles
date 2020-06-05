@@ -1,3 +1,4 @@
+tap "cjbassi/ytop"
 tap "homebrew/bundle"
 tap "homebrew/core"
 tap "linuxbrew/xorg"
@@ -20,8 +21,9 @@ brew "zsh"    # shell
 
 # Utilities
 brew "fzf"
-brew "htop"
+brew "lm-sensors"
 brew "midnight-commander"
+brew "ytop"
 
 # Games / Fun
 brew "cmatrix"
