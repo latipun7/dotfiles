@@ -129,9 +129,7 @@
     },
 
     // Scrollback
-    { "command": "scrollDown", "keys": "ctrl+j" },
     { "command": "scrollDownPage", "keys": "ctrl+shift+j" },
-    { "command": "scrollUp", "keys": "ctrl+k" },
     { "command": "scrollUpPage", "keys": "ctrl+shift+k" }
   ]
 }
