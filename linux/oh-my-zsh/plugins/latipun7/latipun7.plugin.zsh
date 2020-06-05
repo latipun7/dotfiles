@@ -40,7 +40,7 @@ hash bat 2>/dev/null && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 #        Aliases       #
 ########################
 
-alias psudo='sudo env "PATH=$PATH"'
+alias psudo='sudo env PATH="$PATH"'
 
 # lsd alias
 if hash lsd 2>/dev/null; then
