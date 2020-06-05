@@ -24,15 +24,14 @@ if [ -z "$DBUS_SESSION_BUS_ADDRESS" ]; then
 fi
 
 # default editor
-export EDITOR=vim
-export SUDO_EDITOR=vim
+export EDITOR=nvim
+export SUDO_EDITOR=nvim
 
 # batman syntax highlight for man pages -> https://github.com/sharkdp/bat#man
 hash bat 2>/dev/null && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-# ZSH-NVM Options: https://github.com/lukechilds/zsh-nvm#options
-export NVM_LAZY_LOAD=true
-export NVM_AUTO_USE=true
+# activate node
+[[ "$(type node)" = *function* ]] && node -v &>/dev/null
 
 ########################
 #        Aliases       #
@@ -51,6 +50,9 @@ fi
 
 # bat alias
 hash bat 2>/dev/null && alias cat=bat
+
+# nvim alias
+hash nvim 2>/dev/null && alias vi=nvim
 
 ########################
 #   ZSH Keybindings    #

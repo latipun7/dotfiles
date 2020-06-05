@@ -14,13 +14,15 @@
     ~/.bin: linux/bin
     ~/.Brewfile: linux/linuxbrew/Brewfile
     ~/.config/neofetch: linux/neofetch
+    ~/.config/nvim/init.vim: linux/vim/vimrc
     ~/.gitconfig: linux/git/linux.gitconfig
     ~/.oh-my-zsh-custom: linux/oh-my-zsh
     ~/.p10k.zsh: linux/zsh/p10k.zsh
+    ~/.vim/vimrc: linux/vim/vimrc
     ~/.zshrc: linux/zsh/zshrc.zsh
 
 #############################
-- create: [~/projects, ~/downloads]
+- create: [~/projects, ~/downloads, ~/.config/nvim/autoload]
 
 - shell:
     - [

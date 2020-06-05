@@ -68,6 +68,14 @@ success 'All stuff installed and already up-to-date'
 info 'Cleanup outdated versions from brew cellar.'
 brew cleanup
 
+# Setup vims
+info 'Install/update vim-plug'
+curl -fsSLo "$HOME/.vim/autoload/plug.vim" --create-dirs \
+  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+ln -sf "$HOME/.vim/autoload/plug.vim" "$HOME/.config/nvim/autoload/"
+vim +PlugInstall +qall
+success 'Vim-plug and plugins installed and already up-to-date'
+
 # Git credentials libsecret
 FILE=/usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
 if [ ! -f "$FILE" ]; then

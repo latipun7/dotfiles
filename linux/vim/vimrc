@@ -1,0 +1,115 @@
+" ============================================================================
+" VIM-PLUG BLOCK {{{
+" ============================================================================
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'ryanoasis/vim-devicons'
+Plug 'airblade/vim-gitgutter'
+
+call plug#end()
+
+" }}}
+
+" ============================================================================
+" BASIC SETTINGS {{{
+" ============================================================================
+
+set encoding=utf-8
+
+filetype plugin indent on
+syntax on
+
+set autoindent
+set smartindent
+set expandtab
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set shiftround
+
+set lazyredraw
+
+set showcmd
+set showmode
+set visualbell
+
+set backspace=indent,eol,start
+set hidden
+set laststatus=2
+
+set hlsearch " CTRL-L / CTRL-R W
+set incsearch
+set ignorecase smartcase
+
+set cursorline
+set wrapscan
+set synmaxcol=500
+
+" Annoying temporary files
+set backupdir=/tmp//,.
+set directory=/tmp//,.
+
+" Semi-persistent undo
+if has('persistent_undo')
+  set undodir=/tmp,.
+  set undofile
+endif
+
+" }}}
+
+" ============================================================================
+" MAPPINGS {{{
+" ============================================================================
+
+let mapleader      = ' '
+let maplocalleader = ' '
+
+" ----------------------------------------------------------------------------
+" Basic mappings
+" ----------------------------------------------------------------------------
+
+" Open new line below and above current line
+nnoremap <Leader>o o<Esc>
+nnoremap <Leader>O O<Esc>
+
+" Save
+nnoremap <Leader>w :update<CR>
+
+" Quit
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>Q :qa!<CR>
+
+" jj | Escaping!
+inoremap jj <Esc>
+xnoremap jj <Esc>
+cnoremap jj <C-c>
+
+" <leader>n | NERD Tree
+nnoremap <leader>n :NERDTreeToggle<CR>
+
+" Movement in insert mode
+inoremap <C-h> <C-o>h
+inoremap <C-l> <C-o>a
+inoremap <C-j> <C-o>j
+inoremap <C-k> <C-o>k
+inoremap <C-^> <C-o><C-^>
+inoremap <C-$> <C-o><C-$>
+
+" ----------------------------------------------------------------------------
+" Tabs
+" ----------------------------------------------------------------------------
+nnoremap [k :tabn<CR>
+nnoremap [j :tabp<CR>
+
+" ----------------------------------------------------------------------------
+" <Tab> / <S-Tab> | Circular windows navigation
+" ----------------------------------------------------------------------------
+nnoremap <Tab>   <C-w>w
+nnoremap <S-Tab> <C-w>W
+
+" }}}

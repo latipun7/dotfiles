@@ -20,6 +20,10 @@ fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# ZSH-NVM Options: https://github.com/lukechilds/zsh-nvm#options
+export NVM_LAZY_LOAD=true
+export NVM_AUTO_USE=true
+
 # Path to your oh-my-zsh installation.
 export ZSH="/home/latipun7/.oh-my-zsh"
 
@@ -88,12 +92,12 @@ ZSH_CUSTOM=$HOME/.oh-my-zsh-custom
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  latipun7
-  zsh-nvm # need after latipun & early for node/npm available for any other plugins
+  zsh-nvm # need early for node/npm available for any other plugins
   git
   fzf
   zsh-autosuggestions
   zsh-completions
+  latipun7
   zsh-syntax-highlighting # need to load last
 )
 

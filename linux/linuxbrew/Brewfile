@@ -13,9 +13,10 @@ brew "shellcheck"
 brew "libsecret"
 
 # Replacements
-brew "bat" # cat
-brew "lsd" # ls
-brew "zsh" # shell
+brew "bat"    # cat
+brew "lsd"    # ls
+brew "neovim" # vim
+brew "zsh"    # shell
 
 # Utilities
 brew "fzf"
