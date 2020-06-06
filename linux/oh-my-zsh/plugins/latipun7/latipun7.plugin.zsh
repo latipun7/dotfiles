@@ -14,6 +14,11 @@ export DOTFILES="$HOME/.files"
 export EDITOR=nvim
 export SUDO_EDITOR=nvim
 
+# Invoking gpg-agent
+# https://www.gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html
+GPG_TTY="$(tty)"
+export GPG_TTY
+
 # batman syntax highlight for man pages -> https://github.com/sharkdp/bat#man
 hash bat 2>/dev/null && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
