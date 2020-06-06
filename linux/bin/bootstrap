@@ -58,7 +58,7 @@ hash node 2>/dev/null &&
 
 # Install packages with brew
 if [ -s "$HOME/.Brewfile" ]; then
-  brew bundle --global -v
+  brew bundle --global --no-lock -v
 else
   fail ".Brewfile not found on home directory."
 fi
@@ -73,7 +73,7 @@ if [ -d "$HOME/.bashtop" ]; then
 else
   git clone --depth 1 https://github.com/aristocratos/bashtop.git "$HOME/.bashtop"
 fi
-sudo env "PATH=$PATH" make -C "$HOME/.bashtop" install
+sudo make -C "$HOME/.bashtop" install
 
 success 'All stuff installed and already up-to-date'
 
@@ -89,13 +89,9 @@ ln -sf "$HOME/.vim/autoload/plug.vim" "$HOME/.config/nvim/autoload/"
 vim +PlugInstall +qall
 success 'Vim-plug and plugins installed and already up-to-date'
 
-# Git credentials libsecret
-FILE=/usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
-if [ ! -f "$FILE" ]; then
-  info 'Bind git credential manager to libsecret'
-  sudo env "PATH=$PATH" make -C /usr/share/doc/git/contrib/credential/libsecret
-  success 'Git credential libsecret success'
-fi
+# Git credentials netrc
+FILE=/usr/share/doc/git/contrib/credential/netrc/git-credential-netrc
+[ -f "$FILE" ] && sudo chmod +x "$FILE"
 
 # Install OMZ if .oh-my-zsh directory not already in home
 [ ! -d "$HOME/.oh-my-zsh" ] &&

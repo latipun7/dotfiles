@@ -10,9 +10,6 @@ brew "imagemagick"
 brew "pkg-config"
 brew "shellcheck"
 
-# Libraries
-brew "libsecret"
-
 # Replacements
 brew "bat"    # cat
 brew "lsd"    # ls
@@ -20,10 +17,11 @@ brew "neovim" # vim
 brew "zsh"    # shell
 
 # Utilities
+brew "cjbassi/ytop/ytop"
 brew "fzf"
 brew "lm-sensors"
 brew "midnight-commander"
-brew "ytop"
+brew "pass"
 
 # Games / Fun
 brew "cmatrix"

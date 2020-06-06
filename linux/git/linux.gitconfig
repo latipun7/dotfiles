@@ -1,5 +1,5 @@
 [credential]
-  helper = libsecret
+  helper = "netrc -f ~/.password-store/personal/github.com.gpg"
 
 [user]
   name = LS

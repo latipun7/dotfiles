@@ -1,30 +1,14 @@
-########################
-#   PATH environment   #
-########################
-export PATH=$HOME/.bin:/usr/share/doc/git/contrib/credential/libsecret:$PATH
+#########################
+# Environment Variables #
+#########################
+
+export PATH=$HOME/.bin:/usr/share/doc/git/contrib/credential/netrc:$PATH
 
 BREW_PYTHON_MODULES="$(brew --prefix)/lib/python3.8/site-packages/"
 export PYTHONPATH=$BREW_PYTHON_MODULES:$PYTHONPATH
 
-########################
-#    Login Command     #
-########################
-hash chara 2>/dev/null && chara
-
-########################
-#   General Tweaks     #
-########################
-
-# default file and folder mask permission
-umask 022
-
 # default directory of this dotfiles
 export DOTFILES="$HOME/.files"
-
-# launch dbus use for git-credential-libsecret
-if [ -z "$DBUS_SESSION_BUS_ADDRESS" ]; then
-  eval "$(dbus-launch --sh-syntax)"
-fi
 
 # default editor
 export EDITOR=nvim
@@ -33,12 +17,25 @@ export SUDO_EDITOR=nvim
 # batman syntax highlight for man pages -> https://github.com/sharkdp/bat#man
 hash bat 2>/dev/null && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
+#########################
+#     Login Command     #
+#########################
+
+hash chara 2>/dev/null && chara
+
+#########################
+#    General Tweaks     #
+#########################
+
+# default file and folder mask permission
+umask 022
+
 # activate node
 [[ "$(type node)" = *function* ]] && node -v &>/dev/null
 
-########################
-#        Aliases       #
-########################
+#########################
+#         Aliases       #
+#########################
 
 alias psudo='sudo env PATH="$PATH"'
 
@@ -57,16 +54,16 @@ hash bat 2>/dev/null && alias cat=bat
 # nvim alias
 hash nvim 2>/dev/null && alias vi=nvim
 
-########################
-#   ZSH Keybindings    #
-########################
+#########################
+#    ZSH Keybindings    #
+#########################
 
 # C-backspace to delete previous word
 bindkey '^H' backward-kill-word
 
-########################
-#   ZSH Completions    #
-########################
+#########################
+#    ZSH Completions    #
+#########################
 
 # brew completion
 hash brew 2>/dev/null &&
