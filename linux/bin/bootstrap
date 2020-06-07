@@ -91,7 +91,13 @@ success 'Vim-plug and plugins installed and already up-to-date'
 
 # Git credentials netrc
 FILE=/usr/share/doc/git/contrib/credential/netrc/git-credential-netrc
-[ -f "$FILE" ] && sudo chmod +x "$FILE"
+if [ -f "$FILE" ]; then
+  sudo chmod +x "$FILE"
+else
+  sudo curl -fsSLo "$FILE" \
+    https://raw.githubusercontent.com/git/git/master/contrib/credential/netrc/git-credential-netrc.perl
+  sudo chmod +x "$FILE"
+fi
 
 # Install OMZ if .oh-my-zsh directory not already in home
 [ ! -d "$HOME/.oh-my-zsh" ] &&
