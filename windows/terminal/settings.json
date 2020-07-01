@@ -12,9 +12,9 @@
 
   // You can add more global application settings here.
   // To learn more about global settings, visit https://aka.ms/terminal-global-settings
-  // "initialRows": 35,
-  // "initialCols": 135,
-  // "initialPosition": "133,57",
+  "initialRows": 35,
+  "initialCols": 135,
+  "initialPosition": "133,57",
   "launchMode": "maximized",
 
   // If enabled, selections are automatically copied to your clipboard.
@@ -33,7 +33,7 @@
       "acrylicOpacity": 0.75,
       "colorScheme": "Dracula",
       "cursorShape": "vintage",
-      "fontFace": "CaskaydiaCovePL NF",
+      "fontFace": "CaskaydiaCove NF",
       "fontSize": 15,
       "useAcrylic": true
     },

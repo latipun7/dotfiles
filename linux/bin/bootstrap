@@ -22,6 +22,7 @@ function fail() {
 
 info 'Update and upgrade packages from official source.list'
 sudo apt update && sudo apt full-upgrade -y
+sudo -v
 success 'Upgraded successfully'
 
 # install homebrew if it's not installed otherwise update brew
@@ -34,9 +35,11 @@ else
   CI=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   success 'Homebrew (linuxbrew) installed successfully'
 fi
+sudo -v
 
 info 'Install homebrew build dependencies and add brew to PATH'
 sudo apt install build-essential -y
+sudo -v
 [ -d "/home/linuxbrew/.linuxbrew" ] &&
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
@@ -50,6 +53,7 @@ info 'Installing all fun stuff ...'
 
 # Upgrade any already-installed formulae.
 brew upgrade
+sudo -v
 
 # Install yarn
 hash node 2>/dev/null &&
@@ -62,6 +66,7 @@ if [ -s "$HOME/.Brewfile" ]; then
 else
   fail ".Brewfile not found on home directory."
 fi
+sudo -v
 
 # Python Modules
 pip3.8 install psutil
@@ -80,6 +85,7 @@ success 'All stuff installed and already up-to-date'
 # Remove outdated versions from the cellar.
 info 'Cleanup outdated versions from brew cellar.'
 brew cleanup
+sudo -v
 
 # Setup vims
 info 'Install/update vim-plug'
@@ -103,6 +109,7 @@ fi
 [ ! -d "$HOME/.oh-my-zsh" ] &&
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" \
   "" --unattended --keep-zshrc
+sudo -v
 
 # Switch default shell to zsh from brew
 BREW_PREFIX=$(brew --prefix)

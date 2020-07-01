@@ -70,6 +70,23 @@ function update() {
           git -C "$SYNTDIR" checkout FETCH_HEAD
           exit
         ;;
+        all)
+          git -C "$BOTDIR" fetch --depth 1
+          git -C "$BOTDIR" checkout FETCH_HEAD
+          git -C "$ANSIDIR" fetch --depth 1
+          git -C "$ANSIDIR" checkout FETCH_HEAD
+          git -C "$P10KDIR" fetch --depth 1
+          git -C "$P10KDIR" checkout FETCH_HEAD
+          git -C "$AUTODIR" fetch --depth 1
+          git -C "$AUTODIR" checkout FETCH_HEAD
+          git -C "$COMPDIR" fetch --depth 1
+          git -C "$COMPDIR" checkout FETCH_HEAD
+          git -C "$NVMDIR" fetch --depth 1
+          git -C "$NVMDIR" checkout FETCH_HEAD
+          git -C "$SYNTDIR" fetch --depth 1
+          git -C "$SYNTDIR" checkout FETCH_HEAD
+          exit
+        ;;
         *)
           echo "Accepted value is bot, ansi, p10k, autosuggestions, completions, nvm, and syntax."
           exit 1
