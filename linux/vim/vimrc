@@ -5,11 +5,20 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
+
 Plug 'airblade/vim-gitgutter'
+Plug 'junegunn/fzf.vim'
+
+Plug 'joshdick/onedark.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'sheerun/vim-polyglot'
 
 call plug#end()
 
@@ -60,6 +69,46 @@ if has('persistent_undo')
   set undofile
 endif
 
+" ----------------------------------------------------------------------------
+" Theme
+" ----------------------------------------------------------------------------
+if (has("termguicolors"))
+ set termguicolors
+endif
+
+let g:onedark_terminal_italics = 1
+colorscheme onedark
+
+" Airline
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'onedark'
+
+" ----------------------------------------------------------------------------
+" Integrated Terminal
+" ----------------------------------------------------------------------------
+
+" open new split panes to right and below
+set splitright
+set splitbelow
+
+" turn terminal to normal mode with escape
+tnoremap <Esc> <C-\><C-n>
+
+" start terminal in insert mode
+au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+
+" open terminal on ctrl+n
+function! OpenTerminal()
+  split term://zsh
+  resize 25
+endfunction
+nnoremap <C-n> :call OpenTerminal()<CR>
+
+" ----------------------------------------------------------------------------
+" COC.vim
+" ----------------------------------------------------------------------------
+let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver']
+
 " }}}
 
 " ============================================================================
@@ -92,6 +141,9 @@ cnoremap jj <C-c>
 " <leader>n | NERD Tree
 nnoremap <leader>n :NERDTreeToggle<CR>
 
+" FZF
+nnoremap <C-p> :FZF<CR>
+
 " Movement in insert mode
 inoremap <C-h> <C-o>h
 inoremap <C-l> <C-o>a
@@ -111,5 +163,19 @@ nnoremap [j :tabp<CR>
 " ----------------------------------------------------------------------------
 nnoremap <Tab>   <C-w>w
 nnoremap <S-Tab> <C-w>W
+
+" ----------------------------------------------------------------------------
+" Split Panels
+" ----------------------------------------------------------------------------
+
+" use alt+hjkl to move between split/vsplit panels
+tnoremap <A-h> <C-\><C-n><C-w>h
+tnoremap <A-j> <C-\><C-n><C-w>j
+tnoremap <A-k> <C-\><C-n><C-w>k
+tnoremap <A-l> <C-\><C-n><C-w>l
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
 
 " }}}
