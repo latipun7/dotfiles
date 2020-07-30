@@ -7,6 +7,8 @@ export PATH=$HOME/.bin:/usr/share/doc/git/contrib/credential/netrc:$PATH
 BREW_PYTHON_MODULES="$(brew --prefix)/lib/python3.8/site-packages/"
 export PYTHONPATH=$BREW_PYTHON_MODULES:$PYTHONPATH
 
+export NODE_PATH=$HOME/.config/yarn/global/node_modules
+
 # default directory of this dotfiles
 export DOTFILES="$HOME/.files"
 
