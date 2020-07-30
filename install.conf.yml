@@ -14,6 +14,7 @@
     ~/.bin: linux/bin
     ~/.Brewfile: linux/linuxbrew/Brewfile
     ~/.config/neofetch: linux/neofetch
+    ~/.config/nvim/coc-settings.json: linux/vim/coc-settings.json
     ~/.config/nvim/init.vim: linux/vim/vimrc
     ~/.gitconfig: linux/git/linux.gitconfig
     ~/.oh-my-zsh-custom: linux/oh-my-zsh
