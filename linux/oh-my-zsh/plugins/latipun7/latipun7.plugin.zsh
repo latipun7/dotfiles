@@ -44,6 +44,9 @@ umask 022
 
 alias psudo='sudo env PATH="$PATH"'
 
+# git alias
+alias gmff='git merge --ff-only'
+
 # lsd alias
 if hash lsd 2>/dev/null; then
   alias ls=lsd

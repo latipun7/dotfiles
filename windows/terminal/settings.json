@@ -33,7 +33,7 @@
       "acrylicOpacity": 0.75,
       "colorScheme": "Dracula",
       "cursorShape": "vintage",
-      "fontFace": "CaskaydiaCove NF",
+      "fontFace": "CaskaydiaCovePL NF",
       "fontSize": 15,
       "useAcrylic": true
     },
@@ -130,6 +130,9 @@
 
     // Scrollback
     { "command": "scrollDownPage", "keys": "ctrl+shift+j" },
-    { "command": "scrollUpPage", "keys": "ctrl+shift+k" }
+    { "command": "scrollUpPage", "keys": "ctrl+shift+k" },
+
+    // Command Pallete
+    { "command": "commandPalette", "keys": "ctrl+shift+p" }
   ]
 }
