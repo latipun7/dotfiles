@@ -14,13 +14,14 @@ brew "shellcheck"
 brew "bat"    # cat
 brew "lsd"    # ls
 brew "neovim" # vim
-brew "zsh"    # shell
+brew "zsh"    # shell/bash
 
 # Utilities
 brew "cjbassi/ytop/ytop"
 brew "fzf"
 brew "lm-sensors"
 brew "midnight-commander"
+brew "ncdu"
 brew "pass"
 
 # Games / Fun
