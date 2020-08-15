@@ -81,11 +81,47 @@ else
 fi
 sudo make -C "$HOME/.bpytop" install
 
+sudo -v
+
+# Install these if not WSL
+if [[ "$(uname -a)" != *[Mm]icrosoft* ]]; then
+  # Install nginx
+  if ! hash nginx 2>/dev/null; then
+    echo "deb http://nginx.org/packages/ubuntu $(lsb_release -cs) nginx" \
+      | sudo tee /etc/apt/sources.list.d/nginx.list
+    curl -fsSL https://nginx.org/keys/nginx_signing.key | sudo apt-key add -
+    sudo apt-key fingerprint ABF5BD827BD9BF62
+    sudo apt update
+    sudo apt install nginx
+  fi
+
+  # Setup certbot
+  if hash docker 2>/dev/null; then
+    sudo docker run -it --rm --name certbot \
+      -v "/etc/letsencrypt:/etc/letsencrypt" \
+      -v "/var/lib/letsencrypt:/var/lib/letsencrypt" \
+      -v "$HOME/.secrets:$HOME/.secrets" \
+      certbot/dns-digitalocean certonly \
+      --dns-digitalocean-credentials "$HOME/.secrets/digitalocean.ini" \
+      --server https://acme-v02.api.letsencrypt.org/directory \
+      -d ruppy.io,*.ruppy.io
+  fi
+
+  # Setup OpenVPN
+  if [ -f "$HOME/openvpn-install.sh" ]; then
+    curl -fsSLo "$HOME/openvpn-install.sh" https://git.io/vpn && \
+      bash "$HOME/openvpn-install.sh"
+  fi
+fi
+
+sudo -v
+
 success 'All stuff installed and already up-to-date'
 
 # Remove outdated versions from the cellar.
 info 'Cleanup outdated versions from brew cellar.'
 brew cleanup
+brew bundle cleanup --global -f
 sudo -v
 
 # Setup vims

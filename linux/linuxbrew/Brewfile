@@ -31,3 +31,7 @@ brew "lolcat"
 brew "neofetch"
 brew "ponysay", args: ["HEAD"]
 brew "sl"
+
+# Not for WSL (Install these if not WSL)
+brew "docker" unless system "uname -a | grep -iq microsoft"
+brew "docker-compose" unless system "uname -a | grep -iq microsoft"
