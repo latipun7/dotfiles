@@ -16,6 +16,12 @@
 	ignore = dirty
 	shallow = true
 
+[submodule "tmux"]
+	path = linux/tmux/oh-my-tmux
+	url = https://github.com/gpakosz/.tmux.git
+	ignore = dirty
+	shallow = true
+
 [submodule "zsh-completions"]
 	path = linux/oh-my-zsh/plugins/zsh-completions
 	url = https://github.com/zsh-users/zsh-completions.git
