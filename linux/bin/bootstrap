@@ -72,14 +72,14 @@ sudo -v
 pip3 install --upgrade psutil
 pip3 install --upgrade pynvim
 
-# Install bashtop
-if [ -d "$HOME/.bashtop" ]; then
-  git -C "$HOME/.bashtop" fetch --depth 1
-  git -C "$HOME/.bashtop" checkout FETCH_HEAD
+# Install bpytop
+if [ -d "$HOME/.bpytop" ]; then
+  git -C "$HOME/.bpytop" fetch --depth 1
+  git -C "$HOME/.bpytop" checkout FETCH_HEAD
 else
-  git clone --depth 1 https://github.com/aristocratos/bashtop.git "$HOME/.bashtop"
+  git clone --depth 1 https://github.com/aristocratos/bpytop.git "$HOME/.bpytop"
 fi
-sudo make -C "$HOME/.bashtop" install
+sudo make -C "$HOME/.bpytop" install
 
 success 'All stuff installed and already up-to-date'
 

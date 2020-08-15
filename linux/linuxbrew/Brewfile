@@ -19,7 +19,6 @@ brew "zsh"    # shell/bash
 # Utilities
 brew "cjbassi/ytop/ytop"
 brew "fzf"
-brew "lm-sensors"
 brew "midnight-commander"
 brew "ncdu"
 brew "pass"
