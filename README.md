@@ -27,7 +27,7 @@ and make this repo and other dotfiles repo as inspirations.
 
 This repo contains my personal configuration for Linux and Windows.
 
-- Only support Ubuntu / Debian based Linux Distro with `apt`.
+- Only support Ubuntu 20.04 LTS Linux Distro with `apt`.
 - Support both normal linux or WSL.
 - _Windows dotfiles coming soon (Currently only some backup files, no automation)_.
 

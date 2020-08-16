@@ -109,8 +109,24 @@ if [[ "$(uname -a)" != *[Mm]icrosoft* ]]; then
 
   # Setup OpenVPN
   if [ -f "$HOME/openvpn-install.sh" ]; then
-    curl -fsSLo "$HOME/openvpn-install.sh" https://git.io/vpn && \
+    curl -fsSLo "$HOME/openvpn-install.sh" https://git.io/vpn &&
       bash "$HOME/openvpn-install.sh"
+  fi
+
+  # Install PM2
+  hash node 2>/dev/null &&
+    hash yarn 2>/dev/null &&
+    yarn global add pm2
+
+  # Install mongoDB
+  if ! hash mongo 2>/dev/null; then
+    wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+    echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+    sudo apt update
+    sudo apt install -y mongodb-org
+    sudo systemctl daemon-reload
+    sudo systemctl start mongod
+    sudo systemctl enable mongod
   fi
 fi
 
