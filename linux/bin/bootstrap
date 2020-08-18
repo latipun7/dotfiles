@@ -183,6 +183,7 @@ BREW_PREFIX=$(brew --prefix)
 if ! grep -q "$BREW_PREFIX/bin/zsh" /etc/shells; then
   info 'Make zsh installed from brew to default shell'
   echo "$BREW_PREFIX/bin/zsh" | sudo tee -a /etc/shells
+  sudo sed -i s/required/sufficient/g /etc/pam.d/chsh
   chsh -s "$BREW_PREFIX/bin/zsh"
   success 'Changed to zsh shell from brew installed zsh'
 fi
