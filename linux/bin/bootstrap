@@ -5,6 +5,7 @@
 set -e
 
 echo ""
+! (umask | grep -q 022) && umask 022
 
 function info() {
   echo -e "\n  \e[1;35m==>\e[0m $1 ℹ\n"
@@ -108,7 +109,7 @@ if [[ "$(uname -a)" != *[Mm]icrosoft* ]]; then
 
   # Setup certbot
   if hash docker 2>/dev/null; then
-    if ! (sudo docker ps | grep -w certbot); then
+    if ! (sudo docker ps | grep -q certbot); then
       sudo docker run -it --rm --name certbot \
         -v "$HOME/docker-volumes/etc/letsencrypt:/etc/letsencrypt" \
         -v "$HOME/docker-volumes/var/lib/letsencrypt:/var/lib/letsencrypt" \
