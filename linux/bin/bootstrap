@@ -124,13 +124,13 @@ if [[ "$(uname -a)" != *[Mm]icrosoft* ]]; then
   # Setup OpenVPN
   if [ ! -f "$HOME/openvpn-install.sh" ]; then
     curl -fsSLo "$HOME/openvpn-install.sh" https://git.io/vpn &&
-      bash "$HOME/openvpn-install.sh"
+      sudo bash "$HOME/openvpn-install.sh"
   fi
 
   # Install PM2
-  hash node 2>/dev/null &&
-    hash yarn 2>/dev/null &&
+  if hash node 2>/dev/null && hash yarn 2>/dev/null && ! hash pm2; then
     yarn global add pm2
+  fi
 
   # Install mongoDB
   if ! hash mongo 2>/dev/null; then
@@ -143,6 +143,9 @@ if [[ "$(uname -a)" != *[Mm]icrosoft* ]]; then
     sudo systemctl enable mongod
   fi
 fi
+
+# Update yarn global packages
+yarn global upgrade -s
 
 sudo -v
 
