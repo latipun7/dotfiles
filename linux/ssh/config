@@ -1,0 +1,5 @@
+Host *
+  ServerAliveInterval 99
+  ControlMaster auto
+  ControlPath ~/.ssh/multiplex/%r@%h:%p
+  ControlPersist 1
