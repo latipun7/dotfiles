@@ -29,7 +29,8 @@ function install() {
 function update() {
   if [ -d "$DOTDIR" ]; then
     if [[ $# -eq 1 ]]; then
-      git -C "$DOTDIR" pull
+      git -C "$DOTDIR" fetch origin
+      git -C "$DOTDIR" reset --hard origin/master
       exit
     fi
 
