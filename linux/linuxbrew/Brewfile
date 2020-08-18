@@ -4,11 +4,11 @@ tap "homebrew/core"
 tap "linuxbrew/xorg"
 
 # Development Utilities
-brew "fontforge"
+brew "fontforge" unless system "! (uname -a | grep -iq microsoft)"
 brew "gcc@9"
-brew "imagemagick"
-brew "pkg-config"
-brew "shellcheck"
+brew "imagemagick" unless system "! (uname -a | grep -iq microsoft)"
+brew "pkg-config" unless system "! (uname -a | grep -iq microsoft)"
+brew "shellcheck" unless system "! (uname -a | grep -iq microsoft)"
 
 # Replacements
 brew "bat"    # cat
@@ -33,5 +33,4 @@ brew "ponysay", args: ["HEAD"]
 brew "sl"
 
 # Not for WSL (Install these if not WSL)
-brew "docker" unless system "uname -a | grep -iq microsoft"
 brew "docker-compose" unless system "uname -a | grep -iq microsoft"
