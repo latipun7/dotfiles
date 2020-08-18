@@ -109,20 +109,20 @@ if [[ "$(uname -a)" != *[Mm]icrosoft* ]]; then
 
   # Setup certbot
   if hash docker 2>/dev/null; then
-    if ! (sudo docker ps | grep -q certbot); then
+    if [ ! -d "/etc/letsencrypt" ]; then
       sudo docker run -it --rm --name certbot \
-        -v "$HOME/docker-volumes/etc/letsencrypt:/etc/letsencrypt" \
-        -v "$HOME/docker-volumes/var/lib/letsencrypt:/var/lib/letsencrypt" \
+        -v "/etc/letsencrypt:/etc/letsencrypt" \
+        -v "/var/lib/letsencrypt:/var/lib/letsencrypt" \
         -v "$HOME/.secrets:$HOME/.secrets" \
         certbot/dns-digitalocean certonly \
         --dns-digitalocean-credentials "$HOME/.secrets/digitalocean.ini" \
         --server https://acme-v02.api.letsencrypt.org/directory \
-        -d ruppy.io,*.ruppy.io
+        -d ruppy.io
     fi
   fi
 
   # Setup OpenVPN
-  if [ -f "$HOME/openvpn-install.sh" ]; then
+  if [ ! -f "$HOME/openvpn-install.sh" ]; then
     curl -fsSLo "$HOME/openvpn-install.sh" https://git.io/vpn &&
       bash "$HOME/openvpn-install.sh"
   fi
