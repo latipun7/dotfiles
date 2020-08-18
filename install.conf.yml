@@ -26,7 +26,14 @@
     ~/.zshrc: linux/zsh/zshrc.zsh
 
 #############################
-- create: [~/projects, ~/downloads, ~/.config/nvim/autoload, ~/.ssh/multiplex]
+- create:
+    [
+      ~/.config/nvim/autoload,
+      ~/.ssh/multiplex,
+      ~/projects,
+      ~/docker-volumes,
+      ~/downloads,
+    ]
 
 - shell:
     - [
