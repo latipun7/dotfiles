@@ -117,7 +117,7 @@ if [[ "$(uname -a)" != *[Mm]icrosoft* ]]; then
         certbot/dns-digitalocean certonly \
         --dns-digitalocean-credentials "$HOME/.secrets/digitalocean.ini" \
         --server https://acme-v02.api.letsencrypt.org/directory \
-        -d ruppy.io
+        -d ruppy.io,*.ruppy.io
     fi
   fi
 

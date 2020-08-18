@@ -29,9 +29,9 @@
 - create:
     [
       ~/.config/nvim/autoload,
+      ~/.secrets,
       ~/.ssh/multiplex,
       ~/projects,
-      ~/docker-volumes,
       ~/downloads,
     ]
 
@@ -39,4 +39,8 @@
     - [
         'if [[ "$(uname -a)" = *[Mm]icrosoft* ]]; then sudo cp --remove-destination "linux/wsl/wsl.conf" /etc/wsl.conf; fi',
         Force re-copy wsl configs,
+      ]
+    - [
+        "chmod -R go-rwx ~/.secrets",
+        Change correct permissions for secrets folder,
       ]
