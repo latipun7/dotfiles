@@ -9,6 +9,8 @@ export PYTHONPATH=$BREW_PYTHON_MODULES:$PYTHONPATH
 
 export NODE_PATH=$HOME/.config/yarn/global/node_modules
 
+export DOCKER_HOST="tcp://127.0.0.1:2375"
+
 # default directory of this dotfiles
 export DOTFILES="$HOME/.files"
 

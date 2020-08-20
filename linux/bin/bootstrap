@@ -105,6 +105,13 @@ if [[ "$(uname -a)" != *[Mm]icrosoft* ]]; then
     sudo apt-key fingerprint 0EBFCD88
     sudo apt update
     sudo apt install docker-ce docker-ce-cli containerd.io -y
+    sudo systemctl enable docker
+    sudo mkdir -p /etc/systemd/system/docker.service.d
+    sudo touch /etc/systemd/system/docker.service.d/override.conf
+    echo -e '[Service]\nExecStart=\nExecStart=/usr/bin/dockerd -H fd:// -H tcp://127.0.0.1:2375' \
+      | sudo tee -a /etc/systemd/system/docker.service.d/override.conf &>/dev/null
+    sudo systemctl daemon-reload
+    sudo systemctl restart docker.service
   fi
 
   # Setup certbot
