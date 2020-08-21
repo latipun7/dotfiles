@@ -51,6 +51,11 @@ alias openvpn-install='curl -fsSLo "$HOME/openvpn-install.sh" https://git.io/vpn
 
 # git alias
 alias gmff='git merge --ff-only'
+alias gfu='git fetch upstream'
+alias grao='git remote add origin'
+alias grau='git remote add upstream'
+alias grsh='git remote show'
+alias gruh='git reset --hard upstream/$(git_current_branch)'
 
 # lsd alias
 if hash lsd 2>/dev/null; then
