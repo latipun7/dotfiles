@@ -30,7 +30,7 @@ function update() {
   if [ -d "$DOTDIR" ]; then
     if [[ $# -eq 1 ]]; then
       git -C "$DOTDIR" fetch origin
-      git -C "$DOTDIR" reset --hard origin/master
+      git -C "$DOTDIR" reset --hard origin/main
       exit
     fi
 
