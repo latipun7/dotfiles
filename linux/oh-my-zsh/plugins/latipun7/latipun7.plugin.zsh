@@ -50,6 +50,7 @@ alias psudo='sudo env PATH="$PATH"'
 alias openvpn-install='curl -fsSLo "$HOME/openvpn-install.sh" https://git.io/vpn && bash "$HOME/openvpn-install.sh"'
 
 # git alias
+alias gcob='git checkout --orphan'
 alias gmff='git merge --ff-only'
 alias gfu='git fetch upstream'
 alias grao='git remote add origin'
