@@ -9,6 +9,7 @@ fi
 BOTDIR="$DOTDIR/.bot"
 ANSIDIR="$DOTDIR/ansi-arts"
 P10KDIR="$DOTDIR/linux/oh-my-zsh/themes/powerlevel10k"
+OTMUXDIR="$DOTDIR/linux/tmux/oh-my-tmux"
 AUTODIR="$DOTDIR/linux/oh-my-zsh/plugins/zsh-autosuggestions"
 COMPDIR="$DOTDIR/linux/oh-my-zsh/plugins/zsh-completions"
 NVMDIR="$DOTDIR/linux/oh-my-zsh/plugins/zsh-nvm"
@@ -31,6 +32,8 @@ function update() {
     if [[ $# -eq 1 ]]; then
       git -C "$DOTDIR" fetch origin
       git -C "$DOTDIR" reset --hard origin/main
+      git -C "$DOTDIR" submodule sync --recursive
+      git -C "$DOTDIR" submodule update --init --recursive
       exit
     fi
 
@@ -49,6 +52,11 @@ function update() {
         p10k|powerlevel10k)
           git -C "$P10KDIR" fetch --depth 1
           git -C "$P10KDIR" checkout FETCH_HEAD
+          exit
+        ;;
+        tmux|oh-my-tmux)
+          git -C "$OTMUXDIR" fetch --depth 1
+          git -C "$OTMUXDIR" checkout FETCH_HEAD
           exit
         ;;
         autosuggestions|zsh-autosuggestions)
@@ -78,6 +86,8 @@ function update() {
           git -C "$ANSIDIR" checkout FETCH_HEAD
           git -C "$P10KDIR" fetch --depth 1
           git -C "$P10KDIR" checkout FETCH_HEAD
+          git -C "$OTMUXDIR" fetch --depth 1
+          git -C "$OTMUXDIR" checkout FETCH_HEAD
           git -C "$AUTODIR" fetch --depth 1
           git -C "$AUTODIR" checkout FETCH_HEAD
           git -C "$COMPDIR" fetch --depth 1
@@ -89,7 +99,7 @@ function update() {
           exit
         ;;
         *)
-          echo "Accepted value is bot, ansi, p10k, autosuggestions, completions, nvm, and syntax."
+          echo "Accepted value is bot, ansi, p10k, tmux, autosuggestions, completions, nvm, and syntax."
           exit 1
         ;;
       esac
