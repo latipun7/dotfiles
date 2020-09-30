@@ -25,6 +25,7 @@ brew "ncdu"
 brew "pass"
 
 # Games / Fun
+brew "asciiquarium"
 brew "cmatrix"
 brew "cowsay"
 brew "fortune"
