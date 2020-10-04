@@ -84,6 +84,11 @@ sudo make -C "$HOME/.bpytop" install
 
 sudo -v
 
+# Install postgreSQL
+if ! hash psql 2>/dev/null; then
+  sudo apt install postgresql postgresql-contrib -y
+fi
+
 # Install these if not WSL
 if [[ "$(uname -a)" != *[Mm]icrosoft* ]]; then
   # Install nginx
@@ -149,11 +154,6 @@ if [[ "$(uname -a)" != *[Mm]icrosoft* ]]; then
   #   sudo systemctl start mongod
   #   sudo systemctl enable mongod
   # fi
-
-  # Install postgreSQL
-  if ! hash psql 2>/dev/null; then
-    sudo apt install postgresql postgresql-contrib -y
-  fi
 fi
 
 # Update yarn global packages
