@@ -70,6 +70,7 @@ fi
 sudo -v
 
 # Python Modules
+python3 -m pip install --upgrade pip
 pip3 install --upgrade psutil
 pip3 install --upgrade pynvim
 
