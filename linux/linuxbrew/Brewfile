@@ -4,6 +4,7 @@ tap "homebrew/core"
 tap "linuxbrew/xorg"
 
 # Development Utilities
+brew "curl"
 brew "fontforge" unless system "! (uname -a | grep -iq microsoft)"
 brew "gcc@10"
 brew "git"
