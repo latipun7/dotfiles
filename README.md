@@ -1,6 +1,6 @@
 # Latipun's Dotfiles
 
-[![Discord](https://img.shields.io/discord/340308951826694157?style=flat-square&logo=discord&label=chat+and+discuss)](https://discord.gg/Zw8d3wy "Emperor Ruppy's Kingdom")
+[![Discord](https://img.shields.io/discord/758271814153011201?style=flat-square&logo=discord&label=chat+and+discuss)](https://discord.gg/njSj2Nq "Developers Indonesia")
 
 This is my personalized dotfiles that I use on my machines. But what is dotfiles?
 Simply, dotfiles are configuration files of Unix (and some Windows) programs that are
