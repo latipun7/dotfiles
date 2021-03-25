@@ -6,7 +6,7 @@ tap "linuxbrew/xorg"
 # Development Utilities
 brew "curl"
 brew "fontforge" unless system "! (uname -a | grep -iq microsoft)"
-brew "gcc@10"
+brew "gcc"
 brew "git"
 brew "imagemagick" unless system "! (uname -a | grep -iq microsoft)"
 brew "pkg-config" unless system "! (uname -a | grep -iq microsoft)"
