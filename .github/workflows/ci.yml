@@ -1,0 +1,37 @@
+# https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+# Workflows commands (::set-output, etc): # https://docs.github.com/en/actions/reference/workflow-commands-for-github-actions#setting-an-output-parameter
+
+name: CI ⚙🤖
+
+on:
+  push:
+    branches: [main]
+
+  pull_request:
+    branches: [main]
+
+  schedule:
+    - cron: 0 22 * * 0 # Every Monday at 5:00AM (GMT+7) or every Sunday at 22:00PM (UTC)
+
+jobs:
+  test_install:
+    name: Test Install ⚙🛠
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2.3.4
+
+      - name: Initial Install
+        run: |
+          bash -c ./install.sh
+
+      - name: Test bootstrap
+        run: |
+          exec "$(which $SHELL)" -l
+          nvm install node && nvm use node && bootstrap

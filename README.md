@@ -1,6 +1,6 @@
 # Latipun's Dotfiles
 
-[![Discord](https://img.shields.io/discord/758271814153011201?style=flat-square&logo=discord&label=chat+and+discuss)](https://discord.gg/njSj2Nq "Developers Indonesia")
+[![Discord](https://img.shields.io/discord/758271814153011201?style=flat-square&logo=discord&label=chat+and+discuss)](https://discord.gg/njSj2Nq "Developers Indonesia") [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/latipun7/dotfiles/CI%20%E2%9A%99%F0%9F%A4%96?logo=github%20actions&style=flat-square)](https://github.com/latipun7/dotfiles/actions "GitHub Actions")
 
 This is my personalized dotfiles that I use on my machines. But what is dotfiles?
 Simply, dotfiles are configuration files of Unix (and some Windows) programs that are
@@ -27,7 +27,7 @@ and make this repo and other dotfiles repo as inspirations.
 
 This repo contains my personal configuration for Linux and Windows.
 
-- Only support Ubuntu 20.04 LTS Linux Distro with `apt`.
+- Only support Ubuntu latest LTS Linux Distro with `apt`.
 - Support both normal linux or WSL.
 - _Windows dotfiles coming soon (Currently only some backup files, no automation)_.
 
@@ -42,7 +42,7 @@ If you are on Linux, run this command to **install** this dotfiles:
 - Install this dotfiles:
 
   ```bash
-  bash -c "$(curl -fsSL https://ruppy.io/install-dotfiles)"
+  bash -c "$(curl -fsSL https://raw.githubusercontent.com/latipun7/dotfiles/master/install.sh)"
   ```
 
 - Exit current terminal session: `exit`, then start new terminal session
