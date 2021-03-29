@@ -4,11 +4,14 @@
 
 set -e
 
-echo ""
 ! (umask | grep -q 022) && umask 022
 
 function info() {
   echo -e "\n  \e[1;35m==>\e[0m $1 ℹ\n"
+}
+
+function step() {
+  echo -e "\n\e[2K  \e[0;94m==>\e[0m $1\n"
 }
 
 function success() {
@@ -33,12 +36,12 @@ if hash brew 2>/dev/null; then
   success 'Formulas updated'
 else
   info 'Install homebrew (linuxbrew)'
-  CI=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   success 'Homebrew (linuxbrew) installed successfully'
 fi
 sudo -v
 
-info 'Install homebrew build dependencies and add brew to PATH'
+info 'Install build dependencies and add brew to PATH'
 sudo apt install build-essential -y
 sudo -v
 [ -d "/home/linuxbrew/.linuxbrew" ] &&
@@ -57,11 +60,13 @@ brew upgrade
 sudo -v
 
 # Install yarn
+step "Install Yarn"
 hash node 2>/dev/null &&
   ! hash yarn 2>/dev/null &&
   curl -o- -L https://yarnpkg.com/install.sh | bash
 
 # Install packages with brew
+step "Install packages with brew"
 if [ -s "$HOME/.Brewfile" ]; then
   brew bundle --global --no-lock -v
 else
@@ -70,11 +75,13 @@ fi
 sudo -v
 
 # Python Modules
+step "Install Python Modules"
 python3 -m pip install --upgrade pip
 pip3 install --upgrade psutil
 pip3 install --upgrade pynvim
 
 # Install bpytop
+step "Install bpytop"
 if [ -d "$HOME/.bpytop" ]; then
   git -C "$HOME/.bpytop" fetch --depth 1
   git -C "$HOME/.bpytop" checkout FETCH_HEAD
@@ -86,6 +93,7 @@ sudo make -C "$HOME/.bpytop" install
 sudo -v
 
 # Install postgreSQL
+step "Install PostgreSQL"
 if ! hash psql 2>/dev/null; then
   sudo apt install postgresql postgresql-contrib -y
 fi
@@ -94,6 +102,7 @@ fi
 if [[ "$(uname -a)" != *[Mm]icrosoft* ]]; then
   # Install nginx
   if [ ! -f /etc/apt/sources.list.d/nginx.list ]; then
+    step "Install nginx"
     echo "deb http://nginx.org/packages/ubuntu $(lsb_release -cs) nginx" \
       | sudo tee /etc/apt/sources.list.d/nginx.list
     curl -fsSL https://nginx.org/keys/nginx_signing.key | sudo apt-key add -
@@ -104,6 +113,7 @@ if [[ "$(uname -a)" != *[Mm]icrosoft* ]]; then
 
   # Install docker
   if [ ! -f /etc/apt/sources.list.d/docker.list ]; then
+    step "Install docker"
     echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
       $(lsb_release -cs) stable" \
       | sudo tee /etc/apt/sources.list.d/docker.list
@@ -123,6 +133,7 @@ if [[ "$(uname -a)" != *[Mm]icrosoft* ]]; then
   # Setup certbot
   if hash docker 2>/dev/null; then
     if [ ! -d "/etc/letsencrypt" ]; then
+      step "Install certbot"
       sudo docker run -it --rm --name certbot \
         -v "/etc/letsencrypt:/etc/letsencrypt" \
         -v "/var/lib/letsencrypt:/var/lib/letsencrypt" \
@@ -136,28 +147,20 @@ if [[ "$(uname -a)" != *[Mm]icrosoft* ]]; then
 
   # Setup OpenVPN
   if [ ! -f "$HOME/openvpn-install.sh" ]; then
+    step "Install OpenVPN"
     curl -fsSLo "$HOME/openvpn-install.sh" https://git.io/vpn &&
       sudo bash "$HOME/openvpn-install.sh"
   fi
 
   # Install PM2
   if hash node 2>/dev/null && hash yarn 2>/dev/null && ! hash pm2; then
+    step "Install PM2"
     yarn global add pm2
   fi
-
-  # Install mongoDB
-  # if ! hash mongo 2>/dev/null; then
-  #   wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
-  #   echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
-  #   sudo apt update
-  #   sudo apt install mongodb-org -y
-  #   sudo systemctl daemon-reload
-  #   sudo systemctl start mongod
-  #   sudo systemctl enable mongod
-  # fi
 fi
 
 # Update yarn global packages
+step "Update Yarn Global Packages"
 yarn global upgrade -s
 
 sudo -v
@@ -179,6 +182,7 @@ vim +PlugInstall +qall
 success 'Vim-plug and plugins installed and already up-to-date'
 
 # Git credentials netrc
+info 'Setup Git credentials netrc'
 FILE=/usr/share/doc/git/contrib/credential/netrc/git-credential-netrc
 if [ -f "$FILE" ]; then
   sudo chmod +x "$FILE"
@@ -189,12 +193,14 @@ else
 fi
 
 # Install OMZ if .oh-my-zsh directory not already in home
+info 'Install OMZ if .oh-my-zsh directory not already in home'
 [ ! -d "$HOME/.oh-my-zsh" ] &&
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" \
   "" --unattended --keep-zshrc
 sudo -v
 
 # Switch default shell to zsh from brew
+info 'Switch default shell to zsh installed with brew'
 BREW_PREFIX=$(brew --prefix)
 if ! grep -q "$BREW_PREFIX/bin/zsh" /etc/shells; then
   info 'Make zsh installed from brew to default shell'
