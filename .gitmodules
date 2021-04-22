@@ -1,47 +1,47 @@
 [submodule ".bot"]
-	path = .bot
-	url = https://github.com/anishathalye/dotbot.git
-	ignore = dirty
-	shallow = true
+path = .bot
+url = https://github.com/anishathalye/dotbot.git
+ignore = dirty
+shallow = true
 
 [submodule "ansi-arts"]
-	path = ansi-arts
-	url = https://github.com/latipun7/ansi-arts.git
-	ignore = dirty
-	shallow = true
+path = ansi-arts
+url = https://github.com/latipun7/ansi-arts.git
+ignore = dirty
+shallow = true
 
 [submodule "powerlevel10k"]
-	path = linux/oh-my-zsh/themes/powerlevel10k
-	url = https://github.com/romkatv/powerlevel10k.git
-	ignore = dirty
-	shallow = true
+path = linux/oh-my-zsh/themes/powerlevel10k
+url = https://github.com/romkatv/powerlevel10k.git
+ignore = dirty
+shallow = true
 
 [submodule "tmux"]
-	path = linux/tmux/oh-my-tmux
-	url = https://github.com/gpakosz/.tmux.git
-	ignore = dirty
-	shallow = true
+path = linux/tmux/oh-my-tmux
+url = https://github.com/gpakosz/.tmux.git
+ignore = dirty
+shallow = true
 
 [submodule "zsh-completions"]
-	path = linux/oh-my-zsh/plugins/zsh-completions
-	url = https://github.com/zsh-users/zsh-completions.git
-	ignore = dirty
-	shallow = true
+path = linux/oh-my-zsh/plugins/zsh-completions
+url = https://github.com/zsh-users/zsh-completions.git
+ignore = dirty
+shallow = true
 
 [submodule "zsh-autosuggestions"]
-	path = linux/oh-my-zsh/plugins/zsh-autosuggestions
-	url = https://github.com/zsh-users/zsh-autosuggestions.git
-	ignore = dirty
-	shallow = true
+path = linux/oh-my-zsh/plugins/zsh-autosuggestions
+url = https://github.com/zsh-users/zsh-autosuggestions.git
+ignore = dirty
+shallow = true
 
 [submodule "zsh-syntax-highlighting"]
-	path = linux/oh-my-zsh/plugins/zsh-syntax-highlighting
-	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
-	ignore = dirty
-	shallow = true
+path = linux/oh-my-zsh/plugins/zsh-syntax-highlighting
+url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+ignore = dirty
+shallow = true
 
 [submodule "zsh-nvm"]
-	path = linux/oh-my-zsh/plugins/zsh-nvm
-	url = https://github.com/lukechilds/zsh-nvm.git
-	ignore = dirty
-	shallow = true
+path = linux/oh-my-zsh/plugins/zsh-nvm
+url = https://github.com/lukechilds/zsh-nvm.git
+ignore = dirty
+shallow = true
