@@ -16,7 +16,7 @@ NVMDIR="$DOTDIR/linux/oh-my-zsh/plugins/zsh-nvm"
 SYNTDIR="$DOTDIR/linux/oh-my-zsh/plugins/zsh-syntax-highlighting"
 
 function install_script() {
-  bash -c "$(curl -fsSL https://ruppy.io/install-dotfiles)"
+  bash -c "$(curl -fsSL https://raw.githubusercontent.com/latipun7/dotfiles/master/install.sh)"
 }
 
 function install() {
