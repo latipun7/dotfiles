@@ -42,7 +42,7 @@ If you are on Linux, run this command to **install** this dotfiles:
 - Install this dotfiles:
 
   ```bash
-  bash -c "$(curl -fsSL https://raw.githubusercontent.com/latipun7/dotfiles/master/install.sh)"
+  bash -c "$(curl -fsSL https://raw.githubusercontent.com/latipun7/dotfiles/main/install.sh)"
   ```
 
 - Exit current terminal session: `exit`, then start new terminal session
