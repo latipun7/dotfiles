@@ -8,6 +8,8 @@
       create: true
       relink: true
       force: true
+    shell:
+      quiet: true
 
 - link:
     ~/.ansi-arts:
@@ -27,20 +29,14 @@
 
 #############################
 - create:
-    [
-      ~/.config/nvim/autoload,
-      ~/.secrets,
-      ~/.ssh/multiplex,
-      ~/projects,
-      ~/downloads,
-    ]
+    ~/.config/nvim/autoload:
+    ~/.secrets:
+    ~/.ssh/multiplex:
+    ~/downloads:
+    ~/projects:
 
 - shell:
-    - [
-        'if [[ "$(uname -a)" = *[Mm]icrosoft* ]]; then sudo cp --remove-destination "linux/wsl/wsl.conf" /etc/wsl.conf; fi',
-        Force re-copy wsl configs,
-      ]
-    - [
-        "chmod -R go-rwx ~/.secrets",
-        Change correct permissions for secrets folder,
-      ]
+    - description: Force re-copy wsl configs if WSL
+      command: if [[ "$(uname -a)" = *[Mm]icrosoft* ]]; then sudo cp --remove-destination "linux/wsl/wsl.conf" /etc/wsl.conf; fi
+    - description: Change correct permissions for secrets folder
+      command: chmod -R go-rwx ~/.secrets

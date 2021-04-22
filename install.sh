@@ -2,6 +2,8 @@
 
 set -e
 
+umask 022
+
 CONFIG="install.conf.yml"
 DOTBOT_DIR=".bot"
 
