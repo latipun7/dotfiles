@@ -103,8 +103,8 @@ if [[ "$(uname -a)" != *[Mm]icrosoft* ]]; then
   # Install nginx
   if [ ! -f /etc/apt/sources.list.d/nginx.list ]; then
     step "Install nginx"
-    echo "deb http://nginx.org/packages/ubuntu $(lsb_release -cs) nginx" \
-      | sudo tee /etc/apt/sources.list.d/nginx.list
+    echo "deb http://nginx.org/packages/ubuntu $(lsb_release -cs) nginx" |
+      sudo tee /etc/apt/sources.list.d/nginx.list
     curl -fsSL https://nginx.org/keys/nginx_signing.key | sudo apt-key add -
     sudo apt-key fingerprint ABF5BD827BD9BF62
     sudo apt update
@@ -115,8 +115,8 @@ if [[ "$(uname -a)" != *[Mm]icrosoft* ]]; then
   if [ ! -f /etc/apt/sources.list.d/docker.list ]; then
     step "Install docker"
     echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-      $(lsb_release -cs) stable" \
-      | sudo tee /etc/apt/sources.list.d/docker.list
+      $(lsb_release -cs) stable" |
+      sudo tee /etc/apt/sources.list.d/docker.list
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
     sudo apt-key fingerprint 0EBFCD88
     sudo apt update
@@ -124,8 +124,8 @@ if [[ "$(uname -a)" != *[Mm]icrosoft* ]]; then
     sudo systemctl enable docker
     sudo mkdir -p /etc/systemd/system/docker.service.d
     sudo touch /etc/systemd/system/docker.service.d/override.conf
-    echo -e '[Service]\nExecStart=\nExecStart=/usr/bin/dockerd -H fd:// -H tcp://127.0.0.1:2375' \
-      | sudo tee -a /etc/systemd/system/docker.service.d/override.conf &>/dev/null
+    echo -e '[Service]\nExecStart=\nExecStart=/usr/bin/dockerd -H fd:// -H tcp://127.0.0.1:2375' |
+      sudo tee -a /etc/systemd/system/docker.service.d/override.conf &>/dev/null
     sudo systemctl daemon-reload
     sudo systemctl restart docker.service
   fi
@@ -196,7 +196,7 @@ fi
 info 'Install OMZ if .oh-my-zsh directory not already in home'
 [ ! -d "$HOME/.oh-my-zsh" ] &&
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" \
-  "" --unattended --keep-zshrc
+    "" --unattended --keep-zshrc
 sudo -v
 
 # Switch default shell to zsh from brew

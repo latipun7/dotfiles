@@ -1,12 +1,12 @@
 [credential]
-  helper = "netrc -f ~/.password-store/personal/github.com.gpg"
+helper = "netrc -f ~/.password-store/personal/github.com.gpg"
 
 [user]
-  name = LS
-  email = latifsulistyo.me@gmail.com
+name = LS
+email = latifsulistyo.me@gmail.com
 
 [init]
-	defaultBranch = main
+defaultBranch = main
 
 [pull]
-	rebase = true
+rebase = true
