@@ -27,9 +27,9 @@ function fail() {
 info 'Update and upgrade packages from official source.list'
 if [ -z ${CI+x} ]; then
   # if CI is unset
-  sudo apt update && sudo apt full-upgrade -y && apt autoremove
+  sudo apt update && sudo apt full-upgrade -y && sudo apt autoremove
 else
-  echo "Skipping in CI..."
+  sudo apt-get update && sudo apt-get dist-upgrade -y && sudo apt-get autoremove
 fi
 sudo -v
 success 'Upgraded successfully'
@@ -63,12 +63,6 @@ info 'Installing/upgrading all fun stuff ...'
 brew upgrade
 sudo -v
 
-# Install yarn
-hash node 2>/dev/null &&
-  ! hash yarn 2>/dev/null &&
-  step "Install Yarn"
-  curl -o- -L https://yarnpkg.com/install.sh | bash
-
 # Install packages with brew
 if [ -s "$HOME/.Brewfile" ]; then
   step "Install packages with brew"
@@ -77,6 +71,16 @@ else
   fail ".Brewfile not found on home directory."
 fi
 sudo -v
+
+# Install node if node didn't installed
+hash fnm &>/dev/null && eval "$(fnm env --shell zsh | sed -e 's/PATH="\(.*\)":\$PATH/PATH="\1:$PATH"/g')"
+! hash node &>/dev/null && fnm install lts/fermium && fnm use lts/fermium
+
+# Install yarn if has node but not has yarn
+if hash node 2>/dev/null && ! hash yarn 2>/dev/null; then
+  step "Install Yarn"
+  curl -o- -L https://yarnpkg.com/install.sh | bash
+fi
 
 # Python Modules
 step "Install/upgrade Python Modules"
@@ -89,15 +93,18 @@ sudo -v
 # Install these if not WSL
 if [[ "$(uname -a)" != *[Mm]icrosoft* ]]; then
   # Install PM2
-  if hash node 2>/dev/null && hash yarn 2>/dev/null && ! hash pm2; then
+  if hash node 2>/dev/null && hash yarn 2>/dev/null && ! hash pm2 2>/dev/null; then
     step "Install PM2"
     yarn global add pm2
   fi
 fi
 
 # Update yarn global packages
-step "Update Yarn Global Packages"
-yarn global upgrade -s
+if hash yarn &>/dev/null; then
+  step "Update Yarn Global Packages"
+  yarn global upgrade -s
+fi
+
 
 sudo -v
 

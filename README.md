@@ -45,8 +45,7 @@ If you are on Linux, run this command to **install** this dotfiles:
   bash -c "$(curl -fsSL https://raw.githubusercontent.com/latipun7/dotfiles/main/install.sh)"
   ```
 
-- Exit current terminal session: `exit`, then start new terminal session
-- Run `nvm install node && nvm use node && bootstrap`
+- Exit current terminal session: `exit`, then start new terminal session for environment to populate
 - Now this configuration already installed in your machine.
 
 ### Tips
