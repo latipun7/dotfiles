@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 if [ -z "$DOTFILES" ]; then
   DOTDIR="$HOME/.files"
 else
