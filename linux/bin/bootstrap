@@ -85,66 +85,8 @@ pip3 install --upgrade pynvim
 
 sudo -v
 
-# Install postgreSQL
-step "Install PostgreSQL"
-if ! hash psql 2>/dev/null; then
-  sudo apt install postgresql postgresql-contrib -y
-fi
-
 # Install these if not WSL
 if [[ "$(uname -a)" != *[Mm]icrosoft* ]]; then
-  # Install nginx
-  if [ ! -f /etc/apt/sources.list.d/nginx.list ]; then
-    step "Install nginx"
-    echo "deb http://nginx.org/packages/ubuntu $(lsb_release -cs) nginx" |
-      sudo tee /etc/apt/sources.list.d/nginx.list
-    curl -fsSL https://nginx.org/keys/nginx_signing.key | sudo apt-key add -
-    sudo apt-key fingerprint ABF5BD827BD9BF62
-    sudo apt update
-    sudo apt install nginx -y
-  fi
-
-  # Install docker
-  if [ ! -f /etc/apt/sources.list.d/docker.list ]; then
-    step "Install docker"
-    echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-      $(lsb_release -cs) stable" |
-      sudo tee /etc/apt/sources.list.d/docker.list
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-    sudo apt-key fingerprint 0EBFCD88
-    sudo apt update
-    sudo apt install docker-ce docker-ce-cli containerd.io -y
-    sudo systemctl enable docker
-    sudo mkdir -p /etc/systemd/system/docker.service.d
-    sudo touch /etc/systemd/system/docker.service.d/override.conf
-    echo -e '[Service]\nExecStart=\nExecStart=/usr/bin/dockerd -H fd:// -H tcp://127.0.0.1:2375' |
-      sudo tee -a /etc/systemd/system/docker.service.d/override.conf &>/dev/null
-    sudo systemctl daemon-reload
-    sudo systemctl restart docker.service
-  fi
-
-  # Setup certbot
-  if hash docker 2>/dev/null; then
-    if [ ! -d "/etc/letsencrypt" ]; then
-      step "Install certbot"
-      sudo docker run -it --rm --name certbot \
-        -v "/etc/letsencrypt:/etc/letsencrypt" \
-        -v "/var/lib/letsencrypt:/var/lib/letsencrypt" \
-        -v "$HOME/.secrets:$HOME/.secrets" \
-        certbot/dns-digitalocean certonly \
-        --dns-digitalocean-credentials "$HOME/.secrets/digitalocean.ini" \
-        --server https://acme-v02.api.letsencrypt.org/directory \
-        -d ruppy.io,*.ruppy.io
-    fi
-  fi
-
-  # Setup OpenVPN
-  if [ ! -f "$HOME/openvpn-install.sh" ]; then
-    step "Install OpenVPN"
-    curl -fsSLo "$HOME/openvpn-install.sh" https://git.io/vpn &&
-      sudo bash "$HOME/openvpn-install.sh"
-  fi
-
   # Install PM2
   if hash node 2>/dev/null && hash yarn 2>/dev/null && ! hash pm2; then
     step "Install PM2"
