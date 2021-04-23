@@ -17,15 +17,16 @@ else
    echo "homebrew not available in the current OS type.";
 fi
 
+# FNM Shell Setup
+if hash fnm &>/dev/null; then
+  eval "$(fnm env --shell zsh | sed -e 's/PATH="\(.*\)":\$PATH/PATH="\1:$PATH"/g')"
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# ZSH-NVM Options: https://github.com/lukechilds/zsh-nvm#options
-export NVM_LAZY_LOAD=true
-export NVM_AUTO_USE=true
-
 # Path to your oh-my-zsh installation.
-export ZSH="/home/latipun7/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -92,7 +93,6 @@ ZSH_CUSTOM=$HOME/.oh-my-zsh-custom
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  zsh-nvm # need early for node/npm available for any other plugins
   git
   fzf
   zsh-autosuggestions

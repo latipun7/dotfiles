@@ -41,33 +41,32 @@ else
 fi
 sudo -v
 
-info 'Install build dependencies and add brew to PATH'
-sudo apt install build-essential -y
+info 'Add brew to PATH'
 sudo -v
 [ -d "/home/linuxbrew/.linuxbrew" ] &&
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-# make homebrew available in non-sudo installs
+# check homebrew if available in non-sudo installs
 [ -d "$HOME/.linuxbrew" ] &&
   eval "$("$HOME/.linuxbrew/bin/brew" shellenv)"
-success 'brew added to PATH and brew build dependencies installed successfully'
+success 'brew added to PATH successfully'
 
 # Installing stuff
-info 'Installing all fun stuff ...'
+info 'Installing/upgrading all fun stuff ...'
 
 # Upgrade any already-installed formulae.
 brew upgrade
 sudo -v
 
 # Install yarn
-step "Install Yarn"
 hash node 2>/dev/null &&
   ! hash yarn 2>/dev/null &&
+  step "Install Yarn"
   curl -o- -L https://yarnpkg.com/install.sh | bash
 
 # Install packages with brew
-step "Install packages with brew"
 if [ -s "$HOME/.Brewfile" ]; then
+  step "Install packages with brew"
   brew bundle --global --no-lock -v
 else
   fail ".Brewfile not found on home directory."
@@ -75,20 +74,10 @@ fi
 sudo -v
 
 # Python Modules
-step "Install Python Modules"
-python3 -m pip install --upgrade pip
+step "Install/upgrade Python Modules"
+python3 -m pip install --upgrade pip # upgrade pip
 pip3 install --upgrade psutil
 pip3 install --upgrade pynvim
-
-# Install bpytop
-step "Install bpytop"
-if [ -d "$HOME/.bpytop" ]; then
-  git -C "$HOME/.bpytop" fetch --depth 1
-  git -C "$HOME/.bpytop" checkout FETCH_HEAD
-else
-  git clone --depth 1 https://github.com/aristocratos/bpytop.git "$HOME/.bpytop"
-fi
-sudo make -C "$HOME/.bpytop" install
 
 sudo -v
 
@@ -193,14 +182,15 @@ else
 fi
 
 # Install OMZ if .oh-my-zsh directory not already in home
-info 'Install OMZ if .oh-my-zsh directory not already in home'
-[ ! -d "$HOME/.oh-my-zsh" ] &&
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  info 'Install OMZ'
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" \
     "" --unattended --keep-zshrc
+  success 'OMZ installed successfully'
+fi
 sudo -v
 
 # Switch default shell to zsh from brew
-info 'Switch default shell to zsh installed with brew'
 BREW_PREFIX=$(brew --prefix)
 if ! grep -q "$BREW_PREFIX/bin/zsh" /etc/shells; then
   info 'Make zsh installed from brew to default shell'
