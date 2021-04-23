@@ -5,6 +5,7 @@ tap "linuxbrew/xorg"
 
 # Development Utilities
 brew "curl"
+brew "fnm"
 brew "fontforge" unless system "! (uname -a | grep -iq microsoft)"
 brew "gcc"
 brew "git"
@@ -20,6 +21,7 @@ brew "neovim" # vim
 brew "zsh"    # shell/bash
 
 # Utilities
+brew "bpytop"
 brew "cjbassi/ytop/ytop"
 brew "fzf"
 brew "midnight-commander"
