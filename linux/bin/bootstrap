@@ -114,7 +114,7 @@ info 'Install/update vim-plug'
 curl -fsSLo "$HOME/.vim/autoload/plug.vim" --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ln -sf "$HOME/.vim/autoload/plug.vim" "$HOME/.config/nvim/autoload/"
-vim +PlugInstall +qall
+[ -z ${CI+x} ] && vim +PlugUpgrade +PlugUpdate +qall
 success 'Vim-plug and plugins installed and already up-to-date'
 
 # Git credentials netrc
