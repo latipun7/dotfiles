@@ -29,7 +29,7 @@ if [ -z ${CI+x} ]; then
   # if CI is unset
   sudo apt update && sudo apt full-upgrade -y && apt autoremove
 else
-  sudo apt-get update && sudo apt-get dist-upgrade -y && apt-get autoremove
+  echo "Skipping in CI..."
 fi
 sudo -v
 success 'Upgraded successfully'
