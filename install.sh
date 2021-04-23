@@ -4,6 +4,8 @@ set -eo pipefail
 
 umask 022
 
+REPO=${GITHUB_WORKSPACE:-https://github.com/latipun7/dotfiles.git}
+
 CONFIG="install.conf.yml"
 DOTBOT_DIR=".bot"
 
@@ -20,7 +22,7 @@ if [ ! -d "$HOME/.files" ]; then
     --recurse-submodules \
     --shallow-submodules \
     -j 7 \
-    https://github.com/latipun7/dotfiles.git "$DOTDIR"
+    "$REPO" "$DOTDIR"
   chmod -R +x "$DOTDIR/install.sh" "$DOTDIR/linux/bin"
 fi
 
