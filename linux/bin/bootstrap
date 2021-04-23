@@ -26,9 +26,10 @@ function fail() {
 
 info 'Update and upgrade packages from official source.list'
 if [ -z ${CI+x} ]; then
- sudo apt-get update && sudo apt-get dist-upgrade -y && apt-get autoremove
-else
+  # if CI is unset
   sudo apt update && sudo apt full-upgrade -y && apt autoremove
+else
+  sudo apt-get update && sudo apt-get dist-upgrade -y && apt-get autoremove
 fi
 sudo -v
 success 'Upgraded successfully'
