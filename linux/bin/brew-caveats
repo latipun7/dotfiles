@@ -9,6 +9,8 @@
 #:    `brew caveats python@3.9 fzf`
 #:    Show caveats from specific formulas (in this case, python@3.9 and fzf)
 
+set -euo pipefail
+
 if [ $# -eq 0 ]; then
   for formula in $(brew list --formula); do
     caveat=$(brew info "$formula" | sed '/==> Caveats/,/==>/!d;//d')

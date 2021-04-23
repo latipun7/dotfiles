@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 directory=/e/Data/Fonts/@font-patcher
 
 if [ -d "$directory" ]; then
