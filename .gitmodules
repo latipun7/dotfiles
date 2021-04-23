@@ -39,9 +39,3 @@ path = linux/oh-my-zsh/plugins/zsh-syntax-highlighting
 url = https://github.com/zsh-users/zsh-syntax-highlighting.git
 ignore = dirty
 shallow = true
-
-[submodule "zsh-nvm"]
-path = linux/oh-my-zsh/plugins/zsh-nvm
-url = https://github.com/lukechilds/zsh-nvm.git
-ignore = dirty
-shallow = true

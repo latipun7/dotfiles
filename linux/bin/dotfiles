@@ -14,7 +14,6 @@ P10KDIR="$DOTDIR/linux/oh-my-zsh/themes/powerlevel10k"
 OTMUXDIR="$DOTDIR/linux/tmux/oh-my-tmux"
 AUTODIR="$DOTDIR/linux/oh-my-zsh/plugins/zsh-autosuggestions"
 COMPDIR="$DOTDIR/linux/oh-my-zsh/plugins/zsh-completions"
-NVMDIR="$DOTDIR/linux/oh-my-zsh/plugins/zsh-nvm"
 SYNTDIR="$DOTDIR/linux/oh-my-zsh/plugins/zsh-syntax-highlighting"
 
 function install_script() {
@@ -71,11 +70,6 @@ function update() {
         git -C "$COMPDIR" checkout FETCH_HEAD
         exit
         ;;
-      nvm | zsh-nvm)
-        git -C "$NVMDIR" fetch --depth 1
-        git -C "$NVMDIR" checkout FETCH_HEAD
-        exit
-        ;;
       syntax | zsh-syntax | highlighting | zsh-syntax-highlighting)
         git -C "$SYNTDIR" fetch --depth 1
         git -C "$SYNTDIR" checkout FETCH_HEAD
@@ -94,14 +88,12 @@ function update() {
         git -C "$AUTODIR" checkout FETCH_HEAD
         git -C "$COMPDIR" fetch --depth 1
         git -C "$COMPDIR" checkout FETCH_HEAD
-        git -C "$NVMDIR" fetch --depth 1
-        git -C "$NVMDIR" checkout FETCH_HEAD
         git -C "$SYNTDIR" fetch --depth 1
         git -C "$SYNTDIR" checkout FETCH_HEAD
         exit
         ;;
       *)
-        echo "Accepted value is bot, ansi, p10k, tmux, autosuggestions, completions, nvm, and syntax."
+        echo "Accepted value is bot, ansi, p10k, tmux, autosuggestions, completions, and syntax."
         exit 1
         ;;
       esac
