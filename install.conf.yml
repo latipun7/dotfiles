@@ -30,13 +30,13 @@
 #############################
 - create:
     ~/.config/nvim/autoload:
+    ~/.password-store:
+      mode: 0722
     ~/.secrets:
+      mode: 0722
     ~/.ssh/multiplex:
-    ~/downloads:
     ~/projects:
 
 - shell:
     - description: Force re-copy wsl configs if WSL
       command: if [[ "$(uname -a)" = *[Mm]icrosoft* ]]; then sudo cp --remove-destination "linux/wsl/wsl.conf" /etc/wsl.conf; fi
-    - description: Change correct permissions for secrets folder
-      command: chmod -R go-rwx ~/.secrets

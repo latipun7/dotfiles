@@ -2,13 +2,11 @@
 
 set -eo pipefail
 
-umask 022
+! (umask | grep -q 022) && umask 022
 
 REPO=${GITHUB_WORKSPACE:-https://github.com/latipun7/dotfiles.git}
-
 CONFIG="install.conf.yml"
 DOTBOT_DIR=".bot"
-
 DOTBOT_BIN="bin/dotbot"
 
 if [ -z "$DOTFILES" ]; then
@@ -17,12 +15,8 @@ else
   DOTDIR="$DOTFILES"
 fi
 
-if [ ! -d "$HOME/.files" ]; then
-  git clone \
-    --recurse-submodules \
-    --shallow-submodules \
-    -j 7 \
-    "$REPO" "$DOTDIR"
+if [ ! -d "$DOTDIR" ]; then
+  git clone --recurse-submodules --shallow-submodules -j 7 "$REPO" "$DOTDIR"
   chmod -R +x "$DOTDIR/install.sh" "$DOTDIR/linux/bin"
 fi
 

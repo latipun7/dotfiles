@@ -2,6 +2,10 @@
 
 set -euo pipefail
 
+# TODO: rewrite, as this script is not good.
+# TODO: document all scripts in bin folder.
+# TODO: write tests using https://github.com/bats-core/bats-core.
+
 if [ -z "$DOTFILES" ]; then
   DOTDIR="$HOME/.files"
 else
