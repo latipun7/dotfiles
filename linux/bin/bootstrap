@@ -24,15 +24,28 @@ function fail() {
   exit 1
 }
 
-info 'Update and upgrade packages from official source.list'
+###############################################
+#           Update and upgrade APT            #
+###############################################
+
+info 'Update and upgrade packages from APT'
 if [ -z ${CI+x} ]; then
-  # if CI is unset
+  # if CI is unset/zero
   sudo apt update && sudo apt full-upgrade -y && sudo apt autoremove
 else
   sudo apt-get update && sudo apt-get dist-upgrade -y && sudo apt-get autoremove
 fi
 sudo -v
 success 'Upgraded successfully'
+
+###############################################
+#            Homebrew / Linuxbrew             #
+###############################################
+
+# Install ruby if not 64-bit x86_64 CPU arch
+if [[ "$(uname -a)" != *x86_64* ]]; then
+  sudo apt install ruby-full
+fi
 
 # install homebrew if it's not installed otherwise update brew
 if hash brew 2>/dev/null; then
@@ -41,22 +54,32 @@ if hash brew 2>/dev/null; then
   success 'Formulas updated'
 else
   info 'Install homebrew (linuxbrew)'
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   success 'Homebrew (linuxbrew) installed successfully'
 fi
 sudo -v
 
-info 'Add brew to PATH'
+info 'Add brew to PATH and update requirements'
+if [ -z ${CI+x} ]; then
+  # if CI is unset/zero
+  sudo apt install build-essential procps curl file git
+else
+  sudo apt-get install build-essential procps curl file git
+fi
 sudo -v
+
 [ -d "/home/linuxbrew/.linuxbrew" ] &&
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # check homebrew if available in non-sudo installs
 [ -d "$HOME/.linuxbrew" ] &&
   eval "$("$HOME/.linuxbrew/bin/brew" shellenv)"
-success 'brew added to PATH successfully'
+success 'brew added to PATH and requirement updated successfully'
 
-# Installing stuff
+###############################################
+#              Installing Stuff               #
+###############################################
+
 info 'Installing/upgrading all fun stuff ...'
 
 # Upgrade any already-installed formulae.
@@ -72,7 +95,14 @@ else
 fi
 sudo -v
 
-# Install node if node didn't installed
+# Remove outdated versions from the cellar.
+info 'Cleanup outdated versions from brew cellar.'
+brew cleanup
+brew bundle cleanup --global -f
+sudo -v
+
+# Install node if node didn't installed,
+# shellcheck disable=SC2016
 hash fnm &>/dev/null && eval "$(fnm env --shell zsh | sed -e 's/PATH="\(.*\)":\$PATH/PATH="\1:$PATH"/g')"
 ! hash node &>/dev/null && fnm install lts/fermium && fnm use lts/fermium
 
@@ -105,15 +135,6 @@ if hash yarn &>/dev/null; then
   yarn global upgrade -s
 fi
 
-
-sudo -v
-
-success 'All stuff installed and already up-to-date'
-
-# Remove outdated versions from the cellar.
-info 'Cleanup outdated versions from brew cellar.'
-brew cleanup
-brew bundle cleanup --global -f
 sudo -v
 
 # Setup vims
@@ -123,6 +144,21 @@ curl -fsSLo "$HOME/.vim/autoload/plug.vim" --create-dirs \
 ln -sf "$HOME/.vim/autoload/plug.vim" "$HOME/.config/nvim/autoload/"
 [ -z ${CI+x} ] && vim +PlugUpgrade +PlugUpdate +qall
 success 'Vim-plug and plugins installed and already up-to-date'
+
+# Install OMZ if .oh-my-zsh directory not already in home
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  info 'Install OMZ'
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" \
+    "" --unattended --keep-zshrc
+  success 'OMZ installed successfully'
+fi
+sudo -v
+
+success 'All stuff installed and already up-to-date'
+
+###############################################
+#                Miscellaneous                #
+###############################################
 
 # Git credentials netrc
 info 'Setup Git credentials netrc'
@@ -134,15 +170,6 @@ else
     https://raw.githubusercontent.com/git/git/master/contrib/credential/netrc/git-credential-netrc.perl
   sudo chmod +x "$FILE"
 fi
-
-# Install OMZ if .oh-my-zsh directory not already in home
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-  info 'Install OMZ'
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" \
-    "" --unattended --keep-zshrc
-  success 'OMZ installed successfully'
-fi
-sudo -v
 
 # Switch default shell to zsh from brew
 BREW_PREFIX=$(brew --prefix)
