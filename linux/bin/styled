@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#
+# shellcheck source=lib/_functions.sh
+source "$DOTFILES/linux/bin/lib/_functions.sh"
+
+styled "$@"

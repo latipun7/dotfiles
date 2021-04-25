@@ -4,25 +4,8 @@
 
 set -euo pipefail
 
-! (umask | grep -q 022) && umask 022
-
-function info() {
-  echo -e "\n  \e[1;35m==>\e[0m $1 ℹ\n"
-}
-
-function step() {
-  echo -e "\n\e[2K  \e[0;94m==>\e[0m $1\n"
-}
-
-function success() {
-  echo -e "\n\e[2K  \e[0;32m==>\e[0m $1 ✅\n"
-}
-
-function fail() {
-  echo -e "\n\e[2K  \e[0;31m==>\e[0m $1 ❌\n"
-  echo ''
-  exit 1
-}
+# shellcheck source=lib/_functions.sh
+source "$DOTFILES/linux/bin/lib/_functions.sh"
 
 ###############################################
 #           Update and upgrade APT            #
