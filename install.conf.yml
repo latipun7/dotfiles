@@ -39,4 +39,4 @@
 
 - shell:
     - description: Force re-copy wsl configs if WSL
-      command: if [[ "$(uname -a)" = *[Mm]icrosoft* ]]; then sudo cp --remove-destination "linux/wsl/wsl.conf" /etc/wsl.conf; fi
+      command: if [[ "$(uname -a)" == *[Mm]icrosoft* ]]; then sudo cp --remove-destination "linux/wsl/wsl.conf" /etc/wsl.conf; fi

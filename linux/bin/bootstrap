@@ -12,8 +12,8 @@ source "$DOTFILES/linux/bin/lib/_functions.sh"
 ###############################################
 
 info 'Update and upgrade packages from APT'
-if [ -z ${CI+x} ]; then
-  # if CI is unset/zero
+if [ -z ${CI:+true} ]; then
+  # if CI is unset / null (zero)
   sudo apt update && sudo apt full-upgrade -y && sudo apt autoremove -y
 else
   sudo apt-get update && sudo apt-get dist-upgrade -y && sudo apt-get autoremove -y
@@ -25,39 +25,37 @@ success 'Upgraded successfully'
 #            Homebrew / Linuxbrew             #
 ###############################################
 
-# Install ruby if not 64-bit x86_64 CPU arch
-if [[ "$(uname -a)" != *x86_64* ]]; then
-  sudo apt install ruby-full -y
+# Install brew only on 64-bit x86_64 CPU arch
+if [[ "$(uname -a)" == *x86_64* ]]; then
+  # install homebrew if it's not installed otherwise update brew
+  if hash brew 2>/dev/null; then
+    info 'Update brew formulas'
+    brew update
+    success 'Formulas updated'
+  else
+    info 'Install homebrew (linuxbrew)'
+    bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    success 'Homebrew (linuxbrew) installed successfully'
+  fi
+  sudo -v
+
+  info 'Add brew to PATH and update requirements'
+  if [ -z ${CI:+true} ]; then
+    # if CI is unset / null (zero)
+    sudo apt install build-essential procps curl file git -y
+  else
+    sudo apt-get install build-essential procps curl file git -y
+  fi
+  sudo -v
+
+  [ -d "/home/linuxbrew/.linuxbrew" ] &&
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+  # check homebrew if available in non-sudo installs
+  [ -d "$HOME/.linuxbrew" ] &&
+    eval "$("$HOME/.linuxbrew/bin/brew" shellenv)"
+  success 'brew added to PATH and requirement updated successfully'
 fi
-
-# install homebrew if it's not installed otherwise update brew
-if hash brew 2>/dev/null; then
-  info 'Update brew formulas'
-  brew update
-  success 'Formulas updated'
-else
-  info 'Install homebrew (linuxbrew)'
-  bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  success 'Homebrew (linuxbrew) installed successfully'
-fi
-sudo -v
-
-info 'Add brew to PATH and update requirements'
-if [ -z ${CI+x} ]; then
-  # if CI is unset/zero
-  sudo apt install build-essential procps curl file git -y
-else
-  sudo apt-get install build-essential procps curl file git -y
-fi
-sudo -v
-
-[ -d "/home/linuxbrew/.linuxbrew" ] &&
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
-# check homebrew if available in non-sudo installs
-[ -d "$HOME/.linuxbrew" ] &&
-  eval "$("$HOME/.linuxbrew/bin/brew" shellenv)"
-success 'brew added to PATH and requirement updated successfully'
 
 ###############################################
 #              Installing Stuff               #
@@ -65,24 +63,43 @@ success 'brew added to PATH and requirement updated successfully'
 
 info 'Installing/upgrading all fun stuff ...'
 
-# Upgrade any already-installed formulae.
-brew upgrade
-sudo -v
+#===================#
+#   Brew Specific   #
+#===================#
 
-# Install packages with brew
-if [ -s "$HOME/.Brewfile" ]; then
-  step "Install packages with brew"
-  brew bundle --global --no-lock -v
-else
-  fail ".Brewfile not found on home directory."
+# Install with brew only on 64-bit x86_64 CPU arch
+if [[ "$(uname -a)" == *x86_64* ]]; then
+  # Upgrade any already-installed formulae.
+  brew upgrade
+  sudo -v
+
+  # Install packages with brew
+  if [ -s "$HOME/.Brewfile" ]; then
+    step "Install packages with brew"
+    brew bundle --global --no-lock -v
+  else
+    fail ".Brewfile not found on home directory."
+  fi
+  sudo -v
+
+  # Remove outdated versions from the cellar.
+  info 'Cleanup outdated versions from brew cellar.'
+  brew cleanup
+  brew bundle cleanup --global -f
+  sudo -v
 fi
-sudo -v
 
-# Remove outdated versions from the cellar.
-info 'Cleanup outdated versions from brew cellar.'
-brew cleanup
-brew bundle cleanup --global -f
-sudo -v
+#===================#
+#    If not Brew    #
+#===================#
+
+# Install with this if not on 64-bit x86_64 CPU arch
+if [[ "$(uname -a)" != *x86_64* ]]; then
+  # shellcheck source=lib/_apt-packages.sh
+  source "$DOTFILES/linux/bin/lib/_apt-packages.sh"
+fi
+
+#===================#
 
 # Install node if node didn't installed,
 # shellcheck disable=SC2016
@@ -125,7 +142,7 @@ info 'Install/update vim-plug'
 curl -fsSLo "$HOME/.vim/autoload/plug.vim" --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ln -sf "$HOME/.vim/autoload/plug.vim" "$HOME/.config/nvim/autoload/"
-[ -z ${CI+x} ] && vim +PlugUpgrade +PlugUpdate +qall
+[ -z ${CI:+true} ] && vim +PlugUpgrade +PlugUpdate +qall
 success 'Vim-plug and plugins installed and already up-to-date'
 
 # Install OMZ if .oh-my-zsh directory not already in home
@@ -154,14 +171,16 @@ else
   sudo chmod +x "$FILE"
 fi
 
-# Switch default shell to zsh from brew
-BREW_PREFIX=$(brew --prefix)
-if ! grep -q "$BREW_PREFIX/bin/zsh" /etc/shells; then
-  info 'Make zsh installed from brew to default shell'
-  echo "$BREW_PREFIX/bin/zsh" | sudo tee -a /etc/shells
-  sudo sed -i s/required/sufficient/g /etc/pam.d/chsh
-  chsh -s "$BREW_PREFIX/bin/zsh"
-  success 'Changed to zsh shell from brew installed zsh'
+# Switch default shell
+if [[ "$(uname -a)" == *x86_64* ]]; then
+  PATH_PREFIX=$(brew --prefix 2>/dev/null || echo '/usr/bin/')
+  if ! grep -q "$PATH_PREFIX/bin/zsh" /etc/shells; then
+    info 'Make zsh installed from brew to default shell'
+    echo "$PATH_PREFIX/bin/zsh" | sudo tee -a /etc/shells
+    sudo sed -i s/required/sufficient/g /etc/pam.d/chsh
+    chsh -s "$PATH_PREFIX/bin/zsh"
+    success 'Changed to zsh shell from brew installed zsh'
+  fi
 fi
 
 success 'All done!'

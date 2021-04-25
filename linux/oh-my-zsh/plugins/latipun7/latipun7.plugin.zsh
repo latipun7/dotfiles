@@ -37,7 +37,7 @@ hash chara 2>/dev/null && chara
 umask 022
 
 # activate node
-[[ "$(type node)" = *function* ]] && node -v &>/dev/null
+[[ "$(type node)" == *function* ]] && node -v &>/dev/null
 
 #########################
 #         Aliases       #

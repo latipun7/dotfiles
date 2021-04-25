@@ -11,18 +11,20 @@
 
 set -euo pipefail
 
-if [ $# -eq 0 ]; then
-  for formula in $(brew list --formula); do
-    caveat=$(brew info "$formula" | sed '/==> Caveats/,/==>/!d;//d')
-    if [ -n "$caveat" ]; then
-      echo -e "\n\e[2K\e[0;94m==>\e[0m $formula Caveats:\n$caveat\n"
-    fi
-  done
-else
-  for formula in "$@"; do
-    caveat=$(brew info "$formula" | sed '/==> Caveats/,/==>/!d;//d')
-    if [ -n "$caveat" ]; then
-      echo -e "\n\e[2K\e[0;94m==>\e[0m $formula Caveats:\n$caveat\n"
-    fi
-  done
+if hash brew &>/dev/null; then
+  if [ $# -eq 0 ]; then
+    for formula in $(brew list --formula); do
+      caveat=$(brew info "$formula" | sed '/==> Caveats/,/==>/!d;//d')
+      if [ -n "$caveat" ]; then
+        echo -e "\n\e[2K\e[0;94m==>\e[0m $formula Caveats:\n$caveat\n"
+      fi
+    done
+  else
+    for formula in "$@"; do
+      caveat=$(brew info "$formula" | sed '/==> Caveats/,/==>/!d;//d')
+      if [ -n "$caveat" ]; then
+        echo -e "\n\e[2K\e[0;94m==>\e[0m $formula Caveats:\n$caveat\n"
+      fi
+    done
+  fi
 fi

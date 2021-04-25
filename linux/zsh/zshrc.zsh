@@ -6,12 +6,12 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # Make linuxbrew PATH available before sourcing OMZ
-if [[ "$OSTYPE" = linux-gnu ]]; then
+if [[ "$OSTYPE" == linux-gnu ]]; then
   [ -d "/home/linuxbrew/.linuxbrew" ] &&
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   [ -d "$HOME/.linuxbrew" ] &&
     eval "$($HOME/.linuxbrew/bin/brew shellenv)"
-elif [[ "$OSTYPE" = darwin* ]]; then
+elif [[ "$OSTYPE" == darwin* ]]; then
   [ -d "/usr/local/Cellar" ] && eval "$(/usr/local/bin/brew shellenv)"
 else
    echo "homebrew not available in the current OS type.";
