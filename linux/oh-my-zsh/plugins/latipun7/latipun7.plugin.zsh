@@ -2,14 +2,15 @@
 # Environment Variables #
 #########################
 
-export PATH=$HOME/.bin:/usr/share/doc/git/contrib/credential/netrc:$PATH
+# default directory of this dotfiles
+export DOTFILES="$HOME/.files"
+
+pythonlink=$(hash brew 2>/dev/null && echo ":$(brew --prefix)/opt/python/libexec/bin")
+export PATH=$HOME/.bin:/usr/share/doc/git/contrib/credential/netrc$pythonlink:$PATH
 
 export NODE_PATH=$HOME/.config/yarn/global/node_modules
 
 export DOCKER_HOST="tcp://127.0.0.1:2375"
-
-# default directory of this dotfiles
-export DOTFILES="$HOME/.files"
 
 # default editor
 export EDITOR=nvim
@@ -44,7 +45,7 @@ umask 022
 #########################
 
 alias psudo='sudo env PATH="$PATH"'
-alias openvpn-install='curl -fsSLo "$HOME/openvpn-install.sh" https://git.io/vpn && bash "$HOME/openvpn-install.sh"'
+alias openvpn-install='curl -fsLSo "$HOME/openvpn-install.sh" https://git.io/vpn && bash "$HOME/openvpn-install.sh"'
 
 # git alias
 alias gcob='git checkout --orphan'
