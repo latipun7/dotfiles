@@ -36,7 +36,7 @@ if [[ "$(uname -a)" == *x86_64* ]]; then
     success 'Formulas updated'
   else
     info 'Install homebrew (linuxbrew)'
-    bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    bash -c "$(curl -fsLS https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     success 'Homebrew (linuxbrew) installed successfully'
   fi
   sudo -v
@@ -102,17 +102,46 @@ if [[ "$(uname -a)" != *x86_64* ]]; then
 fi
 
 #===================#
+#    Node + Yarn    #
+#===================#
 
 # Install node if node didn't installed,
 # shellcheck disable=SC2016
 hash fnm &>/dev/null && eval "$(fnm env --shell zsh | sed -e 's/PATH="\(.*\)":\$PATH/PATH="\1:$PATH"/g')"
-! hash node &>/dev/null && fnm install lts/fermium && fnm use lts/fermium
+if ! hash node &>/dev/null; then
+  step "Install Node"
+  fnm install lts/fermium && fnm use lts/fermium
+fi
 
 # Install yarn if has node but not has yarn
 if hash node 2>/dev/null && ! hash yarn 2>/dev/null; then
   step "Install Yarn"
-  curl -o- -L https://yarnpkg.com/install.sh | bash
+  curl -fsLSo- https://yarnpkg.com/install.sh | bash
 fi
+
+# Install/Update Global Node Modules
+if hash node 2>/dev/null && hash yarn 2>/dev/null; then
+  step "Install Global Node Modules via Yarn"
+
+  # Install bitwarden-cli
+  ! hash bw 2>/dev/null && yarn global add @bitwarden/cli
+
+  # Install these if not WSL
+  if [[ "$(uname -a)" != *[Mm]icrosoft* ]]; then
+    # Install PM2
+    ! hash pm2 2>/dev/null && yarn global add pm2
+  fi
+
+  # Update yarn global packages
+  step "Update Node Global Packages via Yarn"
+  yarn global upgrade -s
+fi
+
+sudo -v
+
+#===================#
+#   Python Moduls   #
+#===================#
 
 # Python Modules
 step "Install/upgrade Python Modules"
@@ -122,26 +151,11 @@ pip3 install --upgrade pynvim
 
 sudo -v
 
-# Install these if not WSL
-if [[ "$(uname -a)" != *[Mm]icrosoft* ]]; then
-  # Install PM2
-  if hash node 2>/dev/null && hash yarn 2>/dev/null && ! hash pm2 2>/dev/null; then
-    step "Install PM2"
-    yarn global add pm2
-  fi
-fi
-
-# Update yarn global packages
-if hash yarn &>/dev/null; then
-  step "Update Yarn Global Packages"
-  yarn global upgrade -s
-fi
-
-sudo -v
+#===================#
 
 # Setup vims
 info 'Install/update vim-plug'
-curl -fsSLo "$HOME/.vim/autoload/plug.vim" --create-dirs \
+curl -fsLSo "$HOME/.vim/autoload/plug.vim" --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ln -sf "$HOME/.vim/autoload/plug.vim" "$HOME/.config/nvim/autoload/"
 [ -z ${CI:+true} ] && vim +PlugUpgrade +PlugUpdate +qall
@@ -150,7 +164,7 @@ success 'Vim-plug and plugins installed and already up-to-date'
 # Install OMZ if .oh-my-zsh directory not already in home
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
   info 'Install OMZ'
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" \
+  sh -c "$(curl -fsLS https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" \
     "" --unattended --keep-zshrc
   success 'OMZ installed successfully'
 fi
@@ -168,7 +182,7 @@ FILE=/usr/share/doc/git/contrib/credential/netrc/git-credential-netrc
 if [ -f "$FILE" ]; then
   sudo chmod +x "$FILE"
 else
-  sudo curl -fsSLo "$FILE" \
+  sudo curl -fsLSo "$FILE" \
     https://raw.githubusercontent.com/git/git/master/contrib/credential/netrc/git-credential-netrc.perl
   sudo chmod +x "$FILE"
 fi
@@ -184,5 +198,7 @@ if [[ "$(uname -a)" == *x86_64* ]]; then
     success 'Changed to zsh shell from brew installed zsh'
   fi
 fi
+
+###############################################
 
 success 'All done!'

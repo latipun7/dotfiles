@@ -25,9 +25,9 @@ brew "zsh"    # shell/bash
 brew "bpytop"
 brew "cjbassi/ytop/ytop"
 brew "fzf"
+brew "jq"
 brew "midnight-commander"
 brew "ncdu"
-brew "pass"
 
 # Games / Fun
 brew "asciiquarium"

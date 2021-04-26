@@ -7,7 +7,10 @@
 function concat() {
   local IFS="$1"
   shift
-  echo "$*"
+
+  arr=()
+  for a in "$@"; do [ "$a" != '' ] && arr+=("$a"); done
+  echo "${arr[*]}"
 }
 
 function styled() (
@@ -258,8 +261,7 @@ function styled() (
     fi
   fi
 
-  # shellcheck disable=SC2206
-  _format=(${_bold:-} ${_dim:-} ${_italic:-} ${_underline:-} ${_blink:-} ${_background:-} ${_color:-})
+  _format=("${_bold:-}" "${_dim:-}" "${_italic:-}" "${_underline:-}" "${_blink:-}" "${_background:-}" "${_color:-}")
 
   _style=$(concat ";" "${_format[@]}")
 
@@ -267,18 +269,18 @@ function styled() (
 )
 
 function info() {
-  printf "\n\t\e%s $1 ℹ\n" "$(styled -bc lightblue "==>")"
+  printf "\n\t\e%s $1 ℹ\n\n" "$(styled -bc lightblue "==>")"
 }
 
 function step() {
-  printf "\n\t\e%s $1 👟\n" "$(styled -bc purple "==>")"
+  printf "\n\t\e%s $1 👟\n\n" "$(styled -bc purple "==>")"
 }
 
 function success() {
-  printf "\n\t\e%s $1 ✔\n" "$(styled -bc green "==>")"
+  printf "\n\t\e%s $1 ✔\n\n" "$(styled -bc green "==>")"
 }
 
 function fail() {
-  printf "\n\t\e%s $1 ❌\n" "$(styled -bc red "==>")"
+  printf "\n\t\e%s $1 ❌\n\n" "$(styled -bc red "==>")"
   exit 1
 }

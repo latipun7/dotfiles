@@ -1,8 +1,8 @@
 [credential]
-helper = "netrc -f ~/.password-store/personal/github.com.gpg"
+helper = "!github-cred"
 
 [user]
-name = LS
+name = Latif Sulistyo
 email = latifsulistyo.me@gmail.com
 
 [init]

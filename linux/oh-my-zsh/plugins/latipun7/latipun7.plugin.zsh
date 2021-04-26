@@ -5,8 +5,13 @@
 # default directory of this dotfiles
 export DOTFILES="$HOME/.files"
 
-pythonlink=$(hash brew 2>/dev/null && echo ":$(brew --prefix)/opt/python/libexec/bin")
-export PATH=$HOME/.bin:/usr/share/doc/git/contrib/credential/netrc$pythonlink:$PATH
+source "$DOTFILES/linux/bin/lib/_functions.sh"
+
+pythonexe=$(hash brew 2>/dev/null && echo "$(brew --prefix)/opt/python/libexec/bin")
+yarnexe="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin"
+homeexe="$HOME/.bin"
+pathexe=("$homeexe" "$yarnexe" "$pythonexe" "$PATH")
+export PATH=$(concat ":" "${pathexe[@]}")
 
 export NODE_PATH=$HOME/.config/yarn/global/node_modules
 
@@ -71,6 +76,12 @@ hash bat 2>/dev/null && alias cat=bat
 # nvim alias
 hash nvim 2>/dev/null && alias vi=nvim
 
+# bitwarden alias
+if hash bw 2>/dev/null; then
+  alias bw-login='eval "$(bw login | grep -oE --color=never "(export BW_SESSION=".+")")"'
+  alias bw-unlock='eval "$(bw unlock | grep -oE --color=never "(export BW_SESSION=".+")")"'
+fi
+
 #########################
 #    ZSH Keybindings    #
 #########################
@@ -82,8 +93,15 @@ bindkey '^H' backward-kill-word
 #    ZSH Completions    #
 #########################
 
+# bitwarden-cli
+if hash bw 2>/dev/null; then
+  bw completion --shell zsh >"$HOME/.local/share/completions/_bw"
+fi
+
 # brew completion
-hash brew 2>/dev/null &&
-  fpath=("$(brew --prefix)/share/zsh/site-functions" $fpath)
+hash brew 2>/dev/null && fpath=("$(brew --prefix)/share/zsh/site-functions" $fpath)
+
+chmod -R +x "$HOME/.local/share/completions"
+fpath=("$HOME/.local/share/completions" $fpath)
 
 autoload -Uz compinit && compinit

@@ -30,8 +30,7 @@
 #############################
 - create:
     ~/.config/nvim/autoload:
-    ~/.password-store:
-      mode: 0722
+    ~/.local/share/completions:
     ~/.secrets:
       mode: 0722
     ~/.ssh/multiplex:
