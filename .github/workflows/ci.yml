@@ -24,9 +24,25 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
+      - name: Clean up 🧹
+        run: |
+          bash -c "$(curl -fsLS https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)" -- --force --quiet
+          sudo rm -f /usr/local/bin/node
+          sudo rm -f /usr/local/bin/yarn
+
       - name: Checkout 🛎️
         uses: actions/checkout@v2.3.4
+        with:
+          submodules: "recursive"
 
-      - name: Initial Install
+      - name: Initial Install ✨
         run: |
           bash -c ./install.sh
+
+      - name: Run Tests 🧪
+        env:
+          ZSH_DISABLE_COMPFIX: true
+        run: |
+          source ~/.zshrc
+          bootstrap
+        shell: zsh {0}
