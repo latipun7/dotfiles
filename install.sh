@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+! (umask | grep -q 022) && umask 022
+
 export DOTFILES=${DOTFILES:-$HOME/.files}
 
 REPO=${GITHUB_WORKSPACE:-https://github.com/latipun7/dotfiles.git}
@@ -9,13 +11,13 @@ CONFIG="install.conf.yml"
 DOTBOT_DIR=".bot"
 DOTBOT_BIN="bin/dotbot"
 
-# shellcheck source=linux/bin/lib/_functions.sh
-source "$DOTFILES/linux/bin/lib/_functions.sh"
-
 if [ ! -d "$DOTFILES" ]; then
   git clone --recurse-submodules --shallow-submodules -j 7 "$REPO" "$DOTFILES"
   chmod -R +x "$DOTFILES/install.sh" "$DOTFILES/linux/bin"
 fi
+
+# shellcheck source=linux/bin/lib/_functions.sh
+source "$DOTFILES/linux/bin/lib/_functions.sh"
 
 git -C "$DOTFILES" submodule sync --recursive
 git -C "$DOTFILES" submodule update --init --recursive

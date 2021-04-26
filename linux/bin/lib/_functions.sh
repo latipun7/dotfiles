@@ -2,8 +2,6 @@
 #
 # Utilities functions
 
-! (umask | grep -q 022) && umask 022
-
 # Example Usage: concat "," "$arr[@]"
 # result: 1,2,3,4
 function concat() {
@@ -12,7 +10,7 @@ function concat() {
   echo "$*"
 }
 
-function styled() {
+function styled() (
   die() {
     local _ret="${2:-1}"
     test "${_PRINT_HELP:-no}" = yes && print_help >&2
@@ -178,45 +176,45 @@ function styled() {
   handle_passed_args_count
   assign_positional_args 1 "${_positionals[@]}"
 
-  [ $_arg_bold = "on" ] && local _bold=1
-  [ $_arg_dim = "on" ] && local _dim=2
-  [ $_arg_italic = "on" ] && local _italic=3
-  [ $_arg_underline = "on" ] && local _underline=4
-  [ $_arg_blink = "on" ] && local _blink=5
+  [ $_arg_bold = "on" ] && _bold=1
+  [ $_arg_dim = "on" ] && _dim=2
+  [ $_arg_italic = "on" ] && _italic=3
+  [ $_arg_underline = "on" ] && _underline=4
+  [ $_arg_blink = "on" ] && _blink=5
 
   if [[ -n ${_arg_background} ]]; then
     if [[ "$_arg_background" =~ ^[Bb]lack$ ]]; then
-      local _background=40
+      _background=40
     elif [[ "$_arg_background" =~ ^[Rr]ed$ ]]; then
-      local _background=41
+      _background=41
     elif [[ "$_arg_background" =~ ^[Gg]reen$ ]]; then
-      local _background=42
+      _background=42
     elif [[ "$_arg_background" =~ ^[Yy]ellow$ ]]; then
-      local _background=43
+      _background=43
     elif [[ "$_arg_background" =~ ^[Bb]lue$ ]]; then
-      local _background=44
+      _background=44
     elif [[ "$_arg_background" =~ ^([Mm]agenta|[Pp]urple)$ ]]; then
-      local _background=45
+      _background=45
     elif [[ "$_arg_background" =~ ^[Cc]yan$ ]]; then
-      local _background=46
+      _background=46
     elif [[ "$_arg_background" =~ ^[Ww]hite$ ]]; then
-      local _background=47
+      _background=47
     elif [[ "$_arg_background" =~ ([Ll]|[Bb]r)ight(_|-| |)[Bb]lack ]]; then
-      local _background=100
+      _background=100
     elif [[ "$_arg_background" =~ ([Ll]|[Bb]r)ight(_|-| |)[Rr]ed ]]; then
-      local _background=101
+      _background=101
     elif [[ "$_arg_background" =~ ([Ll]|[Bb]r)ight(_|-| |)[Gg]reen ]]; then
-      local _background=102
+      _background=102
     elif [[ "$_arg_background" =~ ([Ll]|[Bb]r)ight(_|-| |)[Yy]ellow ]]; then
-      local _background=103
+      _background=103
     elif [[ "$_arg_background" =~ ([Ll]|[Bb]r)ight(_|-| |)[Bb]lue ]]; then
-      local _background=104
+      _background=104
     elif [[ "$_arg_background" =~ ([Ll]|[Bb]r)ight(_|-| |)([Mm]agenta|[Pp]urple) ]]; then
-      local _background=105
+      _background=105
     elif [[ "$_arg_background" =~ ([Ll]|[Bb]r)ight(_|-| |)[Cc]yan ]]; then
-      local _background=106
+      _background=106
     elif [[ "$_arg_background" =~ ([Ll]|[Bb]r)ight(_|-| |)[Ww]hite ]]; then
-      local _background=107
+      _background=107
     else
       die "Invalid color.\nAccepted value is the color name of 8/16-colors terminal." 1
     fi
@@ -224,50 +222,49 @@ function styled() {
 
   if [[ -n ${_arg_color} ]]; then
     if [[ "$_arg_color" =~ ^[Bb]lack$ ]]; then
-      local _color=30
+      _color=30
     elif [[ "$_arg_color" =~ ^[Rr]ed$ ]]; then
-      local _color=31
+      _color=31
     elif [[ "$_arg_color" =~ ^[Gg]reen$ ]]; then
-      local _color=32
+      _color=32
     elif [[ "$_arg_color" =~ ^[Yy]ellow$ ]]; then
-      local _color=33
+      _color=33
     elif [[ "$_arg_color" =~ ^[Bb]lue$ ]]; then
-      local _color=34
+      _color=34
     elif [[ "$_arg_color" =~ ^([Mm]agenta|[Pp]urple)$ ]]; then
-      local _color=35
+      _color=35
     elif [[ "$_arg_color" =~ ^[Cc]yan$ ]]; then
-      local _color=36
+      _color=36
     elif [[ "$_arg_color" =~ ^[Ww]hite$ ]]; then
-      local _color=37
+      _color=37
     elif [[ "$_arg_color" =~ ([Ll]|[Bb]r)ight(_|-| |)[Bb]lack ]]; then
-      local _color=90
+      _color=90
     elif [[ "$_arg_color" =~ ([Ll]|[Bb]r)ight(_|-| |)[Rr]ed ]]; then
-      local _color=91
+      _color=91
     elif [[ "$_arg_color" =~ ([Ll]|[Bb]r)ight(_|-| |)[Gg]reen ]]; then
-      local _color=92
+      _color=92
     elif [[ "$_arg_color" =~ ([Ll]|[Bb]r)ight(_|-| |)[Yy]ellow ]]; then
-      local _color=93
+      _color=93
     elif [[ "$_arg_color" =~ ([Ll]|[Bb]r)ight(_|-| |)[Bb]lue ]]; then
-      local _color=94
+      _color=94
     elif [[ "$_arg_color" =~ ([Ll]|[Bb]r)ight(_|-| |)([Mm]agenta|[Pp]urple) ]]; then
-      local _color=95
+      _color=95
     elif [[ "$_arg_color" =~ ([Ll]|[Bb]r)ight(_|-| |)[Cc]yan ]]; then
-      local _color=96
+      _color=96
     elif [[ "$_arg_color" =~ ([Ll]|[Bb]r)ight(_|-| |)[Ww]hite ]]; then
-      local _color=97
+      _color=97
     else
       die "Invalid color.\nAccepted value is the color name of 8/16-colors terminal." 1
     fi
   fi
 
   # shellcheck disable=SC2206
-  local _format=(${_bold:-} ${_dim:-} ${_italic:-} ${_underline:-} ${_blink:-} ${_background:-} ${_color:-})
+  _format=(${_bold:-} ${_dim:-} ${_italic:-} ${_underline:-} ${_blink:-} ${_background:-} ${_color:-})
 
-  local _style
   _style=$(concat ";" "${_format[@]}")
 
   echo -e "\e[${_style:-}m${_arg_text:?}\e[0m"
-}
+)
 
 function info() {
   printf "\n\t\e%s $1 ℹ\n" "$(styled -bc lightblue "==>")"

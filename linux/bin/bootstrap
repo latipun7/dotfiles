@@ -4,6 +4,8 @@
 
 set -euo pipefail
 
+! (umask | grep -q 022) && umask 022
+
 # shellcheck source=lib/_functions.sh
 source "$DOTFILES/linux/bin/lib/_functions.sh"
 
