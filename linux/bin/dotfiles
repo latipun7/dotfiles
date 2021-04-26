@@ -21,7 +21,7 @@ COMPDIR="$DOTDIR/linux/oh-my-zsh/plugins/zsh-completions"
 SYNTDIR="$DOTDIR/linux/oh-my-zsh/plugins/zsh-syntax-highlighting"
 
 function install_script() {
-  bash -c "$(curl -fsSL https://raw.githubusercontent.com/latipun7/dotfiles/master/install.sh)"
+  bash -c "$(curl -fsLS https://raw.githubusercontent.com/latipun7/dotfiles/master/install.sh)"
 }
 
 function install() {

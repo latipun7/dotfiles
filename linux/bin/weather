@@ -11,4 +11,4 @@ else
   CITY=$1
 fi
 
-curl -fsSL wttr.in/"$CITY"
+curl -fsLS wttr.in/"$CITY"
