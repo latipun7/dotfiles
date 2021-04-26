@@ -164,8 +164,7 @@ success 'Vim-plug and plugins installed and already up-to-date'
 # Install OMZ if .oh-my-zsh directory not already in home
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
   info 'Install OMZ'
-  sh -c "$(curl -fsLS https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" \
-    "" --unattended --keep-zshrc
+  bash -c "$(curl -fsLS https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" -- --unattended --keep-zshrc
   success 'OMZ installed successfully'
 fi
 sudo -v
@@ -175,17 +174,6 @@ success 'All stuff installed and already up-to-date'
 ###############################################
 #                Miscellaneous                #
 ###############################################
-
-# Git credentials netrc
-info 'Setup Git credentials netrc'
-FILE=/usr/share/doc/git/contrib/credential/netrc/git-credential-netrc
-if [ -f "$FILE" ]; then
-  sudo chmod +x "$FILE"
-else
-  sudo curl -fsLSo "$FILE" \
-    https://raw.githubusercontent.com/git/git/master/contrib/credential/netrc/git-credential-netrc.perl
-  sudo chmod +x "$FILE"
-fi
 
 # Switch default shell
 if [[ "$(uname -a)" == *x86_64* ]]; then
