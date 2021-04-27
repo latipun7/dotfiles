@@ -53,7 +53,7 @@ umask 022
 #########################
 
 alias psudo='sudo env PATH="$PATH"'
-alias openvpn-install='curl -fsLSo "$HOME/openvpn-install.sh" https://git.io/vpn && bash "$HOME/openvpn-install.sh"'
+alias openvpn-install='curl -fsLS https://git.io/vpn | sudo bash'
 
 # git alias
 alias gcob='git checkout --orphan'
