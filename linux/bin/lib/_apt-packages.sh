@@ -104,13 +104,17 @@ pip3 install --upgrade bpytop
 # Install/Upgrade bat
 # https://github.com/sharkdp/bat/releases
 step "Install/Upgrade bat"
-curl -fsLS https://github.com/sharkdp/bat/releases/download/v0.18.0/bat_0.18.0_arm64.deb | sudo dpkg -i
+curl -fsLSo /tmp/bat.deb \
+  https://github.com/sharkdp/bat/releases/download/v0.18.0/bat_0.18.0_arm64.deb
+sudo dpkg -i /tmp/bat.deb
 
 ###############################################################################
-# Install/Upgrade bat
-# https://github.com/sharkdp/bat/releases
-step "Install/Upgrade bat"
-curl -fsLS https://github.com/sharkdp/bat/releases/download/v0.18.0/bat_0.18.0_arm64.deb | sudo dpkg -i
+# Install/Upgrade lsd
+# https://github.com/Peltoche/lsd/releases
+step "Install/Upgrade lsd"
+curl -fsLSo /tmp/lsd.deb \
+  https://github.com/Peltoche/lsd/releases/download/0.20.1/lsd_0.20.1_arm64.deb
+sudo dpkg -i /tmp/lsd.deb
 
 ###############################################################################
 # Install/Upgrade asciiquarium
