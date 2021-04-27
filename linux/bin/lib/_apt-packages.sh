@@ -6,9 +6,9 @@ source "$DOTFILES/linux/bin/lib/_functions.sh"
 # Installing standard apps thru Ubuntu APT repository
 step "Install Apps via APT Repository"
 packages=(
-  "curl" "gcc" "git" "python3" "neovim" "zsh" "jq" "mc" "ncdu" "libcurses-perl"
-  "cmatrix" "cowsay" "fortune" "lolcat" "neofetch" "sl" "coreutils" "gzip"
-  "apt-transport-https" "ca-certificates" "gnupg" "lsb-release" "texinfo"
+  "curl" "gcc" "git" "python3" "python3-pip" "neovim" "zsh" "jq" "mc" "ncdu"
+  "libcurses-perl" "cmatrix" "cowsay" "fortune" "lolcat" "neofetch" "sl"
+  "coreutils" "gzip" "apt-transport-https" "ca-certificates" "gnupg" "lsb-release" "texinfo"
 )
 sudo apt install "${packages[@]}" -y
 
@@ -98,7 +98,7 @@ fi
 # Install/Upgrade bpytop
 # https://github.com/aristocratos/bpytop#installation
 step "Install/Upgrade bpytop"
-pip3 install bpytop --upgrade
+pip3 install --upgrade bpytop
 
 ###############################################################################
 # Install/Upgrade bat
