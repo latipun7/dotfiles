@@ -92,7 +92,7 @@ if [ ! -d "$HOME/.fzf" ]; then
 else
   git -C "$HOME/.fzf" pull -q --depth 1
 fi
-"$HOME/.fzf/install"
+"$HOME/.fzf/install" --all --no-update-rc
 
 ###############################################################################
 # Install/Upgrade bpytop
