@@ -65,8 +65,9 @@ fi
 ###############################################################################
 # Install/Upgrade fnm
 # https://github.com/Schniz/fnm#using-a-script-macoslinux
-step "Install/Upgrade FNM"
+step "Install/Upgrade fnm"
 curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell
+export PATH=$HOME/.fnm:$PATH
 
 ###############################################################################
 # Install/Upgrade Ponysay

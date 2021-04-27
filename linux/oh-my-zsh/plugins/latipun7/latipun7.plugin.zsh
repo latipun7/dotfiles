@@ -8,8 +8,9 @@ export DOTFILES="$HOME/.files"
 source "$DOTFILES/linux/bin/lib/_functions.sh"
 
 pythonexe=$(hash brew 2>/dev/null && echo "$(brew --prefix)/opt/python/libexec/bin")
+fnmexe=$([ -d $HOME/.fnm ] && echo "$HOME/.fnm")
 homeexe="$HOME/.bin:$HOME/.local/bin"
-pathexe=("$homeexe" "$pythonexe" "$PATH")
+pathexe=("$homeexe" "$fnmexe" "$pythonexe" "$PATH")
 export PATH=$(concat ":" "${pathexe[@]}")
 
 if hash fnm 2>/dev/null && hash node 2>/dev/null; then
