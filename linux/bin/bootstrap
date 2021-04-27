@@ -113,28 +113,17 @@ if ! hash node &>/dev/null; then
   fnm install lts/fermium && fnm use lts/fermium
 fi
 
-# Install yarn if has node but not has yarn
-if hash node 2>/dev/null && ! hash yarn 2>/dev/null; then
-  step "Install Yarn"
-  curl -fsLSo- https://yarnpkg.com/install.sh | bash
-fi
-
 # Install/Update Global Node Modules
-if hash node 2>/dev/null && hash yarn 2>/dev/null; then
-  step "Install Global Node Modules via Yarn"
+if hash npm 2>/dev/null; then
+  step "Install/Update Global Node Modules to Latest versions"
 
-  # Install bitwarden-cli
-  ! hash bw 2>/dev/null && yarn global add @bitwarden/cli
+  npm install -gq npm yarn @bitwarden/cli
 
   # Install these if not WSL
   if [[ "$(uname -a)" != *[Mm]icrosoft* ]]; then
     # Install PM2
-    ! hash pm2 2>/dev/null && yarn global add pm2
+    npm install -gq pm2
   fi
-
-  # Update yarn global packages
-  step "Update Node Global Packages via Yarn"
-  yarn global upgrade -s
 fi
 
 sudo -v
