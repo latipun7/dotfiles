@@ -8,12 +8,15 @@ export DOTFILES="$HOME/.files"
 source "$DOTFILES/linux/bin/lib/_functions.sh"
 
 pythonexe=$(hash brew 2>/dev/null && echo "$(brew --prefix)/opt/python/libexec/bin")
-yarnexe="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin"
 homeexe="$HOME/.bin"
-pathexe=("$homeexe" "$yarnexe" "$pythonexe" "$PATH")
+pathexe=("$homeexe" "$pythonexe" "$PATH")
 export PATH=$(concat ":" "${pathexe[@]}")
 
-export NODE_PATH=$HOME/.config/yarn/global/node_modules
+if hash fnm 2>/dev/null && hash node 2>/dev/null; then
+  nodelink=$(readlink -e "$(which node)")
+  NODE_PATH=$(cd "${nodelink:0:-4}../lib/node_modules" && pwd)
+  export NODE_PATH
+fi
 
 export DOCKER_HOST="tcp://127.0.0.1:2375"
 
