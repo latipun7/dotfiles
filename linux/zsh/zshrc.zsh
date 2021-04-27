@@ -18,6 +18,10 @@ else
 fi
 
 # FNM Shell Setup
+if [ -d "$HOME/.fnm" ]; then
+  export PATH=$HOME/.fnm:$PATH
+fi
+
 if hash fnm &>/dev/null; then
   eval "$(fnm env --shell zsh | sed -e 's/PATH="\(.*\)":\$PATH/PATH="\1:$PATH"/g')"
 fi
