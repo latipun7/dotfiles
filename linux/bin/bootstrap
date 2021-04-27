@@ -117,7 +117,8 @@ fi
 if hash npm 2>/dev/null; then
   step "Install/Update Global Node Modules to Latest versions"
 
-  npm install -gq npm yarn @bitwarden/cli
+  npm install -gq npm
+  npm install -gq yarn @bitwarden/cli
 
   # Install these if not WSL
   if [[ "$(uname -a)" != *[Mm]icrosoft* ]]; then
@@ -165,17 +166,16 @@ success 'All stuff installed and already up-to-date'
 ###############################################
 
 # Switch default shell
-if [[ "$(uname -a)" == *x86_64* ]]; then
-  PATH_PREFIX=$(brew --prefix 2>/dev/null || echo '/usr/bin/')
+PATH_PREFIX=$(brew --prefix 2>/dev/null || echo '/usr')
+if ! grep -q zsh $SHELL; then
+  info 'Make zsh as default shell'
   if ! grep -q "$PATH_PREFIX/bin/zsh" /etc/shells; then
-    info 'Make zsh installed from brew to default shell'
     echo "$PATH_PREFIX/bin/zsh" | sudo tee -a /etc/shells
-    sudo sed -i s/required/sufficient/g /etc/pam.d/chsh
-    chsh -s "$PATH_PREFIX/bin/zsh"
-    success 'Changed to zsh shell from brew installed zsh'
   fi
+  sudo sed -i s/required/sufficient/g /etc/pam.d/chsh
+  chsh -s "$PATH_PREFIX/bin/zsh"
+  success 'Changed default shell to zsh'
 fi
-
 ###############################################
 
 success 'All done!'
