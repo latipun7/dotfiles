@@ -7,7 +7,7 @@ source "$DOTFILES/linux/bin/lib/_functions.sh"
 step "Install Apps via APT Repository"
 packages=(
   "curl" "gcc" "git" "python3" "python3-pip" "neovim" "zsh" "jq" "mc" "ncdu"
-  "libcurses-perl" "cmatrix" "cowsay" "fortune" "lolcat" "neofetch" "sl"
+  "libcurses-perl" "cmatrix" "cowsay" "fortune" "lolcat" "neofetch" "sl" "net-tools"
   "coreutils" "gzip" "apt-transport-https" "ca-certificates" "gnupg" "lsb-release" "texinfo"
 )
 sudo apt install "${packages[@]}" -y

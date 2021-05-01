@@ -29,6 +29,7 @@ brew "gnutls"
 brew "jq"
 brew "midnight-commander"
 brew "ncdu"
+brew "net-tools"
 
 # Games / Fun
 brew "asciiquarium"
