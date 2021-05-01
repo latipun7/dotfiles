@@ -21,10 +21,10 @@
     ~/.gitconfig: linux/git/linux.gitconfig
     ~/.oh-my-zsh-custom: linux/oh-my-zsh
     ~/.p10k.zsh: linux/zsh/p10k.zsh
-    ~/.ssh/config: linux/ssh/config
     ~/.tmux.conf: linux/tmux/oh-my-tmux/.tmux.conf
     ~/.tmux.conf.local: linux/tmux/tmux.conf
     ~/.vim/vimrc: linux/vim/vimrc
+    ~/.zshenv: linux/zsh/zshenv.zsh
     ~/.zshrc: linux/zsh/zshrc.zsh
 
 #############################

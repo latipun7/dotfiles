@@ -5,27 +5,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Make linuxbrew PATH available before sourcing OMZ
-if [[ "$OSTYPE" == linux-gnu ]]; then
-  [ -d "/home/linuxbrew/.linuxbrew" ] &&
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-  [ -d "$HOME/.linuxbrew" ] &&
-    eval "$($HOME/.linuxbrew/bin/brew shellenv)"
-elif [[ "$OSTYPE" == darwin* ]]; then
-  [ -d "/usr/local/Cellar" ] && eval "$(/usr/local/bin/brew shellenv)"
-else
-   echo "homebrew not available in the current OS type.";
-fi
-
-# FNM Shell Setup
-if [ -d "$HOME/.fnm" ]; then
-  export PATH=$HOME/.fnm:$PATH
-fi
-
-if hash fnm &>/dev/null; then
-  eval "$(fnm env --shell zsh | sed -e 's/PATH="\(.*\)":\$PATH/PATH="\1:$PATH"/g')"
-fi
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
