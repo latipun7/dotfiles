@@ -7,9 +7,8 @@ updates:
     directory: "/"
     schedule:
       interval: daily
-      time: "05:00"
+      time: "13:00"
       timezone: Asia/Jakarta
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 7
     commit-message:
-      prefix: "chore(gh-ci)"
-      include: "scope"
+      prefix: "chore(ci)"
