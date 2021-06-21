@@ -54,6 +54,13 @@ export GPG_TTY="$TTY"
 # batman syntax highlight for man pages -> https://github.com/sharkdp/bat#man
 hash bat 2>/dev/null && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
+# https://github.com/QMonkey/wsl-tutorial#specify-the-display-server
+if [[ "$(uname -a)" == *[Mm]icrosoft* ]]; then 
+  export DISPLAY=192.168.1.99:0.0
+  export LIBGL_ALWAYS_INDIRECT=1 
+fi
+
+# Load private envs
 if [ -f "$HOME/.zshenv.private" ]; then
   source "$HOME/.zshenv.private"
 fi
