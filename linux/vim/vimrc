@@ -7,31 +7,34 @@ call plug#begin('~/.vim/plugged')
 " Language Server
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
 
-" Explorer
-Plug 'preservim/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+" GUI
+Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on': 'NERDTreeToggle' }
 Plug 'ryanoasis/vim-devicons'
 
 " Utilities
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/fzf.vim'
 Plug 'preservim/nerdcommenter'
+Plug 'easymotion/vim-easymotion'
+Plug 'justinmk/vim-sneak'
+Plug 'tpope/vim-surround'
 
-" Color / syntax highlighting
+" GUI / Syntax Highlighting
 Plug 'joshdick/onedark.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'sheerun/vim-polyglot'
 Plug 'luochen1990/rainbow'
+Plug 'peitalin/vim-jsx-typescript'
 
 call plug#end()
 
 " }}}
 
 " ============================================================================
-" BASIC SETTINGS {{{
+" EDITOR SETTINGS {{{
 " ============================================================================
 
 set encoding=utf-8
@@ -91,13 +94,21 @@ set shortmess+=c
 " always show signcolumns
 set signcolumn=yes
 
-" ----------------------------------------------------------------------------
-" Theme / Color / Syntax Highlighting
-" ----------------------------------------------------------------------------
 if (has("termguicolors"))
  set termguicolors
 endif
 
+" }}}
+
+" ============================================================================
+" PLUGINS SETTINGS {{{
+" ============================================================================
+
+" ----------------------------------------------------------------------------
+" Theme / Color / Syntax Highlighting
+" ----------------------------------------------------------------------------
+
+" One Dark
 let g:onedark_terminal_italics = 1
 colorscheme onedark
 
@@ -108,27 +119,6 @@ let g:airline_theme = 'onedark'
 
 " Bracket Rainbow
 let g:rainbow_active = 1
-
-" ----------------------------------------------------------------------------
-" Integrated Terminal
-" ----------------------------------------------------------------------------
-
-" open new split panes to right and below
-set splitright
-set splitbelow
-
-" turn terminal to normal mode with escape
-tnoremap <Esc> <C-\><C-n>
-
-" start terminal in insert mode
-au BufEnter * if &buftype == 'terminal' | :startinsert | endif
-
-" open terminal on ctrl+n
-function! OpenTerminal()
-  split term://zsh
-  resize 25
-endfunction
-nnoremap <C-n> :call OpenTerminal()<CR>
 
 " ----------------------------------------------------------------------------
 " COC.vim
@@ -169,117 +159,7 @@ augroup mygroup
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
-" ----------------------------------------------------------------------------
-" NERDTree
-" ----------------------------------------------------------------------------
-let g:NERDTreeGitStatusWithFlags = 1
-let g:NERDTreeIgnore = ['^node_modules$']
-
-" sync open file with NERDTree
-" " Check if NERDTree is open or active
-function! IsNERDTreeOpen()
-  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-endfunction
-
-" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
-" file, and we're not in vimdiff
-function! SyncTree()
-  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
-    NERDTreeFind
-    wincmd p
-  endif
-endfunction
-
-" Highlight currently open buffer in NERDTree
-autocmd BufEnter * call SyncTree()
-
-" }}}
-
-" ============================================================================
-" MAPPINGS {{{
-" ============================================================================
-
-let mapleader      = ' '
-let maplocalleader = ' '
-
-" ----------------------------------------------------------------------------
-" Basic mappings
-" ----------------------------------------------------------------------------
-
-" Open new line below and above current line
-nnoremap <Leader>o o<Esc>
-nnoremap <Leader>O O<Esc>
-
-" Save
-nnoremap <Leader>w :update<CR>
-
-" Quit
-nnoremap <Leader>q :q<CR>
-nnoremap <Leader>Q :qa!<CR>
-
-" jj | Escaping!
-inoremap jj <Esc>
-xnoremap jj <Esc>
-cnoremap jj <C-c>
-
-" Movement in insert mode
-imap <C-h> <C-o>h
-imap <C-l> <C-o>l
-imap <C-j> <C-o>j
-imap <C-k> <C-o>k
-imap <C-^> <C-o><C-^>
-imap <C-$> <C-o><C-$>
-
-" j/k will move virtual lines (lines that wrap)
-noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
-noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
-
-" ----------------------------------------------------------------------------
-" Tabs
-" ----------------------------------------------------------------------------
-nnoremap [k :tabn<CR>
-nnoremap [j :tabp<CR>
-
-" ----------------------------------------------------------------------------
-" <Tab> / <S-Tab> | Circular windows navigation
-" ----------------------------------------------------------------------------
-nnoremap <Tab>   <C-w>w
-nnoremap <S-Tab> <C-w>W
-
-" ----------------------------------------------------------------------------
-" Split Panels
-" ----------------------------------------------------------------------------
-
-" use alt+hjkl to move between split/vsplit panels
-tnoremap <A-h> <C-\><C-n><C-w>h
-tnoremap <A-j> <C-\><C-n><C-w>j
-tnoremap <A-k> <C-\><C-n><C-w>k
-tnoremap <A-l> <C-\><C-n><C-w>l
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
-
-" ----------------------------------------------------------------------------
-" NERD Tree
-" ----------------------------------------------------------------------------
-nnoremap <leader>n :NERDTreeToggle<CR>
-
-" ----------------------------------------------------------------------------
-" NERD Commenter
-" ----------------------------------------------------------------------------
-vnoremap <C-/> <plug>NERDCommenterToggle
-nnoremap <C-/> <plug>NERDCommenterToggle
-
-" ----------------------------------------------------------------------------
-" FZF
-" ----------------------------------------------------------------------------F
-nnoremap <C-p> :FZF<CR>
-
-" ----------------------------------------------------------------------------
-" COC.vim
-" ----------------------------------------------------------------------------C
-
+" MAPPINGS
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
@@ -368,5 +248,125 @@ nnoremap <silent> <space>j :<C-u>CocNext<CR>
 nnoremap <silent> <space>k :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p :<C-u>CocListResume<CR>
+
+" ----------------------------------------------------------------------------
+" NERDTree Related
+" ----------------------------------------------------------------------------
+let g:NERDTreeGitStatusWithFlags = 1
+let g:NERDTreeIgnore = ['^node_modules$']
+
+" sync open file with NERDTree
+" " Check if NERDTree is open or active
+function! IsNERDTreeOpen()
+  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+endfunction
+
+" Call NERDTreeFind if NERDTree is active, current window contains a modifiable
+" file, and we're not in vimdiff
+function! SyncTree()
+  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
+    NERDTreeFind
+    wincmd p
+  endif
+endfunction
+
+" Highlight currently open buffer in NERDTree
+autocmd BufEnter * call SyncTree()
+
+" NERD Tree mapping
+nnoremap <leader>n :NERDTreeToggle<CR>
+
+" NERD Commenter mapping
+vnoremap <C-/> <plug>NERDCommenterToggle
+nnoremap <C-/> <plug>NERDCommenterToggle
+
+" ----------------------------------------------------------------------------
+" FZF
+" ----------------------------------------------------------------------------
+set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf,/usr/local/opt/fzf,~/.fzf
+
+nnoremap <C-p> :FZF<CR>
+
+" }}}
+
+" ============================================================================
+" PERSONAL SETTINGS {{{
+" ============================================================================
+
+" ----------------------------------------------------------------------------
+" Integrated Terminal
+" ----------------------------------------------------------------------------
+
+" open new split panes to right and below
+set splitright
+set splitbelow
+
+" turn terminal to normal mode with escape
+tnoremap <Esc> <C-\><C-n>
+
+" start terminal in insert mode
+au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+
+" open terminal on ctrl+n
+function! OpenTerminal()
+  split term://zsh
+  resize 25
+endfunction
+
+nnoremap <C-n> :call OpenTerminal()<CR>
+
+" ----------------------------------------------------------------------------
+" Mappings
+" ----------------------------------------------------------------------------
+let mapleader      = ' '
+let maplocalleader = ' '
+
+nnoremap <Leader>/ :noh<CR>
+nnoremap <Leader>r :reg<CR>
+
+" Open new line below and above current line
+nnoremap <Leader>o o<Esc>
+nnoremap <Leader>O O<Esc>
+
+" Action on all lines
+nnoremap <Leader>ad :%d<CR>
+nnoremap <Leader>ay :%y<CR>
+
+" Save
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>W :wa<CR>
+
+" Quit
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>Q :qa!<CR>
+
+" jj | Escaping!
+inoremap jj <Esc>
+xnoremap jj <Esc>
+cnoremap jj <C-c>
+
+" Movement in insert mode
+inoremap <C-h> <C-o>h
+inoremap <C-l> <C-o>l
+inoremap <C-j> <C-o>j
+inoremap <C-k> <C-o>k
+
+inoremap <C-BS> <C-w>
+
+" j/k will move virtual lines (lines that wrap)
+noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+
+" Tabs
+nnoremap <Tab> :tabnext<CR>
+nnoremap <S-Tab> :tabprevious<CR>
+nnoremap <Leader>to :tabo<CR>
+
+" Split Panels / Windows
+" use alt+hjkl to move between split/vsplit panels
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
 
 " }}}
