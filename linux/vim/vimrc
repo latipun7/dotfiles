@@ -98,6 +98,9 @@ if (has("termguicolors"))
  set termguicolors
 endif
 
+let mapleader      = "\<Space>"
+let maplocalleader = "\<Space>"
+
 " }}}
 
 " ============================================================================
@@ -273,12 +276,24 @@ endfunction
 " Highlight currently open buffer in NERDTree
 autocmd BufEnter * call SyncTree()
 
-" NERD Tree mapping
-nnoremap <leader>n :NERDTreeToggle<CR>
+" NERD Commenter settings
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
 
-" NERD Commenter mapping
-vnoremap <C-/> <plug>NERDCommenterToggle
-nnoremap <C-/> <plug>NERDCommenterToggle
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when decommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not
+let g:NERDToggleCheckAllLines = 1
+
+" NERD Tree mapping
+nnoremap <A-\> :NERDTreeToggle<CR>
 
 " ----------------------------------------------------------------------------
 " FZF
@@ -318,9 +333,6 @@ nnoremap <C-n> :call OpenTerminal()<CR>
 " ----------------------------------------------------------------------------
 " Mappings
 " ----------------------------------------------------------------------------
-let mapleader      = ' '
-let maplocalleader = ' '
-
 nnoremap <Leader>/ :noh<CR>
 nnoremap <Leader>r :reg<CR>
 
