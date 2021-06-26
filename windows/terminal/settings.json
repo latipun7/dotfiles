@@ -9,6 +9,10 @@
     },
     {
       "command": "unbound",
+      "keys": "ctrl+/"
+    },
+    {
+      "command": "unbound",
       "keys": "ctrl+shift+down"
     },
     {
@@ -73,13 +77,18 @@
   "launchMode": "maximized",
   "profiles": {
     "defaults": {
-      "acrylicOpacity": 0.45000000000000001,
+      "acrylicOpacity": 0.45,
       "colorScheme": "Dracula",
       "cursorShape": "vintage",
       "fontFace": "CaskaydiaCovePL NF",
       "fontSize": 15,
       "historySize": 10000,
-      "useAcrylic": true
+      "useAcrylic": true,
+      "backgroundImage": "E:\\Pictures\\Random\\dyah-latif.small.png",
+      "backgroundImageAlignment": "topRight",
+      "backgroundImageOpacity": 0.51,
+      "backgroundImageStretchMode": "none",
+      "bellStyle": ["window", "taskbar"]
     },
     "list": [
       {
@@ -101,11 +110,6 @@
         "source": "Windows.Terminal.PowershellCore"
       },
       {
-        "backgroundImage": "E:\\Pictures\\Random\\dyah-latif.small.png",
-        "backgroundImageAlignment": "topRight",
-        "backgroundImageOpacity": 0.51000000000000001,
-        "backgroundImageStretchMode": "none",
-        "bellStyle": ["window", "taskbar"],
         "colorScheme": "Dracula",
         "experimental.retroTerminalEffect": false,
         "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
