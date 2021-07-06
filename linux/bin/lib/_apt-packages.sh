@@ -82,7 +82,7 @@ cd "$HOME/.ponysay" || return
 sudo ./setup.py \
   --freedom=partial \
   --with-custom-env-python="$(command -v python3)" \
-  install
+  install 1>/dev/null
 
 ###############################################################################
 # Install/Upgrade FZF
