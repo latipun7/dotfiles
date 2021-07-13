@@ -109,7 +109,7 @@ fi
 # shellcheck disable=SC2016
 hash fnm &>/dev/null && eval "$(fnm env --shell zsh | sed -e 's/PATH="\(.*\)":\$PATH/PATH="\1:$PATH"/g')"
 step "Install/Upgrade Node"
-fnm install 'lts/*' 1>/dev/null
+fnm install 'lts/*' 1>/dev/null && fnm use 'lts/*' 1>/dev/null
 
 # Install/Update Global Node Modules
 if hash npm 2>/dev/null; then
