@@ -11,7 +11,7 @@ brew "gcc"
 brew "git"
 brew "imagemagick" unless system "! (uname -a | grep -iq microsoft)"  # WSL only (dev env)
 brew "pkg-config" unless system "! (uname -a | grep -iq microsoft)"   # WSL only (dev env)
-# brew "postgresql" linuxbrew failed to build
+brew "postgresql"
 brew "python@3.9"
 brew "shellcheck" unless system "! (uname -a | grep -iq microsoft)"   # WSL only (dev env)
 
