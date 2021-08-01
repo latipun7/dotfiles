@@ -106,7 +106,7 @@ pip3 install --upgrade bpytop
 # https://github.com/sharkdp/bat/releases
 step "Install/Upgrade bat"
 curl -fsLSo /tmp/bat.deb \
-  https://github.com/sharkdp/bat/releases/download/v0.18.0/bat_0.18.0_arm64.deb
+  https://github.com/sharkdp/bat/releases/download/v0.18.2/bat_0.18.2_arm64.deb
 sudo dpkg -i /tmp/bat.deb
 
 ###############################################################################
