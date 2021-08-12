@@ -1,0 +1,7 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+
+  "extends": ["github>latipun7/library//.github/default"],
+
+  "schedule": ["after 12pm and before 1pm"]
+}
