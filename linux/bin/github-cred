@@ -5,8 +5,10 @@ set -euo pipefail
 # shellcheck source=lib/_functions.sh
 source "$DOTFILES/linux/bin/lib/_functions.sh"
 
-if hash bw 2>/dev/null && hash jq 2>/dev/null; then
-  bw get item fa2818ae-b64f-40fd-881c-abf000b12a6d | jq --raw-output '.notes'
-else
-  fail "Need bitwarden-cli and jq tool"
+if ! (git remote get-url origin 2>/dev/null | grep -q '@' &>/dev/null); then
+  if hash bw 2>/dev/null && hash jq 2>/dev/null; then
+    bw get item fa2818ae-b64f-40fd-881c-abf000b12a6d | jq --raw-output '.notes'
+  else
+    fail "Need bitwarden-cli and jq tool"
+  fi
 fi
