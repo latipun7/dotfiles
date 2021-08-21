@@ -40,7 +40,9 @@ if hash fnm 2>/dev/null && hash node 2>/dev/null; then
   export NODE_PATH
 fi
 
-export DOCKER_HOST="tcp://127.0.0.1:2375"
+if [[ "$(uname -a)" != *[Mm]icrosoft* ]]; then
+  export DOCKER_HOST="tcp://127.0.0.1:2375"
+fi
 
 # default editor
 export EDITOR=nvim
@@ -55,9 +57,9 @@ export GPG_TTY="$TTY"
 hash bat 2>/dev/null && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # https://github.com/QMonkey/wsl-tutorial#specify-the-display-server
-if [[ "$(uname -a)" == *[Mm]icrosoft* ]]; then 
+if [[ "$(uname -a)" == *[Mm]icrosoft* ]]; then
   export DISPLAY=192.168.1.99:0.0
-  export LIBGL_ALWAYS_INDIRECT=1 
+  export LIBGL_ALWAYS_INDIRECT=1
 fi
 
 # Load private envs
