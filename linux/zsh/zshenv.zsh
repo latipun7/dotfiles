@@ -53,6 +53,8 @@ export SUDO_EDITOR=nvim
 # GPG_TTY="$(tty)" see: romkatv/powerlevel10k#524
 export GPG_TTY="$TTY"
 
+export FORCE_COLOR=true
+
 # batman syntax highlight for man pages -> https://github.com/sharkdp/bat#man
 hash bat 2>/dev/null && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
