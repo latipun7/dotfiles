@@ -18,7 +18,12 @@
     ~/.config/neofetch: linux/neofetch
     ~/.config/nvim/coc-settings.json: linux/vim/coc-settings.json
     ~/.config/nvim/init.vim: linux/vim/vimrc
-    ~/.gitconfig: linux/git/linux.gitconfig
+    ~/.gitconfig:
+      if: '[[ "$(uname -a)" == *[Mm]icrosoft* ]]'
+      path: linux/git/linux.gitconfig
+    ~/.gitconfig:
+      if: '[[ "$(uname -a)" != *[Mm]icrosoft* ]]'
+      path: linux/git/no-wsl-linux.gitconfig
     ~/.oh-my-zsh-custom: linux/oh-my-zsh
     ~/.p10k.zsh: linux/zsh/p10k.zsh
     ~/.tmux.conf: linux/tmux/oh-my-tmux/.tmux.conf
