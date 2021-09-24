@@ -120,8 +120,7 @@ if hash npm 2>/dev/null; then
 
   # Install these if not WSL
   if [[ "$(uname -a)" != *[Mm]icrosoft* ]]; then
-    # Install PM2
-    npm install -gq pm2
+    npm install -gq pm2 prettier
   fi
 fi
 
