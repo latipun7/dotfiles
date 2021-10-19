@@ -31,7 +31,7 @@ jobs:
           sudo rm -f /usr/local/bin/yarn
 
       - name: Checkout 🛎️
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2.3.5
         with:
           submodules: "recursive"
 
