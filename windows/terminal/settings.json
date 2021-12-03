@@ -2,29 +2,18 @@
   "$schema": "https://aka.ms/terminal-profiles-schema",
   "actions": [
     {
-      "command": {
-        "action": "copy",
-        "singleLine": false
-      }
-    },
-    {
       "command": "unbound",
       "keys": "ctrl+/"
     },
     {
-      "command": "unbound",
-      "keys": "ctrl+shift+down"
-    },
-    {
-      "command": "unbound",
-      "keys": "ctrl+shift+up"
-    },
-    {
-      "command": "unbound",
+      "command": {
+        "action": "copy",
+        "singleLine": false
+      },
       "keys": "ctrl+c"
     },
     {
-      "command": "unbound",
+      "command": "paste",
       "keys": "ctrl+v"
     },
     {
@@ -33,62 +22,33 @@
     },
     {
       "command": {
-        "action": "commandPalette"
-      },
-      "keys": "ctrl+shift+p"
-    },
-    {
-      "command": "paste",
-      "keys": "ctrl+shift+v"
-    },
-    {
-      "command": {
         "action": "splitPane",
         "split": "auto",
         "splitMode": "duplicate"
       },
       "keys": "alt+shift+d"
-    },
-    {
-      "command": "scrollUpPage"
-    },
-    {
-      "command": "scrollDownPage"
-    },
-    {
-      "command": {
-        "action": "scrollDown"
-      },
-      "keys": "ctrl+shift+j"
-    },
-    {
-      "command": {
-        "action": "scrollUp"
-      },
-      "keys": "ctrl+shift+k"
     }
   ],
   "copyFormatting": "none",
   "copyOnSelect": false,
-  "defaultProfile": "{2c4de342-38b7-51cf-b940-2309a097f518}",
-  "initialCols": 135,
-  "initialPosition": "133,57",
-  "initialRows": 35,
+  "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
   "launchMode": "maximized",
   "profiles": {
     "defaults": {
-      "acrylicOpacity": 0.45,
-      "colorScheme": "Dracula",
-      "cursorShape": "vintage",
-      "fontFace": "CaskaydiaCovePL NF",
-      "fontSize": 15,
-      "historySize": 10000,
-      "useAcrylic": true,
+      "acrylicOpacity": 0.45000000000000001,
       "backgroundImage": "E:\\Pictures\\Random\\dyah-latif.small.png",
       "backgroundImageAlignment": "topRight",
-      "backgroundImageOpacity": 0.51,
+      "backgroundImageOpacity": 0.68999999999999995,
       "backgroundImageStretchMode": "none",
-      "bellStyle": ["window", "taskbar"]
+      "colorScheme": "Dracula",
+      "cursorShape": "vintage",
+      "font": {
+        "face": "Delugia",
+        "size": 13
+      },
+      "historySize": 100000,
+      "padding": "7",
+      "useAcrylic": true
     },
     "list": [
       {
@@ -104,22 +64,6 @@
         "name": "Command Prompt"
       },
       {
-        "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
-        "hidden": false,
-        "name": "PowerShell",
-        "source": "Windows.Terminal.PowershellCore"
-      },
-      {
-        "colorScheme": "Dracula",
-        "experimental.retroTerminalEffect": false,
-        "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
-        "hidden": false,
-        "historySize": 100000,
-        "name": "Ubuntu",
-        "source": "Windows.Terminal.Wsl",
-        "startingDirectory": "//wsl$/Ubuntu/home/latipun7"
-      },
-      {
         "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
         "hidden": false,
         "name": "Azure Cloud Shell",
@@ -130,6 +74,19 @@
         "hidden": false,
         "name": "Git Bash",
         "source": "Git"
+      },
+      {
+        "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+        "hidden": false,
+        "name": "PowerShell",
+        "source": "Windows.Terminal.PowershellCore"
+      },
+      {
+        "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
+        "hidden": false,
+        "name": "Ubuntu",
+        "source": "Windows.Terminal.Wsl",
+        "startingDirectory": "//wsl$/Ubuntu/home/latipun7"
       }
     ]
   },
@@ -181,27 +138,27 @@
       "yellow": "#C19C00"
     },
     {
-      "background": "#272935",
-      "black": "#272935",
+      "background": "#282A36",
+      "black": "#21222C",
       "blue": "#BD93F9",
-      "brightBlack": "#9E9D9D",
-      "brightBlue": "#BD93F9",
-      "brightCyan": "#8BE9FD",
-      "brightGreen": "#50FA7B",
-      "brightPurple": "#FF79C6",
-      "brightRed": "#FF5555",
+      "brightBlack": "#6272A4",
+      "brightBlue": "#D6ACFF",
+      "brightCyan": "#A4FFFF",
+      "brightGreen": "#69FF94",
+      "brightPurple": "#FF92DF",
+      "brightRed": "#FF6E6E",
       "brightWhite": "#FFFFFF",
-      "brightYellow": "#F1FA8C",
-      "cursorColor": "#FF79C6",
-      "cyan": "#6272A4",
+      "brightYellow": "#FFFFA5",
+      "cursorColor": "#F8F8F2",
+      "cyan": "#8BE9FD",
       "foreground": "#F8F8F2",
       "green": "#50FA7B",
       "name": "Dracula",
-      "purple": "#6272A4",
+      "purple": "#FF79C6",
       "red": "#FF5555",
-      "selectionBackground": "#A75F97",
+      "selectionBackground": "#44475A",
       "white": "#F8F8F2",
-      "yellow": "#FFB86C"
+      "yellow": "#F1FA8C"
     },
     {
       "background": "#282C34",
@@ -365,5 +322,6 @@
       "yellow": "#808000"
     }
   ],
-  "wordDelimiters": " /\\()\"'-.,:;<>~!@#$%^&*|+=[]{}~?\u2502"
+  "trimBlockSelection": true,
+  "useAcrylicInTabRow": true
 }
