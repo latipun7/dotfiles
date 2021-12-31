@@ -116,12 +116,12 @@ fnm install 'lts/*' 1>/dev/null && fnm use 'lts/*' 1>/dev/null
 if hash npm 2>/dev/null; then
   step "Install/Update Global Node Modules to Latest versions"
 
-  npm install -gq npm
-  npm install -gq yarn @bitwarden/cli
+  corepack enable
+  npm install -gq @bitwarden/cli
 
   # Install these if not WSL
   if [[ "$(uname -a)" != *[Mm]icrosoft* ]]; then
-    npm install -gq pm2 prettier
+    npm install -gq pm2
   fi
 fi
 
