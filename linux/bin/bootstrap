@@ -107,7 +107,8 @@ fi
 
 # Install node if node didn't installed,
 # shellcheck disable=SC2016
-hash fnm &>/dev/null && eval "$(fnm env --shell zsh | sed -e 's/PATH="\(.*\)":\$PATH/PATH="\1:$PATH"/g')"
+hash fnm &>/dev/null && eval "$(fnm env | sed -e 's/PATH="\(.*\)":\$PATH/PATH="\1:$PATH"/g')"
+
 step "Install/Upgrade Node"
 fnm install 'lts/*' 1>/dev/null && fnm use 'lts/*' 1>/dev/null
 

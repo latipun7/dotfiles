@@ -11,6 +11,7 @@ packages=(
   "coreutils" "gzip" "apt-transport-https" "ca-certificates" "gnupg" "lsb-release" "texinfo"
 )
 sudo apt install "${packages[@]}" -y
+sudo -v
 
 ###############################################################################
 # Install nginx
@@ -26,6 +27,7 @@ if [ ! -f /etc/apt/sources.list.d/nginx.list ]; then
 
   sudo apt update
   sudo apt install nginx -y
+  sudo -v
 fi
 
 ##############################################################################
@@ -47,6 +49,8 @@ if [ ! -f /etc/apt/sources.list.d/docker.list ]; then
     sudo tee -a /etc/systemd/system/docker.service.d/override.conf &>/dev/null
   sudo systemctl daemon-reload
   sudo systemctl restart docker.service
+
+  sudo -v
 fi
 
 # Install docker compose
@@ -69,6 +73,8 @@ if [ ! -f /etc/apt/sources.list.d/pgdg.list ]; then
 
   sudo apt update
   sudo apt install postgresql -y
+
+  sudo -v
 fi
 
 ###############################################################################
@@ -77,6 +83,7 @@ fi
 step "Install/Upgrade fnm"
 curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell
 export PATH=$HOME/.fnm:$PATH
+sudo -v
 
 ###############################################################################
 # Install/Upgrade Ponysay
@@ -92,6 +99,7 @@ sudo ./setup.py \
   --freedom=partial \
   --with-custom-env-python="$(command -v python3)" \
   install 1>/dev/null
+sudo -v
 
 ###############################################################################
 # Install/Upgrade FZF
@@ -103,12 +111,14 @@ else
   git -C "$HOME/.fzf" pull -q --depth 1
 fi
 "$HOME/.fzf/install" --all --no-update-rc
+sudo -v
 
 ###############################################################################
 # Install/Upgrade bpytop
 # https://github.com/aristocratos/bpytop#installation
 step "Install/Upgrade bpytop"
 pip3 install --upgrade bpytop
+sudo -v
 
 ###############################################################################
 # Install/Upgrade bat
@@ -117,6 +127,7 @@ step "Install/Upgrade bat"
 curl -fsLSo /tmp/bat.deb \
   https://github.com/sharkdp/bat/releases/download/v0.18.2/bat_0.18.2_arm64.deb
 sudo dpkg -i /tmp/bat.deb
+sudo -v
 
 ###############################################################################
 # Install/Upgrade lsd
@@ -125,6 +136,7 @@ step "Install/Upgrade lsd"
 curl -fsLSo /tmp/lsd.deb \
   https://github.com/Peltoche/lsd/releases/download/0.20.1/lsd_0.20.1_arm64.deb
 sudo dpkg -i /tmp/lsd.deb
+sudo -v
 
 ###############################################################################
 # Install/Upgrade asciiquarium
@@ -137,6 +149,7 @@ fi
 curl -fsLS https://robobunny.com/projects/asciiquarium/asciiquarium_1.1.tar.gz | tar -zx -C /tmp
 sudo cp /tmp/asciiquarium_1.1/asciiquarium /usr/local/bin/
 sudo chmod +x /usr/local/bin/asciiquarium
+sudo -v
 
 ###############################################################################
 # Install this for server non Raspi
@@ -144,3 +157,4 @@ if [[ "$(uname -a)" != *raspi* ]]; then
   # TODO: Setup certbot
   step "Install certbot (coming soon)"
 fi
+sudo -v
