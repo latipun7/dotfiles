@@ -1,0 +1,86 @@
+#########################
+# Environment Variables #
+#########################
+
+source "$HOME/bin/_functions"
+
+#=======================#
+#         PATH          #
+#=======================#
+
+# Make linuxbrew PATH available before sourcing OMZ
+if [[ "$OSTYPE" == linux-gnu ]]; then
+  [ -d "/home/linuxbrew/.linuxbrew" ] &&
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  [ -d "$HOME/.linuxbrew" ] &&
+    eval "$($HOME/.linuxbrew/bin/brew shellenv)"
+elif [[ "$OSTYPE" == darwin* ]]; then
+  [ -d "/usr/local/Cellar" ] &&
+    eval "$(/usr/local/bin/brew shellenv)"
+else
+  echo "homebrew not available in the current OS type."
+fi
+
+# Rust binary path
+export PATH=$HOME/.cargo/bin:$PATH
+
+# FNM Shell Setup
+if [ -d "$HOME/.fnm" ]; then
+  export PATH=$HOME/.fnm:$PATH
+fi
+hash fnm &>/dev/null && eval "$(fnm env)"
+
+# Custom path
+pythonexe=$(hash brew 2>/dev/null && echo "$(brew --prefix)/opt/python/libexec/bin")
+homeexe="$HOME/bin:$HOME/.local/bin"
+pathexe=("$homeexe" "$pythonexe" "$PATH")
+
+export PATH=$(concat ":" "${pathexe[@]}")
+
+# Node binary path
+if hash fnm 2>/dev/null && hash node 2>/dev/null; then
+  nodelink=$(readlink -e "$(which node)")
+  NODE_PATH=$(cd "${nodelink:0:-4}../lib/node_modules" && pwd)
+  export NODE_PATH
+fi
+
+if [[ "$(uname -a)" != *[Mm]icrosoft* ]]; then
+  export DOCKER_HOST="tcp://127.0.0.1:2375"
+fi
+
+#=======================#
+#        Tweaks         #
+#=======================#
+
+export LANG=en_US.UTF-8
+
+# Default editor
+export EDITOR=nvim
+export SUDO_EDITOR=nvim
+
+# Invoking gpg-agent
+# https://www.gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html
+# GPG_TTY="$(tty)" see: romkatv/powerlevel10k#524
+export GPG_TTY="$TTY"
+
+# Batman syntax highlight for man pages -> https://github.com/sharkdp/bat#man
+hash bat 2>/dev/null && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+# https://github.com/QMonkey/wsl-tutorial#specify-the-display-server
+# if [[ "$(uname -a)" == *[Mm]icrosoft* ]]; then
+#   export DISPLAY=192.168.99.26:0.0
+#   export LIBGL_ALWAYS_INDIRECT=1
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+export FORCE_COLOR=true
+
+#=======================#
+# Private Environments  #
+#=======================#
+
+if [ -f "$HOME/.zshenv.private" ]; then
+  source "$HOME/.zshenv.private"
+fi

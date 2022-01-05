@@ -1,0 +1,4 @@
+{{ $bw := lookPath "bw" -}}
+{{ if $bw -}}
+{{ output $bw "completions" "--shell" "zsh" -}}
+{{ end -}}

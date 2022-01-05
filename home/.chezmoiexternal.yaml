@@ -1,0 +1,34 @@
+ansi-arts:
+  type: archive
+  url: https://api.github.com/repos/latipun7/ansi-arts/tarball
+  exact: true
+  stripComponents: 1
+
+{{ if ne .chezmoi.os "windows" -}}
+.omz-custom/themes/powerlevel10k:
+  type: archive
+  url: https://api.github.com/repos/romkatv/powerlevel10k/tarball/v1.15.0
+  exact: true
+  stripComponents: 1
+
+.omz-custom/plugins/zsh-completions:
+  type: archive
+  url: https://api.github.com/repos/zsh-users/zsh-completions/tarball
+  exact: true
+  stripComponents: 1
+  refreshPeriod: 168h
+
+.omz-custom/plugins/zsh-syntax-highlighting:
+  type: archive
+  url: https://api.github.com/repos/zsh-users/zsh-syntax-highlighting/tarball
+  exact: true
+  stripComponents: 1
+  refreshPeriod: 168h
+
+.omz-custom/plugins/zsh-autosuggestions:
+  type: archive
+  url: https://api.github.com/repos/zsh-users/zsh-autosuggestions/tarball
+  exact: true
+  stripComponents: 1
+  refreshPeriod: 168h
+{{- end }}

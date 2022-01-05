@@ -1,0 +1,23 @@
+# -*-gitconfig-*- vim:syntax=gitconfig
+# code:language=properties
+#
+# https://git-scm.com/docs/git-config/
+
+[user]
+  # Specify the email address of the author/committer.
+  email = {{ .email }}
+
+  # Specify the username of the author/committer.
+  name = {{ .name }}
+
+[init]
+  # Allows overriding the default branch name e.g. when initializing a new repository.
+  defaultBranch = main
+
+[rebase]
+  # Create a temporary stash entry before the operation begins.
+  autostash = true
+
+[fetch]
+  # Remove any remote-tracking references that no longer exist on the remote.
+  prune = true

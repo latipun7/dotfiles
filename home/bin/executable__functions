@@ -1,0 +1,95 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2034
+# shellcheck disable=SC2154
+#
+######################################
+# Utilities functions                #
+######################################
+
+######################################
+# Concatenate arguments with custom separator.
+# Example Usage: concat "," "$arr[@]"
+# result: 1,2,3,4
+function concat() {
+  local IFS="$1"
+  shift
+
+  arr=()
+  for a in "$@"; do [ "$a" != '' ] && arr+=("$a"); done
+  echo "${arr[*]}"
+}
+
+# dummy print_help
+function print_help() {
+  echo
+}
+
+######################################
+# Exit with message and exit code.
+# Example Usage:
+#   die "Error to run that command." 1 (error with exit code 1)
+#   _PRINT_HELP=yes die "Error" 1 (error with exit code 1 and show the help)
+function die() {
+  local _ret="${2:-1}"
+  if [[ $_ret != 0 ]]; then
+    test "${_PRINT_HELP:-no}" = yes && print_help >&2
+    echo -e "$1" >&2
+  else
+    test "${_PRINT_HELP:-no}" = yes && print_help
+    echo -e "$1"
+  fi
+
+  exit "${_ret}"
+}
+
+######################################
+# ANSI Color Codes
+# ref: https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
+esc="\033"
+reset="${esc}[0m"
+
+# 256 Colors Foreground
+for color in {0..255}; do
+  declare "color${color}=${esc}[38;5;${color}m"
+done
+
+# 256 Colors Background
+for bg in {0..255}; do
+  declare "bg${bg}=${esc}[48;5;${bg}m"
+done
+
+# Graphic Mode
+boldon="${esc}[1m" # set bold/bright mode
+boldoff="${esc}[22m"
+dimon="${esc}[2m" # set dim/faint mode
+dimoff="${esc}[22m"
+italicon="${esc}[3m" # set italic mode
+italicoff="${esc}[23m"
+ulon="${esc}[4m" # set underline mode
+uloff="${esc}[24m"
+blinkon="${esc}[5m" # set blinking mode
+blinkoff="${esc}[25m"
+inveon="${esc}[7m" # set inverse/reverse mode
+inveoff="${esc}[27m"
+hiddenon="${esc}[8m" # set hidden/invisible mode
+hiddenoff="${esc}[28m"
+strikeon="${esc}[9m" # set strikethrough mode
+strikeoff="${esc}[29m"
+
+######################################
+# Status Message
+function info() {
+  echo -e "\n\t${color14}==>${reset} $1 ℹ\n"
+}
+
+function step() {
+  echo -e "\n\t${color13}==>${reset} $1 👟\n"
+}
+
+function success() {
+  echo -e "\n\t${color2}==>${reset} $1 ✔\n"
+}
+
+function fail() {
+  die "\n\t${color1}==>${reset} $1 ❌\n" 1
+}

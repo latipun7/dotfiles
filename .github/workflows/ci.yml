@@ -1,5 +1,4 @@
-# https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-# Workflows commands (::set-output, etc): # https://docs.github.com/en/actions/reference/workflow-commands-for-github-actions#setting-an-output-parameter
+# https://docs.github.com/en/actions
 
 name: CI ⚙🤖
 

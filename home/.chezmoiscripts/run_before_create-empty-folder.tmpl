@@ -1,0 +1,12 @@
+{{ if ne .chezmoi.os "windows" -}}
+#!/usr/bin/env bash
+# -*-shell-script-*- vim:syntax=shell-script
+# code:language=shellscript
+#
+# Create empty directory
+
+set -euo pipefail
+
+mkdir -p "$HOME/.config/nvim/autoload"
+mkdir -p "$HOME/.ssh/multiplex"
+{{- end }}

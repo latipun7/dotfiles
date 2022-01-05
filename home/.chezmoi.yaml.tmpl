@@ -1,0 +1,8 @@
+# -*-yaml-*- vim:syntax=yaml
+# code:language=yaml
+
+{{ $email := promptString "Email address" -}}
+{{ $name := promptString "Full name" -}}
+data:
+  email: {{ $email }}
+  name: {{ $name }}

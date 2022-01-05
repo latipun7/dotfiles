@@ -20,43 +20,18 @@ and make this repo and other dotfiles repo as inspirations.
 
 ### Screenshots
 
-![screenshot1-2020-05-31](./assets/screenshots/2020-05-31_13-00-45_WindowsTerminal.png)
-![screenshot2-2020-05-31](./assets/screenshots/2020-05-31_13-03-23_WindowsTerminal.png)
+![screenshot1-2020-05-31](./assets/2020-05-31_13-00-45_WindowsTerminal.png)
+![screenshot2-2020-05-31](./assets/2020-05-31_13-03-23_WindowsTerminal.png)
 
 ## What in this Repo
 
 This repo contains my personal configuration for Linux and Windows.
 
-- Only support Ubuntu latest LTS Linux Distro with `apt`.
-- Support both normal linux or WSL.
-- _Windows dotfiles coming soon (Currently only some backup files, no automation)_.
-
 **Important**: You need [nerd fonts][nerd-fonts] in your terminal.
 Install the font of your choosing and use that font in your terminal.
-This repo already included [font that I personally use][my-font].
+Personally, I use [Delugia Font][my-font].
 
 ## Installation
-
-If you are on Linux, run this command to **install** this dotfiles:
-
-- Install this dotfiles:
-
-  ```bash
-  bash -c "$(curl -fsLS https://raw.githubusercontent.com/latipun7/dotfiles/main/install.sh)"
-  ```
-
-- Exit current terminal session: `exit`, then start new terminal session for environment to populate
-- Now this configuration already installed in your machine.
-
-### Tips
-
-If you follow the steps above, you can runs the following commands:
-
-- Run `bootstrap` regularly to update apps/packages.
-- Run `dotfiles` or `dotfiles -i` or `dotfiles --install` to install.
-- Run `dotfiles -u` or `dotfiles --update` to update the dotfiles.
-- Run `chara` to see the characters saying some quotes.
-- Run `weather` or `weather "desired city"` to check weathers on that city.
 
 ## Resources
 
@@ -69,11 +44,6 @@ and this list is what actually inspired me to get started with it.
 - [Holman's dotfiles][holman] - Nice zsh dotfiles
 - [Bash manual][bash] - Bash documentation to write your own scripts
 
-## Information
-
-I'm new with bash/shell scripting, so my script would be lot of dirty and not optimized
-for performance. Suggestion and criticism are open.
-
 [MIT License](./LICENSE) © 2020, Latipun7
 
 <!-- Variables -->
@@ -85,4 +55,4 @@ for performance. Suggestion and criticism are open.
 [holman]: https://github.com/holman/dotfiles "Holman does dotfiles"
 [bash]: https://www.gnu.org/software/bash/manual/bash.html "Bash Manual"
 [nerd-fonts]: https://www.nerdfonts.com/ "NerdFonts"
-[my-font]: ./assets/fonts/Caskaydia%20Cove%20PL%20Regular%20Nerd%20Font%20Complete%20Windows%20Compatible.otf "CaskaydiaCove NF (self-patched)"
+[my-font]: https://github.com/adam7/delugia-code/releases "Download Delugia Font"

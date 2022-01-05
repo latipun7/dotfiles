@@ -1,0 +1,11 @@
+# waiting for chezmoi to leverage .gitignore from archives:
+# https://github.com/twpayne/chezmoi/issues/1421#issuecomment-964473844
+**/*.zwc
+
+{{- if eq .chezmoi.os "windows" }}
+bin
+.omz-custom
+.p10k.zsh
+.zshenv
+.zshrc
+{{- end }}

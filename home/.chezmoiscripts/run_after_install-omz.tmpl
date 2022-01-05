@@ -1,0 +1,17 @@
+{{ if ne .chezmoi.os "windows" -}}
+#!/usr/bin/env bash
+# -*-shell-script-*- vim:syntax=shell-script
+# code:language=shellscript
+#
+# Install OMZ if .oh-my-zsh directory not already in home
+
+set -euo pipefail
+
+source "$HOME/bin/_functions"
+
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  info 'Install OMZ'
+  bash -c "$(curl -fsLS https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" -- --unattended --keep-zshrc
+  success 'OMZ installed successfully'
+fi
+{{ end -}}
