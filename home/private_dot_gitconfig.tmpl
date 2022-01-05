@@ -3,6 +3,12 @@
 #
 # https://git-scm.com/docs/git-config/
 
+{{ if eq .chezmoi.os "windows" -}}
+[core]
+  # Editor to edit commands such as commit, tag, etc.
+  editor = code --wait
+
+{{ end -}}
 [user]
   # Specify the email address of the author/committer.
   email = {{ .email }}
