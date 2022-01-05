@@ -55,8 +55,13 @@ fi
 export LANG=en_US.UTF-8
 
 # Default editor
-export EDITOR=nvim
-export SUDO_EDITOR=nvim
+if [[ "${TERM_PROGRAM:-tty}" == *vscode* ]]; then
+  export EDITOR="code --wait"
+  export SUDO_EDITOR="code --wait"
+else
+  export EDITOR=nvim
+  export SUDO_EDITOR=nvim
+fi
 
 # Invoking gpg-agent
 # https://www.gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html
