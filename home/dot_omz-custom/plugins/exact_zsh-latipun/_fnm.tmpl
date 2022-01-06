@@ -1,0 +1,4 @@
+{{ $fnm := lookPath "fnm" -}}
+{{ if $fnm -}}
+{{ output $fnm "completions" "--shell" "zsh" -}}
+{{ end -}}

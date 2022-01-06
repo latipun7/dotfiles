@@ -1,0 +1,118 @@
+{{ if ne .chezmoi.os "windows" -}}
+#!/usr/bin/env bash
+# -*-shell-script-*- vim:syntax=shell-script
+# code:language=shellscript
+#
+# Setup FNM Installation
+
+set -euo pipefail
+
+source "$HOME/bin/_functions"
+
+data=$(curl -fsLS https://api.github.com/repos/Schniz/fnm/releases/latest)
+
+function check_dependencies() {
+  step "Checking dependencies for the \`fnm\` installation script..."
+
+  if ! hash curl 2>/dev/null; then
+    fail "Missing \`curl\`!\n    Not installing \`fnm\` due to missing dependencies."
+  fi
+
+  if ! hash unzip 2>/dev/null; then
+    fail "Missing \`unzip\`!\n    Not installing \`fnm\` due to missing dependencies."
+  fi
+
+  if ! hash jq 2>/dev/null; then
+    fail "Missing \`jq\`!\n    Not installing \`fnm\` due to missing dependencies."
+  fi
+
+  info "OK!"
+}
+
+function get_latest_url () {
+  step "Getting latest tag version of \`fnm\`..."
+
+  browser_download_url=$(echo "$data" | jq -r '.assets[].browser_download_url')
+  latest_tag=$(echo "$browser_download_url" | grep -Pom 1 --color=never 'v\d+\.\d+\.\d+')
+
+  OS="$(uname -s)"
+
+  info "Latest tag version found: ${color6}${latest_tag}${reset}"
+
+  if [ "$OS" = "Linux" ]; then
+    # Based on https://stackoverflow.com/a/45125525
+    case "$(uname -m)" in
+      arm | armv7*)
+        url="$(echo "$browser_download_url" | grep --color=never 'arm32')"
+        filename="fnm-arm32"
+        ;;
+      aarch* | armv8*)
+        url="$(echo "$browser_download_url" | grep --color=never 'arm64')"
+        filename="fnm-arm64"
+        ;;
+      *)
+        url="$(echo "$browser_download_url" | grep --color=never 'linux')"
+        filename="fnm-linux"
+    esac
+  fi
+
+  if [ "$OS" = "Darwin" ]; then
+    url="$(echo "$browser_download_url" | grep --color=never 'macos')"
+    filename="fnm-macos"
+  fi
+}
+
+function check_temp () {
+  latest_tmp=$(find /tmp -maxdepth 1 -type d -iname "fnm-$latest_tag-*")
+  if [ -n "$latest_tmp" ]; then
+    SKIP="true"
+    info "\`fnm\` already in the latest version."
+  else
+    DOWNLOAD_DIR="$(mktemp -dp /tmp "fnm-$latest_tag-XXXXX")"
+    INSTALL_DIR="$HOME/.fnm"
+    mkdir -p "$INSTALL_DIR"
+  fi
+}
+
+function download_fnm () {
+  if hash brew 2>/dev/null; then
+    step "Brewing \`fnm\` ..."
+    brew install fnm
+  else
+    check_dependencies
+    get_latest_url
+    check_temp
+
+    if [[ "${SKIP:-no}" != "true" ]]; then
+      step "Downloading $url ..."
+
+      if ! curl --progress-bar --fail -L "$url" -o "$DOWNLOAD_DIR/$filename.zip"; then
+        fail "Download failed. Check that the release/filename are correct."
+      fi
+
+      unzip -q "$DOWNLOAD_DIR/$filename.zip" -d "$DOWNLOAD_DIR"
+
+      if [ -f "$DOWNLOAD_DIR/fnm" ]; then
+        mv "$DOWNLOAD_DIR/fnm" "$INSTALL_DIR/fnm"
+      else
+        mv "$DOWNLOAD_DIR/$filename/fnm" "$INSTALL_DIR/fnm"
+      fi
+
+      chmod u+x "$INSTALL_DIR/fnm"
+    fi
+  fi
+}
+
+download_fnm
+
+if ! ( echo $PATH | grep -q .fnm: ); then
+  export PATH=$HOME/.fnm:$PATH
+fi
+
+hash fnm &>/dev/null && eval "$(fnm env --use-on-cd)"
+
+step "Install Latest LTS Node"
+fnm install --lts && fnm use 'lts/*'
+
+success "\`fnm\` and \`node\` already installed!"
+{{- end }}

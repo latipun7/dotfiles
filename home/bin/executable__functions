@@ -79,17 +79,17 @@ strikeoff="${esc}[29m"
 ######################################
 # Status Message
 function info() {
-  echo -e "\n\t${color14}==>${reset} $1 ℹ\n"
+  echo -e "\n${color14}==>${reset} $1 ℹ\n"
 }
 
 function step() {
-  echo -e "\n\t${color13}==>${reset} $1 👟\n"
+  echo -e "\n${color13}==>${reset} $1 👟\n"
 }
 
 function success() {
-  echo -e "\n\t${color2}==>${reset} $1 ✔\n"
+  echo -e "\n${color2}==>${reset} $1 ✔\n"
 }
 
 function fail() {
-  die "\n\t${color1}==>${reset} $1 ❌\n" 1
+  die "\n${color1}==>${reset} $1 ❌\n" 1
 }

@@ -1,3 +1,5 @@
+# -*-shell-script-*- vim:syntax=shell-script
+# code:language=shellscript
 #########################
 # Environment Variables #
 #########################
@@ -28,7 +30,7 @@ export PATH=$HOME/.cargo/bin:$PATH
 if [ -d "$HOME/.fnm" ]; then
   export PATH=$HOME/.fnm:$PATH
 fi
-hash fnm &>/dev/null && eval "$(fnm env)"
+hash fnm &>/dev/null && eval "$(fnm env --use-on-cd)"
 
 # Custom path
 pythonexe=$(hash brew 2>/dev/null && echo "$(brew --prefix)/opt/python/libexec/bin")
@@ -51,8 +53,6 @@ fi
 #=======================#
 #        Tweaks         #
 #=======================#
-
-export LANG=en_US.UTF-8
 
 # Default editor
 if [[ "${TERM_PROGRAM:-tty}" == *vscode* ]]; then
