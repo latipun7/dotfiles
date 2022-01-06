@@ -1,6 +1,7 @@
 # Latipun's Dotfiles
 
-[![Discord](https://img.shields.io/discord/758271814153011201?style=flat-square&logo=discord&label=chat+and+discuss)](https://discord.gg/njSj2Nq "Developers Indonesia") [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/latipun7/dotfiles/CI%20%E2%9A%99%F0%9F%A4%96?logo=github%20actions&style=flat-square)](https://github.com/latipun7/dotfiles/actions "GitHub Actions")
+[![Discord][discord-image]][discord-url]
+[![GitHub Workflow Status][workflow-image]][workflow-url]
 
 This is my personalized dotfiles that I use on my machines. But what is dotfiles?
 Simply, dotfiles are configuration files of Unix (and some Windows) programs that are
@@ -48,6 +49,10 @@ and this list is what actually inspired me to get started with it.
 
 <!-- Variables -->
 
+[discord-image]: https://img.shields.io/discord/758271814153011201?label=Developers%20Indonesia&logo=discord&style=flat-square
+[discord-url]: https://discord.gg/njSj2Nq "Chat and discuss at Developers Indonesia"
+[workflow-image]: https://img.shields.io/github/workflow/status/latipun7/dotfiles/%E2%9A%99%F0%9F%A4%96?label=CI&logo=github-actions&style=flat-square
+[workflow-url]: https://github.com/latipun7/dotfiles/actions "GitHub Actions"
 [awe-dot]: https://github.com/webpro/awesome-dotfiles#readme "Awesome Dotfiles"
 [manage]: https://www.anishathalye.com/2014/08/03/managing-your-dotfiles/ "Managing your dotfiles"
 [dotbot]: https://github.com/anishathalye/dotbot "Dotbot - dotfiles management tools"
