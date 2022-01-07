@@ -7,7 +7,7 @@
 
 set -euo pipefail
 
-source "$HOME/bin/_functions"
+{{ template "functions-bin" -}}
 
 data=$(curl -fsLS https://api.github.com/repos/Schniz/fnm/releases/latest)
 

@@ -7,7 +7,7 @@
 
 set -euo pipefail
 
-source "$HOME/bin/_functions"
+{{ template "functions-bin" -}}
 
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
   info 'Install OMZ'
