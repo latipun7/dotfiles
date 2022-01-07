@@ -26,6 +26,11 @@ fi
 # Rust binary path
 export PATH=$HOME/.cargo/bin:$PATH
 
+# GoDNS binary path
+if [ -d "$HOME/.godns" ]; then
+  export PATH=$HOME/.godns:$PATH
+fi
+
 # FNM Shell Setup
 if [ -d "$HOME/.fnm" ]; then
   export PATH=$HOME/.fnm:$PATH

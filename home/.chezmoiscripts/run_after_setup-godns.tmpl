@@ -1,0 +1,127 @@
+{{ if eq .chezmoi.hostname "latipun-pi" -}}
+#!/usr/bin/env bash
+# -*-shell-script-*- vim:syntax=shell-script
+# code:language=shellscript
+#
+# NOTE: Setup GoDNS on 'latipun-pi'
+
+set -euo pipefail
+
+source "$HOME/bin/_functions"
+
+data=$(curl -fsLS https://api.github.com/repos/TimothyYe/godns/releases/latest)
+INSTALL_DIR="$HOME/.godns"
+
+function check_dependencies() {
+  step "Checking dependencies for the \`godns\` installation script..."
+
+  if ! hash curl 2>/dev/null; then
+    fail "Missing \`curl\`!\n    Not installing \`godns\` due to missing dependencies."
+  fi
+
+  if ! hash tar 2>/dev/null; then
+    fail "Missing \`tar\`!\n    Not installing \`godns\` due to missing dependencies."
+  fi
+
+  if ! hash jq 2>/dev/null; then
+    fail "Missing \`jq\`!\n    Not installing \`godns\` due to missing dependencies."
+  fi
+
+  info "OK!"
+}
+
+function get_latest_url () {
+  step "Getting latest tag version of \`godns\`..."
+
+  browser_download_url=$(echo "$data" | jq -r '.assets[].browser_download_url')
+  latest_tag=$(echo "$browser_download_url" | grep -Pom 1 --color=never 'v\d+\.\d+\.\d+')
+
+  OS="$(uname -s)"
+
+  info "Latest tag version found: ${color6}${latest_tag}${reset}"
+
+  if [ "$OS" = "Linux" ]; then
+    case "$(uname -m)" in
+      arm | armv7*)
+        url="$(echo "$browser_download_url" | grep --color=never 'arm-')"
+        filename="godns-arm"
+        ;;
+      aarch* | armv8*)
+        url="$(echo "$browser_download_url" | grep --color=never 'arm64-')"
+        filename="godns-arm64"
+        ;;
+      *)
+        url="$(echo "$browser_download_url" | grep --color=never 'linux64-')"
+        filename="godns-linux64"
+    esac
+  fi
+
+  if [ "$OS" = "Darwin" ]; then
+    url="$(echo "$browser_download_url" | grep --color=never 'mac64-')"
+    filename="godns-mac64"
+  fi
+}
+
+function check_temp () {
+  latest_tmp=$(find /tmp -maxdepth 1 -type d -iname "godns-$latest_tag-*")
+  if [ -n "$latest_tmp" ]; then
+    SKIP="true"
+    info "\`godns\` already in the latest version."
+  else
+    DOWNLOAD_DIR="$(mktemp -dp /tmp "godns-$latest_tag-XXXXX")"
+    mkdir -p "$INSTALL_DIR"
+  fi
+}
+
+function download_godns () {
+  check_dependencies
+  get_latest_url
+  check_temp
+
+  if [[ "${SKIP:-no}" != "true" ]]; then
+    step "Downloading $url ..."
+
+    if ! curl --progress-bar --fail -L "$url" -o "$DOWNLOAD_DIR/$filename.tar.gz"; then
+      fail "Download failed. Check that the release/filename are correct."
+    fi
+
+    tar -xvf "$DOWNLOAD_DIR/$filename.tar.gz" -C "$DOWNLOAD_DIR"
+
+    if [ -f "$DOWNLOAD_DIR/godns" ]; then
+      mv "$DOWNLOAD_DIR/godns" "$INSTALL_DIR/godns"
+    else
+      mv "$DOWNLOAD_DIR/$filename/godns" "$INSTALL_DIR/godns"
+    fi
+
+    chmod u+x "$INSTALL_DIR/godns"
+  fi
+}
+
+download_godns
+
+if ! ( echo $PATH | grep -q .godns: ); then
+  export PATH=$HOME/.godns:$PATH
+fi
+
+sudo tee /usr/lib/systemd/system/godns.service > /dev/null << EOL
+[Unit]
+Description=GoDNS Service
+After=network.target
+
+[Service]
+ExecStart=${INSTALL_DIR}/godns -c=${INSTALL_DIR}/config.yml
+Restart=always
+KillMode=process
+RestartSec=1s
+
+[Install]
+WantedBy=multi-user.target
+EOL
+
+if ! pgrep -f 'godns -c.*config.yml$' &>/dev/null; then
+  # godns -c=$INSTALL_DIR/config.yml
+  echo 'run go dns'
+fi
+
+success "\`godns\` already installed and started!"
+{{- end }}
