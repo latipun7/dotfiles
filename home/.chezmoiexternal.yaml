@@ -58,10 +58,10 @@ bin/jq.exe:
   refreshPeriod: 744h
 {{- end }}
 
-# {{ if eq .chezmoi.hostname "latipun-pi" -}}
-# .godns/godns:
-#   type: archive
-#   url:
-#   stripComponents: 1
-#   refreshPeriod: 168h
-# {{- end }}
+{{ if eq .chezmoi.hostname "latipun-pi" -}}
+.godns:
+  type: archive
+  url: {{ template "godns-download-url" . }}
+  stripComponents: 1
+  refreshPeriod: 168h
+{{- end }}

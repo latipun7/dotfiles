@@ -1,0 +1,16 @@
+{{- /* -*-go-*- vim:syntax=go */ -}}
+
+{{- $output := "" -}}
+{{- $repo := index . 0 -}}
+{{- $os := index . 1 -}}
+
+{{- if eq $os "windows" -}}
+{{- 	$output = `Out-Null` -}}
+{{- else -}}
+{{- 	$output = `/dev/null` -}}
+{{- end -}}
+
+{{- $latest_url := printf "https://github.com/%s/releases/latest" $repo -}}
+{{- $release_url := output "curl" "-fsLSo" $output "-w" "%{url_effective}" $latest_url -}}
+{{- $latest_tag := $release_url | trim | base | trimPrefix "v" -}}
+{{- $latest_tag -}}
