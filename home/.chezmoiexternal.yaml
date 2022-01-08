@@ -3,13 +3,25 @@ ansi-arts:
   url: https://api.github.com/repos/latipun7/ansi-arts/tarball
   exact: true
   stripComponents: 1
+  refreshPeriod: 744h
 
 {{ if ne .chezmoi.os "windows" -}}
+.fnm/fnm:
+  # not archive, workaround of https://github.com/actions/upload-artifact/issues/38
+  type: file
+  url: {{ template "fnm-download-url" . }}
+  executable: true
+  refreshPeriod: 168h
+  filter:
+    command: gzip
+    args: ["-dcS", ".zip"]
+
 .omz-custom/themes/powerlevel10k:
   type: archive
   url: https://api.github.com/repos/romkatv/powerlevel10k/tarball/v1.15.0
   exact: true
   stripComponents: 1
+  refreshPeriod: 168h
 
 .omz-custom/plugins/zsh-completions:
   type: archive
@@ -32,3 +44,24 @@ ansi-arts:
   stripComponents: 1
   refreshPeriod: 168h
 {{- end }}
+
+{{ if eq .chezmoi.os "windows" -}}
+.fnm:
+  type: archive
+  url: {{ template "fnm-download-url" . }}
+  refreshPeriod: 168h
+
+bin/jq.exe:
+  type: file
+  url: https://github.com/stedolan/jq/releases/latest/download/jq-win64.exe
+  executable: true
+  refreshPeriod: 744h
+{{- end }}
+
+# {{ if eq .chezmoi.hostname "latipun-pi" -}}
+# .godns/godns:
+#   type: archive
+#   url:
+#   stripComponents: 1
+#   refreshPeriod: 168h
+# {{- end }}

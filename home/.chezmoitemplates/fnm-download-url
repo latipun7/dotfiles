@@ -1,0 +1,17 @@
+{{- /* -*-go-*- vim:syntax=go */ -}}
+
+{{- $url := `https://github.com/Schniz/fnm/releases/latest/download/` -}}
+
+{{- if eq .chezmoi.os "linux" -}}
+{{-   if eq .chezmoi.arch "arm" -}}
+{{-     list $url "fnm-arm32.zip" | join "" -}}
+{{-   else if eq .chezmoi.arch "arm64" -}}
+{{-     list $url "fnm-arm64.zip" | join "" -}}
+{{-   else -}}
+{{-     list $url "fnm-linux.zip" | join "" -}}
+{{-   end -}}
+{{- else if .chezmoi.os "windows" -}}
+{{-   list $url "fnm-windows.zip" | join "" -}}
+{{- else -}}
+{{-   list $url "fnm-macos.zip" | join "" -}}
+{{- end -}}

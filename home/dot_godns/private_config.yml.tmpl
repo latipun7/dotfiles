@@ -1,6 +1,7 @@
 # -*-yaml-*- vim:syntax=yaml
+{{ $bw_ruppy := bitwardenFields "item" "f8d0f3e2-7d8b-4e23-befc-ae15017ae995" -}}
 provider: Cloudflare
-login_token: "{{/* (bitwardenFields "item" "<itemid>").token.value */}}"
+login_token: "{{ (bitwardenFields "item" "25535491-5533-4464-ba10-ac44000d5bd4").apiTokenLatipunDev.value }}"
 domains:
   - domain_name: latipun.dev
     sub_domains: [kumori, raspi]
@@ -17,6 +18,6 @@ debug_info: false
 notify:
   discord:
     enabled: false
-    bot_api_token: "{{/* (bitwardenFields "item" "<itemid>").token.value */}}"
-    channel: "{{/* (bitwardenFields "item" "<itemid>").token.value */}}"
+    bot_api_token: "{{ $bw_ruppy.botToken.value }}"
+    channel: "{{ $bw_ruppy.godnsNotifyChannel.value }}"
     message_template: "Domain **{{`{{ .Domain }}`}}** is updated to **{{`{{ .CurrentIP }}`}}**"
