@@ -1,11 +1,30 @@
-# waiting for chezmoi to leverage .gitignore from archives:
+# -*-ignore-*- vim:syntax=ignore
+
+# NOTE: waiting for chezmoi to leverage .gitignore from archives:
 # https://github.com/twpayne/chezmoi/issues/1421#issuecomment-964473844
+# p10k
 **/*.zwc
 
 {{- if eq .chezmoi.os "windows" }}
+# Ignore this in windows
+.config/certbot
 bin
 .omz-custom
 .p10k.zsh
 .zshenv
 .zshrc
+###
+{{- end }}
+
+{{- if ne .chezmoi.os "windows" }}
+# Ignore this outside windows
+AppData
+Documents
+###
+{{- end }}
+
+{{- if ne .chezmoi.hostname "latipun-pi" }}
+# Ignore .godns if not latipun-pi (home)
+.godns
+###
 {{- end }}
