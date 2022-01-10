@@ -40,7 +40,14 @@ if hash lsd 2>/dev/null; then
 fi
 
 # bat alias
-hash bat 2>/dev/null && alias cat=bat
+if hash bat 2>/dev/null; then
+  alias cat=bat
+  alias catp='bat -pp'
+
+  function cattail() {
+    tail "$@" | bat --paging=never -l log
+  }
+fi
 
 # nvim alias
 hash nvim 2>/dev/null && alias vi=nvim
