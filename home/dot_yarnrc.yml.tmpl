@@ -1,0 +1,14 @@
+{{- /* -*-yaml-*- vim:syntax=yaml */ -}}
+{{- /* https://yarnpkg.com/configuration/yarnrc */ -}}
+
+{{ if eq .chezmoi.os "windows" -}}
+cacheFolder: "E:\\Apps\\@development\\.cache\\yarn\\cache"
+
+{{ end -}}
+enableGlobalCache: true
+
+{{ if eq .chezmoi.os "windows" -}}
+globalFolder: "E:\\Apps\\@development\\.cache\\yarn\\"
+
+{{ end -}}
+nmMode: hardlinks-global
