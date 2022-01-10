@@ -3,27 +3,49 @@
 #
 # https://git-scm.com/docs/git-config/
 
-{{ if eq .chezmoi.os "windows" -}}
 [core]
-  # Editor to edit commands such as commit, tag, etc.
+  pager = delta
+{{- if eq .chezmoi.os "windows" }}
   editor = code --wait
+{{- end }}
 
-{{ end -}}
 [user]
-  # Specify the email address of the author/committer.
   email = {{ .email }}
-
-  # Specify the username of the author/committer.
   name = {{ .name }}
 
 [init]
-  # Allows overriding the default branch name e.g. when initializing a new repository.
   defaultBranch = main
 
 [rebase]
-  # Create a temporary stash entry before the operation begins.
   autostash = true
 
 [fetch]
-  # Remove any remote-tracking references that no longer exist on the remote.
   prune = true
+
+[merge]
+  conflictstyle = diff3
+
+[diff]
+  colorMoved = default
+
+[interactive]
+  diffFilter = delta --color-only --features=interactive
+
+[delta]
+  navigate = true
+  features = side-by-side line-numbers decorations
+  syntax-theme = Dracula
+  plus-style = syntax "#003800"
+  minus-style = syntax "#3f0001"
+
+[delta "decorations"]
+  commit-decoration-style = bold yellow box ul
+  file-style = bold yellow ul
+  file-decoration-style = none
+  hunk-header-decoration-style = cyan box ul
+
+[delta "line-numbers"]
+  line-numbers-left-style = cyan
+  line-numbers-right-style = cyan
+  line-numbers-minus-style = 124
+  line-numbers-plus-style = 28
