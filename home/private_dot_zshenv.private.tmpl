@@ -1,0 +1,8 @@
+# -*-shell-script-*- vim:syntax=shell-script
+# code:language=shellscript
+
+{{ $github := bitwardenFields "item" "2741a107-522b-41a4-9a03-ae1801769ff6" -}}
+export GH_TOKEN={{ $github.repo.value | trim }}
+export HOMEBREW_GITHUB_API_TOKEN={{ $github.gist.value | trim }}
+export VSCE_PAT={{ (bitwarden "item" "b127dfd4-49e9-4f0b-9361-ae1801765957").notes | trim }}
+export NPM_TOKEN={{ (bitwarden "item" "e5b3971f-b5f5-4700-9e1c-ae18016e20dc").notes | trim }}
