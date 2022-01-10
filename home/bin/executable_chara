@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1091
+# shellcheck disable=SC2154
+
+set -euo pipefail
+
+source "$HOME/bin/_functions"
+
+FILES=$HOME/ansi-arts/ponysay
+args=()
+
+while IFS= read -r file; do
+  args+=(-F "$file")
+done < <(find "$FILES" -type f)
+
+if hash fortune 2>/dev/null && hash ponysay 2>/dev/null; then
+  fortune | ponysay -W i -b round "${args[@]}"
+else
+  fail "${color5}fortune${reset} and ${color5}ponysay${reset} are required packages.\n    Please install them."
+fi

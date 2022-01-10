@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+#:  * `caveats` [formulae]
+#:    See caveats of all installed formulae or specific formulae.
+#:
+#:  Examples:
+#:    `brew caveats`
+#:    Show caveats from all installed formulas
+#:
+#:    `brew caveats python@3.9 fzf`
+#:    Show caveats from specific formulas (in this case, python@3.9 and fzf)
+
+set -euo pipefail
+
+if hash brew &>/dev/null; then
+  if [ $# -eq 0 ]; then
+    for formula in $(brew list --formula); do
+      caveat=$(brew info "$formula" | sed '/==> Caveats/,/==>/!d;//d')
+      if [ -n "$caveat" ]; then
+        echo -e "\n\e[2K\e[0;94m==>\e[0m $formula Caveats:\n$caveat\n"
+      fi
+    done
+  else
+    for formula in "$@"; do
+      caveat=$(brew info "$formula" | sed '/==> Caveats/,/==>/!d;//d')
+      if [ -n "$caveat" ]; then
+        echo -e "\n\e[2K\e[0;94m==>\e[0m $formula Caveats:\n$caveat\n"
+      fi
+    done
+  fi
+fi
