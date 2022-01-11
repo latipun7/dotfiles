@@ -16,6 +16,16 @@ ansi-arts:
     command: gzip
     args: ["-dcS", ".zip"]
 
+.local/share/mc/skins/dracula.ini:
+  type: file
+  url: https://raw.github.com/dracula/midnight-commander/master/skins/dracula.ini
+  refreshPeriod: 168h
+
+.local/share/mc/skins/dracula256.ini:
+  type: file
+  url: https://raw.github.com/dracula/midnight-commander/master/skins/dracula256.ini
+  refreshPeriod: 168h
+
 .omz-custom/themes/powerlevel10k:
   type: archive
   url: https://api.github.com/repos/romkatv/powerlevel10k/tarball/v1.15.0
