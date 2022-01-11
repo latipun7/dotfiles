@@ -32,11 +32,16 @@ alias gruh='git reset --hard upstream/$(git_current_branch)'
 
 # lsd alias
 if hash lsd 2>/dev/null; then
-  alias ls=lsd
-  alias l='lsd -la --group-dirs first'
+  alias l='lsd -lA --group-dirs first'
   alias ll='lsd -lA --group-dirs first --total-size'
-  alias lll='lsd -la --group-dirs first --total-size'
   alias lt='lsd --tree -A --group-dirs first'
+fi
+
+# exa alias
+if hash exa 2>/dev/null; then
+  alias l='exa --long --all --header --group-directories-first --icons --git'
+  alias ll='exa --long --all --header --group --group-directories-first --icons --git'
+  alias lt='exa --tree --all --header --group-directories-first --icons --git --ignore-glob ".git|node_modules"'
 fi
 
 # bat alias
