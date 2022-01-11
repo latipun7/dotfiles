@@ -61,9 +61,15 @@ fi
 
 # Default editor
 if [[ "${TERM_PROGRAM:-tty}" == *vscode* ]]; then
+  export VISUAL="code --wait"
+  export EDITOR="code --wait"
+  export SUDO_EDITOR="code --wait"
+elif hash code 2>/dev/null; then
+  export VISUAL="code --wait"
   export EDITOR="code --wait"
   export SUDO_EDITOR="code --wait"
 else
+  export VISUAL=nvim
   export EDITOR=nvim
   export SUDO_EDITOR=nvim
 fi

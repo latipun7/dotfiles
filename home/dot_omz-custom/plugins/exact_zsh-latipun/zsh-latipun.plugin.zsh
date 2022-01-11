@@ -55,7 +55,7 @@ if hash bat 2>/dev/null; then
 fi
 
 # nvim alias
-hash nvim 2>/dev/null && alias vi=nvim
+hash nvim 2>/dev/null && alias v=nvim
 
 # bitwarden alias
 if hash bw 2>/dev/null; then
