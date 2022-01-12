@@ -1,8 +1,9 @@
 using namespace System.Management.Automation
 using namespace System.Management.Automation.Language
 
-# From: https://github.com/PowerShell/PSReadLine/blob/master/PSReadLine/SamplePSReadLineProfile.ps1
-#
+#============================= Copied From =================================
+# https://github.com/PowerShell/PSReadLine/blob/master/PSReadLine/SamplePSReadLineProfile.ps1
+
 # This is roughly what I use so there is some emphasis on emacs bindings,
 # but most of these bindings make sense in Windows mode as well.
 
@@ -616,7 +617,7 @@ Set-PSReadLineKeyHandler -Key Alt+a `
   [Microsoft.PowerShell.PSConsoleReadLine]::SelectForwardChar($null, ($nextAst.Extent.EndOffset - $nextAst.Extent.StartOffset) - $endOffsetAdjustment)
 }
 
-#####
+#=======================
 
 Set-PSReadLineKeyHandler -Chord Tab -Function MenuComplete
 Set-PSReadLineKeyHandler -Chord Ctrl+Backspace -Function BackwardKillWord
@@ -639,7 +640,7 @@ Set-PSReadlineOption -Color @{
   "Variable"           = [ConsoleColor]::DarkBlue
 }
 
-#######################################################################################
+#================================= LATIPUN =====================================#
 
 # Prompt Theme
 if (Get-Command "oh-my-posh" -ErrorAction SilentlyContinue) {

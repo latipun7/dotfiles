@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
-#
-######################################
-# Utilities functions                #
-######################################
 
-######################################
+#====================================#
+#         Utilities Functions        #
+#====================================#
+
+#---------------------------------------------o
 # Concatenate arguments with custom separator.
 # Example Usage: concat "," "$arr[@]"
 # result: 1,2,3,4
@@ -19,12 +19,13 @@ function concat() {
   echo "${arr[*]}"
 }
 
+#---------------------------------------------o
 # dummy print_help
 function print_help() {
   echo
 }
 
-######################################
+#---------------------------------------------o
 # Exit with message and exit code.
 # Example Usage:
 #   die "Error to run that command." 1 (error with exit code 1)
@@ -42,7 +43,7 @@ function die() {
   exit "${_ret}"
 }
 
-######################################
+#---------------------------------------------o
 # ANSI Color Codes
 # ref: https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
 esc="\033"
@@ -76,7 +77,7 @@ hiddenoff="${esc}[28m"
 strikeon="${esc}[9m" # set strikethrough mode
 strikeoff="${esc}[29m"
 
-######################################
+#---------------------------------------------o
 # Status Message
 function info() {
   echo -e "\n${color14}==>${reset} $1 ℹ\n"

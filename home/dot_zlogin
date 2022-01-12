@@ -1,8 +1,9 @@
-# -*-shell-script-*- vim:syntax=shell-script
-# code:language=shellscript
+# -*-shell-script-*- vim:syntax=shell-script #
+#         code:language=shellscript          #
+#--------------------------------------------#
 
-#########################
+#=======================#
 #     Login Command     #
-#########################
+#=======================#
 
 hash chara 2>/dev/null && chara

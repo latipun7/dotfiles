@@ -1,8 +1,6 @@
-# -*-shell-script-*- vim:syntax=shell-script
-# code:language=shellscript
-#########################
-# Environment Variables #
-#########################
+# -*-shell-script-*- vim:syntax=shell-script #
+#         code:language=shellscript          #
+#--------------------------------------------#
 
 source "$HOME/bin/_functions"
 
@@ -110,4 +108,12 @@ export FORCE_COLOR=true
 
 if [ -f "$HOME/.zshenv.private" ]; then
   source "$HOME/.zshenv.private"
+fi
+
+#=======================#
+#  Custom Environments  #
+#=======================#
+
+if [ -f "$HOME/.zshenv.custom" ]; then
+  source "$HOME/.zshenv.custom"
 fi

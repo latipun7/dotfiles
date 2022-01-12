@@ -1,4 +1,5 @@
 # -*-yaml-*- vim:syntax=yaml
+
 {{ $emperor_ruppy := bitwardenFields "item" "f8d0f3e2-7d8b-4e23-befc-ae15017ae995" -}}
 provider: Cloudflare
 login_token: "{{ (bitwarden "item" "d7aa3e8d-1eaa-49ab-ba57-ae19000f11a9").notes | trim }}"

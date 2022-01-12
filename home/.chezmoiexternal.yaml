@@ -7,7 +7,7 @@ ansi-arts:
 
 {{ if ne .chezmoi.os "windows" -}}
 .fnm/fnm:
-  # not archive, workaround of https://github.com/actions/upload-artifact/issues/38
+  # NOTE: workaround of https://github.com/actions/upload-artifact/issues/38
   type: file
   url: {{ template "fnm-download-url" . }}
   executable: true

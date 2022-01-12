@@ -1,6 +1,6 @@
-#########################
+#=======================#
 #    General Tweaks     #
-#########################
+#=======================#
 
 # default file and folder mask permission
 umask 022
@@ -8,9 +8,9 @@ umask 022
 # activate node
 [[ "$(type node)" == *function* ]] && node -v &>/dev/null
 
-#########################
+#=======================#
 #         Aliases       #
-#########################
+#=======================#
 
 alias psudo='sudo env PATH="$PATH"'
 alias openvpn-install='curl -fsLS https://git.io/vpn | sudo bash'
@@ -71,9 +71,9 @@ if hash bw 2>/dev/null; then
   alias bw-unlock='eval "$(bw unlock | grep -oE --color=never "(export BW_SESSION=".+")")"'
 fi
 
-#########################
+#=======================#
 #    ZSH Keybindings    #
-#########################
+#=======================#
 
 # C-backspace to delete previous word
 bindkey '^H' backward-kill-word
