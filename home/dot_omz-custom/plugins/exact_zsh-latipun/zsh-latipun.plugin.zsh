@@ -52,6 +52,12 @@ if hash bat 2>/dev/null; then
   function cattail() {
     tail "$@" | bat --paging=never -l log
   }
+  compdef _tail cattail
+
+  function catjournal() {
+    journalctl "$@" | bat --paging=never -l log
+  }
+  compdef _journalctl catjournal
 fi
 
 # nvim alias
