@@ -1,0 +1,16 @@
+{{ if ne .chezmoi.os "windows" -}}
+#!/usr/bin/env bash
+# -*-shell-script-*- vim:syntax=shell-script
+# code:language=shellscript
+#
+# Install nnn plugins
+# https://github.com/jarun/nnn/tree/master/plugins#installation
+
+set -euo pipefail
+
+{{ template "functions-bin" }}
+
+info "Install ${color6}nnn${reset} plugins"
+curl -fsLS https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs | sh
+success "${color6}nnn${reset} plugins installed successfully"
+{{ end -}}

@@ -63,6 +63,14 @@ fi
 # nvim alias
 hash nvim 2>/dev/null && alias v=nvim
 
+# nnn alias
+if hash nnn 2>/dev/null; then
+  function n() {
+    LC_COLLATE=C nnn "$@"
+  }
+  compdef _nnn n
+fi
+
 # bitwarden alias
 if hash bw 2>/dev/null; then
   alias bw-login='eval "$(bw login | grep -oE --color=never "(export BW_SESSION=".+")")"'

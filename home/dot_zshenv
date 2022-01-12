@@ -74,13 +74,26 @@ else
   export SUDO_EDITOR=nvim
 fi
 
+# `nnn` configs
+if hash nnn 2>/dev/null; then
+  export NNN_OPTS="eEUx"
+  export NNN_BMS="p:$HOME/projects;w:$HOME/www/"
+  export NNN_ARCHIVE="\\.(7z|a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|gz|jar|lha|lz|lzh|lzma|lzo|rar|rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z|zip)$"
+  export NNN_COLORS='6541'
+  export NNN_FCOLORS='76bed530004b7bd245d7c8c4'
+  export NNN_FIFO='/tmp/nnn.fifo'
+fi
+
 # Invoking gpg-agent
 # https://www.gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html
-# GPG_TTY="$(tty)" see: romkatv/powerlevel10k#524
+# GPG_TTY="$(tty)"
+# see: https://github.com/romkatv/powerlevel10k/issues/524
 export GPG_TTY="$TTY"
 
 # Batman syntax highlight for man pages -> https://github.com/sharkdp/bat#man
 hash bat 2>/dev/null && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+export FORCE_COLOR=true
 
 # https://github.com/QMonkey/wsl-tutorial#specify-the-display-server
 # if [[ "$(uname -a)" == *[Mm]icrosoft* ]]; then
@@ -90,8 +103,6 @@ hash bat 2>/dev/null && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
-
-export FORCE_COLOR=true
 
 #=======================#
 # Private Environments  #
