@@ -17,7 +17,7 @@ use_proxy: false
 debug_info: false
 notify:
   discord:
-    enabled: false
+    enabled: true
     bot_api_token: "{{ $emperor_ruppy.botToken.value | trim }}"
     channel: "{{ $emperor_ruppy.godnsNotifyChannel.value | trim }}"
     message_template: "Domain **{{`{{ .Domain }}`}}** is updated to **{{`{{ .CurrentIP }}`}}**"
