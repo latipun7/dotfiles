@@ -1,4 +1,4 @@
-ansi-arts:
+.local/share/ansi-arts:
   type: archive
   url: https://api.github.com/repos/latipun7/ansi-arts/tarball
   exact: true
@@ -6,7 +6,7 @@ ansi-arts:
   refreshPeriod: 744h
 
 {{ if ne .chezmoi.os "windows" -}}
-.fnm/fnm:
+.local/bin/fnm:
   # NOTE: workaround of https://github.com/actions/upload-artifact/issues/38
   type: file
   url: {{ template "fnm-download-url" . }}
@@ -26,28 +26,28 @@ ansi-arts:
   url: https://raw.github.com/dracula/midnight-commander/master/skins/dracula256.ini
   refreshPeriod: 168h
 
-.omz-custom/themes/powerlevel10k:
+.local/share/omz-custom/themes/powerlevel10k:
   type: archive
-  url: https://api.github.com/repos/romkatv/powerlevel10k/tarball/v1.15.0
+  url: https://api.github.com/repos/romkatv/powerlevel10k/tarball/v{{ template "github-latest-tag" list "romkatv/powerlevel10k" .chezmoi.os }}
   exact: true
   stripComponents: 1
   refreshPeriod: 168h
 
-.omz-custom/plugins/zsh-completions:
+.local/share/omz-custom/plugins/zsh-completions:
   type: archive
   url: https://api.github.com/repos/zsh-users/zsh-completions/tarball
   exact: true
   stripComponents: 1
   refreshPeriod: 168h
 
-.omz-custom/plugins/zsh-syntax-highlighting:
+.local/share/omz-custom/plugins/zsh-syntax-highlighting:
   type: archive
   url: https://api.github.com/repos/zsh-users/zsh-syntax-highlighting/tarball
   exact: true
   stripComponents: 1
   refreshPeriod: 168h
 
-.omz-custom/plugins/zsh-autosuggestions:
+.local/share/omz-custom/plugins/zsh-autosuggestions:
   type: archive
   url: https://api.github.com/repos/zsh-users/zsh-autosuggestions/tarball
   exact: true
@@ -116,12 +116,12 @@ www/adminer/plugins/foreign-system.php:
 {{- end }}
 
 {{ if eq .chezmoi.os "windows" -}}
-.fnm:
+.local/bin:
   type: archive
   url: {{ template "fnm-download-url" . }}
   refreshPeriod: 168h
 
-bin/jq.exe:
+.local/bin/jq.exe:
   type: file
   url: https://github.com/stedolan/jq/releases/latest/download/jq-win64.exe
   executable: true
@@ -129,7 +129,7 @@ bin/jq.exe:
 {{- end }}
 
 {{ if eq .chezmoi.hostname "latipun-pi" -}}
-.godns:
+.local/bin:
   type: archive
   url: {{ template "godns-download-url" . }}
   stripComponents: 1

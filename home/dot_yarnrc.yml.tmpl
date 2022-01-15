@@ -4,11 +4,17 @@
 {{ if eq .chezmoi.os "windows" -}}
 cacheFolder: "E:\\Apps\\@development\\.cache\\yarn\\cache"
 
+{{ else -}}
+cacheFolder: "${HOME}/.cache/yarn"
+
 {{ end -}}
 enableGlobalCache: true
 
 {{ if eq .chezmoi.os "windows" -}}
 globalFolder: "E:\\Apps\\@development\\.cache\\yarn\\"
+
+{{ else -}}
+globalFolder: "${HOME}/.local/share/yarn"
 
 {{ end -}}
 nmMode: hardlinks-global

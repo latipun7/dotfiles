@@ -9,19 +9,13 @@ set -euo pipefail
 
 {{ template "functions-bin" }}
 
-INSTALL_DIR=$HOME/.godns
-
-if ! ( echo $PATH | grep -q .godns: ); then
-  export PATH=$INSTALL_DIR:$PATH
-fi
-
 sudo tee /usr/lib/systemd/system/godns.service > /dev/null << EOL
 [Unit]
 Description=GoDNS Service
 After=network.target
 
 [Service]
-ExecStart=${INSTALL_DIR}/godns -c ${INSTALL_DIR}/config.yml
+ExecStart=${HOME}/.local/bin/godns -c ${HOME}/.config/godns/config.yml
 Restart=always
 KillMode=process
 RestartSec=1s

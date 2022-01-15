@@ -1,15 +1,26 @@
 # -*-shell-script-*- vim:syntax=shell-script #
-#         code:language=shellscript          #
+# code:language=shellscript                  #
 #--------------------------------------------#
 
-source "$HOME/bin/_functions"
+source "$HOME/.local/bin/_functions"
+
+#=======================#
+#  XDG Base Directory   #
+#=======================#
+
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
 
 #=======================#
 #         PATH          #
 #=======================#
 
 # Make linuxbrew PATH available before sourcing OMZ
-if [[ "$OSTYPE" == linux-gnu ]]; then
+if hash brew 2>/dev/null; then
+  eval "$(brew shellenv)"
+elif [[ "$OSTYPE" == linux-gnu ]]; then
   [ -d "/home/linuxbrew/.linuxbrew" ] &&
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   [ -d "$HOME/.linuxbrew" ] &&
@@ -21,36 +32,20 @@ else
   echo "homebrew not available in the current OS type."
 fi
 
-# Rust binary path
-export PATH=$HOME/.cargo/bin:$PATH
-
-# GoDNS binary path
-if [ -d "$HOME/.godns" ]; then
-  export PATH=$HOME/.godns:$PATH
-fi
-
-# FNM Shell Setup
-if [ -d "$HOME/.fnm" ]; then
-  export PATH=$HOME/.fnm:$PATH
-fi
-hash fnm &>/dev/null && eval "$(fnm env --use-on-cd)"
-
 # Custom path
-pythonexe=$(hash brew 2>/dev/null && echo "$(brew --prefix)/opt/python/libexec/bin")
-homeexe="$HOME/bin:$HOME/.local/bin"
-pathexe=("$homeexe" "$pythonexe" "$PATH")
+! ( echo $PATH | grep -q '/.local/bin:' ) && homeexe="$HOME/.local/bin"
+hash cargo 2>/dev/null && cargoexe="$XDG_DATA_HOME/cargo/bin"
+brewpythonexe=$(hash brew 2>/dev/null && echo "$(brew --prefix)/opt/python/libexec/bin")
+
+pathexe=("$homeexe" "$cargoexe" "$brewpythonexe" "$PATH")
 
 export PATH=$(concat ":" "${pathexe[@]}")
 
-# Node binary path
+# Node global module require path
 if hash fnm 2>/dev/null && hash node 2>/dev/null; then
   nodelink=$(readlink -e "$(which node)")
   NODE_PATH=$(cd "${nodelink:0:-4}../lib/node_modules" && pwd)
   export NODE_PATH
-fi
-
-if [[ "$(uname -a)" != *[Mm]icrosoft* ]]; then
-  export DOCKER_HOST="tcp://127.0.0.1:2375"
 fi
 
 #=======================#
@@ -58,11 +53,11 @@ fi
 #=======================#
 
 # Default editor
-if [[ "${TERM_PROGRAM:-tty}" == *vscode* ]]; then
+if hash code 2>/dev/null; then
   export VISUAL="code --wait"
   export EDITOR="code --wait"
   export SUDO_EDITOR="code --wait"
-elif hash code 2>/dev/null; then
+elif [[ "${TERM_PROGRAM:-tty}" == *vscode* ]]; then
   export VISUAL="code --wait"
   export EDITOR="code --wait"
   export SUDO_EDITOR="code --wait"
@@ -70,6 +65,12 @@ else
   export VISUAL=nvim
   export EDITOR=nvim
   export SUDO_EDITOR=nvim
+fi
+
+# `fnm` setup
+if hash fnm &>/dev/null; then
+  export FNM_DIR="$XDG_DATA_HOME/fnm"
+  eval "$(fnm env --use-on-cd)"
 fi
 
 # `nnn` configs
@@ -82,6 +83,25 @@ if hash nnn 2>/dev/null; then
   export NNN_FIFO='/tmp/nnn.fifo'
 fi
 
+# wakatime
+export WAKATIME_HOME="$XDG_CONFIG_HOME/wakatime"
+
+# Rust
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+
+# Go
+export GOPATH="$XDG_DATA_HOME/go"
+
+# postgreSQL
+if hash psql 2>/dev/null; then
+  mkdir -p "$XDG_CONFIG_HOME/pg" && mkdir -p "$XDG_STATE_HOME"
+
+  export PSQLRC="$XDG_CONFIG_HOME/pg/psqlrc"
+  export PGPASSFILE="$XDG_CONFIG_HOME/pg/pgpass"
+  export PSQL_HISTORY="$XDG_STATE_HOME/psql_history"
+  export PGSERVICEFILE="$XDG_CONFIG_HOME/pg/pg_service.conf"
+fi
+
 # Invoking gpg-agent
 # https://www.gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html
 # GPG_TTY="$(tty)"
@@ -92,15 +112,6 @@ export GPG_TTY="$TTY"
 hash bat 2>/dev/null && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 export FORCE_COLOR=true
-
-# https://github.com/QMonkey/wsl-tutorial#specify-the-display-server
-# if [[ "$(uname -a)" == *[Mm]icrosoft* ]]; then
-#   export DISPLAY=192.168.99.26:0.0
-#   export LIBGL_ALWAYS_INDIRECT=1
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
 
 #=======================#
 # Private Environments  #

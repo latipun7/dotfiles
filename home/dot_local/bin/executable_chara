@@ -4,9 +4,9 @@
 
 set -euo pipefail
 
-source "$HOME/bin/_functions"
+source "$HOME/.local/bin/_functions"
 
-FILES=$HOME/ansi-arts/ponysay
+FILES="$XDG_DATA_HOME/ansi-arts/ponysay"
 args=()
 
 while IFS= read -r file; do

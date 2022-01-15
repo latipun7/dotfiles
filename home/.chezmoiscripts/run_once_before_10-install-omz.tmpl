@@ -3,15 +3,15 @@
 # -*-shell-script-*- vim:syntax=shell-script
 # code:language=shellscript
 #
-# Install OMZ if .oh-my-zsh directory not already in home
+# Install `oh-my-zsh`
 
 set -euo pipefail
 
 {{ template "functions-bin" }}
 
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-  info 'Install OMZ'
-  bash -c "$(curl -fsLS https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" -- --unattended --keep-zshrc
-  success 'OMZ installed successfully'
-fi
+step "Install ${color6}oh-my-zsh${reset}"
+
+ZSH="${XDG_DATA_HOME:-$HOME/.local/share}/oh-my-zsh" bash -c "$(curl -fsLS https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" -- --unattended --keep-zshrc
+
+success "${color6}oh-my-zsh${reset} installed successfully"
 {{ end -}}
