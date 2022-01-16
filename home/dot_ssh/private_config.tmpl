@@ -1,7 +1,11 @@
 Host *
   ServerAliveInterval 99
+{{- /* ControlMaster not work on Windows yet */ -}}
+{{- /* NOTE: https://github.com/PowerShell/Win32-OpenSSH/issues/405 */ -}}
+{{ if ne .chezmoi.os "windows" -}}
   ControlMaster auto
   ControlPath ~/.ssh/multiplex/%r@%h:%p
   ControlPersist 1
+{{- end }}
 
 {{ (bitwarden "item" "3e24accf-02a5-4547-8d88-ad1b00075f68").notes | trim }}
