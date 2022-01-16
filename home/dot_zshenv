@@ -83,9 +83,6 @@ if hash nnn 2>/dev/null; then
   export NNN_FIFO='/tmp/nnn.fifo'
 fi
 
-# wakatime
-export WAKATIME_HOME="$XDG_CONFIG_HOME/wakatime"
-
 # Rust
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 
