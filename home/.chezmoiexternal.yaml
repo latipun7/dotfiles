@@ -16,6 +16,12 @@
     command: gzip
     args: ["-dcS", ".zip"]
 
+.local/share/fonts:
+  type: archive
+  url: https://github.com/adam7/delugia-code/releases/latest/download/delugia-mono-complete.zip
+  stripComponents: 1
+  refreshPeriod: 744h
+
 .local/share/mc/skins/dracula.ini:
   type: file
   url: https://raw.github.com/dracula/midnight-commander/master/skins/dracula.ini
