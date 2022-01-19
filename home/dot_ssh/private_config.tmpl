@@ -2,7 +2,7 @@ Host *
   ServerAliveInterval 99
 {{- /* ControlMaster not work on Windows yet */ -}}
 {{- /* NOTE: https://github.com/PowerShell/Win32-OpenSSH/issues/405 */ -}}
-{{ if ne .chezmoi.os "windows" -}}
+{{- if ne .chezmoi.os "windows" }}
   ControlMaster auto
   ControlPath ~/.ssh/multiplex/%r@%h:%p
   ControlPersist 1
