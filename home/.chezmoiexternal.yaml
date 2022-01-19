@@ -16,7 +16,7 @@
     command: gzip
     args: ["-dcS", ".zip"]
 
-.local/share/fonts:
+.local/share/fonts/delugia-mono-complete:
   type: archive
   url: https://github.com/adam7/delugia-code/releases/latest/download/delugia-mono-complete.zip
   stripComponents: 1
