@@ -140,6 +140,10 @@ function install_fnm() {
   export FNM_DIR=$DATA_DIR
 }
 
+#========================#
+#    Setup fnm & node    #
+#========================#
+
 get_fnm_url
 install_fnm
 hash fnm &>/dev/null && eval "$(fnm env --use-on-cd)"
@@ -151,9 +155,16 @@ step "Install global node modules..."
 
 export npm_config_cache="$HOME/.cache/npm"
 corepack enable
+npm install -gq npm@latest
 npm install -gq @bitwarden/cli pm2
 
 success "${color6}fnm${reset}, ${color6}node${reset}, ${color6}bitwarden${reset}, and ${color6}pm2${reset} already installed!"
+
+#========================#
+#    Login bitwarden     #
+#========================#
+
+step "Login / unlock bitwarden vault..."
 
 # login and unlock `bw`, if already login, unlock if not unlocked yet.
 if bw login; then
@@ -163,7 +174,10 @@ else
     eval "$(bw unlock | grep -oE --color=never "(export BW_SESSION=".+")")"
 fi
 
-# Bootstrap dotfiles
+#========================#
+#   Bootstrap dotfiles   #
+#========================#
+
 step "Install dotfiles..."
 chezmoi init latipun7 --apply
 success "All done 👏\n    Please restart your terminal 🎉"
