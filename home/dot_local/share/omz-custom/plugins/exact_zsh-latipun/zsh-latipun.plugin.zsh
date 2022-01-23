@@ -24,6 +24,12 @@ alias grau='git remote add upstream'
 alias grsh='git remote show'
 alias gruh='git reset --hard upstream/$(git_current_branch)'
 
+# paru alias
+if hash paru 2>/dev/null; then
+  alias yay=paru
+  alias yeet='paru -Rns'
+fi
+
 # lsd alias
 if hash lsd 2>/dev/null; then
   alias l='lsd -lA --group-dirs first'
@@ -54,8 +60,8 @@ if hash bat 2>/dev/null; then
   compdef _journalctl catjournal
 fi
 
-# nvim alias
-hash nvim 2>/dev/null && alias v=nvim
+# editor alias
+alias v='$VISUAL'
 
 # nnn alias
 if hash nnn 2>/dev/null; then
@@ -66,18 +72,8 @@ if hash nnn 2>/dev/null; then
       return
     fi
 
-    # The behaviour is set to cd on quit (nnn checks if NNN_TMPFILE is set)
-    # To cd on quit only on ^G, either remove the "export" as in:
-    #    NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
-    #    (or, to a custom path: NNN_TMPFILE=/tmp/.lastd)
-    # or, export NNN_TMPFILE after nnn invocation
+    # Always `cd` on exit
     export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
-
-    # Unmask ^Q (, ^V etc.) (if required, see `stty -a`) to Quit nnn
-    # stty start undef
-    # stty stop undef
-    # stty lwrap undef
-    # stty lnext undef
 
     LC_COLLATE=C nnn "$@"
 
