@@ -138,6 +138,5 @@ www/adminer/plugins/foreign-system.php:
 .local/bin:
   type: archive
   url: {{ template "godns-download-url" . }}
-  stripComponents: 1
   refreshPeriod: 168h
 {{- end }}
