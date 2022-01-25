@@ -23,8 +23,8 @@ Documents
 ###
 {{- end }}
 
-{{- if ne .chezmoi.hostname "latipun-pi" }}
-# Ignore .godns if not latipun-pi (home)
+{{- if ne .chezmoi.hostname "archpi" }}
+# Ignore .godns if not archpi (home)
 .godns
 ###
 {{- end }}

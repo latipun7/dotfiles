@@ -134,7 +134,7 @@ www/adminer/plugins/foreign-system.php:
   refreshPeriod: 744h
 {{- end }}
 
-{{ if eq .chezmoi.hostname "latipun-pi" -}}
+{{ if eq .chezmoi.hostname "archpi" -}}
 .local/bin:
   type: archive
   url: {{ template "godns-download-url" . }}
