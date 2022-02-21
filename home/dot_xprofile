@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+[ -f ~/.zshenv ] && source ~/.zshenv
+
+xrdb -merge ~/.local/share/Xresources
