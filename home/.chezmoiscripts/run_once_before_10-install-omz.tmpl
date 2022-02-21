@@ -9,9 +9,13 @@ set -euo pipefail
 
 {{ template "functions-bin" }}
 
-step "Install ${color6}oh-my-zsh${reset}"
+ZSH="${XDG_DATA_HOME:-$HOME/.local/share}/oh-my-zsh" 
 
-ZSH="${XDG_DATA_HOME:-$HOME/.local/share}/oh-my-zsh" bash -c "$(curl -fsLS https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" -- --unattended --keep-zshrc
+if [ ! -d "$ZSH" ]; then
+  step "Install ${color6}oh-my-zsh${reset}"
 
-success "${color6}oh-my-zsh${reset} installed successfully"
+  bash -c "$(curl -fsLS https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" -- --unattended --keep-zshrc
+
+  success "${color6}oh-my-zsh${reset} installed successfully"
+fi
 {{ end -}}
