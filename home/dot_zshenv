@@ -1,21 +1,20 @@
-# -*-shell-script-*- vim:syntax=shell-script #
-# code:language=shellscript                  #
-#--------------------------------------------#
+# -*-zsh-*- vim:ft=zsh
+# code:language=shellscript
 
 source "$HOME/.local/bin/_functions"
 
-#=======================#
-#  XDG Base Directory   #
-#=======================#
+# ░█░█░█▀▄░█▀▀░░░█▀▄░█▀█░█▀▀░█▀▀░░░█▀▄░▀█▀░█▀▄
+# ░▄▀▄░█░█░█░█░░░█▀▄░█▀█░▀▀█░█▀▀░░░█░█░░█░░█▀▄
+# ░▀░▀░▀▀░░▀▀▀░░░▀▀░░▀░▀░▀▀▀░▀▀▀░░░▀▀░░▀▀▀░▀░▀
 
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 
-#=======================#
-#         PATH          #
-#=======================#
+# ░█▀█░█▀█░▀█▀░█░█
+# ░█▀▀░█▀█░░█░░█▀█
+# ░▀░░░▀░▀░░▀░░▀░▀
 
 # Make linuxbrew PATH available before sourcing OMZ
 if hash brew 2>/dev/null; then
@@ -48,23 +47,23 @@ if hash fnm 2>/dev/null && hash node 2>/dev/null; then
   export NODE_PATH
 fi
 
-#=======================#
-#        Tweaks         #
-#=======================#
+# ░▀█▀░█░█░█▀▀░█▀█░█░█░█▀▀
+# ░░█░░█▄█░█▀▀░█▀█░█▀▄░▀▀█
+# ░░▀░░▀░▀░▀▀▀░▀░▀░▀░▀░▀▀▀
 
 # Default editor
 if hash code 2>/dev/null; then
   export VISUAL="code --wait"
   export EDITOR="code --wait"
-  export SUDO_EDITOR="code --wait"
 elif [[ "${TERM_PROGRAM:-tty}" == *vscode* ]]; then
   export VISUAL="code --wait"
   export EDITOR="code --wait"
-  export SUDO_EDITOR="code --wait"
+elif hash lvim 2>/dev/null; then
+  export VISUAL=lvim
+  export EDITOR=lvim
 else
   export VISUAL=nvim
   export EDITOR=nvim
-  export SUDO_EDITOR=nvim
 fi
 
 # `fnm` setup
@@ -75,7 +74,7 @@ fi
 
 # `nnn` configs
 if hash nnn 2>/dev/null; then
-  export NNN_OPTS="eEUx"
+  export NNN_OPTS="eEUHx"
   export NNN_BMS="p:$HOME/projects;w:$HOME/www/"
   export NNN_ARCHIVE="\\.(7z|a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|gz|jar|lha|lz|lzh|lzma|lzo|rar|rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z|zip)$"
   export NNN_COLORS='6541'
@@ -100,6 +99,10 @@ if hash psql 2>/dev/null; then
   export PGSERVICEFILE="$XDG_CONFIG_HOME/pg/pg_service.conf"
 fi
 
+# Uniform look for Qt and GTK apps
+# https://wiki.archlinux.org/title/Uniform_look_for_Qt_and_GTK_applications
+export QT_QPA_PLATFORMTHEME=qt5ct
+
 # Invoking gpg-agent
 # https://www.gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html
 # GPG_TTY="$(tty)"
@@ -109,19 +112,20 @@ export GPG_TTY="$TTY"
 # Batman syntax highlight for man pages -> https://github.com/sharkdp/bat#man
 hash bat 2>/dev/null && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
+export LESS='--RAW-CONTROL-CHARS --ignore-case'
 export FORCE_COLOR=true
 
-#=======================#
-# Private Environments  #
-#=======================#
+# ░█▀█░█▀▄░▀█▀░█░█░█▀█░▀█▀░█▀▀░░░█▀▀░█▀█░█░█
+# ░█▀▀░█▀▄░░█░░▀▄▀░█▀█░░█░░█▀▀░░░█▀▀░█░█░▀▄▀
+# ░▀░░░▀░▀░▀▀▀░░▀░░▀░▀░░▀░░▀▀▀░░░▀▀▀░▀░▀░░▀░
 
 if [ -f "$HOME/.zshenv.private" ]; then
   source "$HOME/.zshenv.private"
 fi
 
-#=======================#
-#  Custom Environments  #
-#=======================#
+# ░█▀▀░█░█░█▀▀░▀█▀░█▀█░█▄█░░░█▀▀░█▀█░█░█
+# ░█░░░█░█░▀▀█░░█░░█░█░█░█░░░█▀▀░█░█░▀▄▀
+# ░▀▀▀░▀▀▀░▀▀▀░░▀░░▀▀▀░▀░▀░░░▀▀▀░▀░▀░░▀░
 
 if [ -f "$HOME/.zshenv.custom" ]; then
   source "$HOME/.zshenv.custom"

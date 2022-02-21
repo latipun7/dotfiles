@@ -4,9 +4,19 @@
 {{ $email := promptString "Email address" "latifsulistyo.me@gmail.com" -}}
 {{ $name := promptString "Full name" "Latif Sulistyo" -}}
 
+{{ $isServer := false -}}
+
+{{- if eq .chezmoi.os "linux" -}}
+{{-   $chassis := output "hostnamectl" "chassis" | trim -}}
+{{-   if eq $chassis "server" -}}
+{{-     $isServer = true -}}
+{{-   end -}}
+{{- end -}}
+
 data:
   email: {{ $email }}
   name: {{ $name }}
+  is_server: {{ $isServer }}
 
 diff:
   pager: delta

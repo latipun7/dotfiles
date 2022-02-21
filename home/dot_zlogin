@@ -1,6 +1,5 @@
-# -*-shell-script-*- vim:syntax=shell-script #
-#         code:language=shellscript          #
-#--------------------------------------------#
+# -*-zsh-*- vim:ft=zsh 
+# code:language=shellscript         
 
 #=======================#
 #     Login Command     #

@@ -1,9 +1,9 @@
-{{ if eq .chezmoi.hostname "archpi" -}}
+{{ if .is_server -}}
 #!/usr/bin/env bash
-# -*-shell-script-*- vim:syntax=shell-script
+# -*-bash-*- vim:syntax=bash
 # code:language=shellscript
-#
-# NOTE: Setup GoDNS on 'archpi'
+
+# Setup GoDNS on server machine
 
 set -euo pipefail
 

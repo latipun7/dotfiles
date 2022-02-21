@@ -1,4 +1,4 @@
-# -*-ignore-*- vim:syntax=ignore
+# -*-ignore-*- vim:syntax=conf
 
 # NOTE: waiting for chezmoi to leverage .gitignore from archives:
 # https://github.com/twpayne/chezmoi/issues/1421#issuecomment-964473844
@@ -7,11 +7,12 @@
 
 {{- if eq .chezmoi.os "windows" }}
 # Ignore this in windows
-.config/certbot
-bin
-.omz-custom
+.local/bin
+.local/share/omz-custom
 .p10k.zsh
 .zshenv
+.zshenv.private
+.zlogin
 .zshrc
 ###
 {{- end }}
@@ -23,8 +24,10 @@ Documents
 ###
 {{- end }}
 
-{{- if ne .chezmoi.hostname "archpi" }}
-# Ignore .godns if not archpi (home)
-.godns
+{{- if not .is_server }}
+# Ignore if not server machine
+.config/certbot
+.config/godns
+www
 ###
 {{- end }}

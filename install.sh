@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
-# -*-shell-script-*- vim:syntax=shell-script
-# code:language=shellscript
 # shellcheck disable=SC2154
-#
+
 # Install Dependencies and Dotfiles
 
 set -euo pipefail
@@ -144,8 +142,10 @@ function install_fnm() {
 #    Setup fnm & node    #
 #========================#
 
-get_fnm_url
-install_fnm
+if ! hash fnm; then
+  get_fnm_url
+  install_fnm
+fi
 hash fnm &>/dev/null && eval "$(fnm env --use-on-cd)"
 
 step "Install latest LTS nodeJS..."

@@ -1,6 +1,5 @@
-# -*-shell-script-*- vim:syntax=shell-script #
-#         code:language=shellscript          #
-#--------------------------------------------#
+# -*-zsh-*- vim:ft=zsh
+# code:language=shellscript
 
 {{ $github := bitwardenFields "item" "2741a107-522b-41a4-9a03-ae1801769ff6" -}}
 export GH_TOKEN={{ $github.repo.value | trim }}

@@ -16,11 +16,20 @@
     command: gzip
     args: ["-dcS", ".zip"]
 
-.local/share/fonts/delugia-mono-complete:
-  type: archive
-  url: https://github.com/adam7/delugia-code/releases/latest/download/delugia-mono-complete.zip
-  stripComponents: 1
-  refreshPeriod: 744h
+.config/kitty/themes/dracula.conf:
+  type: file
+  url: https://github.com/dracula/kitty/raw/master/dracula.conf
+  refreshPeriod: 168h
+
+.config/kitty/themes/tokyonight.conf:
+  type: file
+  url: https://github.com/folke/tokyonight.nvim/raw/main/extras/kitty_tokyonight_storm.conf
+  refreshPeriod: 168h
+
+.config/kitty/themes/catppuccin.conf:
+  type: file
+  url: https://github.com/catppuccin/kitty/raw/main/catppuccin.conf
+  refreshPeriod: 168h
 
 .local/share/mc/skins/dracula.ini:
   type: file
@@ -58,6 +67,26 @@
   url: https://api.github.com/repos/zsh-users/zsh-autosuggestions/tarball
   exact: true
   stripComponents: 1
+  refreshPeriod: 168h
+{{- end }}
+
+{{ if eq .chezmoi.os "windows" -}}
+.local/bin:
+  type: archive
+  url: {{ template "fnm-download-url" . }}
+  refreshPeriod: 168h
+
+.local/bin/jq.exe:
+  type: file
+  url: https://github.com/stedolan/jq/releases/latest/download/jq-win64.exe
+  executable: true
+  refreshPeriod: 744h
+{{- end }}
+
+{{ if .is_server -}}
+.local/bin:
+  type: archive
+  url: {{ template "godns-download-url" . }}
   refreshPeriod: 168h
 
 www/adminer/adminer.php:
@@ -119,24 +148,4 @@ www/adminer/plugins/foreign-system.php:
   type: file
   url: https://raw.github.com/vrana/adminer/master/plugins/foreign-system.php
   refreshPeriod: 744h
-{{- end }}
-
-{{ if eq .chezmoi.os "windows" -}}
-.local/bin:
-  type: archive
-  url: {{ template "fnm-download-url" . }}
-  refreshPeriod: 168h
-
-.local/bin/jq.exe:
-  type: file
-  url: https://github.com/stedolan/jq/releases/latest/download/jq-win64.exe
-  executable: true
-  refreshPeriod: 744h
-{{- end }}
-
-{{ if eq .chezmoi.hostname "archpi" -}}
-.local/bin:
-  type: archive
-  url: {{ template "godns-download-url" . }}
-  refreshPeriod: 168h
 {{- end }}

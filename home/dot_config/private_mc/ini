@@ -1,4 +1,4 @@
-# -*-ini-*- vim:syntax=ini
+# -*-ini-*- vim:syntax=dosini
 
 [Midnight-Commander]
 verbose=true

@@ -1,3 +1,4 @@
+{{- /* -*-go-*- vim:syntax=go */ -}}
 //registry.npmjs.org/:_authToken={{ (bitwarden "item" "e5b3971f-b5f5-4700-9e1c-ae18016e20dc").notes | trim }}
 {{- if eq .chezmoi.os "windows" }}
 cache=E:\Apps\@development\.cache\npm
