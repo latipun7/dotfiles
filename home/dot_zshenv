@@ -12,9 +12,9 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 
-# ░█▀█░█▀█░▀█▀░█░█
-# ░█▀▀░█▀█░░█░░█▀█
-# ░▀░░░▀░▀░░▀░░▀░▀
+# ░█▀█░█▀█░▀█▀░█░█░█▀▀
+# ░█▀▀░█▀█░░█░░█▀█░▀▀█
+# ░▀░░░▀░▀░░▀░░▀░▀░▀▀▀
 
 # Make linuxbrew PATH available before sourcing OMZ
 if hash brew 2>/dev/null; then
@@ -23,7 +23,7 @@ elif [[ "$OSTYPE" == linux-gnu ]]; then
   [ -d "/home/linuxbrew/.linuxbrew" ] &&
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   [ -d "$HOME/.linuxbrew" ] &&
-    eval "$($HOME/.linuxbrew/bin/brew shellenv)"
+    eval "$("$HOME/.linuxbrew/bin/brew" shellenv)"
 elif [[ "$OSTYPE" == darwin* ]]; then
   [ -d "/usr/local/Cellar" ] &&
     eval "$(/usr/local/bin/brew shellenv)"
@@ -32,13 +32,14 @@ else
 fi
 
 # Custom path
-! ( echo $PATH | grep -q '/.local/bin:' ) && homeexe="$HOME/.local/bin"
+! (echo "$PATH" | grep -q "$HOME/.local/bin") && homeexe="$HOME/.local/bin"
 hash cargo 2>/dev/null && cargoexe="$XDG_DATA_HOME/cargo/bin"
 brewpythonexe=$(hash brew 2>/dev/null && echo "$(brew --prefix)/opt/python/libexec/bin")
 
 pathexe=("$homeexe" "$cargoexe" "$brewpythonexe" "$PATH")
 
-export PATH=$(concat ":" "${pathexe[@]}")
+PATH=$(concat ":" "${pathexe[@]}")
+export PATH
 
 # Node global module require path
 if hash fnm 2>/dev/null && hash node 2>/dev/null; then
@@ -47,11 +48,11 @@ if hash fnm 2>/dev/null && hash node 2>/dev/null; then
   export NODE_PATH
 fi
 
-# ░▀█▀░█░█░█▀▀░█▀█░█░█░█▀▀
-# ░░█░░█▄█░█▀▀░█▀█░█▀▄░▀▀█
-# ░░▀░░▀░▀░▀▀▀░▀░▀░▀░▀░▀▀▀
+# ░█▀▄░█▀▀░█▀▀░█▀█░█░█░█░░░▀█▀░█▀▀
+# ░█░█░█▀▀░█▀▀░█▀█░█░█░█░░░░█░░▀▀█
+# ░▀▀░░▀▀▀░▀░░░▀░▀░▀▀▀░▀▀▀░░▀░░▀▀▀
 
-# Default editor
+# Editor
 if hash code 2>/dev/null; then
   export VISUAL="code --wait"
   export EDITOR="code --wait"
@@ -66,6 +67,17 @@ else
   export EDITOR=nvim
 fi
 
+# Browser
+if [ -n "$DISPLAY" ]; then
+  export BROWSER=vivaldi-stable
+else
+  export BROWSER=lynx
+fi
+
+# ░▀█▀░█░█░█▀▀░█▀█░█░█░█▀▀
+# ░░█░░█▄█░█▀▀░█▀█░█▀▄░▀▀█
+# ░░▀░░▀░▀░▀▀▀░▀░▀░▀░▀░▀▀▀
+
 # `fnm` setup
 if hash fnm &>/dev/null; then
   export FNM_DIR="$XDG_DATA_HOME/fnm"
@@ -75,7 +87,6 @@ fi
 # `nnn` configs
 if hash nnn 2>/dev/null; then
   export NNN_OPTS="eEUHx"
-  export NNN_BMS="p:$HOME/projects;w:$HOME/www/"
   export NNN_ARCHIVE="\\.(7z|a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|gz|jar|lha|lz|lzh|lzma|lzo|rar|rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z|zip)$"
   export NNN_COLORS='6541'
   export NNN_FCOLORS='76bed530004b7bd245d7c8c4'
@@ -112,6 +123,7 @@ export GPG_TTY="$TTY"
 # Batman syntax highlight for man pages -> https://github.com/sharkdp/bat#man
 hash bat 2>/dev/null && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
+# Misc
 export LESS='--RAW-CONTROL-CHARS --ignore-case'
 export FORCE_COLOR=true
 
