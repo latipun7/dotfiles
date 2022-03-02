@@ -81,7 +81,12 @@ fi
 # `fnm` setup
 if hash fnm &>/dev/null; then
   export FNM_DIR="$XDG_DATA_HOME/fnm"
-  eval "$(fnm env --use-on-cd)"
+
+  if [[ -z "$TTY" ]]; then
+    eval "$(fnm env --shell=bash)"
+  else
+    eval "$(fnm env --use-on-cd)"
+  fi
 fi
 
 # `nnn` configs

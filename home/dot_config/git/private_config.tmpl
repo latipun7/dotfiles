@@ -2,6 +2,12 @@
 # code:language=properties
 # https://git-scm.com/docs/git-config/
 
+{{- if not .is_server }}
+
+[credential]
+  helper = libsecret
+{{- end }}
+
 [core]
   pager = delta
 {{- if eq .chezmoi.os "windows" }}
