@@ -95,6 +95,8 @@ if hash nnn 2>/dev/null; then
   export NNN_ARCHIVE="\\.(7z|a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|gz|jar|lha|lz|lzh|lzma|lzo|rar|rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z|zip)$"
   export NNN_COLORS='6541'
   export NNN_FCOLORS='76bed530004b7bd245d7c8c4'
+  export NNN_BMS="e:/etc;s:/usr/share;c:$XDG_CONFIG_HOME;d:$XDG_DATA_HOME"
+  export NNN_PLUG='p:preview-tui;o:fzopen'
   export NNN_FIFO='/tmp/nnn.fifo'
 fi
 
