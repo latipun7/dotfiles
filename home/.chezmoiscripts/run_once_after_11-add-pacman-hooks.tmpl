@@ -1,0 +1,41 @@
+{{ if ne .chezmoi.os "windows" -}}
+#!/usr/bin/env bash
+# -*-bash-*- vim:syntax=bash
+# code:language=shellscript
+
+# Install Pacman Hooks
+
+set -euo pipefail
+
+{{ template "functions-bin" }}
+
+if hash pacman &>/dev/null; then
+sudo tee /usr/share/libalpm/hooks/cacheremove.hook > /dev/null << EOL
+[Trigger]
+Operation = Remove
+Type = Package
+Target = *
+
+[Action]
+Description = Clearing pacman & yay cache...
+When = PostTransaction
+Exec = ${HOME}/.local/bin/yay-remove-hook
+Depends = pacman-contrib
+EOL
+
+sudo tee /usr/share/libalpm/hooks/cacheupgrade.hook > /dev/null << EOL
+[Trigger]
+Operation = Upgrade
+Type = Package
+Target = *
+
+[Action]
+Description = Clearing pacman & yay cache...
+When = PostTransaction
+Exec = ${HOME}/.local/bin/yay-upgrade-hook
+Depends = pacman-contrib
+EOL
+
+success "${color6}pacman hooks${reset} successfully installed!"
+fi
+{{- end }}

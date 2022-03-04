@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# shellcheck disable=2086,2046
+
+# Assuming yay is run by user with UID 1000
+admin="$(id -nu 1000)"
+cachedir="/home/$admin/.cache/yay"
+pkgdirs=$(find "$cachedir" -mindepth 1 -maxdepth 1 -type d)
+pkgcache="$(echo $pkgdirs | xargs -r printf "-c %s\n")"
+
+echo -e "\033[0;32m==>\033[0m Keep last two versions for installed packages"
+/usr/bin/paccache -rk2 -c /var/cache/pacman/pkg $pkgcache
