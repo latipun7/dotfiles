@@ -1,8 +1,6 @@
 .local/share/ansi-arts:
-  type: archive
-  url: https://api.github.com/repos/latipun7/ansi-arts/tarball
-  exact: true
-  stripComponents: 1
+  type: git-repo
+  url: https://github.com/latipun7/ansi-arts.git
   refreshPeriod: 744h
 
 {{ if ne .chezmoi.os "windows" -}}
@@ -14,7 +12,7 @@
   refreshPeriod: 168h
   filter:
     command: gzip
-    args: ["-dcS", ".zip"]
+    args: ["--decompress", "--to-stdout", "--suffix", ".zip"]
 
 .config/kitty/themes/dracula.conf:
   type: file
@@ -84,10 +82,14 @@
 {{- end }}
 
 {{ if .is_server -}}
-.local/bin:
-  type: archive
+.local/bin/godns:
+  type: file
   url: {{ template "godns-download-url" . }}
+  executable: true
   refreshPeriod: 168h
+  filter:
+    command: tar
+    args: ["--extract", "--gzip", "--file", "/dev/stdin", "--to-stdout", "godns"]
 
 www/adminer/adminer.php:
   type: file
