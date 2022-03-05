@@ -6,7 +6,7 @@
 **/*.zwc
 
 {{- if eq .chezmoi.os "windows" }}
-# Ignore this in windows
+# Ignore this in windows (*nix only files)
 .local/bin
 .local/share/omz-custom
 .p10k.zsh
@@ -18,14 +18,14 @@
 {{- end }}
 
 {{- if ne .chezmoi.os "windows" }}
-# Ignore this outside windows
+# Ignore this outside windows (windows only files)
 AppData
 Documents
 ###
 {{- end }}
 
 {{- if not .is_server }}
-# Ignore if not server machine
+# Ignore if not server machine (server only files)
 .config/certbot
 .config/godns
 www
