@@ -5,6 +5,13 @@
 # p10k
 **/*.zwc
 
+**/.editorconfig
+
+# Non-config lunarvim
+.config/lvim/ignore
+.config/lvim/plugin/**
+.config/lvim/lv-settings.lua
+
 {{- if eq .chezmoi.os "windows" }}
 # Ignore this in windows (*nix only files)
 .local/bin
