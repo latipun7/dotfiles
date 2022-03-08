@@ -79,6 +79,9 @@ ZSH_CUSTOM="${XDG_DATA_HOME:-$HOME/.local/share}/omz-custom"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  fzf
+  sudo
+  rsync
   zsh-autosuggestions
   zsh-latipun
   zsh-syntax-highlighting # need to load last
