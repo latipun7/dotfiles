@@ -141,7 +141,7 @@ M.config = function()
       button(
         "c",
         " " .. kind.icons.settings .. " Edit Config File",
-        ":e ~/.config/lvim/config.lua<CR>"
+        ":e " .. get_config_dir() .. "/config.lua<CR>"
       ),
       button("q", " " .. kind.icons.exit .. " Quit", ":qa<CR>"),
     },
