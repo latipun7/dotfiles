@@ -4,6 +4,10 @@
   refreshPeriod: 744h
 
 {{ if ne .chezmoi.os "windows" -}}
+# ╻ ╻┏┓╻╻╻ ╻   ┏━┓┏┓╻╻  ╻ ╻
+# ┃ ┃┃┗┫┃┏╋┛   ┃ ┃┃┗┫┃  ┗┳┛
+# ┗━┛╹ ╹╹╹ ╹   ┗━┛╹ ╹┗━╸ ╹
+
 .local/bin/fnm:
   # NOTE: workaround of https://github.com/actions/upload-artifact/issues/38
   type: file
@@ -17,26 +21,6 @@
 .config/bat/themes/catppuccin.tmTheme:
   type: file
   url: https://github.com/catppuccin/sublime-text/raw/main/Catppuccin.tmTheme
-  refreshPeriod: 168h
-
-.config/kitty/themes/dracula.conf:
-  type: file
-  url: https://github.com/dracula/kitty/raw/master/dracula.conf
-  refreshPeriod: 168h
-
-.config/kitty/themes/tokyonight.conf:
-  type: file
-  url: https://github.com/folke/tokyonight.nvim/raw/main/extras/kitty_tokyonight_storm.conf
-  refreshPeriod: 168h
-
-.config/kitty/themes/catppuccin.conf:
-  type: file
-  url: https://github.com/catppuccin/kitty/raw/main/catppuccin.conf
-  refreshPeriod: 168h
-
-.config/rofi/themes/catppuccin.rasi:
-  type: file
-  url: https://github.com/catppuccin/rofi/raw/main/.local/share/rofi/themes/catppuccin.rasi
   refreshPeriod: 168h
 
 .local/share/mc/skins/dracula.ini:
@@ -76,22 +60,38 @@
   exact: true
   stripComponents: 1
   refreshPeriod: 168h
-{{- end }}
 
-{{ if eq .chezmoi.os "windows" -}}
-.local/bin:
-  type: archive
-  url: {{ template "fnm-download-url" . }}
+{{    if not .is_server -}}
+# ╺┳┓┏━╸┏━┓╻┏ ╺┳╸┏━┓┏━┓   ┏━┓┏┓╻╻  ╻ ╻
+#  ┃┃┣╸ ┗━┓┣┻┓ ┃ ┃ ┃┣━┛   ┃ ┃┃┗┫┃  ┗┳┛
+# ╺┻┛┗━╸┗━┛╹ ╹ ╹ ┗━┛╹     ┗━┛╹ ╹┗━╸ ╹
+
+.config/kitty/themes/dracula.conf:
+  type: file
+  url: https://github.com/dracula/kitty/raw/master/dracula.conf
   refreshPeriod: 168h
 
-.local/bin/jq.exe:
+.config/kitty/themes/tokyonight.conf:
   type: file
-  url: https://github.com/stedolan/jq/releases/latest/download/jq-win64.exe
-  executable: true
-  refreshPeriod: 744h
-{{- end }}
+  url: https://github.com/folke/tokyonight.nvim/raw/main/extras/kitty_tokyonight_storm.conf
+  refreshPeriod: 168h
 
-{{ if .is_server -}}
+.config/kitty/themes/catppuccin.conf:
+  type: file
+  url: https://github.com/catppuccin/kitty/raw/main/catppuccin.conf
+  refreshPeriod: 168h
+
+.config/rofi/themes/catppuccin.rasi:
+  type: file
+  url: https://github.com/catppuccin/rofi/raw/main/.local/share/rofi/themes/catppuccin.rasi
+  refreshPeriod: 168h
+{{-   end }}
+
+{{    if .is_server -}}
+# ┏━┓┏━╸┏━┓╻ ╻┏━╸┏━┓   ┏━┓┏┓╻╻  ╻ ╻
+# ┗━┓┣╸ ┣┳┛┃┏┛┣╸ ┣┳┛   ┃ ┃┃┗┫┃  ┗┳┛
+# ┗━┛┗━╸╹┗╸┗┛ ┗━╸╹┗╸   ┗━┛╹ ╹┗━╸ ╹
+
 .local/bin/godns:
   type: file
   url: {{ template "godns-download-url" . }}
@@ -117,4 +117,22 @@ www/adminer/plugins:
   refreshPeriod: 744h
   stripComponents: 2
   include: ["*", "*/plugins", "*/plugins/*.php", "*/plugins/drivers", "*/plugins/drivers/*.php"]
+{{-   end }}
+{{- end }}
+
+{{ if eq .chezmoi.os "windows" -}}
+# ╻ ╻╻┏┓╻╺┳┓┏━┓╻ ╻┏━┓   ┏━┓┏┓╻╻  ╻ ╻
+# ┃╻┃┃┃┗┫ ┃┃┃ ┃┃╻┃┗━┓   ┃ ┃┃┗┫┃  ┗┳┛
+# ┗┻┛╹╹ ╹╺┻┛┗━┛┗┻┛┗━┛   ┗━┛╹ ╹┗━╸ ╹
+
+.local/bin:
+  type: archive
+  url: {{ template "fnm-download-url" . }}
+  refreshPeriod: 168h
+
+.local/bin/jq.exe:
+  type: file
+  url: https://github.com/stedolan/jq/releases/latest/download/jq-win64.exe
+  executable: true
+  refreshPeriod: 744h
 {{- end }}

@@ -27,12 +27,22 @@
 AppData
 Documents
 ###
-{{- end }}
 
-{{- if not .is_server }}
+{{-   if not .is_server }}
 # Ignore if not server machine (server only files)
 .config/certbot
 .config/godns
+.config/pg
 www
 ###
+{{-   end }}
+
+{{-   if .is_server }}
+# Ignore if in server machine (desktop only files)
+.config/kitty
+.config/rofi
+.local/share/Xresources*
+.xprofile
+###
+{{-   end }}
 {{- end }}
