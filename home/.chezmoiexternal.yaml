@@ -111,53 +111,10 @@ www/adminer/adminer.css:
   url: https://raw.githubusercontent.com/vrana/adminer/master/designs/dracula/adminer.css
   refreshPeriod: 744h
 
-www/adminer/plugins/plugin.php:
-  type: file
-  url: https://raw.github.com/vrana/adminer/master/plugins/plugin.php
+www/adminer/plugins:
+  type: archive
+  url: "https://api.github.com/repos/vrana/adminer/tarball"
   refreshPeriod: 744h
-
-www/adminer/plugins/edit-calendar.php:
-  type: file
-  url: https://raw.github.com/vrana/adminer/master/plugins/edit-calendar.php
-  refreshPeriod: 744h
-
-www/adminer/plugins/edit-foreign.php:
-  type: file
-  url: https://raw.github.com/vrana/adminer/master/plugins/edit-foreign.php
-  refreshPeriod: 744h
-
-www/adminer/plugins/enum-option.php:
-  type: file
-  url: https://raw.github.com/vrana/adminer/master/plugins/enum-option.php
-  refreshPeriod: 744h
-
-www/adminer/plugins/enum-types.php:
-  type: file
-  url: https://raw.github.com/vrana/adminer/master/plugins/enum-types.php
-  refreshPeriod: 744h
-
-www/adminer/plugins/file-upload.php:
-  type: file
-  url: https://raw.github.com/vrana/adminer/master/plugins/file-upload.php
-  refreshPeriod: 744h
-
-www/adminer/plugins/pretty-json-column.php:
-  type: file
-  url: https://raw.github.com/vrana/adminer/master/plugins/pretty-json-column.php
-  refreshPeriod: 744h
-
-www/adminer/plugins/slugify.php:
-  type: file
-  url: https://raw.github.com/vrana/adminer/master/plugins/slugify.php
-  refreshPeriod: 744h
-
-www/adminer/plugins/tinymce.php:
-  type: file
-  url: https://raw.github.com/vrana/adminer/master/plugins/tinymce.php
-  refreshPeriod: 744h
-
-www/adminer/plugins/foreign-system.php:
-  type: file
-  url: https://raw.github.com/vrana/adminer/master/plugins/foreign-system.php
-  refreshPeriod: 744h
+  stripComponents: 2
+  include: ["*", "*/plugins", "*/plugins/*.php", "*/plugins/drivers", "*/plugins/drivers/*.php"]
 {{- end }}

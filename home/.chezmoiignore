@@ -5,8 +5,6 @@
 # p10k
 **/*.zwc
 
-**/.editorconfig
-
 # Non-config lunarvim
 .config/lvim/ignore
 .config/lvim/plugin/**
