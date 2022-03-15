@@ -14,6 +14,11 @@
     command: gzip
     args: ["--decompress", "--to-stdout", "--suffix", ".zip"]
 
+.config/bat/themes/catppuccin.tmTheme:
+  type: file
+  url: https://github.com/catppuccin/sublime-text/raw/main/Catppuccin.tmTheme
+  refreshPeriod: 168h
+
 .config/kitty/themes/dracula.conf:
   type: file
   url: https://github.com/dracula/kitty/raw/master/dracula.conf
