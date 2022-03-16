@@ -97,6 +97,7 @@ if hash nnn 2>/dev/null; then
   export NNN_FCOLORS='76bed530004b7bd245d7c8c4'
   export NNN_BMS="e:/etc;s:/usr/share;c:$XDG_CONFIG_HOME;h:$XDG_DATA_HOME/chezmoi"
   export NNN_PLUG='p:preview-tui;o:fzopen;e:suedit;u:getplugs'
+  export NNN_TRASH=2
 fi
 
 # Rust
