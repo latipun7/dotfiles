@@ -15,7 +15,7 @@ mainbox {
 }
 
 inputbar {
-  children: [prompt,entry];
+  children: [prompt,entry,num-filtered-rows,textbox-num-sep,num-rows];
   background-color: @bg-col;
   border-radius: 5px;
   padding: 2px;
@@ -45,6 +45,24 @@ entry {
   margin: 20px 0px 0px 10px;
   text-color: @fg-col;
   background-color: @bg-col;
+}
+
+num-filtered-rows, textbox-num-sep, num-rows {
+  expand: false;
+  padding: 6px 0px;
+  margin: 20px 0 0;
+  text-color: @grey;
+  background-color: @bg-col;
+  width: 1ch;
+  highlight: italic;
+}
+
+textbox-num-sep {
+  str: "/";
+}
+
+num-rows {
+  margin: 20px 20px 0 0;
 }
 
 listview {
@@ -78,7 +96,7 @@ button {
   padding: 10px;
   background-color: @bg-col-light;
   text-color: @grey;
-  vertical-align: 0.5; 
+  vertical-align: 0.5;
   horizontal-align: 0.5;
 }
 

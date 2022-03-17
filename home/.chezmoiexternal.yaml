@@ -80,11 +80,6 @@
   type: file
   url: https://github.com/catppuccin/kitty/raw/main/catppuccin.conf
   refreshPeriod: 168h
-
-.config/rofi/themes/catppuccin.rasi:
-  type: file
-  url: https://github.com/catppuccin/rofi/raw/main/.local/share/rofi/themes/catppuccin.rasi
-  refreshPeriod: 168h
 {{-   end }}
 
 {{    if .is_server -}}
