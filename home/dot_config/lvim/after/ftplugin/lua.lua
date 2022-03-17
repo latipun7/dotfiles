@@ -6,7 +6,6 @@ if not status_ok then
   lua_dev = require("lua-dev")
 end
 
-local config_dir = get_config_dir()
 local file_name = vim.fn.expand("%:p")
 
 local lspconfig_opts = {
@@ -33,6 +32,7 @@ local lspconfig_opts = {
         globals = {
           "awesome",
           "mouse",
+          "mousegrabber",
           "screen",
           "client",
           "drawable",
@@ -104,7 +104,11 @@ end
 
 formatters.setup({ { exe = "stylua", filetypes = { "lua" } } })
 
-if string.sub(file_name, 1, string.len(config_dir)) == config_dir then
+local config_dir = get_config_dir()
+local current_dir = string.sub(file_name, 1, string.len(config_dir))
+local dot_dir = os.getenv("XDG_DATA_HOME") .. "/chezmoi/home/dot_config/lvim"
+
+if current_dir == config_dir or current_dir == dot_dir then
   server_opts = luadev
 else
   server_opts = lspconfig_opts

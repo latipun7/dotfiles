@@ -7,6 +7,10 @@
 
 [ -f ~/.zshenv ] && source ~/.zshenv
 
+# Gnome Keyring
+eval "$(gnome-keyring-daemon --start)"
+export SSH_AUTH_SOCK
+
 # XOrg
 export USERXSESSION="$XDG_CACHE_HOME/X11/xsession"
 export USERXSESSIONRC="$XDG_CACHE_HOME/X11/xsessionrc"
