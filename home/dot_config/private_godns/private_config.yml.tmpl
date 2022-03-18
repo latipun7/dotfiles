@@ -1,8 +1,9 @@
 # -*-yaml-*- vim:syntax=yaml
 
-{{ $emperor_ruppy := bitwardenFields "item" "f8d0f3e2-7d8b-4e23-befc-ae15017ae995" -}}
+{{ $bootstrap := bitwardenFields "item" "71d96432-cd58-4fcf-a870-ae2f01159fba" -}}
+
 provider: Cloudflare
-login_token: "{{ (bitwarden "item" "d7aa3e8d-1eaa-49ab-ba57-ae19000f11a9").notes | trim }}"
+login_token: "{{ $bootstrap.cloudflare_latipun_dev.value | trim }}"
 domains:
   - domain_name: latipun.dev
     sub_domains: [kumori, raspi]
@@ -17,6 +18,6 @@ debug_info: false
 notify:
   discord:
     enabled: true
-    bot_api_token: "{{ $emperor_ruppy.botToken.value | trim }}"
-    channel: "{{ $emperor_ruppy.godnsNotifyChannel.value | trim }}"
+    bot_api_token: "{{ $bootstrap.discord_bottoken.value | trim }}"
+    channel: "{{ $bootstrap.godns_notify_discord_channel.value | trim }}"
     message_template: "Domain **{{`{{ .Domain }}`}}** is updated to **{{`{{ .CurrentIP }}`}}**"

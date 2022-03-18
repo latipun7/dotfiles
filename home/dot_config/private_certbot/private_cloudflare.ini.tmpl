@@ -1,3 +1,4 @@
 # -*-ini-*- vim:syntax=dosini
 
-dns_cloudflare_api_token = {{ (bitwarden "item" "d7aa3e8d-1eaa-49ab-ba57-ae19000f11a9").notes | trim }}
+{{ $bootstrap := bitwardenFields "item" "71d96432-cd58-4fcf-a870-ae2f01159fba" -}}
+dns_cloudflare_api_token = {{ $bootstrap.cloudflare_latipun_dev.value | trim }}
