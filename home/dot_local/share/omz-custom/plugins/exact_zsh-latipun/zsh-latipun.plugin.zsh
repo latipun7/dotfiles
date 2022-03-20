@@ -47,12 +47,12 @@ if hash bat 2>/dev/null; then
   alias catp='bat -pp'
 
   function cattail() {
-    tail "$@" | bat --paging=never -l log
+    tail "$@" | bat --language log
   }
   compdef _tail cattail
 
   function catjournal() {
-    journalctl "$@" | bat --paging=never -l log
+    journalctl "$@" | bat --language log
   }
   compdef _journalctl catjournal
 fi

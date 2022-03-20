@@ -80,8 +80,9 @@ ZSH_CUSTOM="${XDG_DATA_HOME:-$HOME/.local/share}/omz-custom"
 plugins=(
   git
   fzf
-  sudo
   rsync
+  sudo
+  tmux
   zsh-autosuggestions
   zsh-latipun
   zsh-syntax-highlighting # need to load last
