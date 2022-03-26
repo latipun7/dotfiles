@@ -42,7 +42,7 @@ M.config = function()
       nvimtree = {
         enabled = true,
         show_root = true,
-        transparent_panel = true,
+        transparent_panel = lvim.transparent_window,
       },
       neotree = {
         enabled = true,
@@ -66,6 +66,7 @@ M.config = function()
       hop = true,
       notify = true,
       telekasten = true,
+      symbols_outline = true,
     },
   })
 end

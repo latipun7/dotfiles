@@ -5,12 +5,15 @@ lvim.log.level = "warn"
 lvim.transparent_window = true
 
 -- LunarVim builtin configs
-lvim.builtin.dashboard.active = false
+lvim.colorscheme = "catppuccin"
 lvim.builtin.notify.active = true
-lvim.builtin.nvimtree.setup.actions.open_file.resize_window = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 1
 lvim.builtin.terminal.active = true
+lvim.builtin.alpha.mode = "custom"
+
+local alpha_opts = require("latipun.plugins.alpha-dashboard").config()
+lvim.builtin.alpha["custom"] = { config = alpha_opts }
 
 lvim.builtin.treesitter.ensure_installed = {
   "bash",

@@ -12,8 +12,8 @@ end
 
 M.set_hop_keymaps = function()
   local opts = { noremap = true, silent = true }
-  vim.api.nvim_set_keymap("n", "S", ":HopChar2<cr>", opts)
-  vim.api.nvim_set_keymap("n", "s", ":HopWord<cr>", opts)
+  vim.api.nvim_set_keymap("n", "S", ":HopChar2MW<cr>", opts)
+  vim.api.nvim_set_keymap("n", "s", ":HopWordMW<cr>", opts)
   vim.api.nvim_set_keymap(
     "",
     "f",
@@ -78,7 +78,6 @@ M.config = function()
   lvim.keys.visual_mode["<A-k>"] = ":m .-2<CR>gv"
 
   -- WhichKey
-  lvim.builtin.which_key.mappings[";"] = { "<cmd>Alpha<CR>", "Dashboard" }
   lvim.builtin.which_key.mappings["t"] = { "<cmd>set list!<CR>", "Toggle List" }
 end
 

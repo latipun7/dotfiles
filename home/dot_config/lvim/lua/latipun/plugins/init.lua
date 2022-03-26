@@ -39,12 +39,6 @@ M.config = function()
         require("persistence").setup()
       end,
     },
-    {
-      "goolord/alpha-nvim",
-      config = function()
-        require("latipun.plugins.alpha-dashboard").config()
-      end,
-    },
     { "editorconfig/editorconfig-vim", event = "BufRead" },
     { "tpope/vim-surround", event = "BufRead" },
     { "tpope/vim-repeat", after = "vim-surround" },
