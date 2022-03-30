@@ -4,10 +4,11 @@
 
 *background: #1E1E2E
 *foreground: #D9E0EE
+*.cursorColor: #F5E0DC
 
-! Gray
-*color0: #6E6C7E
-*color8: #988BA2
+! Black
+*color0: #302D41 
+*color8: #575268 
 
 ! Red
 *color1: #F28FAD
