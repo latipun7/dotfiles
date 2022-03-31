@@ -5,10 +5,17 @@
 # p10k
 **/*.zwc
 
-# Non-config lunarvim
+# Ignorable list
+.Xauthority
+.cache
+.config/bpytop/error.log
 .config/lvim/ignore
 .config/lvim/plugin/**
 .config/lvim/lv-settings.lua
+.pki
+.ssh/known_hosts
+.zcompdump-*
+.zsh_history
 
 {{- if eq .chezmoi.os "windows" }}
 # Ignore this in windows (*nix only files)
