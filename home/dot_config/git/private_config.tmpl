@@ -2,10 +2,16 @@
 # code:language=properties
 # https://git-scm.com/docs/git-config/
 
-{{- if not .is_server }}
-
 [credential]
+{{- if eq .chezmoi.os "linux" -}}
+{{-   if .is_server }}
+  helper = 'cache --timeout 18000'
+{{-   else }}
   helper = libsecret
+{{-   end }}
+{{- else if eq .chezmoi.os "windows" -}}
+  helper = manager
+{{- else }}
 {{- end }}
 
 [core]
