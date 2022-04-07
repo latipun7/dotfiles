@@ -79,6 +79,26 @@ M.config = function()
 
   -- WhichKey
   lvim.builtin.which_key.mappings["t"] = { "<cmd>set list!<CR>", "Toggle List" }
+  lvim.builtin.which_key.mappings["g"]["d"] = {
+    "<cmd>DiffviewOpen<cr>",
+    "Diffview: diff HEAD",
+  }
+  lvim.builtin.which_key.mappings["gh"] = {
+    "<cmd>DiffviewFileHistory<cr>",
+    "Diffview: diff history",
+  }
+  lvim.builtin.which_key.mappings["gg"] = {
+    ":lua require('lvim.core.terminal')._exec_toggle({cmd = 'lazygit', count = 1, direction = 'float'})<CR>",
+    "LazyGit Dashboard",
+  }
+  lvim.builtin.which_key.mappings["l"]["r"] = {
+    "<cmd>lua require('renamer').rename()<cr>",
+    "Rename",
+  }
+  lvim.builtin.which_key.vmappings["l"] = {
+    name = "+Lsp",
+    r = { "<ESC><CMD>lua require('renamer').rename()<CR>", "Rename" },
+  }
 end
 
 return M

@@ -11,6 +11,8 @@ lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 1
 lvim.builtin.terminal.active = true
 lvim.builtin.alpha.mode = "custom"
+lvim.builtin.bufferline.options.mode = "buffers"
+lvim.builtin.bufferline.options.sort_by = "insert_after_current"
 
 local alpha_opts = require("latipun.plugins.alpha-dashboard").config()
 lvim.builtin.alpha["custom"] = { config = alpha_opts }
