@@ -40,19 +40,18 @@
   colorMoved = default
 
 [interactive]
-  diffFilter = delta --color-only --features=interactive
+  diffFilter = delta --color-only
 
 [delta]
-  navigate = true
-  features = side-by-side line-numbers decorations
-  syntax-theme = Dracula
-  plus-style = syntax "#003800"
-  minus-style = syntax "#3f0001"
+  features = side-by-side line-numbers decorations navigate
+  syntax-theme = catppuccin
+  plus-style = syntax auto
+  minus-style = syntax auto
 
 [delta "decorations"]
-  commit-decoration-style = bold yellow box ul
   file-style = bold yellow ul
   file-decoration-style = none
+  commit-decoration-style = bold yellow box ul
   hunk-header-decoration-style = cyan box ul
 
 [delta "line-numbers"]
