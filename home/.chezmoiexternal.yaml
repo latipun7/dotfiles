@@ -80,6 +80,13 @@
   type: file
   url: https://github.com/catppuccin/kitty/raw/main/catppuccin.conf
   refreshPeriod: 168h
+
+.local/share/fcitx5/themes/Catppuccin:
+  type: archive
+  url: "https://api.github.com/repos/catppuccin/fcitx5/tarball"
+  refreshPeriod: 744h
+  stripComponents: 2
+  include: ["*", "*/Catppuccin", "*/Catppuccin/*"]
 {{-   end }}
 
 {{    if .is_server -}}

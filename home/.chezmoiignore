@@ -46,8 +46,10 @@ www
 
 {{-   if .is_server }}
 # Ignore if in server machine (desktop only files)
+.config/fcitx5
 .config/kitty
 .config/rofi
+.local/share/fcitx5
 .local/share/Xresources*
 .xprofile
 ###
