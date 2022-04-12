@@ -106,9 +106,11 @@ formatters.setup({ { exe = "stylua", filetypes = { "lua" } } })
 
 local config_dir = get_config_dir()
 local current_dir = string.sub(file_name, 1, string.len(config_dir))
-local dot_dir = os.getenv("XDG_DATA_HOME") .. "/chezmoi/home/dot_config/lvim"
+local dot_dir = os.getenv("XDG_DATA_HOME")
+  .. "/chezmoi/home/dot_config/exact_lvim"
+local current_dir_2 = string.sub(file_name, 1, string.len(dot_dir))
 
-if current_dir == config_dir or current_dir == dot_dir then
+if current_dir == config_dir or current_dir_2 == dot_dir then
   server_opts = luadev
 else
   server_opts = lspconfig_opts
