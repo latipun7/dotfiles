@@ -40,11 +40,11 @@ M.config = function()
       end,
     },
     {
-      "abzcoding/renamer.nvim",
-      branch = "develop",
+      "stevearc/dressing.nvim",
       config = function()
-        require("latipun.plugins.renamer").config()
+        require("latipun.plugins.dressing").config()
       end,
+      event = "BufWinEnter",
     },
     {
       "sindrets/diffview.nvim",

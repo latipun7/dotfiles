@@ -91,13 +91,9 @@ M.config = function()
     ":lua require('lvim.core.terminal')._exec_toggle({cmd = 'lazygit', count = 1, direction = 'float'})<CR>",
     "LazyGit Dashboard",
   }
-  lvim.builtin.which_key.mappings["l"]["r"] = {
-    "<cmd>lua require('renamer').rename()<cr>",
-    "Rename",
-  }
   lvim.builtin.which_key.vmappings["l"] = {
     name = "+Lsp",
-    r = { "<ESC><CMD>lua require('renamer').rename()<CR>", "Rename" },
+    r = { "<ESC><CMD>lua vim.lsp.buf.rename()<CR>", "Rename" },
   }
 end
 
