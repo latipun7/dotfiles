@@ -53,7 +53,10 @@ lvim.builtin.project.patterns = {
 -- LSP
 lvim.lsp.automatic_servers_installation = false
 lvim.lsp.diagnostics.virtual_text = false
-vim.list_extend(lvim.lsp.override, { "sumneko_lua" })
+vim.list_extend(
+  lvim.lsp.automatic_configuration.skipped_servers,
+  { "sumneko_lua" }
+)
 
 -- Plugins
 require("latipun.plugins").config()
