@@ -47,6 +47,12 @@ M.config = function()
       event = "BufWinEnter",
     },
     {
+      "nathom/filetype.nvim",
+      config = function()
+        require("latipun.plugins.filetype").config()
+      end,
+    },
+    {
       "sindrets/diffview.nvim",
       opt = true,
       cmd = { "DiffviewOpen", "DiffviewFileHistory" },
