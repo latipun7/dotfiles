@@ -12,6 +12,7 @@
 .config/lvim/ignore
 .config/lvim/plugin/**
 .config/lvim/lv-settings.lua
+.config/lvim/sessions
 .pki
 .ssh/known_hosts
 .zcompdump-*
