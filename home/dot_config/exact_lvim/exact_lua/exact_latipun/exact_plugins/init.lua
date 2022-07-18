@@ -8,6 +8,7 @@ M.config = function()
       as = "catppuccin",
       config = function()
         require("latipun.plugins.catppuccin").config()
+        vim.g.catppuccin_flavour = "mocha"
         vim.cmd([[colorscheme catppuccin]])
       end,
     },
@@ -58,11 +59,6 @@ M.config = function()
       cmd = { "DiffviewOpen", "DiffviewFileHistory" },
       module = "diffview",
       keys = "<leader>gd",
-      setup = function()
-        require("which-key").register({
-          ["<leader>gd"] = "diffview: diff HEAD",
-        })
-      end,
       config = function()
         require("diffview").setup({
           enhanced_diff_hl = true,

@@ -9,30 +9,7 @@ M.config = function()
   catppuccin.setup({
     transparent_background = lvim.transparent_window,
     term_colors = true,
-    styles = {
-      comments = "italic",
-      functions = "italic",
-      keywords = "italic",
-      strings = "NONE",
-      variables = "italic",
-    },
     integrations = {
-      treesitter = true,
-      native_lsp = {
-        enabled = true,
-        virtual_text = {
-          errors = "italic",
-          hints = "italic",
-          warnings = "italic",
-          information = "italic",
-        },
-        underlines = {
-          errors = "underline",
-          hints = "underline",
-          warnings = "underline",
-          information = "underline",
-        },
-      },
       lsp_trouble = true,
       cmp = true,
       lsp_saga = true,
@@ -47,7 +24,7 @@ M.config = function()
       neotree = {
         enabled = true,
         show_root = true,
-        transparent_panel = true,
+        transparent_panel = lvim.transparent_window,
       },
       which_key = true,
       indent_blankline = {
@@ -67,6 +44,7 @@ M.config = function()
       notify = true,
       telekasten = true,
       symbols_outline = true,
+      mini = true,
     },
   })
 end

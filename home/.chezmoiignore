@@ -8,6 +8,8 @@
 # Ignorable list
 .Xauthority
 .cache
+.config/lvim/config.lua.bak
+.config/lvim/config.lua.ori
 .config/bpytop/error.log
 .config/lvim/ignore
 .config/lvim/plugin/**

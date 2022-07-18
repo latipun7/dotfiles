@@ -1,14 +1,14 @@
 -- general configs
 require("latipun.options").config()
 lvim.format_on_save = true
-lvim.log.level = "warn"
+lvim.log.level = "trace"
+vim.lsp.set_log_level("trace")
 lvim.transparent_window = true
 
 -- LunarVim builtin configs
-lvim.colorscheme = "catppuccin"
+lvim.colorscheme = "lll"
 lvim.builtin.notify.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
-lvim.builtin.nvimtree.show_icons.git = 1
 lvim.builtin.terminal.active = true
 lvim.builtin.alpha.mode = "custom"
 lvim.builtin.bufferline.options.mode = "buffers"
@@ -51,7 +51,7 @@ lvim.builtin.project.patterns = {
 }
 
 -- LSP
-lvim.lsp.automatic_servers_installation = false
+lvim.lsp.automatic_servers_installation = true
 lvim.lsp.diagnostics.virtual_text = false
 vim.list_extend(
   lvim.lsp.automatic_configuration.skipped_servers,
