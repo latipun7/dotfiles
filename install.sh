@@ -72,24 +72,25 @@ function check_dependencies() {
 }
 
 function get_fnm_url() {
-latest_url='https://github.com/Schniz/fnm/releases/latest/download'
+  latest_url='https://github.com/Schniz/fnm/releases/latest/download'
 
-if [[ "$(uname -s)" == *Linux* ]]; then
-  case "$(uname -m)" in
-    arm | armv7*)
-      URL="$latest_url/fnm-arm32.zip"
-      ;;
-    aarch* | armv8*)
-      URL="$latest_url/fnm-arm64.zip"
-      ;;
-    *)
-      URL="$latest_url/fnm-linux.zip"
-  esac
-fi
+  if [[ "$(uname -s)" == *Linux* ]]; then
+    case "$(uname -m)" in
+      arm | armv7*)
+        URL="$latest_url/fnm-arm32.zip"
+        ;;
+      aarch* | armv8*)
+        URL="$latest_url/fnm-arm64.zip"
+        ;;
+      *)
+        URL="$latest_url/fnm-linux.zip"
+        ;;
+    esac
+  fi
 
-if [[ "$(uname -s)" == *Darwin* ]]; then
-  USE_HOMEBREW="true"
-fi
+  if [[ "$(uname -s)" == *Darwin* ]]; then
+    USE_HOMEBREW="true"
+  fi
 }
 
 function install_fnm() {
@@ -126,7 +127,7 @@ function install_fnm() {
 
     chmod +x "$INSTALL_DIR/fnm"
 
-    if ! ( echo "$PATH" | grep -q '/.local/bin:' ); then
+    if ! (echo "$PATH" | grep -q '/.local/bin:'); then
       export PATH=$INSTALL_DIR:$PATH
     fi
 
@@ -154,11 +155,11 @@ fnm install --lts && fnm use 'lts/*'
 step "Install global node modules..."
 
 export npm_config_cache="$HOME/.cache/npm"
+npm update --location=global
 corepack enable
-npm install -gq npm@latest
-npm install -gq @bitwarden/cli pm2
+npm install@bitwarden/cli pm2 --location=global
 
-success "${color6}fnm${reset}, ${color6}node${reset}, ${color6}bitwarden${reset}, and ${color6}pm2${reset} already installed!"
+success "${color6}fnm${reset}, ${color6}node${reset}, and ${color6}npm packages${reset} already installed!"
 
 #========================#
 #    Login bitwarden     #
