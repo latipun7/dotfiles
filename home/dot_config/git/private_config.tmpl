@@ -5,7 +5,7 @@
 [credential]
 {{- if eq .chezmoi.os "linux" -}}
 {{-   if .is_server }}
-  helper = 'cache --timeout 18000'
+  helper = cache --timeout=86400
 {{-   else }}
   helper = libsecret
 {{-   end }}
