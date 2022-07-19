@@ -23,6 +23,11 @@
   url: https://github.com/catppuccin/sublime-text/raw/main/Catppuccin.tmTheme
   refreshPeriod: 168h
 
+.config/bpytop/themes/catppuccin-mocha.theme:
+  type: file
+  url: https://github.com/catppuccin/btop/raw/main/catppuccin_mocha.theme
+  refreshPeriod: 168h
+
 .local/share/mc/skins/dracula.ini:
   type: file
   url: https://raw.github.com/dracula/midnight-commander/master/skins/dracula.ini
