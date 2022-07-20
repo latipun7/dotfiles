@@ -6,17 +6,16 @@ vim.lsp.set_log_level("trace")
 lvim.transparent_window = true
 
 -- LunarVim builtin configs
-lvim.colorscheme = "lll"
+lvim.colorscheme = "catppuccin"
 lvim.builtin.notify.active = true
-lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.terminal.active = true
 lvim.builtin.alpha.mode = "custom"
-lvim.builtin.bufferline.options.mode = "buffers"
 lvim.builtin.bufferline.options.sort_by = "insert_after_current"
 
 local alpha_opts = require("latipun.plugins.alpha-dashboard").config()
 lvim.builtin.alpha["custom"] = { config = alpha_opts }
 
+lvim.builtin.treesitter.highlight.enabled = true
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
   "c",
@@ -30,12 +29,6 @@ lvim.builtin.treesitter.ensure_installed = {
   "rust",
   "yaml",
 }
-lvim.builtin.treesitter.highlight.enabled = true
-
-lvim.builtin.telescope.defaults.file_ignore_patterns = {
-  ".git",
-  "node_modules",
-}
 
 lvim.builtin.project.detection_methods = { "pattern" }
 lvim.builtin.project.show_hidden = true
@@ -48,6 +41,11 @@ lvim.builtin.project.patterns = {
   "_darcs",
   "Makefile",
   "package.json",
+}
+
+lvim.builtin.telescope.defaults.file_ignore_patterns = {
+  ".git",
+  "node_modules",
 }
 
 -- LSP
