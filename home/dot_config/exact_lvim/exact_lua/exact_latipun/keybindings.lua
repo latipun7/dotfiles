@@ -4,15 +4,15 @@ local expr_opts = { noremap = true, expr = true }
 M.set_terminal_keymaps = function()
   local opts = { noremap = true }
   vim.api.nvim_buf_set_keymap(0, "t", "<esc>", [[<C-\><C-n>]], opts)
-  vim.api.nvim_buf_set_keymap(0, "t", "<C-h>", [[<C-\><C-n><C-W>h]], opts)
-  vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", [[<C-\><C-n><C-W>j]], opts)
-  vim.api.nvim_buf_set_keymap(0, "t", "<C-k>", [[<C-\><C-n><C-W>k]], opts)
-  vim.api.nvim_buf_set_keymap(0, "t", "<C-l>", [[<C-\><C-n><C-W>l]], opts)
+  vim.api.nvim_buf_set_keymap(0, "t", "<C-h>", "<Nop>", opts)
+  vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", "<Nop>", opts)
+  vim.api.nvim_buf_set_keymap(0, "t", "<C-k>", "<Nop>", opts)
+  vim.api.nvim_buf_set_keymap(0, "t", "<C-l>", "<Nop>", opts)
 end
 
 M.set_hop_keymaps = function()
   local opts = { noremap = true, silent = true }
-  vim.api.nvim_set_keymap("n", "S", ":HopChar2MW<cr>", opts)
+  vim.api.nvim_set_keymap("n", "S", ":HopChar1MW<cr>", opts)
   vim.api.nvim_set_keymap("n", "s", ":HopWordMW<cr>", opts)
   vim.api.nvim_set_keymap(
     "",
@@ -27,27 +27,15 @@ M.set_hop_keymaps = function()
     {}
   )
   vim.api.nvim_set_keymap(
-    "o",
-    "f",
-    "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, inclusive_jump = true })<cr>",
-    {}
-  )
-  vim.api.nvim_set_keymap(
-    "o",
-    "F",
-    "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, inclusive_jump = true })<cr>",
-    {}
-  )
-  vim.api.nvim_set_keymap(
     "",
     "t",
-    "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>",
+    "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<cr>",
     {}
   )
   vim.api.nvim_set_keymap(
     "",
     "T",
-    "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>",
+    "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<cr>",
     {}
   )
 end
@@ -78,7 +66,8 @@ M.config = function()
   lvim.keys.visual_mode["<A-k>"] = ":m .-2<CR>gv"
 
   -- WhichKey
-  lvim.builtin.which_key.mappings["t"] = { "<cmd>set list!<CR>", "Toggle List" }
+  lvim.builtin.which_key.mappings["t"] =
+    { "<cmd>set list!<CR>", "Toggle hidden characters" }
   lvim.builtin.which_key.mappings["g"]["d"] = {
     "<cmd>DiffviewOpen<cr>",
     "Diffview: diff HEAD",

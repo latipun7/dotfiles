@@ -78,7 +78,7 @@ M.config = function()
 
     dashboard_button.opts.hl_shortcut = "Number"
     dashboard_button.opts.hl = "Function"
-    dashboard_button.opts.width = 24
+    dashboard_button.opts.width = 33
 
     return dashboard_button
   end
@@ -95,8 +95,13 @@ M.config = function()
       ":ene <BAR> startinsert <CR>"
     ),
     button(
+      "l",
+      " " .. kind.icons.magic .. " Restore Last Session",
+      ":lua require('persistence').load({ last = true })<cr>"
+    ),
+    button(
       "s",
-      " " .. kind.icons.magic .. " Restore Session",
+      " " .. kind.icons.magic .. " Restore Directory Session",
       ":lua require('persistence').load()<cr>"
     ),
     button(

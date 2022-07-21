@@ -1,18 +1,18 @@
 -- general configs
 require("latipun.options").config()
+
+lvim.log.level = "warn"
 lvim.format_on_save = true
-lvim.log.level = "trace"
-vim.lsp.set_log_level("trace")
 lvim.transparent_window = true
 
 -- LunarVim builtin configs
 lvim.colorscheme = "catppuccin"
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
-lvim.builtin.alpha.mode = "custom"
 lvim.builtin.bufferline.options.sort_by = "insert_after_current"
 
 local alpha_opts = require("latipun.plugins.alpha-dashboard").config()
+lvim.builtin.alpha.mode = "custom"
 lvim.builtin.alpha["custom"] = { config = alpha_opts }
 
 lvim.builtin.treesitter.highlight.enabled = true
