@@ -88,6 +88,20 @@ if hash nnn 2>/dev/null; then
   compdef _nnn n
 fi
 
+# lazygit alias
+if hash lazygit 2>/dev/null; then
+  function lg() {
+    export LAZYGIT_NEW_DIR_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/lazygit/newdir"
+
+    lazygit "$@"
+
+    if [ -f $LAZYGIT_NEW_DIR_FILE ]; then
+      cd "$(cat $LAZYGIT_NEW_DIR_FILE)"
+      rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
+    fi
+  }
+fi
+
 # bitwarden alias
 if hash bw 2>/dev/null; then
   alias bw-login='eval "$(bw login | grep -oE --color=never "(export BW_SESSION=".+")")"'
