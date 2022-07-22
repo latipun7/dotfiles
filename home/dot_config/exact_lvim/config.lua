@@ -56,6 +56,18 @@ vim.list_extend(
   { "sumneko_lua" }
 )
 
+local formatters = require("lvim.lsp.null-ls.formatters")
+formatters.setup({
+  { name = "prettier" },
+  { command = "shfmt", args = { "-i", "2", "-ci" } },
+})
+
+local linters = require("lvim.lsp.null-ls.linters")
+linters.setup({
+  { name = "eslint" },
+  { name = "shellcheck" },
+})
+
 -- Plugins
 require("latipun.plugins").config()
 
