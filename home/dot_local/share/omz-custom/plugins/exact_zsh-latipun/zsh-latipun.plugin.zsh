@@ -112,5 +112,14 @@ fi
 # ░█▀▄░█▀▀░░█░░█▀▄░░█░░█░█░█░█░▀▀█
 # ░▀░▀░▀▀▀░░▀░░▀▀░░▀▀▀░▀░▀░▀▀░░▀▀▀
 
+# https://unix.stackexchange.com/questions/517025/zsh-clear-scrollback-buffer
+function clear-scrollback-buffer {
+  clear && printf '\e[3J'
+  zle && zle .reset-prompt && zle -R
+}
+
+zle -N clear-scrollback-buffer
+bindkey '^K' clear-scrollback-buffer
+
 # C-backspace to delete previous word
 bindkey '^H' backward-kill-word
