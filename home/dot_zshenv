@@ -91,13 +91,26 @@ fi
 
 # `nnn` configs
 if hash nnn 2>/dev/null; then
+  # Using terminal colors (catppuccin mocha)
+  BLK="03" CHR="03" DIR="04" EXE="02" REG="07" HARDLINK="05" SYMLINK="05"
+  MISSING="08" ORPHAN="01" FIFO="06" SOCK="03" UNKNOWN="01"
+
+  export NNN_COLORS="#04020301;4231"
+  export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$UNKNOWN"
   export NNN_OPTS="aeEUHx"
   export NNN_ARCHIVE="\\.(7z|a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|gz|jar|lha|lz|lzh|lzma|lzo|rar|rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z|zip)$"
-  export NNN_COLORS='6541'
-  export NNN_FCOLORS='76bed530004b7bd245d7c8c4'
   export NNN_BMS="e:/etc;s:/usr/share;c:$XDG_CONFIG_HOME;h:$XDG_DATA_HOME/chezmoi"
   export NNN_PLUG='p:preview-tui;o:fzopen;e:suedit;u:getplugs'
   export NNN_TRASH=2
+fi
+
+# fzf configs
+if hash fzf 2>/dev/null; then
+  # catppuccin mocha colors
+  export FZF_DEFAULT_OPTS=" \
+    --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+    --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+    --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
 fi
 
 # Rust
