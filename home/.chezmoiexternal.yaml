@@ -66,6 +66,13 @@
   stripComponents: 1
   refreshPeriod: 168h
 
+.local/share/omz-custom/plugins/zsh-autocomplete:
+  type: archive
+  url: https://api.github.com/repos/marlonrichert/zsh-autocomplete/tarball
+  exact: true
+  stripComponents: 1
+  refreshPeriod: 168h
+
 {{    if not .is_server -}}
 # ╺┳┓┏━╸┏━┓╻┏ ╺┳╸┏━┓┏━┓   ┏━┓┏┓╻╻  ╻ ╻
 #  ┃┃┣╸ ┗━┓┣┻┓ ┃ ┃ ┃┣━┛   ┃ ┃┃┗┫┃  ┗┳┛

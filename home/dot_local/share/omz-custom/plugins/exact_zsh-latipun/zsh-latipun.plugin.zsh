@@ -8,6 +8,11 @@ umask 022
 # activate node
 [[ "$(type node)" == *function* ]] && node -v &>/dev/null
 
+# activate zoxide
+if hash zoxide 2>/dev/null; then
+  eval "$(zoxide init zsh)"
+fi
+
 # ░█▀█░█░░░▀█▀░█▀█░█▀▀░█▀▀░█▀▀
 # ░█▀█░█░░░░█░░█▀█░▀▀█░█▀▀░▀▀█
 # ░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀░▀▀▀
@@ -20,6 +25,9 @@ alias grao='git remote add origin'
 alias grau='git remote add upstream'
 alias grsh='git remote show'
 alias gruh='git reset --hard upstream/$(git_current_branch)'
+
+alias v='$VISUAL'
+alias cm=chezmoi
 
 # paru alias
 if hash paru 2>/dev/null; then
@@ -56,9 +64,6 @@ if hash bat 2>/dev/null; then
   }
   compdef _journalctl catjournal
 fi
-
-# editor alias
-alias v='$VISUAL'
 
 # kitens alias
 if hash kitty 2>/dev/null; then

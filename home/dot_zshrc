@@ -72,6 +72,11 @@ HIST_STAMPS="yyyy-mm-dd"
 # Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM="${XDG_DATA_HOME:-$HOME/.local/share}/omz-custom"
 
+# zsh-autocomplete configs
+zstyle ':autocomplete:*' min-input 1
+zstyle ':autocomplete:*' fzf-completion yes
+zstyle ':autocomplete:*' ignored-input '(\*\*|..)'
+
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -84,6 +89,7 @@ plugins=(
   sudo
   tmux
   zsh-autosuggestions
+  zsh-autocomplete
   zsh-latipun
   zsh-syntax-highlighting # need to load last
 )
