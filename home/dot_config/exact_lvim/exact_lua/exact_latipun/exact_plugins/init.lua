@@ -69,9 +69,9 @@ M.config = function()
         })
       end,
     },
-    { "editorconfig/editorconfig-vim", event = "BufRead" },
     { "tpope/vim-surround", event = "BufRead" },
     { "tpope/vim-repeat", after = "vim-surround" },
+    { "gpanders/editorconfig.nvim" },
     { "wakatime/vim-wakatime" },
   }
 end

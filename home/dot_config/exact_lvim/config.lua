@@ -43,11 +43,6 @@ lvim.builtin.project.patterns = {
   "package.json",
 }
 
-lvim.builtin.telescope.defaults.file_ignore_patterns = {
-  ".git",
-  "node_modules",
-}
-
 -- LSP
 lvim.lsp.automatic_servers_installation = true
 lvim.lsp.diagnostics.virtual_text = false

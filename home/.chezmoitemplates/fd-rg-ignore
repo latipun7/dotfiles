@@ -1,0 +1,18 @@
+{{ template "ignore" }}
+
+.git/
+
+.cache/
+!.cache/yay/
+!.cache/paru/
+
+.local/share/cargo
+.local/share/go
+.local/share/yarn
+
+Trash*/
+
+node_modules/
+dist/
+out/
+.next/
