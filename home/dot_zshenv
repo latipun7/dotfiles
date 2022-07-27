@@ -100,7 +100,7 @@ if hash nnn 2>/dev/null; then
   export NNN_OPTS="aeEUHx"
   export NNN_ARCHIVE="\\.(7z|a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|gz|jar|lha|lz|lzh|lzma|lzo|rar|rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z|zip)$"
   export NNN_BMS="e:/etc;s:/usr/share;c:$XDG_CONFIG_HOME;h:$XDG_DATA_HOME/chezmoi"
-  export NNN_PLUG='p:preview-tui;o:fzopen;e:suedit;u:getplugs'
+  export NNN_PLUG='p:preview-tui;o:fzopen;e:suedit;u:getplugs;z:autojump'
   export NNN_TRASH=2
 fi
 
