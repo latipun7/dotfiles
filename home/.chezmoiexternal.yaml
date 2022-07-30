@@ -122,7 +122,7 @@ www/adminer/adminer.php:
 
 www/adminer/adminer.css:
   type: file
-  url: https://raw.githubusercontent.com/vrana/adminer/master/designs/dracula/adminer.css
+  url: https://raw.githubusercontent.com/Niyko/Hydra-Dark-Theme-for-Adminer/master/adminer.css
   refreshPeriod: 744h
 
 www/adminer/plugins:

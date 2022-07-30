@@ -21,7 +21,7 @@ function adminer_object() {
         new AdminerForeignSystem(),
         new AdminerEnumOption(),
         new AdminerEnumTypes(),
-        new AdminerPrettyJsonColumn(),
+        new AdminerJsonColumn(),
     );
 
     /* It is possible to combine customization and plugins:
