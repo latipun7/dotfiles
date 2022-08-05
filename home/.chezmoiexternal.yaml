@@ -18,10 +18,12 @@
     command: gzip
     args: ["--decompress", "--to-stdout", "--suffix", ".zip"]
 
-.config/bat/themes/catppuccin.tmTheme:
-  type: file
-  url: https://github.com/catppuccin/sublime-text/raw/main/Catppuccin.tmTheme
+.config/bat/themes:
+  type: archive
+  url: https://api.github.com/repos/catppuccin/bat/tarball
+  stripComponents: 1
   refreshPeriod: 168h
+  include: ["*/*.tmTheme"]
 
 .config/bpytop/themes/catppuccin-mocha.theme:
   type: file
