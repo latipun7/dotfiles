@@ -90,14 +90,16 @@
   url: https://github.com/folke/tokyonight.nvim/raw/main/extras/kitty_tokyonight_storm.conf
   refreshPeriod: 168h
 
-.config/kitty/themes/catppuccin.conf:
-  type: file
-  url: https://github.com/catppuccin/kitty/raw/main/catppuccin.conf
+.config/kitty/themes/catppuccin:
+  type: archive
+  url: https://api.github.com/repos/catppuccin/kitty/tarball
   refreshPeriod: 168h
+  stripComponents: 1
+  include: ["*/*.conf"]
 
 .local/share/fcitx5/themes/Catppuccin:
   type: archive
-  url: "https://api.github.com/repos/catppuccin/fcitx5/tarball"
+  url: https://api.github.com/repos/catppuccin/fcitx5/tarball
   refreshPeriod: 744h
   stripComponents: 2
   include: ["*", "*/Catppuccin", "*/Catppuccin/*"]
