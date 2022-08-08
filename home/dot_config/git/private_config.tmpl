@@ -3,7 +3,7 @@
 # https://git-scm.com/docs/git-config/
 
 [credential]
-{{- if eq .chezmoi.os "linux" -}}
+{{- if (or (eq .chezmoi.os "linux") (eq .chezmoi.os "android")) -}}
 {{-   if .is_server }}
   helper = cache --timeout=86400
 {{-   else }}
