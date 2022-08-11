@@ -1,5 +1,4 @@
 # -*-zsh-*- vim:ft=zsh
-# code:language=shellscript
 
 source "$HOME/.local/bin/_functions"
 
@@ -54,11 +53,11 @@ fi
 
 # Editor
 if hash code 2>/dev/null; then
-  export VISUAL="code --wait"
-  export EDITOR="code --wait"
+  export VISUAL=code
+  export EDITOR=code
 elif [[ "${TERM_PROGRAM:-tty}" == *vscode* ]]; then
-  export VISUAL="code --wait"
-  export EDITOR="code --wait"
+  export VISUAL=code
+  export EDITOR=code
 elif hash lvim 2>/dev/null; then
   export VISUAL=lvim
   export EDITOR=lvim

@@ -1,5 +1,3 @@
-{{- /* -*-go-*- vim:syntax=go */ -}}
-
 {{- $output := "" -}}
 {{- $repo := index . 0 -}}
 {{- $os := index . 1 -}}

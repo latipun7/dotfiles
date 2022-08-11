@@ -1,7 +1,5 @@
 {{ if ne .chezmoi.os "windows" -}}
 #!/usr/bin/env bash
-# -*-bash-*- vim:syntax=bash
-# code:language=shellscript
 
 # Install `oh-my-zsh`
 
@@ -9,7 +7,7 @@ set -euo pipefail
 
 {{ template "functions-bin" }}
 
-ZSH="${XDG_DATA_HOME:-$HOME/.local/share}/oh-my-zsh" 
+ZSH="${XDG_DATA_HOME:-$HOME/.local/share}/oh-my-zsh"
 
 if [ ! -d "$ZSH" ]; then
   step "Install ${color6}oh-my-zsh${reset}"

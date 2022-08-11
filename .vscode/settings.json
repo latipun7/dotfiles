@@ -1,0 +1,18 @@
+{
+  "files.associations": {
+    "dot_zshrc": "shellscript",
+    "dot_zshenv": "shellscript",
+    "dot_zlogin": "shellscript",
+    "fd-rg-ignore": "gotemplate",
+    "fnm-download-url": "gotemplate",
+    "functions-bin": "shellscript",
+    "github-latest-tag": "gotemplate",
+    "godns-download-url": "gotemplate",
+    "ignore": "ignore",
+    "config": "properties",
+    "bpytop.conf": "properties",
+    "dot_editorconfig": "editorconfig",
+    "kitty.conf": "properties",
+    ".chezmoiignore": "gotemplate"
+  }
+}

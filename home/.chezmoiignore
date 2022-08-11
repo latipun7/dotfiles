@@ -1,5 +1,3 @@
-# -*-ignore-*- vim:syntax=conf
-
 # NOTE: waiting for chezmoi to leverage .gitignore from archives:
 # https://github.com/twpayne/chezmoi/issues/1421#issuecomment-964473844
 # p10k

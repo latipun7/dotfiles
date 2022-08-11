@@ -1,5 +1,3 @@
-{{- /* -*-go-*- vim:syntax=go */ -}}
-
 {{- $url := `https://github.com/Schniz/fnm/releases/latest/download/` -}}
 
 {{- if (or (eq .chezmoi.os "linux") (eq .chezmoi.os "android")) -}}
