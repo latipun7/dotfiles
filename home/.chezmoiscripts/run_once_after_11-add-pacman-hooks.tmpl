@@ -1,4 +1,6 @@
 {{ if ne .chezmoi.os "windows" -}}
+{{   $pacman := lookPath "pacman" -}}
+{{   if $pacman -}}
 #!/usr/bin/env bash
 
 # Install Pacman Hooks
@@ -7,7 +9,6 @@ set -euo pipefail
 
 {{ template "functions-bin" }}
 
-if hash pacman &>/dev/null; then
 sudo tee /usr/share/libalpm/hooks/cacheremove.hook > /dev/null << EOL
 [Trigger]
 Operation = Remove
@@ -35,5 +36,5 @@ Depends = pacman-contrib
 EOL
 
 success "${color6}pacman hooks${reset} successfully installed!"
-fi
+{{-   end }}
 {{- end }}

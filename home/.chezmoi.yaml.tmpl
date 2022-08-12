@@ -1,5 +1,5 @@
-{{ $email := promptString "Email address" "latifsulistyo.me@gmail.com" -}}
-{{ $name := promptString "Full name" "Latif Sulistyo" -}}
+{{ $email := promptStringOnce . "email" "Email address" "latifsulistyo.me@gmail.com" -}}
+{{ $name := promptStringOnce . "name" "Full name" "Latif Sulistyo" -}}
 
 {{ $isServer := false -}}
 
