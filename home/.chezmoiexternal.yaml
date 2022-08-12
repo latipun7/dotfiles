@@ -30,16 +30,6 @@
   url: https://github.com/catppuccin/btop/raw/main/catppuccin_mocha.theme
   refreshPeriod: 168h
 
-.local/share/mc/skins/dracula.ini:
-  type: file
-  url: https://raw.github.com/dracula/midnight-commander/master/skins/dracula.ini
-  refreshPeriod: 168h
-
-.local/share/mc/skins/dracula256.ini:
-  type: file
-  url: https://raw.github.com/dracula/midnight-commander/master/skins/dracula256.ini
-  refreshPeriod: 168h
-
 .local/share/omz-custom/themes/powerlevel10k:
   type: archive
   url: https://api.github.com/repos/romkatv/powerlevel10k/tarball/{{ (gitHubLatestRelease "romkatv/powerlevel10k").TagName }}
@@ -80,29 +70,19 @@
 #  ┃┃┣╸ ┗━┓┣┻┓ ┃ ┃ ┃┣━┛   ┃ ┃┃┗┫┃  ┗┳┛
 # ╺┻┛┗━╸┗━┛╹ ╹ ╹ ┗━┛╹     ┗━┛╹ ╹┗━╸ ╹
 
-.config/kitty/themes/dracula.conf:
-  type: file
-  url: https://github.com/dracula/kitty/raw/master/dracula.conf
-  refreshPeriod: 168h
-
-.config/kitty/themes/tokyonight.conf:
-  type: file
-  url: https://github.com/folke/tokyonight.nvim/raw/main/extras/kitty_tokyonight_storm.conf
-  refreshPeriod: 168h
-
 .config/kitty/themes/catppuccin:
   type: archive
   url: https://api.github.com/repos/catppuccin/kitty/tarball
-  refreshPeriod: 168h
   stripComponents: 1
+  refreshPeriod: 168h
   include: ["*/*.conf"]
 
-.local/share/fcitx5/themes/Catppuccin:
+.local/share/fcitx5/themes: # Catppuccin
   type: archive
   url: https://api.github.com/repos/catppuccin/fcitx5/tarball
+  stripComponents: 1
   refreshPeriod: 744h
-  stripComponents: 2
-  include: ["*", "*/Catppuccin", "*/Catppuccin/*"]
+  include: ["*/Catppuccin/**"]
 {{-   end }}
 
 {{    if .is_server -}}
@@ -129,12 +109,12 @@ www/adminer/adminer.css:
   url: https://raw.githubusercontent.com/Niyko/Hydra-Dark-Theme-for-Adminer/master/adminer.css
   refreshPeriod: 744h
 
-www/adminer/plugins:
+www/adminer: # plugins
   type: archive
   url: "https://api.github.com/repos/vrana/adminer/tarball"
+  stripComponents: 1
   refreshPeriod: 744h
-  stripComponents: 2
-  include: ["*", "*/plugins", "*/plugins/*.php", "*/plugins/drivers", "*/plugins/drivers/*.php"]
+  include: ["*/plugins/**"]
 {{-   end }}
 {{- end }}
 
