@@ -42,7 +42,7 @@
 
 .local/share/omz-custom/themes/powerlevel10k:
   type: archive
-  url: https://api.github.com/repos/romkatv/powerlevel10k/tarball/v{{ template "github-latest-tag" list "romkatv/powerlevel10k" .chezmoi.os }}
+  url: https://api.github.com/repos/romkatv/powerlevel10k/tarball/{{ (gitHubLatestRelease "romkatv/powerlevel10k").TagName }}
   exact: true
   stripComponents: 1
   refreshPeriod: 168h

@@ -6,7 +6,6 @@
     "fd-rg-ignore": "gotemplate",
     "fnm-download-url": "gotemplate",
     "functions-bin": "shellscript",
-    "github-latest-tag": "gotemplate",
     "godns-download-url": "gotemplate",
     "ignore": "ignore",
     "config": "properties",

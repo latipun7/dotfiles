@@ -1,26 +1,17 @@
 {{- $url := `https://github.com/TimothyYe/godns/releases/latest/download/` -}}
+{{- $tag := (gitHubLatestRelease "TimothyYe/godns").TagName | trimPrefix "v" }}
 {{- $os := .chezmoi.os -}}
 
 {{- if eq $os "linux" -}}
 {{-   if eq .chezmoi.arch "arm" -}}
-{{-     list $url "godns_" | join "" -}}
-{{-     template "github-latest-tag" list "TimothyYe/godns" $os -}}
-{{-     `_Linux_armv6.tar.gz` -}}
+{{-     list $url "godns_" $tag "_Linux_armv6.tar.gz" | join "" -}}
 {{-   else if eq .chezmoi.arch "arm64" -}}
-{{-     list $url "godns_" | join "" -}}
-{{-     template "github-latest-tag" list "TimothyYe/godns" $os -}}
-{{-     `_Linux_arm64.tar.gz` -}}
+{{-     list $url "godns_" $tag "_Linux_arm64.tar.gz" | join "" -}}
 {{-   else -}}
-{{-     list $url "godns_" | join "" -}}
-{{-     template "github-latest-tag" list "TimothyYe/godns" $os -}}
-{{-     `_Linux_x86_64.tar.gz` -}}
+{{-     list $url "godns_" $tag "_Linux_x86_64.tar.gz" | join "" -}}
 {{-   end -}}
 {{- else if $os "windows" -}}
-{{-   list $url "godns_" | join "" -}}
-{{-   template "github-latest-tag" list "TimothyYe/godns" $os -}}
-{{-   `_Windows_x86_64.tar.gz` -}}
+{{-   list $url "godns_" $tag "_Windows_x86_64.tar.gz" | join "" -}}
 {{- else -}}
-{{-   list $url "godns_" | join "" -}}
-{{-   template "github-latest-tag" list "TimothyYe/godns" $os -}}
-{{-   `_Darwin_x86_64.tar.gz` -}}
+{{-   list $url "godns_" $tag "_Darwin_x86_64.tar.gz" | join "" -}}
 {{- end -}}
