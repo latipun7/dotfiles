@@ -71,6 +71,7 @@ M.config = function()
     },
     { "tpope/vim-surround", event = "BufRead" },
     { "tpope/vim-repeat", after = "vim-surround" },
+    { "alker0/chezmoi.vim" },
     { "gpanders/editorconfig.nvim" },
     { "wakatime/vim-wakatime" },
   }

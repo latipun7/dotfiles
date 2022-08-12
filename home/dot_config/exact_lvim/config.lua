@@ -13,20 +13,23 @@ lvim.builtin.bufferline.options.sort_by = "insert_after_current"
 
 local alpha_opts = require("latipun.plugins.alpha-dashboard").config()
 lvim.builtin.alpha.mode = "custom"
-lvim.builtin.alpha["custom"] = { config = alpha_opts }
+lvim.builtin.alpha.custom = { config = alpha_opts }
 
+lvim.builtin.treesitter.auto_install = true
 lvim.builtin.treesitter.highlight.enabled = true
+lvim.builtin.treesitter.highlight.additional_vim_regex_highlighting = { "yaml" }
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
-  "c",
+  "comment",
+  "css",
+  "html",
   "javascript",
   "json",
   "lua",
-  "python",
-  "typescript",
+  "markdown",
+  "markdown_inline",
   "tsx",
-  "css",
-  "rust",
+  "typescript",
   "yaml",
 }
 

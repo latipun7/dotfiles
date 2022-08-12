@@ -1,3 +1,4 @@
+# -*-sh-*- vim:ft=sh
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 # shellcheck shell=bash

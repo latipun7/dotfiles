@@ -4,7 +4,7 @@ M.config = function()
   require("filetype").setup({
     overrides = {
       literal = {
-        ["kitty.conf"] = "kitty",
+        ["dot_editorconfig"] = "dosini",
         [".gitignore"] = "conf",
       },
       complex = {
