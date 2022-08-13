@@ -91,18 +91,11 @@ local luadev = lua_dev.setup({
   },
 })
 
-local servers = require("nvim-lsp-installer.servers")
 local lsp_manager = require("lvim.lsp.manager")
-local server_available, requested_server = servers.get_server("sumneko_lua")
 local formatters = require("lvim.lsp.null-ls.formatters")
 local server_opts
 
-if server_available then
-  luadev.cmd_env = requested_server:get_default_options().cmd_env
-  lspconfig_opts.cmd_env = requested_server:get_default_options().cmd_env
-end
-
-formatters.setup({ { exe = "stylua", filetypes = { "lua" } } })
+formatters.setup({ { name = "stylua" } })
 
 local config_dir = get_config_dir()
 local current_dir = string.sub(file_name, 1, string.len(config_dir))

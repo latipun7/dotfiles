@@ -47,7 +47,6 @@ lvim.builtin.project.patterns = {
 }
 
 -- LSP
-lvim.lsp.automatic_servers_installation = true
 lvim.lsp.diagnostics.virtual_text = false
 vim.list_extend(
   lvim.lsp.automatic_configuration.skipped_servers,
