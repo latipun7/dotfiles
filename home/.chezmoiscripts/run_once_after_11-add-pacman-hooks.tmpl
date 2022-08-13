@@ -1,7 +1,7 @@
 {{ if ne .chezmoi.os "windows" -}}
 {{   $pacman := lookPath "pacman" -}}
 {{   if $pacman -}}
-#!/usr/bin/env bash
+#!{{ lookPath "bash" }}
 
 # Install Pacman Hooks
 
