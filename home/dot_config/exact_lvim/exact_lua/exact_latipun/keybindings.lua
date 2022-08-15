@@ -3,49 +3,20 @@ local expr_opts = { noremap = true, expr = true }
 
 M.set_terminal_keymaps = function()
   local opts = { noremap = true }
-  vim.api.nvim_buf_set_keymap(0, "t", "<esc>", [[<C-\><C-n>]], opts)
+
+  vim.api.nvim_buf_set_keymap(0, "t", "<Esc>", [[<C-\><C-n>]], opts)
   vim.api.nvim_buf_set_keymap(0, "t", "<C-h>", "<Nop>", opts)
   vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", "<Nop>", opts)
   vim.api.nvim_buf_set_keymap(0, "t", "<C-k>", "<Nop>", opts)
   vim.api.nvim_buf_set_keymap(0, "t", "<C-l>", "<Nop>", opts)
 end
 
-M.set_hop_keymaps = function()
-  local opts = { noremap = true, silent = true }
-  vim.api.nvim_set_keymap("n", "S", ":HopChar1MW<cr>", opts)
-  vim.api.nvim_set_keymap("n", "s", ":HopWordMW<cr>", opts)
-  vim.api.nvim_set_keymap(
-    "",
-    "f",
-    "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>",
-    {}
-  )
-  vim.api.nvim_set_keymap(
-    "",
-    "F",
-    "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>",
-    {}
-  )
-  vim.api.nvim_set_keymap(
-    "",
-    "t",
-    "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<cr>",
-    {}
-  )
-  vim.api.nvim_set_keymap(
-    "",
-    "T",
-    "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<cr>",
-    {}
-  )
-end
-
 M.config = function()
-  -- keymappings [view all the defaults by pressing <leader>Lk]
+  -- keymappings [view all the defaults by pressing <Leader>Lk]
   lvim.leader = "space"
 
   -- add keymapping
-  lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+  lvim.keys.normal_mode["<C-s>"] = ":w<CR>"
 
   -- Move virtual lines (lines that wrap)
   lvim.keys.normal_mode["j"] = { [[v:count == 0 ? "gj" : "j"]], expr_opts }
@@ -67,17 +38,9 @@ M.config = function()
 
   -- WhichKey
   lvim.builtin.which_key.mappings["t"] =
-    { "<cmd>set list!<CR>", "Toggle hidden characters" }
-  lvim.builtin.which_key.mappings["g"]["d"] = {
-    "<cmd>DiffviewOpen<cr>",
-    "Diffview: diff HEAD",
-  }
-  lvim.builtin.which_key.mappings["gh"] = {
-    "<cmd>DiffviewFileHistory<cr>",
-    "Diffview: diff history",
-  }
-  lvim.builtin.which_key.mappings["gg"] = {
-    ":lua require('lvim.core.terminal')._exec_toggle({cmd = 'lazygit', count = 1, direction = 'float'})<CR>",
+    { "<Cmd>set list!<CR>", "Toggle hidden characters" }
+  lvim.builtin.which_key.mappings["g"]["g"] = {
+    "<Cmd>lua require('lvim.core.terminal')._exec_toggle({cmd = 'lazygit', count = 1, direction = 'float'})<CR>",
     "LazyGit Dashboard",
   }
 end

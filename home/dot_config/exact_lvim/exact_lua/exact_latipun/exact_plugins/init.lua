@@ -21,10 +21,10 @@ M.config = function()
     },
     {
       "norcalli/nvim-colorizer.lua",
+      event = "BufRead",
       config = function()
         require("latipun.plugins.colorizer").config()
       end,
-      event = "BufRead",
     },
     {
       "andweeb/presence.nvim",
@@ -42,10 +42,10 @@ M.config = function()
     },
     {
       "stevearc/dressing.nvim",
+      event = "BufWinEnter",
       config = function()
         require("latipun.plugins.dressing").config()
       end,
-      event = "BufWinEnter",
     },
     {
       "nathom/filetype.nvim",
@@ -55,22 +55,47 @@ M.config = function()
     },
     {
       "sindrets/diffview.nvim",
-      opt = true,
       cmd = { "DiffviewOpen", "DiffviewFileHistory" },
+      keys = { "<Leader>gd", "<Leader>gh" },
       module = "diffview",
-      keys = "<leader>gd",
+      setup = function()
+        require("latipun.plugins.diffview").keybindings()
+      end,
       config = function()
-        require("diffview").setup({
-          enhanced_diff_hl = true,
-          key_bindings = {
-            file_panel = { q = "<Cmd>DiffviewClose<CR>" },
-            view = { q = "<Cmd>DiffviewClose<CR>" },
-          },
-        })
+        require("latipun.plugins.diffview").config()
       end,
     },
-    { "tpope/vim-surround", event = "BufRead" },
-    { "tpope/vim-repeat", after = "vim-surround" },
+    {
+      "kevinhwang91/nvim-bqf",
+      event = "BufRead",
+      tag = "*",
+      config = function()
+        require("latipun.plugins.bqf").config()
+      end,
+    },
+    {
+      "akinsho/git-conflict.nvim",
+      tag = "*",
+      config = function()
+        require("git-conflict").setup()
+      end,
+    },
+    {
+      "kylechui/nvim-surround",
+      tag = "*",
+      config = function()
+        require("nvim-surround").setup()
+      end,
+    },
+    {
+      "AckslD/nvim-neoclip.lua",
+      setup = function()
+        require("latipun.plugins.neoclip").keybindings()
+      end,
+      config = function()
+        require("latipun.plugins.neoclip").config()
+      end,
+    },
     { "alker0/chezmoi.vim" },
     { "gpanders/editorconfig.nvim" },
     { "wakatime/vim-wakatime" },
