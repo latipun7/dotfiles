@@ -8,19 +8,18 @@ M.config = function()
       as = "catppuccin",
       config = function()
         require("latipun.plugins.catppuccin").config()
-        vim.g.catppuccin_flavour = "mocha"
-        vim.cmd([[colorscheme catppuccin]])
       end,
     },
     {
       "phaazon/hop.nvim",
+      tag = "*",
       event = "BufRead",
       config = function()
         require("latipun.plugins.hop").config()
       end,
     },
     {
-      "norcalli/nvim-colorizer.lua",
+      "NvChad/nvim-colorizer.lua",
       event = "BufRead",
       config = function()
         require("latipun.plugins.colorizer").config()
@@ -33,11 +32,12 @@ M.config = function()
       end,
     },
     {
-      "folke/persistence.nvim",
-      event = "BufReadPre",
-      module = "persistence",
+      "olimorris/persisted.nvim",
+      setup = function()
+        require("latipun.plugins.persisted").keybindings()
+      end,
       config = function()
-        require("persistence").setup()
+        require("latipun.plugins.persisted").config()
       end,
     },
     {
@@ -67,8 +67,8 @@ M.config = function()
     },
     {
       "kevinhwang91/nvim-bqf",
-      event = "BufRead",
       tag = "*",
+      event = "BufRead",
       config = function()
         require("latipun.plugins.bqf").config()
       end,

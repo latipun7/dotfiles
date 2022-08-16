@@ -22,6 +22,7 @@ M.config = function()
     numberwidth = 4,
     pumheight = 10,
     relativenumber = true,
+    sessionoptions = "buffers,curdir,folds,help,tabpages,winpos,winsize",
     shiftround = true,
     shiftwidth = 2,
     showmode = false,

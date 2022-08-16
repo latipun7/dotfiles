@@ -87,39 +87,39 @@ M.config = function()
     button(
       "f",
       " " .. kind.icons.find .. " Find File",
-      ":Telescope find_files<CR>"
+      "<Cmd>Telescope find_files<CR>"
     ),
     button(
       "e",
       " " .. kind.icons.file .. " New File",
-      ":ene <BAR> startinsert <CR>"
+      "<Cmd>ene <Bar> startinsert <CR>"
     ),
     button(
       "l",
       " " .. kind.icons.magic .. " Restore Last Session",
-      ":lua require('persistence').load({ last = true })<cr>"
+      "<Cmd>lua require('persisted').load({ last = true })<CR>"
     ),
     button(
       "s",
       " " .. kind.icons.magic .. " Restore Directory Session",
-      ":lua require('persistence').load()<cr>"
+      "<Cmd>lua require('persisted').load()<CR>"
     ),
     button(
       "p",
       " " .. kind.icons.worker .. " Recent Projects",
-      ":Telescope projects<CR>"
+      "<Cmd>Telescope projects<CR>"
     ),
     button(
       "r",
       " " .. kind.icons.clock .. " Recent Files",
-      ":Telescope oldfiles<CR>"
+      "<Cmd>Telescope oldfiles<CR>"
     ),
     button(
       "c",
       " " .. kind.icons.settings .. " Edit Config File",
-      ":e " .. get_config_dir() .. "/config.lua<CR>"
+      "<Cmd>e " .. get_config_dir() .. "/config.lua<CR>"
     ),
-    button("q", " " .. kind.icons.exit .. " Quit", ":qa<CR>"),
+    button("q", " " .. kind.icons.exit .. " Quit", "<Cmd>qa<CR>"),
   }
 
   local section = {
