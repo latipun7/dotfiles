@@ -30,6 +30,12 @@
   url: https://github.com/catppuccin/btop/raw/main/catppuccin_mocha.theme
   refreshPeriod: 168h
 
+.local/share/oh-my-zsh:
+  type: git-repo
+  url: https://github.com/ohmyzsh/ohmyzsh.git
+  pull:
+    args: ["--dry-run"] # update with `omz update`
+
 .local/share/omz-custom/themes/powerlevel10k:
   type: archive
   url: https://api.github.com/repos/romkatv/powerlevel10k/tarball/{{ (gitHubLatestRelease "romkatv/powerlevel10k").TagName }}
