@@ -30,6 +30,7 @@
   url: https://github.com/catppuccin/btop/raw/main/catppuccin_mocha.theme
   refreshPeriod: 168h
 
+# Oh-My-ZSH
 .local/share/oh-my-zsh:
   type: git-repo
   url: https://github.com/ohmyzsh/ohmyzsh.git
@@ -70,6 +71,15 @@
   exact: true
   stripComponents: 1
   refreshPeriod: 168h
+
+# LunarVim
+.local/share/lunarvim/lvim:
+  type: git-repo
+  url: https://github.com/LunarVim/LunarVim.git
+  clone:
+    args: ["--branch", "rolling", "--depth", "1"]
+  pull:
+    args: ["--dry-run"] # Update via `lvim +LvimUpdate`
 
 {{    if not .is_server -}}
 # ╺┳┓┏━╸┏━┓╻┏ ╺┳╸┏━┓┏━┓   ┏━┓┏┓╻╻  ╻ ╻
