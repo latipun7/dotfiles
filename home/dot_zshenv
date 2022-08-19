@@ -31,6 +31,9 @@ export NODE_REPL_HISTORY="$XDG_DATA_HOME/node_repl_history"
 # Wakatime
 export WAKATIME_HOME="$XDG_CONFIG_HOME/wakatime"
 
+# PM2
+export PM2_HOME="$XDG_CACHE_HOME/pm2"
+
 # postgreSQL
 export PSQLRC="$XDG_CONFIG_HOME/pg/psqlrc"
 export PGPASSFILE="$XDG_CONFIG_HOME/pg/pgpass"
