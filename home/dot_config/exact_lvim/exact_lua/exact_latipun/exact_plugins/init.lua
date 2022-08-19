@@ -96,6 +96,12 @@ M.config = function()
         require("latipun.plugins.neoclip").config()
       end,
     },
+    {
+      "famiu/bufdelete.nvim",
+      setup = function()
+        require("latipun.plugins.bufdelete").keybindings()
+      end,
+    },
     { "alker0/chezmoi.vim" },
     { "gpanders/editorconfig.nvim" },
     { "wakatime/vim-wakatime" },
