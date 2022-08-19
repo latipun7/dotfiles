@@ -97,6 +97,13 @@ M.config = function()
       end,
     },
     {
+      "andymass/vim-matchup",
+      event = "BufReadPost",
+      config = function()
+        require("latipun.plugins.matchup").config()
+      end,
+    },
+    {
       "famiu/bufdelete.nvim",
       setup = function()
         require("latipun.plugins.bufdelete").keybindings()
