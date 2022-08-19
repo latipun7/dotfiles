@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2154
 
-# Install Dependencies and Dotfiles
-
 set -euo pipefail
 
 esc="\033"
@@ -53,20 +51,23 @@ function fail() {
 
 #===================================================0
 
+deps=(gzip chezmoi git wget curl tar lazygit fd rg nvim grep delta)
+
+function print_missing_dep_msg() {
+  if [ "$#" -eq 1 ]; then
+    fail "Unable to find dependency ${color6}$1${reset}.\n    Please install it first and re-run the installer."
+  fi
+  exit 1
+}
+
 function check_dependencies() {
-  step "Checking dependencies for the installation script..."
+  step "Checking dependencies..."
 
-  if ! hash curl 2>/dev/null; then
-    fail "Missing ${color6}curl${reset}!\n    Not installing due to missing dependencies."
-  fi
-
-  if ! hash gzip 2>/dev/null; then
-    fail "Missing ${color6}gzip${reset}!\n    Not installing due to missing dependencies."
-  fi
-
-  if ! hash chezmoi 2>/dev/null; then
-    fail "Missing ${color6}chezmoi${reset}!\n    Not installing due to missing dependencies."
-  fi
+  for dep in "${deps[@]}"; do
+    if ! hash "$dep" 2>/dev/null; then
+      print_missing_dep_msg "$dep"
+    fi
+  done
 
   info "OK!"
 }
@@ -96,7 +97,7 @@ function get_fnm_url() {
 function install_fnm() {
   step "Install ${color6}fnm${reset}"
 
-  if [ "${USE_HOMEBREW:-no}" = "true" ]; then
+  if [ "${USE_HOMEBREW:-false}" = "true" ]; then
     if hash brew 2>/dev/null; then
       step "Brewing ${color6}fnm${reset} ..."
       brew install fnm
@@ -104,8 +105,6 @@ function install_fnm() {
       fail "Missing ${color6}brew${reset}!\n    Not installing due to missing dependencies."
     fi
   else
-    check_dependencies
-
     DOWNLOAD_DIR="$(mktemp -dp /tmp "fnm-XXXXX")"
     INSTALL_DIR="$HOME/.local/bin"
 
@@ -139,46 +138,50 @@ function install_fnm() {
   export FNM_DIR=$DATA_DIR
 }
 
-#========================#
-#    Setup fnm & node    #
-#========================#
+function setup_fnm_node() {
+  if ! hash fnm; then
+    get_fnm_url
+    install_fnm
+  fi
 
-if ! hash fnm; then
-  get_fnm_url
-  install_fnm
-fi
-hash fnm &>/dev/null && eval "$(fnm env --use-on-cd)"
+  hash fnm &>/dev/null && eval "$(fnm env --use-on-cd)"
 
-step "Install latest LTS nodeJS..."
-fnm install --lts && fnm use 'lts/*'
+  step "Install latest LTS nodeJS..."
+  fnm install --lts && fnm use 'lts/*'
 
-step "Install global node modules..."
+  step "Install global node modules..."
 
-export npm_config_cache="$HOME/.cache/npm"
-npm update --location=global
-corepack enable
-npm install@bitwarden/cli pm2 --location=global
+  export npm_config_cache="$HOME/.cache/npm"
+  npm update --location=global
+  corepack enable
+  npm install @bitwarden/cli --location=global
 
-success "${color6}fnm${reset}, ${color6}node${reset}, and ${color6}npm packages${reset} already installed!"
+  success "${color6}fnm${reset}, ${color6}node${reset}, and ${color6}bitwarden cli${reset} already installed!"
+}
 
-#========================#
-#    Login bitwarden     #
-#========================#
+function login_bitwarden() {
+  step "Login / unlock bitwarden vault..."
 
-step "Login / unlock bitwarden vault..."
-
-# login and unlock `bw`, if already login, unlock if not unlocked yet.
-if bw login; then
-  eval "$(bw unlock | grep -oE --color=never "(export BW_SESSION=".+")")"
-else
-  ! (env | grep -q 'BW_SESSION') &&
+  # login and unlock `bw`, if already login, unlock if not unlocked yet.
+  if bw login; then
     eval "$(bw unlock | grep -oE --color=never "(export BW_SESSION=".+")")"
-fi
+  else
+    ! (env | grep -q 'BW_SESSION') &&
+      eval "$(bw unlock | grep -oE --color=never "(export BW_SESSION=".+")")"
+  fi
+}
 
-#========================#
-#   Bootstrap dotfiles   #
-#========================#
+function bootstrap_dotfiles() {
+  step "Install dotfiles..."
+  chezmoi init latipun7 --apply --verbose
+}
 
-step "Install dotfiles..."
-chezmoi init latipun7 --apply
-success "All done 👏\n    Please restart your terminal 🎉"
+function main() {
+  check_dependencies
+  setup_fnm_node
+  login_bitwarden
+  bootstrap_dotfiles
+  success "All done 👏\n    Please restart your terminal 🎉"
+}
+
+main

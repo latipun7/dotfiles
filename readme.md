@@ -4,8 +4,9 @@
 [![GitHub Workflow Status][workflow-image]][workflow-url]
 
 This is my personalized dotfiles that I use on my machines. But what is dotfiles?
-Simply, dotfiles are configuration files of Unix (and some Windows) programs that are
-stored in the user's home directory. These files usually named with leading dot (`.`) hence the names are dotfiles (`.files`).
+Simply, dotfiles are configuration files of Unix (and some Windows) programs
+that are stored in the user's home directory. These files usually named with
+leading dot (`.`) hence the names are dotfiles (`.files`).
 
 The interesting part of dotfiles are it can be shared to different machine to have
 the same program configurations. Then the project like this are awesome while the
@@ -19,7 +20,7 @@ So, [fork it](https://github.com/latipun7/dotfiles/fork), customize to your pers
 settings, remove what you don't need, add what you need. Or create [new repo](https://github.com/new)
 and make this repo and other dotfiles repo as inspirations.
 
-### Screenshots
+## Screenshots
 
 ![screenshot1-2020-05-31](./assets/2020-05-31_13-00-45_WindowsTerminal.png)
 ![screenshot2-2020-05-31](./assets/2020-05-31_13-03-23_WindowsTerminal.png)
@@ -33,6 +34,12 @@ Install the font of your choosing and use that font in your terminal.
 Personally, I use [Delugia Font][my-font].
 
 ## Installation
+
+For \*nix, simply run:
+
+```bash
+bash -c "$(curl -fsLS https://github.com/latipun7/dotfiles/raw/main/install.sh)"
+```
 
 ## Resources
 
