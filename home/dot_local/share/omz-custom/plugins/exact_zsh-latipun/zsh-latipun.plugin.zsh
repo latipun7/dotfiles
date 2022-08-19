@@ -65,7 +65,7 @@ if hash bat 2>/dev/null; then
   compdef _journalctl catjournal
 fi
 
-# kitens alias
+# kittens alias
 if hash kitty 2>/dev/null; then
   alias ssh='kitty +kitten ssh'
   alias icat='kitty +kitten icat'
