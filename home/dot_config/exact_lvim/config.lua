@@ -53,32 +53,24 @@ vim.list_extend(
   { "sumneko_lua" }
 )
 
-local command_resolver = require("null-ls.helpers.command_resolver")
+local code_actions = require("lvim.lsp.null-ls.code_actions")
 local formatters = require("lvim.lsp.null-ls.formatters")
 local linters = require("lvim.lsp.null-ls.linters")
 
+code_actions.setup({
+  { name = "eslint_d" },
+  { name = "shellcheck" },
+})
+
 formatters.setup({
+  { name = "prettierd" },
   { command = "shfmt", args = { "-i", "2", "-ci" } },
-  {
-    command = "prettier",
-    dynamic_command = function(params)
-      return command_resolver.from_node_modules(params)
-        or command_resolver.from_yarn_pnp(params)
-        or vim.fn.executable(params.command) == 1 and params.command
-    end,
-  },
 })
 
 linters.setup({
+  { name = "eslint_d" },
   { name = "shellcheck" },
-  {
-    command = "eslint",
-    dynamic_command = function(params)
-      return command_resolver.from_node_modules(params)
-        or command_resolver.from_yarn_pnp(params)
-        or vim.fn.executable(params.command) == 1 and params.command
-    end,
-  },
+  { name = "zsh" },
 })
 
 -- Plugins

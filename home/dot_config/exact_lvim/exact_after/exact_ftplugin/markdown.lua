@@ -1,6 +1,9 @@
 local surr_utils = require("nvim-surround.config")
 local ts_utils = require("nvim-treesitter.ts_utils")
 local query = vim.treesitter.query
+local linters = require("lvim.lsp.null-ls.linters")
+
+linters.setup({ { name = "markdownlint" } })
 
 require("nvim-surround").buffer_setup({
   surrounds = {
