@@ -105,7 +105,7 @@ function install_fnm() {
       fail "Missing ${color6}brew${reset}!\n    Not installing due to missing dependencies."
     fi
   else
-    DOWNLOAD_DIR="$(mktemp -dp /tmp "fnm-XXXXX")"
+    DOWNLOAD_DIR="$(mktemp -d --tmpdir "fnm-XXXXX")"
     INSTALL_DIR="$HOME/.local/bin"
 
     mkdir -p "$INSTALL_DIR"
