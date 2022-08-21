@@ -67,7 +67,7 @@
 
 .local/share/omz-custom/plugins/zsh-autocomplete:
   type: archive
-  url: https://api.github.com/repos/marlonrichert/zsh-autocomplete/tarball
+  url: https://github.com/marlonrichert/zsh-autocomplete/archive/d8bfbef46efc54c1189010a3b70d501b44487504.zip
   exact: true
   stripComponents: 1
   refreshPeriod: 168h
