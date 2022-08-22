@@ -152,9 +152,9 @@ function setup_fnm_node() {
   step "Install global node modules..."
 
   export npm_config_cache="$HOME/.cache/npm"
-  npm update --location=global
+  npm update --global --silent
   corepack enable
-  npm install @bitwarden/cli --location=global
+  npm install @bitwarden/cli --global --silent
 
   success "${color6}fnm${reset}, ${color6}node${reset}, and ${color6}bitwarden cli${reset} already installed!"
 }

@@ -13,6 +13,11 @@ if hash zoxide 2>/dev/null; then
   eval "$(zoxide init zsh)"
 fi
 
+# npm completion
+if hash npm 2>/dev/null; then
+  eval "$(npm completion)"
+fi
+
 # ░█▀█░█░░░▀█▀░█▀█░█▀▀░█▀▀░█▀▀
 # ░█▀█░█░░░░█░░█▀█░▀▀█░█▀▀░▀▀█
 # ░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀░▀▀▀

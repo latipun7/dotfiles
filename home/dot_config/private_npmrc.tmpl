@@ -1,0 +1,5 @@
+{{ $bootstrap := bitwardenFields "item" "71d96432-cd58-4fcf-a870-ae2f01159fba" -}}
+_auth = {{ $bootstrap.npm.value | trim }}
+{{- if ne .chezmoi.os "windows" }}
+cache = ${HOME}/.cache/npm
+{{- end }}

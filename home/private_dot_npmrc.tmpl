@@ -1,7 +1,0 @@
-{{ $bootstrap := bitwardenFields "item" "71d96432-cd58-4fcf-a870-ae2f01159fba" -}}
-//registry.npmjs.org/:_authToken={{ $bootstrap.npm.value | trim }}
-{{- if eq .chezmoi.os "windows" }}
-cache=E:\Apps\@development\.cache\npm
-{{- else }}
-cache=~/.cache/npm
-{{- end }}
