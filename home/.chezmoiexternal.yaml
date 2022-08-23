@@ -150,3 +150,19 @@ www/adminer: # plugins
   executable: true
   refreshPeriod: 744h
 {{- end }}
+
+{{ if eq .chezmoi.os "android" -}}
+# ┏━┓┏┓╻╺┳┓┏━┓┏━┓╻╺┳┓   ┏━┓┏┓╻╻  ╻ ╻
+# ┣━┫┃┗┫ ┃┃┣┳┛┃ ┃┃ ┃┃   ┃ ┃┃┗┫┃  ┗┳┛
+# ╹ ╹╹ ╹╺┻┛╹┗╸┗━┛╹╺┻┛   ┗━┛╹ ╹┗━╸ ╹
+
+.termux/colors.properties:
+  type: file
+  url: https://github.com/catppuccin/termux/raw/main/Mocha/colors.properties
+  refreshPeriod: 168h
+
+.termux:
+  type: archive
+  url: https://drive.google.com/uc?export=download&id=1oKvdW1-7xrwOkyUqRiLjTK0KLDe2qNIZ
+  refreshPeriod: 168h
+{{- end }}
