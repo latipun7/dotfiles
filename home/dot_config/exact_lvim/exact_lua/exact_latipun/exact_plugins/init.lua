@@ -105,6 +105,13 @@ M.config = function()
       end,
     },
     {
+      "lukas-reineke/indent-blankline.nvim",
+      event = "BufReadPre",
+      config = function()
+        require("latipun.plugins.indent_blankline").config()
+      end,
+    },
+    {
       "famiu/bufdelete.nvim",
       setup = function()
         require("latipun.plugins.bufdelete").keybindings()
