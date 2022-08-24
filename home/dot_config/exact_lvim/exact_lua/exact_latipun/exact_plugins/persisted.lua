@@ -17,8 +17,12 @@ M.config = function()
     allowed_dirs = nil,
     ignored_dirs = nil,
     after_source = function()
-      vim.notify("Loaded session", vim.log.levels.INFO, { title = title })
-      print("Loaded session")
+      local status_ok, _ = pcall(require, "notify")
+      if status_ok then
+        vim.notify("Loaded session", vim.log.levels.INFO, { title = title })
+      else
+        print("Loaded session")
+      end
     end,
     telescope = {
       before_source = function()

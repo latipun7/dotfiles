@@ -7,7 +7,6 @@ M.config = function()
   end
 
   catppuccin.setup({
-    transparent_background = lvim.transparent_window,
     term_colors = true,
     compile = { enabled = true },
     integrations = {
