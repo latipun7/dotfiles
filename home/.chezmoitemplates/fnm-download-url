@@ -8,7 +8,7 @@
 {{-   else -}}
 {{-     list $url "fnm-linux.zip" | join "" -}}
 {{-   end -}}
-{{- else if .chezmoi.os "windows" -}}
+{{- else if eq .chezmoi.os "windows" -}}
 {{-   list $url "fnm-windows.zip" | join "" -}}
 {{- else -}}
 {{-   list $url "fnm-macos.zip" | join "" -}}

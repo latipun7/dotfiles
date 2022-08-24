@@ -139,7 +139,7 @@ function install_fnm() {
 }
 
 function setup_fnm_node() {
-  if ! hash fnm; then
+  if ! hash fnm 2>/dev/null; then
     get_fnm_url
     install_fnm
   fi

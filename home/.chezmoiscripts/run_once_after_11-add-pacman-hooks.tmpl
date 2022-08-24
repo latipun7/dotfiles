@@ -1,9 +1,7 @@
-{{ if ne .chezmoi.os "windows" -}}
+{{ if eq .chezmoi.os "linux" -}}
 {{   $pacman := lookPath "pacman" -}}
 {{   if $pacman -}}
 #!{{ lookPath "bash" }}
-
-# Install Pacman Hooks
 
 set -euo pipefail
 
