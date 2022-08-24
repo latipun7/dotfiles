@@ -6,6 +6,7 @@ M.config = function()
     {
       "catppuccin/nvim",
       as = "catppuccin",
+      run = ":CatppuccinCompile",
       config = function()
         require("latipun.plugins.catppuccin").config()
       end,

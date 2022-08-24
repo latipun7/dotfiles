@@ -22,6 +22,24 @@ M.config = function()
     command = "lua require('latipun.keybindings').set_terminal_keymaps()",
   })
 
+  -- catppuccin auto compile
+  create_aucmd("BufWritePost", {
+    pattern = { "catppuccin.lua", "**/plugins/init.lua" },
+    callback = function()
+      vim.cmd("PackerCompile")
+    end,
+  })
+
+  create_aucmd("User", {
+    pattern = "PackerCompileDone",
+    callback = function()
+      vim.cmd("CatppuccinCompile")
+      vim.defer_fn(function()
+        vim.cmd("colorscheme catppuccin")
+      end, 0)
+    end,
+  })
+
   -- need bufdelete.nvim & alpha-dashboard
   create_augroup("alpha_on_empty", { clear = true })
   create_aucmd("User", {

@@ -81,3 +81,8 @@ require("latipun.autocommands").config()
 
 -- Keybindings
 require("latipun.keybindings").config()
+
+-- reload packer compiled without restarting nvim
+require("packer").init({
+  auto_reload_compiled = true,
+})
