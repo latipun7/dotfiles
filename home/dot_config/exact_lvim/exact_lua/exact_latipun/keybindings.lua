@@ -1,8 +1,8 @@
 local M = {}
-local expr_opts = { noremap = true, expr = true }
+local expr_opts = { noremap = true, expr = true, silent = true }
 
 M.set_terminal_keymaps = function()
-  local opts = { noremap = true }
+  local opts = { noremap = true, silent = true }
 
   vim.api.nvim_buf_set_keymap(0, "t", "<Esc>", [[<C-\><C-n>]], opts)
   vim.api.nvim_buf_set_keymap(0, "t", "<C-h>", "<Nop>", opts)
