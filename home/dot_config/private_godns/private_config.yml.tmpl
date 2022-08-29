@@ -4,7 +4,7 @@ provider: Cloudflare
 login_token: "{{ $bootstrap.cloudflare_latipun_dev.value | trim }}"
 domains:
   - domain_name: latipun.dev
-    sub_domains: [kumori, raspi, adminer]
+    sub_domains: [adminer, feeds, kumori, raspi]
 proxied: true
 ip_urls: [https://api4.my-ip.io/ip, https://api.ipify.org, https://api.ip.sb/ip]
 ipv6_urls: [https://api6.my-ip.io/ip]
