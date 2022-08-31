@@ -1,0 +1,301 @@
+#compdef delta
+
+__delta() {
+  local lang='
+  ActionScript\:as
+  Apache_Conf\:envvars,_htaccess,_HTACCESS,_htgroups,_HTGROUPS,_htpasswd,_HTPASSWD,_.htaccess,_.HTACCESS,_.htgroups,_.HTGROUPS,_.htpasswd,_.HTPASSWD
+  AppleScript\:applescript,_script_editor
+  ARM_Assembly\:s,_S
+  AsciiDoc_(Asciidoctor)\:adoc,_ad,_asciidoc
+  ASP\:asa
+  Assembly_(x86_64)\:yasm,_nasm,_asm,_inc,_mac
+  Authorized_Keys\:authorized_keys,_pub
+  AWK\:awk
+  Batch_File\:bat,_cmd
+  BibTeX\:bib
+  Bourne_Again_Shell_(bash)\:sh,_bash,_zsh,_ash,_.bash_aliases,_.bash_completions,_.bash_functions,_.bash_login,_.bash_logout,_.bash_profile,_.bash_variables,_.bashrc,_.profile,_.textmate_init,_.zlogin,_.zlogout,_.zprofile,_.zshenv,_.zshrc,_PKGBUILD,_ebuild,_eclass
+  C\:c,_h
+  C#\:cs,_csx
+  C++\:cpp,_cc,_cp,_cxx,_c++,_C,_h,_hh,_hpp,_hxx,_h++,_inl,_ipp
+  Cabal\:cabal
+  Clojure\:clj,_cljc,_cljs,_edn
+  CMake\:CMakeLists.txt,_cmake
+  CMake_C_Header\:h.in
+  CMake_C++_Header\:hh.in,_hpp.in,_hxx.in,_h++.in
+  CMakeCache\:CMakeCache.txt
+  CoffeeScript\:coffee,_Cakefile,_coffee.erb,_cson
+  Comma_Separated_Values\:csv,_tsv
+  CpuInfo\:cpuinfo
+  Crystal\:cr
+  CSS\:css,_css.erb,_css.liquid
+  D\:d,_di
+  Dart\:dart
+  Diff\:diff,_patch
+  Dockerfile\:Dockerfile,_dockerfile
+  DotENV\:.env,_.env.dist,_.env.local,_.env.sample,_.env.example,_.env.test,_.env.test.local,_.env.testing,_.env.dev,_.env.development,_.env.development.local,_.env.prod,_.env.production,_.env.production.local,_.env.dusk.local,_.env.staging,_.env.default,_.env.defaults,_.envrc,_.flaskenv
+  Elixir\:ex,_exs
+  Elm\:elm
+  Email\:eml,_msg,_mbx,_mboxz
+  Erlang\:erl,_hrl,_Emakefile,_emakefile,_escript
+  F#\:fs,_fsi,_fsx
+  Fortran_(Fixed_Form)\:f,_F,_f77,_F77,_for,_FOR,_fpp,_FPP
+  Fortran_(Modern)\:f90,_F90,_f95,_F95,_f03,_F03,_f08,_F08
+  Fortran_Namelist\:namelist
+  Friendly_Interactive_Shell_(fish)_fish
+  fstab\:fstab,_crypttab,_mtab
+  Git_Attributes\:attributes,_gitattributes,_.gitattributes
+  Git_Commit\:COMMIT_EDITMSG,_MERGE_MSG,_TAG_EDITMSG
+  Git_Config\:gitconfig,_.gitconfig,_.gitmodules
+  Git_Ignore\:exclude,_gitignore,_.gitignore
+  Git_Link\:.git
+  Git_Log\:gitlog
+  Git_Mailmap\:.mailmap,_mailmap
+  Git_Rebase_Todo\:git-rebase-todo
+  GLSL\:vs,_fs,_gs,_vsh,_fsh,_gsh,_vshader,_fshader,_gshader,_vert,_frag,_geom,_tesc,_tese,_comp,_glsl,_mesh,_task,_rgen,_rint,_rahit,_rchit,_rmiss,_rcall
+  gnuplot\:gp,_gpl,_gnuplot,_gnu,_plot,_plt
+  Go\:go
+  GraphQL\:graphql,_graphqls,_gql
+  Graphviz_(DOT)\:dot,_DOT,_gv
+  Groff/troff\:groff,_troff,_1,_2,_3,_4,_5,_6,_7,_8,_9
+  Groovy\:groovy,_gvy,_gradle,_Jenkinsfile
+  group\:group
+  Haskell\:hs
+  Highlight_non-printables\:show-nonprintable
+  hosts\:hosts
+  HTML\:html,_htm,_shtml,_xhtml
+  HTML_(ASP)\:asp
+  HTML_(EEx)\:html.eex,_html.leex
+  HTML_(Erlang)\:yaws
+  HTML_(Jinja2)\:htm.j2,_html.j2,_xhtml.j2,_xml.j2
+  HTML_(Rails)\:rails,_rhtml,_erb,_html.erb
+  HTML_(Tcl)\:adp
+  HTML_(Twig)\:twig,_html.twig
+  HTTP_Request_and_Response\:http
+  INI\:ini,_INI,_reg,_REG,_lng,_cfg,_CFG,_desktop,_url,_URL,_.editorconfig,_.hgrc,_hgrc
+  Java\:java,_bsh
+  Java_Properties\:properties
+  Java_Server_Page_(JSP)\:jsp
+  JavaScript\:js,_htc
+  JavaScript_(Babel)\:js,_mjs,_jsx,_babel,_es6,_cjs
+  JavaScript_(Rails)\:js.erb
+  Jinja2\:j2,_jinja2,_jinja
+  JQ\:jq
+  JSON\:json,_sublime-settings,_sublime-menu,_sublime-keymap,_sublime-mousemap,_sublime-theme,_sublime-build,_sublime-project,_sublime-completions,_sublime-commands,_sublime-macro,_sublime-color-scheme,_ipynb,_Pipfile.lock
+  jsonnet\:jsonnet,_libsonnet,_libjsonnet
+  Julia\:jl
+  Known_Hosts\:known_hosts
+  Kotlin\:kt,_kts
+  LaTeX\:tex,_ltx
+  Lean\:lean
+  Less\:less,_css.less
+  Lisp\:lisp,_cl,_clisp,_l,_mud,_el,_scm,_ss,_lsp,_fasl
+  Literate_Haskell\:lhs
+  LiveScript\:ls,_Slakefile,_ls.erb
+  LLVM\:ll
+  log\:log
+  Lua\:lua
+  Makefile\:make,_GNUmakefile,_makefile,_Makefile,_makefile.am,_Makefile.am,_makefile.in,_Makefile.in,_OCamlMakefile,_mak,_mk
+  Manpage\:man
+  Markdown\:md,_mdown,_markdown,_markdn
+  MATLAB\:matlab
+  MediaWiki\:mediawiki,_wikipedia,_wiki
+  MemInfo\:meminfo
+  NAnt_Build_File\:build
+  nginx\:conf.erb,_conf,_nginx.conf,_mime.types,_fastcgi_params,_scgi_params,_uwsgi_params
+  Nim\:nim,_nims,_nimble
+  Ninja\:ninja
+  Nix\:nix
+  Objective-C\:m,_h
+  Objective-C++\:mm,_M,_h
+  OCaml\:ml,_mli
+  OCamllex\:mll
+  OCamlyacc\:mly
+  orgmode\:org
+  Pascal\:pas,_p,_dpr
+  passwd\:passwd
+  Perl\:pl,_pc,_pm,_pmc,_pod,_t
+  PHP\:php,_php3,_php4,_php5,_php7,_phps,_phpt,_phtml
+  Plain_Text\:txt
+  PowerShell\:ps1,_psm1,_psd1
+  Protocol_Buffer\:proto,_protodevel
+  Protocol_Buffer_(TEXT)\:pb.txt,_proto.text,_textpb,_pbtxt,_prototxt
+  Puppet\:pp,_epp
+  PureScript\:purs
+  Python\:py,_py3,_pyw,_pyi,_pyx,_pyx.in,_pxd,_pxd.in,_pxi,_pxi.in,_rpy,_cpy,_SConstruct,_Sconstruct,_sconstruct,_SConscript,_gyp,_gypi,_Snakefile,_vpy,_wscript,_bazel,_bzl
+  QML\:qml,_qmlproject
+  R\:R,_r,_Rprofile
+  Racket\:rkt
+  Rd_(R_Documentation)\:rd
+  Rego\:rego
+  Regular_Expression\:re
+  resolv\:resolv.conf
+  reStructuredText\:rst,_rest
+  Robot_Framework\:robot,_resource
+  Ruby\:rb,_Appfile,_Appraisals,_Berksfile,_Brewfile,_capfile,_cgi,_Cheffile,_config.ru,_Deliverfile,_Fastfile,_fcgi,_Gemfile,_gemspec,_Guardfile,_irbrc,_jbuilder,_Podfile,_podspec,_prawn,_rabl,_rake,_Rakefile,_Rantfile,_rbx,_rjs,_ruby.rail,_Scanfile,_simplecov,_Snapfile,_thor,_Thorfile,_Vagrantfile
+  Ruby_Haml\:haml,_sass
+  Ruby_on_Rails\:rxml,_builder
+  Ruby_Slim\:slim,_skim
+  Rust\:rs
+  Salt_State_(SLS)\:sls
+  Sass\:sass
+  Scala\:scala,_sbt,_sc
+  SCSS\:scss
+  SML\:sml,_cm,_sig
+  Solidity\:sol
+  SQL\:sql,_ddl,_dml
+  SQL_(Rails)\:erbsql,_sql.erb
+  SSH_Config\:ssh_config
+  SSHD_Config\:sshd_config
+  Strace\:strace
+  Stylus\:styl,_stylus
+  Svelte\:svlt,_svelte
+  Swift\:swift
+  syslog\:syslog
+  SystemVerilog\:sv,_v,_svh,_vh
+  Tcl\:tcl
+  Terraform\:tf,_tfvars,_hcl
+  TeX\:sty,_cls
+  Textile\:textile
+  TOML\:toml,_tml,_Cargo.lock,_Gopkg.lock,_Pipfile,_poetry.lock
+  TypeScript\:ts
+  TypeScriptReact\:tsx
+  varlink\:varlink
+  Verilog\:v,_V
+  VimL\:vim,_vimrc,_gvimrc,_.vimrc,_.gvimrc,__vimrc,__gvimrc
+  Vue_Component\:vue
+  Vyper\:vy
+  XML\:xml,_xsd,_xslt,_tld,_dtml,_rng,_rss,_opml,_svg,_xaml
+  YAML\:yaml,_yml,_sublime-syntax
+  Zig\:zig'
+  local syntax_theme='
+  GitHub\:light
+  Monokai_Extended_Light\:light
+  OneHalfLight\:light
+  Solarized_(light)\:light
+  gruvbox-light\:light
+  1337\:dark
+  Coldark-Cold\:dark
+  Coldark-Dark\:dark
+  DarkNeon\:dark
+  Dracula\:dark
+  Monokai_Extended\:dark
+  Monokai_Extended_Bright\:dark
+  Monokai_Extended_Origin\:dark
+  Nord\:dark
+  OneHalfDark\:dark
+  Solarized_(dark)\:dark
+  Sublime_Snazzy\:dark
+  TwoDark\:dark
+  Visual_Studio_Dark+\:dark
+  ansi\:dark
+  base16\:dark
+  base16-256\:dark
+  gruvbox-dark\:dark
+  zenburn\:dark'
+
+  _arguments -s -S \
+    "(- *)"{-V,--version}'[Print version information]' \
+    "(- *)"{-h,--help}'[Print help information]' \
+    --blame-code-style'[Style string for the code section of a git blame line]:(style)' \
+    --blame-format'[Format string for git blame commit metadata (default: "{timestamp:<15} {author:<15.14} {commit:<8}")]:(fmt)' \
+    --blame-palette'[Background colors used for git blame lines (space-separated string)]:(colors)' \
+    --blame-separator-format'[Separator between the blame format and the code section of a git blame line (default: │{n:^4}│)]:(fmt)' \
+    --blame-separator-style'[Style string for the blame-separator-format]:(style)' \
+    --blame-timestamp-format'[Format of `git blame` timestamp in raw git output received by delta (default: "%Y-%m-%d %H:%M:%S %z")]:(fmt)' \
+    --color-only'[Do not alter the input structurally in any way]' \
+    --commit-decoration-style'[Style string for the commit hash decoration (default: )]:(style)' \
+    --commit-regex'[Regular expression used to identify the commit line when parsing git output (default: "^commit ")]:(regex)' \
+    --commit-style'[Style string for the commit hash line (default: raw)]:(style)' \
+    --dark'[Use default colors appropriate for a dark terminal background]' \
+    --default-language"[Default language used for syntax highlighting]:(lang):(($lang))" \
+    --diff-highlight'[Emulate diff-highlight]' \
+    --diff-so-fancy'[Emulate diff-so-fancy]' \
+    --diff-stat-align-width'[Width allocated for file paths in a diff stat section (default: 48)]:(n)' \
+    --features'[Names of delta features to activate (space-separated)]:(features)' \
+    --file-added-label'[Text to display before an added file path (default: added:)]:(string)' \
+    --file-copied-label'[Text to display before a copied file path (default: copied:)]:(string)' \
+    --file-decoration-style'[Style string for the file decoration (default: "blue ul")]:(style)' \
+    --file-modified-label'[Text to display before a modified file path (default: )]:(string)' \
+    --file-removed-label'[Text to display before a removed file path (default: removed:)]:(string)' \
+    --file-renamed-label'[Text to display before a renamed file path (default: renamed:)]:(string)' \
+    --file-style'[Style string for the file section (default: blue)]:(style)' \
+    --file-transformation'[Sed-style command transforming file paths for display]:(sed_cmd)' \
+    --grep-context-line-style'[Style string for non-matching lines of grep output]:(style)' \
+    --grep-file-style'[Style string for file paths in grep output]:(style)' \
+    --grep-line-number-style'[Style string for line numbers in grep output]:(style)' \
+    --grep-match-line-style'[Style string for matching lines of grep output]:(style)' \
+    --grep-match-word-style'[Style string for the matching substrings within a matching line of grep output]:(style)' \
+    --grep-separator-symbol'[Separator symbol printed after the file path and line number in grep output (default: :)]:(string)' \
+    --hunk-header-decoration-style'[Style string for the hunk-header decoration (default: "blue box")]:(style)' \
+    --hunk-header-file-style'[Style string for the file path part of the hunk-header (default: blue)]:(style)' \
+    --hunk-header-line-number-style'[Style string for the line number part of the hunk-header (default: blue)]:(style)' \
+    --hunk-header-style'[Style string for the hunk-header (default: "line-number syntax")]:(style)' \
+    --hunk-label'[Text to display before a hunk header (default: )]:(string)' \
+    --hyperlinks'[Render commit hashes, file names, and line numbers as hyperlinks]' \
+    --hyperlinks-commit-link-format'[Format string for commit hyperlinks (requiraes --hyperlinks)]:(fmt)' \
+    --hyperlinks-file-link-format'[Format string for file hyperlinks (requires --hyperlinks) (default: file://{path})]:(fmt)' \
+    --inline-hint-style'[Style string for short inline hint text (default: blue)]:(style)' \
+    --inspect-raw-lines'[Kill-switch for --color-moved support (default: true)]:(bool):(true false)' \
+    --keep-plus-minus-markers'[Prefix added/removed lines with a +/- character, as git does]' \
+    --light'[Use default colors appropriate for a light terminal background]' \
+    --line-buffer-size'[Size of internal line buffer (default: 32)]:(n)' \
+    --line-fill-method'[Line-fill method in side-by-side mode]:(string)' \
+    {-n,--line-numbers}'[Display line numbers next to the diff]' \
+    --line-numbers-left-format'[Format string for the left column of line numbers (default: {nm:^4}⋮)]:(fmt)' \
+    --line-numbers-left-style'[Style string for the left column of line numbers (default: auto)]:(style)' \
+    --line-numbers-minus-style'[Style string for line numbers in the old (minus) version of the file (default: auto)]:(style)' \
+    --line-numbers-plus-style'[Style string for line numbers in the new (plus) version of the file (default: auto)]:(style)' \
+    --line-numbers-right-format'[Format string for the right column of line numbers (default: {np:^4}│)]:(fmt)' \
+    --line-numbers-right-style'[Style string for the right column of line numbers (default: auto)]:(style)' \
+    --line-numbers-zero-style'[Style string for line numbers in unchanged (zero) lines (default: auto)]:(style)' \
+    --list-languages'[List supported languages and associated file extensions]' \
+    --list-syntax-themes'[List available syntax-highlighting color themes]' \
+    --map-styles'[Map styles encountered in raw input to desired output styles]:(styles_map)' \
+    --max-line-distance'[Maximum line pair distance parameter in within-line diff algorithm (default: 0.6)]:(dist)' \
+    --max-line-length'[Truncate lines longer than this (default: 512)]:(n)' \
+    --merge-conflict-begin-symbol'[String marking the beginning of a merge conflict region (default: ▼)]:(string)' \
+    --merge-conflict-end-symbol'[String marking the end of a merge conflict region (default: ▲)]:(string)' \
+    --merge-conflict-ours-diff-header-decoration-style'[Style string for the decoration of the header above the "ours" merge conflict diff (default: box)]:(style)' \
+    --merge-conflict-ours-diff-header-style'[Style string for the header above the "ours" branch merge conflict diff (default: normal)]:(style)' \
+    --merge-conflict-theirs-diff-header-decoration-style'[Style string for the decoration of the header above the "theirs" merge conflict diff (default: box)]:(style)' \
+    --merge-conflict-theirs-diff-header-style'[Style string for the header above the "theirs" branch merge conflict diff (default: normal)]:(style)' \
+    --minus-empty-line-marker-style'[Style string for removed empty line marker (default: "normal auto")]:(style)' \
+    --minus-emph-style'[Style string for emphasized sections of removed lines (default: "normal auto")]:(style)' \
+    --minus-non-emph-style'[Style string for non-emphasized sections of removed lines that have an emphasized section (default: minus-style)]:(style)' \
+    --minus-style'[Style string for removed lines (default: "normal auto")]:(style)' \
+    --navigate'[Activate diff navigation]' \
+    --navigate-regex'[Regular expression defining navigation stop points]:(regex)' \
+    --no-gitconfig'[Do not read any settings from git config]' \
+    --pager'[Which pager to use]:(cmd)' \
+    --paging'[Whether to use a pager when displaying output (default: auto)]:(auto always never)' \
+    --parse-ansi'[Display ANSI color escape sequences in human-readable form]' \
+    --plus-emph-style'[Style string for emphasized sections of added lines (default: "syntax auto")]:(style)' \
+    --plus-empty-line-marker-style'[Style string for added empty line marker (default: "normal auto")]:(style)' \
+    --plus-non-emph-style'[Style string for non-emphasized sections of added lines that have an emphasized section (default: plus-style)]:(style)' \
+    --plus-style'[Style string for added lines (default: "syntax auto")]:(style)' \
+    --raw'[Do not alter the input in any way]' \
+    --relative-paths'[Output all file paths relative to the current directory]' \
+    --right-arrow'[Text to display with a changed file path (default: "⟶")]:(string)' \
+    --show-colors'[Show available named colors]' \
+    --show-config'[Display the active values for all Delta options]' \
+    --show-syntax-themes'[Show example diff for available syntax-highlighting themes]' \
+    --show-themes'[Show example diff for available delta themes]' \
+    {-s,--side-by-side}'[Display diffs in side-by-side layout]' \
+    --syntax-theme"[The syntax-highlighting theme to use]:(syntax_theme):(($syntax_theme))" \
+    --tabs'[The number of spaces to replace tab characters with (default: 4)]:(n)' \
+    --true-color'[Whether to emit 24-bit ("true color") RGB color codes (default: auto)]:(when):(auto always never)' \
+    --whitespace-error-style'[Style string for whitespace errors (default: "auto auto")]:(style)' \
+    {-w,--width}'[The width of underline/overline decorations]:(n)' \
+    --word-diff-regex'[Regular expression defining a "word" in within-line diff algorithm (default: \w+)]:(regex)' \
+    --wrap-left-symbol'[End-of-line wrapped content symbol (left-aligned) (default: ↵)]:(string)' \
+    --wrap-max-lines'[How often a line should be wrapped if it does not fit (default: 2)]:(n)' \
+    --wrap-right-percent'[Threshold for right-aligning wrapped content (default: 37.0)]:(percent)' \
+    --wrap-right-prefix-symbol'[Pre-wrapped content symbol (right-aligned) (default: …)]:(string)' \
+    --wrap-right-symbol'[End-of-line wrapped content symbol (right-aligned) (default: ↴)]:(string)' \
+    --zero-style'[Style string for unchanged lines (default: "syntax normal")]:(style)' \
+    --24-bit-color'[Deprecated: use --true-color]:(when):(auto always never)' \
+    '1:minus_file    First file to be compared when delta is being used in diff mode:_files' \
+    '2:plus_file     Second file to be compared when delta is being used in diff mode:_files'
+}
+
+__delta
