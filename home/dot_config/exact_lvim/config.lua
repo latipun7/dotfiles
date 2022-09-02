@@ -9,6 +9,7 @@ lvim.transparent_window = true
 lvim.colorscheme = "catppuccin"
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
+lvim.builtin.terminal.open_mapping = "<C-Space>"
 lvim.builtin.bufferline.options.sort_by = "insert_after_current"
 
 local alpha_opts = require("latipun.plugins.alpha-dashboard").config()
