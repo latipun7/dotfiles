@@ -1,16 +1,12 @@
-# NOTE: waiting for chezmoi to leverage .gitignore from archives:
-# https://github.com/twpayne/chezmoi/issues/1421#issuecomment-964473844
-# p10k
-**/*.zwc
-
 # Ignorable list
+**/*.bak
+**/*.log
+**/*.ori
+**/*.zwc
 .Xauthority
 .cache
-.config/lvim/config.lua.bak
-.config/lvim/config.lua.ori
-.config/bpytop/error.log
 .config/lvim/ignore
-.config/lvim/plugin/**
+.config/lvim/plugin
 .config/lvim/lv-settings.lua
 .config/lvim/sessions
 .pki
@@ -21,19 +17,22 @@
 {{- if eq .chezmoi.os "windows" }}
 # Ignore this in windows (*nix only files)
 .local/bin
-.local/share/omz-custom
+.local/config/{kitty,paru,certbot,fcitx5,godns,rofi}
+.local/share/{fcitx5,omz-custom,Xresources*}
 .p10k.zsh
 .zshenv
 .zshenv.private
 .zlogin
 .zshrc
+www
 ###
 {{- end }}
 
 {{- if ne .chezmoi.os "windows" }}
 # Ignore this outside windows (windows only files)
+.config/oh-my-posh
 AppData
-Documents
+Documents/PowerShell
 ###
 
 {{-   if not .is_server }}

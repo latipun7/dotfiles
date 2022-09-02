@@ -1,0 +1,75 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
+
+version: 2
+final_space: true
+console_title_template: "{{.PWD}}"
+transient_prompt:
+  template: "❯ "
+  foreground: green
+  foreground_templates:
+    - "{{ if ne .Code 0 }}red{{ end }}"
+
+blocks:
+  - type: prompt
+    alignment: left
+    segments:
+      - type: os
+        style: plain
+        template: "{{ if .WSL }}() {{ end }}{{ .Icon }} "
+        foreground: white
+
+      - type: path
+        style: plain
+        template: '{{ if eq .PWD "~" }}{{ else }}{{ end }} <b>{{ .Path }}</b> '
+        foreground: lightBlue
+        properties:
+          style: full
+
+      - type: git
+        style: plain
+        template: "<white>on</> {{ .UpstreamIcon }} {{ .HEAD }}{{ .BranchStatus }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0}}  {{ .StashCount }}{{ end }}{{ if gt .WorktreeCount 0}}  {{ .WorktreeCount }}{{ end }} "
+        foreground: green
+        properties:
+          fetch_status: true
+          fetch_stash_count: true
+          fetch_worktree_count: true
+          fetch_upstream_icon: true
+          branch_icon: " "
+          github_icon: 
+
+  - type: prompt
+    alignment: right
+    segments:
+      - type: executiontime
+        style: plain
+        template: "<lightWhite>took</>  {{ .FormattedMs }} "
+        foreground: yellow
+        properties:
+          threshold: 1000
+          style: round
+
+      - type: node
+        style: plain
+        template: " {{ .Full }} "
+        foreground: green
+
+      - type: project
+        style: plain
+        template: "{{ if .Version }} {{.Version}} {{ end }}"
+        foreground: cyan
+
+      - type: session
+        style: plain
+        template: "<lightWhite>with</> {{ if .SSHSession }} {{ end }}{{ .UserName }}<blue>@</>{{ .HostName }}"
+        foreground: magenta
+
+  - type: prompt
+    alignment: left
+    newline: true
+    segments:
+      - type: text
+        style: plain
+        template: ❯
+        foreground: green
+        foreground_templates:
+          - "{{ if ne .Code 0 }}red{{ end }}"

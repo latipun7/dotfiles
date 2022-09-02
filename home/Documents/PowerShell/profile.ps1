@@ -1,7 +1,7 @@
 using namespace System.Management.Automation
 using namespace System.Management.Automation.Language
 
-#============================= Copied From =================================
+#================================= Copied From =================================#
 # https://github.com/PowerShell/PSReadLine/blob/master/PSReadLine/SamplePSReadLineProfile.ps1
 
 # This is roughly what I use so there is some emphasis on emacs bindings,
@@ -617,7 +617,7 @@ Set-PSReadLineKeyHandler -Key Alt+a `
   [Microsoft.PowerShell.PSConsoleReadLine]::SelectForwardChar($null, ($nextAst.Extent.EndOffset - $nextAst.Extent.StartOffset) - $endOffsetAdjustment)
 }
 
-#=======================
+#===============================================================================#
 
 Set-PSReadLineKeyHandler -Chord Tab -Function MenuComplete
 Set-PSReadLineKeyHandler -Chord Ctrl+Backspace -Function BackwardKillWord
@@ -640,16 +640,16 @@ Set-PSReadlineOption -Color @{
   "Variable"           = [ConsoleColor]::DarkBlue
 }
 
-#================================= LATIPUN =====================================#
+#=================================== LATIPUN ===================================#
+
+Import-Module -Name Terminal-Icons -ErrorAction Continue
 
 # Prompt Theme
 if (Get-Command "oh-my-posh" -ErrorAction SilentlyContinue) {
-  oh-my-posh --init --shell pwsh --config ~/latipun.omp.json | Invoke-Expression
-  Enable-PoshTransientPrompt
+  oh-my-posh init pwsh --config "~/.config/oh-my-posh/latipun-lean.yml" | Invoke-Expression
 }
 
 # FNM
 if (Get-Command "fnm" -ErrorAction SilentlyContinue) {
-  $env:FNM_DIR = 'E:\Apps\@development\node'
   fnm env --use-on-cd | Out-String | Invoke-Expression
 }
