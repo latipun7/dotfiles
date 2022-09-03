@@ -21,7 +21,7 @@ M.config = function()
     },
     {
       "NvChad/nvim-colorizer.lua",
-      event = "BufRead",
+      event = "BufReadPre",
       config = function()
         require("latipun.plugins.colorizer").config()
       end,
