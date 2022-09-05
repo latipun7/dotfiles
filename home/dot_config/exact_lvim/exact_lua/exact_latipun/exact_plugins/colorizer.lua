@@ -6,14 +6,31 @@ M.config = function()
     return
   end
 
-  colorizer.setup({ "*" }, {
-    RGB = true,
-    RRGGBB = true,
-    RRGGBBAA = true,
-    rgb_fn = true,
-    hsl_fn = true,
-    css = true,
-    css_fn = true,
+  colorizer.setup({
+    filetypes = {
+      "*",
+      css = { css = true },
+      scss = { css = true },
+      sass = { css = true },
+    },
+    user_default_options = {
+      RGB = true,
+      RRGGBB = true,
+      names = false,
+      RRGGBBAA = true,
+      AARRGGBB = true,
+      rgb_fn = true,
+      hsl_fn = true,
+      css = false,
+      css_fn = true,
+      mode = "background",
+    },
+    buftypes = {
+      "*",
+      -- exclude prompt and popup buftypes from highlight
+      "!prompt",
+      "!popup",
+    },
   })
 end
 
