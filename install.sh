@@ -159,12 +159,17 @@ function setup_fnm_node() {
   step "Install global node modules..."
 
   export npm_config_cache="$HOME/.cache/npm"
+  export npm_config_userconfig="$HOME/.config/npmrc"
 
   corepack enable
   ! [[ "$(uname -o)" == *[Aa]ndroid* ]] && npm update --global --loglevel=error
-  npm install @bitwarden/cli --global --loglevel=error
+  ! hash bw 2>/dev/null && npm install @bitwarden/cli --global --loglevel=error
 
-  success "${color6}fnm${reset}, ${color6}node${reset}, and ${color6}bitwarden cli${reset} already installed!"
+  if [[ "$(uname -o)" == *[Aa]ndroid* ]]; then
+    success "${color6}node${reset} and ${color6}bitwarden cli${reset} already installed!"
+  else
+    success "${color6}fnm${reset}, ${color6}node${reset}, and ${color6}bitwarden cli${reset} already installed!"
+  fi
 }
 
 function login_bitwarden() {
