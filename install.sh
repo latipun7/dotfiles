@@ -139,21 +139,28 @@ function install_fnm() {
 }
 
 function setup_fnm_node() {
-  if ! hash fnm 2>/dev/null; then
-    get_fnm_url
-    install_fnm
+  if [[ "$(uname -o)" == *[Aa]ndroid* ]]; then
+    if ! hash node 2>/dev/null; then
+      step "Install latest LTS nodeJS..."
+      pkg install nodejs-lts
+    fi
+  else
+    if ! hash fnm 2>/dev/null; then
+      get_fnm_url
+      install_fnm
+    fi
+
+    hash fnm &>/dev/null && eval "$(fnm env --use-on-cd)"
+
+    step "Install latest LTS nodeJS..."
+    fnm install --lts && fnm use 'lts/*'
   fi
-
-  hash fnm &>/dev/null && eval "$(fnm env --use-on-cd)"
-
-  step "Install latest LTS nodeJS..."
-  fnm install --lts && fnm use 'lts/*'
 
   step "Install global node modules..."
 
   export npm_config_cache="$HOME/.cache/npm"
-  npm update --global --silent
   corepack enable
+  npm update --global --silent
   npm install @bitwarden/cli --global --silent
 
   success "${color6}fnm${reset}, ${color6}node${reset}, and ${color6}bitwarden cli${reset} already installed!"
