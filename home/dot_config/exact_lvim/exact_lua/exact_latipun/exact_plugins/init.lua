@@ -56,9 +56,6 @@ M.config = function()
     },
     {
       "sindrets/diffview.nvim",
-      cmd = { "DiffviewOpen", "DiffviewFileHistory" },
-      keys = { "<Leader>gd", "<Leader>gh" },
-      module = "diffview",
       setup = function()
         require("latipun.plugins.diffview").keybindings()
       end,
