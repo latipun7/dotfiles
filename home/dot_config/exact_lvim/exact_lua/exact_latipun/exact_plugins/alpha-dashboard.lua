@@ -25,19 +25,9 @@ M.config = function()
   dashboard.section.header.val = require("latipun.banners").dashboard()
   dashboard.section.header.opts.hl = "Error"
 
+  local date = os.date("%a %d %b")
   local plugins =
     #vim.fn.globpath(get_runtime_dir() .. "/site/pack/packer/*", "*", 0, 1)
-
-  local date = ""
-  if vim.fn.has("unix") == 1 or vim.fn.has("mac") == 1 then
-    local thingy = io.popen(
-      'echo "$(date +%a) $(date +%d) $(date +%b)" | tr -d "\n"'
-    ) or "whatever"
-    date = thingy:read("*a")
-    thingy:close()
-  else
-    date = "  whatever "
-  end
 
   local heading = {
     type = "text",

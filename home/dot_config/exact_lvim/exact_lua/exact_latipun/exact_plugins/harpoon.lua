@@ -13,7 +13,7 @@ M.keybindings = function()
     { "<Cmd>lua require('harpoon.mark').add_file()<CR>", " Add file mark" }
   lvim.builtin.which_key.mappings["<leader>"] = {
     "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>",
-    "﯑ Harpoon menu",
+    " Harpoon menu",
   }
 end
 
