@@ -1,0 +1,255 @@
+# : << EOF
+# https://github.com/gpakosz/.tmux
+
+
+# -- windows & pane creation ---------------------------------------------------
+
+tmux_conf_new_window_retain_current_path=false
+
+tmux_conf_new_pane_retain_current_path=true
+
+tmux_conf_new_pane_reconnect_ssh=false
+
+tmux_conf_new_session_prompt=false
+
+
+# -- display -------------------------------------------------------------------
+
+tmux_conf_24b_colour=true
+
+# --> Catppuccin (Mocha)
+%hidden thm_crust="#11111b"        # background
+%hidden thm_mantle="#181825"
+%hidden thm_text="#cdd6f4"         # foreground
+%hidden thm_surface1="#45475a"
+%hidden thm_surface2="#585b70"
+%hidden thm_blue="#89b4fa"
+%hidden thm_sky="#89dceb"
+%hidden thm_green="#a6e3a1"
+%hidden thm_yellow="#f9e2af"
+%hidden thm_peach="#fab387"
+%hidden thm_pink="#f5c2e7"
+%hidden thm_mauve="#cba6f7"
+%hidden thm_red="#f38ba8"
+
+# window style
+tmux_conf_theme_window_fg="default"
+tmux_conf_theme_window_bg="default"
+
+tmux_conf_theme_highlight_focused_pane=false
+
+# focused pane colours:
+tmux_conf_theme_focused_pane_bg="$thm_surface1"
+
+# pane border style, possible values are:
+#   - thin (default)
+#   - fat
+tmux_conf_theme_pane_border_style=thin
+
+# pane borders colours:
+tmux_conf_theme_pane_border="$thm_surface1"
+tmux_conf_theme_pane_active_border="$thm_blue"
+
+# pane indicator colours (when hit <prefix> + q)
+tmux_conf_theme_pane_indicator="$thm_blue"
+tmux_conf_theme_pane_active_indicator="$thm_sky"
+
+# status line style
+tmux_conf_theme_message_fg="$thm_sky"
+tmux_conf_theme_message_bg="$thm_surface1"
+tmux_conf_theme_message_attr="align=centre,bold"
+
+# status line command style (<prefix> : Escape)
+tmux_conf_theme_message_command_fg="$thm_sky"
+tmux_conf_theme_message_command_bg="$thm_surface1"
+tmux_conf_theme_message_command_attr="align=centre,bold"
+
+# window modes style
+tmux_conf_theme_mode_fg="$thm_crust"
+tmux_conf_theme_mode_bg="$thm_peach"
+tmux_conf_theme_mode_attr="bold"
+
+# status line style
+tmux_conf_theme_status_fg="$thm_surface2"
+tmux_conf_theme_status_bg="$thm_crust"
+tmux_conf_theme_status_attr="none"
+
+# terminal title
+tmux_conf_theme_terminal_title="❐ #S ● #W"
+
+# window status style
+tmux_conf_theme_window_status_fg="$thm_surface2"
+tmux_conf_theme_window_status_bg="$thm_crust"
+tmux_conf_theme_window_status_attr="none"
+tmux_conf_theme_window_status_format="#{circled_window_index} #W#{?window_bell_flag,🔔,}#{?window_zoomed_flag,🔍,}"
+
+# window current status style
+tmux_conf_theme_window_status_current_fg="$thm_crust"
+tmux_conf_theme_window_status_current_bg="$thm_blue"
+tmux_conf_theme_window_status_current_attr="bold"
+tmux_conf_theme_window_status_current_format="#I  #W#{?window_zoomed_flag,🔍,}"
+
+# window activity status style
+tmux_conf_theme_window_status_activity_fg="default"
+tmux_conf_theme_window_status_activity_bg="default"
+tmux_conf_theme_window_status_activity_attr="underscore"
+
+# window bell status style
+tmux_conf_theme_window_status_bell_fg="$thm_peach"
+tmux_conf_theme_window_status_bell_bg="default"
+tmux_conf_theme_window_status_bell_attr="blink,bold"
+
+# window last status style
+tmux_conf_theme_window_status_last_fg="$thm_blue"
+tmux_conf_theme_window_status_last_bg="$thm_surface1"
+tmux_conf_theme_window_status_last_attr="none"
+
+# status left/right sections separators
+tmux_conf_theme_left_separator_main=""
+tmux_conf_theme_left_separator_sub=""
+tmux_conf_theme_right_separator_main=""
+tmux_conf_theme_right_separator_sub=""
+
+# status left/right content:
+#   - separate main sections with "|"
+#   - separate subsections with ","
+tmux_conf_theme_status_left="  #S "
+tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , #(printf '%a,%e %b') , %I:%M %p | #{username}#{root} | #{hostname}#{online} "
+
+# status left style
+tmux_conf_theme_status_left_fg="$thm_crust,$thm_crust,$thm_crust"
+tmux_conf_theme_status_left_bg="$thm_yellow,$thm_pink,$thm_green"
+tmux_conf_theme_status_left_attr="bold,none,none"
+
+# status right style
+tmux_conf_theme_status_right_fg="$thm_surface2,$thm_mantle,$thm_crust"
+tmux_conf_theme_status_right_bg="$thm_crust,$thm_red,$thm_text"
+tmux_conf_theme_status_right_attr="none,bold,bold"
+
+# pairing indicator
+tmux_conf_theme_pairing=""
+tmux_conf_theme_pairing_fg="none"
+tmux_conf_theme_pairing_bg="none"
+tmux_conf_theme_pairing_attr="none"
+
+# prefix indicator
+tmux_conf_theme_prefix=""
+tmux_conf_theme_prefix_fg="none"
+tmux_conf_theme_prefix_bg="none"
+tmux_conf_theme_prefix_attr="none"
+
+# mouse indicator
+tmux_conf_theme_mouse=""
+tmux_conf_theme_mouse_fg="none"
+tmux_conf_theme_mouse_bg="none"
+tmux_conf_theme_mouse_attr="none"
+
+# root indicator
+tmux_conf_theme_root=""
+tmux_conf_theme_root_fg="none"
+tmux_conf_theme_root_bg="none"
+tmux_conf_theme_root_attr="bold,blink"
+
+# synchronized indicator
+tmux_conf_theme_synchronized=""
+tmux_conf_theme_synchronized_fg="none"
+tmux_conf_theme_synchronized_bg="none"
+tmux_conf_theme_synchronized_attr="none"
+
+# battery bar symbols
+tmux_conf_battery_bar_symbol_full="ﱢ"
+tmux_conf_battery_bar_symbol_empty="ﱡ"
+
+# battery bar length (in number of symbols), possible values are:
+#   - auto
+#   - a number, e.g. 5
+tmux_conf_battery_bar_length="auto"
+
+# battery bar palette, possible values are:
+#   - gradient (default)
+#   - heat
+#   - "colour_full_fg,colour_empty_fg,colour_bg"
+tmux_conf_battery_bar_palette="gradient"
+
+# battery hbar palette, possible values are:
+#   - gradient (default)
+#   - heat
+#   - "colour_low,colour_half,colour_full"
+tmux_conf_battery_hbar_palette="gradient"
+
+# battery vbar palette, possible values are:
+#   - gradient (default)
+#   - heat
+#   - "colour_low,colour_half,colour_full"
+tmux_conf_battery_vbar_palette="gradient"
+
+# symbols used to indicate whether battery is charging or discharging
+tmux_conf_battery_status_charging="🔌"
+tmux_conf_battery_status_discharging="🔋"
+
+# clock style (when you hit <prefix> + t)
+# you may want to use %I:%M %p in place of %R in tmux_conf_theme_status_right
+tmux_conf_theme_clock_colour="$thm_sky"
+tmux_conf_theme_clock_style="12"
+
+
+# -- clipboard -----------------------------------------------------------------
+
+# in copy mode, copying selection also copies to the OS clipboard
+#   - true
+#   - false (default)
+#   - disabled
+# on macOS, this requires installing reattach-to-user-namespace, see README.md
+# on Linux, this requires xsel or xclip
+tmux_conf_copy_to_os_clipboard=false
+
+
+# -- user customizations -------------------------------------------------------
+# this is the place to override or undo settings
+
+set-environment -g TMUX_PLUGIN_MANAGER_PATH "$XDG_CONFIG_HOME/tmux/plugins"
+
+unbind -
+bind _ split-window -v
+bind | split-window -h
+
+# increase history size
+set -g history-limit 10000
+
+# force Vi mode
+set -g status-keys vi
+set -g mode-keys vi
+
+setw -g automatic-rename-format "#{=/-13/..:pane_title}"
+set -g pane-border-status top
+
+
+# -- tpm -----------------------------------------------------------------------
+
+tmux_conf_update_plugins_on_launch=true
+
+tmux_conf_update_plugins_on_reload=true
+
+tmux_conf_uninstall_plugins_on_reload=true
+
+
+# -- custom variables ----------------------------------------------------------
+
+# # /!\ do not remove the following line
+# EOF
+#
+# # /!\ do not "uncomment" the functions: the leading "# " characters are needed
+#
+# weather() {
+#   curl -fsm3 'wttr.in/Godean?format=%l:+%c%t+%w+(%m+%M)\n' || printf '\n'
+#   sleep 900  # sleep for 15 minutes, throttle network requests whatever the value of status-interval
+# }
+#
+# online() {
+#   ping -c 1 1.1.1.1 >/dev/null 2>&1 && printf '' || printf ''
+# }
+#
+# "$@"
+# # /!\ do not remove the previous line
+
+# vim:ft=conf

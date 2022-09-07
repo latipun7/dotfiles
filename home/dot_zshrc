@@ -10,6 +10,7 @@ fi
 # ┏━┓┏┳┓╺━┓   ┏━┓┏━╸╺┳╸╺┳╸╻┏┓╻┏━╸┏━┓
 # ┃ ┃┃┃┃┏━┛   ┗━┓┣╸  ┃  ┃ ┃┃┗┫┃╺┓┗━┓
 # ┗━┛╹ ╹┗━╸   ┗━┛┗━╸ ╹  ╹ ╹╹ ╹┗━┛┗━┛
+
 export ZSH="${XDG_DATA_HOME:-$HOME/.local/share}/oh-my-zsh"
 
 ZSH_CUSTOM="${XDG_DATA_HOME:-$HOME/.local/share}/omz-custom"
@@ -27,6 +28,11 @@ HIST_STAMPS="yyyy-mm-dd"
 zstyle ':autocomplete:*' min-input 1
 zstyle ':autocomplete:*' fzf-completion yes
 zstyle ':autocomplete:*' ignored-input '(\*\*|..)'
+
+# tmux
+ZSH_TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
+ZSH_TMUX_DEFAULT_SESSION_NAME="L"
+ZSH_TMUX_UNICODE=true
 
 plugins=(
   git

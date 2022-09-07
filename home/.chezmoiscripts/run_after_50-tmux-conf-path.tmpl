@@ -1,0 +1,7 @@
+{{ if ne .chezmoi.os "windows" -}}
+#!{{ lookPath "bash" }}
+
+set -euo pipefail
+
+sed -i 's#\.tmux\.conf#.config/tmux/tmux.conf#g' ~/.local/share/oh-my-tmux/.tmux.conf
+{{ end -}}

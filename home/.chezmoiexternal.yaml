@@ -30,10 +30,12 @@
   url: https://github.com/catppuccin/btop/raw/main/catppuccin_mocha.theme
   refreshPeriod: 168h
 
-# Oh-My-ZSH
+# oh-my-zsh
 .local/share/oh-my-zsh:
   type: git-repo
   url: https://github.com/ohmyzsh/ohmyzsh.git
+  clone:
+    args: ["--depth", "1"]
   pull:
     args: ["--dry-run"] # update with `omz update`
 
@@ -80,6 +82,16 @@
     args: ["--branch", "rolling", "--depth", "1"]
   pull:
     args: ["--dry-run"] # Update via `lvim +LvimUpdate`
+
+# oh-my-tmux
+.local/share/oh-my-tmux:
+  type: git-repo
+  url: https://github.com/gpakosz/.tmux.git
+  refreshPeriod: 168h
+  clone:
+    args: ["--depth", "1"]
+  pull:
+    args: ["--dry-run"] # update/pull manually
 
 {{    if not .is_server -}}
 # ╺┳┓┏━╸┏━┓╻┏ ╺┳╸┏━┓┏━┓   ┏━┓┏┓╻╻  ╻ ╻
@@ -139,7 +151,7 @@ www/adminer: # plugins
 # ┃╻┃┃┃┗┫ ┃┃┃ ┃┃╻┃┗━┓   ┃ ┃┃┗┫┃  ┗┳┛
 # ┗┻┛╹╹ ╹╺┻┛┗━┛┗┻┛┗━┛   ┗━┛╹ ╹┗━╸ ╹
 
-.local/bin:
+.local/bin: # fnm.exe
   type: archive
   url: {{ template "fnm-download-url" . }}
   refreshPeriod: 168h
@@ -161,7 +173,7 @@ www/adminer: # plugins
   url: https://github.com/catppuccin/termux/raw/main/Mocha/colors.properties
   refreshPeriod: 168h
 
-.termux:
+.termux: # font.ttf
   type: archive
   url: https://drive.google.com/uc?export=download&id=1oKvdW1-7xrwOkyUqRiLjTK0KLDe2qNIZ
   refreshPeriod: 168h

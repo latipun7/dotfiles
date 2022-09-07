@@ -6,9 +6,13 @@
 .Xauthority
 .cache
 .config/lvim/ignore
-.config/lvim/plugin
 .config/lvim/lv-settings.lua
+.config/lvim/plugin/**
 .config/lvim/sessions
+.local/share/ansi-arts/** # git-repo
+.local/share/lunarvim/lvim/** # git-repo
+.local/share/oh-my-tmux/** # git-repo
+.local/share/oh-my-zsh/** # git-repo
 .pki
 .ssh/known_hosts
 .zcompdump-*
