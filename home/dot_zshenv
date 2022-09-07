@@ -71,6 +71,12 @@ fi
 hash cargo 2>/dev/null && cargoexe="$XDG_DATA_HOME/cargo/bin"
 brewpythonexe=$(hash brew 2>/dev/null && echo "$(brew --prefix)/opt/python/libexec/bin")
 
+# global npm on Android
+if [[ "$(uname -o)" == *[Aa]ndroid* ]]; then
+  export npm_config_prefix="$HOME/.local/share/node"
+  PATH="$npm_config_prefix/bin":$PATH
+fi
+
 pathexe=("$homeexe" "$cargoexe" "$brewpythonexe" "$PATH")
 
 PATH=$(concat ":" "${pathexe[@]}")

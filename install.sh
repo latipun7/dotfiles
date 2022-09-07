@@ -144,6 +144,8 @@ function setup_fnm_node() {
       step "Install latest LTS nodeJS..."
       pkg install nodejs-lts
     fi
+    export npm_config_prefix="$HOME/.local/share/node"
+    export PATH="$npm_config_prefix/bin":$PATH
   else
     if ! hash fnm 2>/dev/null; then
       get_fnm_url
@@ -160,8 +162,8 @@ function setup_fnm_node() {
 
   export npm_config_cache="$HOME/.cache/npm"
   corepack enable
-  npm update --global --silent
-  npm install @bitwarden/cli --global --silent
+  npm update --global --loglevel=error
+  npm install @bitwarden/cli --global --loglevel=error
 
   success "${color6}fnm${reset}, ${color6}node${reset}, and ${color6}bitwarden cli${reset} already installed!"
 }
