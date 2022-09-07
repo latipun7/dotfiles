@@ -209,9 +209,12 @@ tmux_conf_copy_to_os_clipboard=false
 
 set-environment -g TMUX_PLUGIN_MANAGER_PATH "$XDG_CONFIG_HOME/tmux/plugins"
 
+# Keybindings
+
 unbind -
 bind _ split-window -v
 bind | split-window -h
+bind R respawn-pane -k \; display 'Pane respawned' # reload pane
 
 # increase history size
 set -g history-limit 10000
