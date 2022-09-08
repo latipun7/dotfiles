@@ -77,6 +77,12 @@ tmux_conf_theme_status_attr="none"
 # terminal title
 tmux_conf_theme_terminal_title="❐ #S ● #W"
 
+# status left/right sections separators
+tmux_conf_theme_left_separator_main=""
+tmux_conf_theme_left_separator_sub=""
+tmux_conf_theme_right_separator_main=""
+tmux_conf_theme_right_separator_sub=""
+
 # window status style
 tmux_conf_theme_window_status_fg="$thm_surface2"
 tmux_conf_theme_window_status_bg="$thm_crust"
@@ -84,10 +90,11 @@ tmux_conf_theme_window_status_attr="none"
 tmux_conf_theme_window_status_format="#{circled_window_index} #W#{?window_bell_flag,🔔,}#{?window_zoomed_flag,🔍,}"
 
 # window current status style
+%hidden thm_status_current_index_bg="$thm_mauve"
 tmux_conf_theme_window_status_current_fg="$thm_crust"
 tmux_conf_theme_window_status_current_bg="$thm_blue"
 tmux_conf_theme_window_status_current_attr="bold"
-tmux_conf_theme_window_status_current_format="#I  #W#{?window_zoomed_flag,🔍,}"
+tmux_conf_theme_window_status_current_format="#I #[fg=$thm_status_current_index_bg,bg=$tmux_conf_theme_window_status_current_bg,$tmux_conf_theme_window_status_current_attr]$tmux_conf_theme_left_separator_main#[fg=$tmux_conf_theme_window_status_current_fg,bg=$tmux_conf_theme_window_status_current_bg,$tmux_conf_theme_window_status_current_attr] #W#{?window_zoomed_flag,🔍,}"
 
 # window activity status style
 tmux_conf_theme_window_status_activity_fg="default"
@@ -103,12 +110,6 @@ tmux_conf_theme_window_status_bell_attr="blink,bold"
 tmux_conf_theme_window_status_last_fg="$thm_blue"
 tmux_conf_theme_window_status_last_bg="$thm_surface1"
 tmux_conf_theme_window_status_last_attr="none"
-
-# status left/right sections separators
-tmux_conf_theme_left_separator_main=""
-tmux_conf_theme_left_separator_sub=""
-tmux_conf_theme_right_separator_main=""
-tmux_conf_theme_right_separator_sub=""
 
 # status left/right content:
 #   - separate main sections with "|"
@@ -225,6 +226,9 @@ set -g mode-keys vi
 
 setw -g automatic-rename-format "#{=/-13/..:pane_title}"
 set -g pane-border-status top
+
+# override window status current
+setw -g window-status-current-format "#[fg=$tmux_conf_theme_status_bg,bg=$thm_status_current_index_bg,none]$tmux_conf_theme_left_separator_main#[fg=$thm_crust,bg=$thm_status_current_index_bg,$tmux_conf_theme_window_status_current_attr] $tmux_conf_theme_window_status_current_format #[fg=$tmux_conf_theme_window_status_current_bg,bg=$tmux_conf_theme_status_bg]$tmux_conf_theme_left_separator_main" #!important
 
 
 # -- tpm -----------------------------------------------------------------------
