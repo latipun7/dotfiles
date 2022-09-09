@@ -1,5 +1,9 @@
 local M = {}
 
+local function getlines(i, j)
+  return table.concat(vim.api.nvim_buf_get_lines(0, i - 1, j or i, true), "\n")
+end
+
 M.config = function()
   require("filetype").setup({
     overrides = {
@@ -7,11 +11,7 @@ M.config = function()
         ["dot_editorconfig"] = "dosini",
         [".gitignore"] = "conf",
       },
-      complex = {
-        [".clang*"] = "yaml",
-        [".*%.env.*"] = "sh",
-        [".*ignore"] = "conf",
-      },
+
       extensions = {
         tf = "terraform",
         tfvars = "terraform",
@@ -20,6 +20,20 @@ M.config = function()
         eslintrc = "json",
         prettierrc = "json",
         mdx = "markdown",
+      },
+
+      complex = { -- regex
+        [".*ignore"] = "conf",
+      },
+
+      function_extensions = {
+        ["conf"] = function()
+          if getlines(1):find("<%?xml") then
+            return "xml"
+          else
+            return "conf"
+          end
+        end,
       },
     },
   })
