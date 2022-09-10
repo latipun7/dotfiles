@@ -47,6 +47,8 @@ lvim.builtin.project.patterns = {
   "package.json",
 }
 
+require("latipun.plugins.bufferline").config()
+
 -- LSP
 lvim.lsp.diagnostics.virtual_text = false
 vim.list_extend(
