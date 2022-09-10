@@ -1,12 +1,14 @@
-{{ if not (or (eq .chezmoi.os "windows") (eq .chezmoi.os "darwin")) -}}
-{{   if not .is_server -}}
+{{ if .is_linux_gui -}}
 #!{{ lookPath "bash" }}
 
 set -euo pipefail
+
+{{ template "functions-bin" }}
 
 if [ -z "$HOME/.local/share/applications/lvim.desktop" ]; then
   mkdir -p "$HOME/.local/share/applications"
   ln -s "$HOME/.local/share/lunarvim/lvim/utils/desktop/lvim.desktop" "$HOME/.local/share/applications/lvim.desktop"
 fi
-{{   end -}}
+
+success "${color6}LunarVim${reset} successfully installed!"
 {{ end -}}

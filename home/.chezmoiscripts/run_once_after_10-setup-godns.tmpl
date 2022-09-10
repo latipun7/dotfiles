@@ -1,8 +1,6 @@
 {{ if .is_server -}}
 #!{{ lookPath "bash" }}
 
-# Setup GoDNS on server machine
-
 set -euo pipefail
 
 {{ template "functions-bin" }}

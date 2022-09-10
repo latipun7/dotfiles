@@ -10,10 +10,16 @@
 {{-   end -}}
 {{- end -}}
 
+{{ $isNoGUI := or (eq .chezmoi.os "android") $isServer }}
+{{ $isGUI := and (not $isNoGUI) (eq .chezmoi.os "linux") }}
+
 data:
   email: {{ $email }}
   name: {{ $name }}
+  is_no_gui: {{ $isNoGUI }}
+  is_linux_gui: {{ $isGUI }}
   is_server: {{ $isServer }}
+  is_arch_linux: {{ not (not (and (eq .chezmoi.os "linux") (lookPath "pacman"))) }}
 
 diff:
   pager: delta

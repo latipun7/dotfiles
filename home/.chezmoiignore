@@ -20,13 +20,14 @@
 
 {{- if eq .chezmoi.os "windows" }}
 # Ignore this in windows (*nix only files)
+.config/{bpytop,kitty,paru,certbot,fcitx5,godns,rofi,tmux,wgetrc}
 .local/bin
-.local/config/{kitty,paru,certbot,fcitx5,godns,rofi}
 .local/share/{fcitx5,omz-custom,Xresources*}
 .p10k.zsh
+.xprofile
+.zlogin
 .zshenv
 .zshenv.private
-.zlogin
 .zshrc
 www
 ###
@@ -38,24 +39,23 @@ www
 AppData
 Documents/PowerShell
 ###
+{{- end }}
 
-{{-   if not .is_server }}
+{{- if not .is_server }}
 # Ignore if not server machine (server only files)
-.config/certbot
-.config/godns
-.config/pg
+.config/{certbot,godns,pg}
 www
 ###
-{{-   end }}
+{{- end }}
 
-{{-   if .is_server }}
-# Ignore if in server machine (desktop only files)
-.config/fcitx5
-.config/kitty
-.config/rofi
-.local/share/fcitx5
-.local/share/Xresources*
+{{- if .is_no_gui }}
+# Ignore if no GUI environment (desktop only files)
+.config/{fcitx5,kitty,rofi}
+.local/share/{fcitx5,Xresources*}
 .xprofile
 ###
-{{-   end }}
+{{- end }}
+
+{{- if not .is_arch_linux }}
+.local/share/bin/yay-*
 {{- end }}

@@ -1,6 +1,4 @@
-{{ if eq .chezmoi.os "linux" -}}
-{{   $pacman := lookPath "pacman" -}}
-{{   if $pacman -}}
+{{ if .is_arch_linux -}}
 #!{{ lookPath "bash" }}
 
 set -euo pipefail
@@ -34,5 +32,4 @@ Depends = pacman-contrib
 EOL
 
 success "${color6}pacman hooks${reset} successfully installed!"
-{{-   end }}
 {{- end }}

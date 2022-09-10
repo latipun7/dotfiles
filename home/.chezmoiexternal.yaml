@@ -3,6 +3,13 @@
   url: https://github.com/latipun7/ansi-arts.git
   refreshPeriod: 744h
 
+.config/bat/themes:
+  type: archive
+  url: https://api.github.com/repos/catppuccin/bat/tarball
+  stripComponents: 1
+  refreshPeriod: 168h
+  include: ["*/*.tmTheme"]
+
 {{ if ne .chezmoi.os "windows" -}}
 # ╻ ╻┏┓╻╻╻ ╻   ┏━┓┏┓╻╻  ╻ ╻
 # ┃ ┃┃┗┫┃┏╋┛   ┃ ┃┃┗┫┃  ┗┳┛
@@ -17,13 +24,6 @@
   filter:
     command: gzip
     args: ["--decompress", "--to-stdout", "--suffix", ".zip"]
-
-.config/bat/themes:
-  type: archive
-  url: https://api.github.com/repos/catppuccin/bat/tarball
-  stripComponents: 1
-  refreshPeriod: 168h
-  include: ["*/*.tmTheme"]
 
 .config/bpytop/themes/catppuccin-mocha.theme:
   type: file
@@ -92,11 +92,12 @@
     args: ["--depth", "1"]
   pull:
     args: ["--dry-run"] # update/pull manually
+{{ end -}}
 
-{{    if not .is_server -}}
-# ╺┳┓┏━╸┏━┓╻┏ ╺┳╸┏━┓┏━┓   ┏━┓┏┓╻╻  ╻ ╻
-#  ┃┃┣╸ ┗━┓┣┻┓ ┃ ┃ ┃┣━┛   ┃ ┃┃┗┫┃  ┗┳┛
-# ╺┻┛┗━╸┗━┛╹ ╹ ╹ ┗━┛╹     ┗━┛╹ ╹┗━╸ ╹
+{{ if .is_linux_gui -}}
+# ╻  ╻┏┓╻╻ ╻╻ ╻   ┏━╸╻ ╻╻   ┏━┓┏┓╻╻  ╻ ╻
+# ┃  ┃┃┗┫┃ ┃┏╋┛   ┃╺┓┃ ┃┃   ┃ ┃┃┗┫┃  ┗┳┛
+# ┗━╸╹╹ ╹┗━┛╹ ╹   ┗━┛┗━┛╹   ┗━┛╹ ╹┗━╸ ╹
 
 .config/kitty/themes/catppuccin:
   type: archive
@@ -111,9 +112,9 @@
   stripComponents: 1
   refreshPeriod: 744h
   include: ["*/Catppuccin/**"]
-{{-   end }}
+{{- end }}
 
-{{    if .is_server -}}
+{{ if .is_server -}}
 # ┏━┓┏━╸┏━┓╻ ╻┏━╸┏━┓   ┏━┓┏┓╻╻  ╻ ╻
 # ┗━┓┣╸ ┣┳┛┃┏┛┣╸ ┣┳┛   ┃ ┃┃┗┫┃  ┗┳┛
 # ┗━┛┗━╸╹┗╸┗┛ ┗━╸╹┗╸   ┗━┛╹ ╹┗━╸ ╹
@@ -143,7 +144,6 @@ www/adminer: # plugins
   stripComponents: 1
   refreshPeriod: 744h
   include: ["*/plugins/**"]
-{{-   end }}
 {{- end }}
 
 {{ if eq .chezmoi.os "windows" -}}
