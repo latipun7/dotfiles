@@ -51,7 +51,7 @@ export PGSERVICEFILE="$XDG_CONFIG_HOME/pg/pg_service.conf"
 # ░█▀▀░█▀█░░█░░█▀█░▀▀█
 # ░▀░░░▀░▀░░▀░░▀░▀░▀▀▀
 
-# Make linuxbrew PATH available before sourcing OMZ
+# Make homebrew PATH available
 if hash brew 2>/dev/null; then
   eval "$(brew shellenv)"
 elif [[ "$OSTYPE" == linux-gnu ]]; then
@@ -62,8 +62,6 @@ elif [[ "$OSTYPE" == linux-gnu ]]; then
 elif [[ "$OSTYPE" == darwin* ]]; then
   [ -d "/usr/local/Cellar" ] &&
     eval "$(/usr/local/bin/brew shellenv)"
-else
-  echo "homebrew not available in the current OS type."
 fi
 
 # Custom path
@@ -77,7 +75,7 @@ PATH=$(concat ":" "${pathexe[@]}")
 export PATH
 
 # Node global module require path
-if hash fnm 2>/dev/null && hash node 2>/dev/null; then
+if hash node 2>/dev/null; then
   nodelink=$(readlink -e "$(which node)")
   NODE_PATH=$(cd "${nodelink:0:-4}../lib/node_modules" && pwd)
   export NODE_PATH
@@ -114,11 +112,7 @@ fi
 if hash fnm &>/dev/null; then
   export FNM_DIR="$XDG_DATA_HOME/fnm"
 
-  if [[ -z "$TTY" ]]; then
-    eval "$(fnm env --shell=bash)"
-  else
-    eval "$(fnm env --use-on-cd)"
-  fi
+  eval "$(fnm env --use-on-cd)"
 fi
 
 # nnn configs

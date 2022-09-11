@@ -4,4 +4,6 @@
 #     Login Command     #
 #=======================#
 
-hash chara 2>/dev/null && chara
+if hash fortune 2>/dev/null && hash ponysay 2>/dev/null; then
+  hash chara 2>/dev/null && chara
+fi
