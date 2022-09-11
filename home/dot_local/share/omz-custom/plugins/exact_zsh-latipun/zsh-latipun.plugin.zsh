@@ -100,6 +100,8 @@ if hash nnn 2>/dev/null; then
     fi
   }
   compdef _nnn n
+
+  alias N='sudo -E nnn -d'
 fi
 
 # lazygit alias

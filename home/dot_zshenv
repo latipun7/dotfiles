@@ -121,24 +121,32 @@ if hash fnm &>/dev/null; then
   fi
 fi
 
-# `nnn` configs
+# nnn configs
 if hash nnn 2>/dev/null; then
-  # Using terminal colors (catppuccin mocha)
-  BLK="03" CHR="03" DIR="04" EXE="02" REG="07" HARDLINK="05" SYMLINK="05"
+  # Using terminal colors
+  BLK="03" CHR="03" DIR="04" EXE="02" REG="07" HARDLINK="04" SYMLINK="06"
   MISSING="08" ORPHAN="01" FIFO="06" SOCK="03" UNKNOWN="01"
 
-  export NNN_COLORS="#04020301;4231"
+  export NNN_COLORS="#05060103;5613"
   export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$UNKNOWN"
-  export NNN_OPTS="aeEUHx"
-  export NNN_ARCHIVE="\\.(7z|a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|gz|jar|lha|lz|lzh|lzma|lzo|rar|rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z|zip)$"
-  export NNN_BMS="e:/etc;s:/usr/share;c:$XDG_CONFIG_HOME;h:$XDG_DATA_HOME/chezmoi"
-  export NNN_PLUG='p:preview-tui;o:fzopen;e:suedit;u:getplugs;z:autojump'
 
-  if [[ "$(hostnamectl chassis)" == *server* ]]; then
+  export NNN_BMS="e:/etc;s:/usr/share;c:$XDG_CONFIG_HOME;h:$XDG_DATA_HOME/chezmoi"
+  export NNN_PLUG='p:preview-tui;o:fzopen;e:-!sudoedit $nnn*;u:getplugs;z:autojump'
+
+  if [[ -z "$DISPLAY" ]]; then
+    export NNN_OPENER="$XDG_CONFIG_HOME/nnn/plugins/nuke"
+    export NNN_OPTS="acADEUHx"
+  else
+    export NNN_OPTS="aeADEUHx"
+  fi
+
+  if [[ "$(uname -o)" == *[Aa]ndroid* ]]; then
     export NNN_TRASH=*
   else
-    export NNN_TRASH=2
+    export NNN_TRASH=1
   fi
+
+  export NNN_ARCHIVE="\\.(7z|a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|gz|jar|lha|lz|lzh|lzma|lzo|rar|rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z|zip)$"
 fi
 
 # fzf configs
@@ -163,10 +171,6 @@ if hash fzf 2>/dev/null; then
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
   fi
 fi
-
-# Uniform look for Qt and GTK apps
-# https://wiki.archlinux.org/title/Uniform_look_for_Qt_and_GTK_applications
-export QT_QPA_PLATFORMTHEME=qt5ct
 
 # Invoking gpg-agent
 # https://www.gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html

@@ -28,6 +28,10 @@ export XMODIFIERS=@im=fcitx
 # Todo
 export TODO_PATH="$HOME/Documents/todo"
 
+# Uniform look for Qt and GTK apps
+# https://wiki.archlinux.org/title/Uniform_look_for_Qt_and_GTK_applications
+export QT_QPA_PLATFORMTHEME=qt5ct
+
 # ▄▖  ▗     ▗     ▗
 # ▌▌▌▌▜▘▛▌▛▘▜▘▀▌▛▘▜▘
 # ▛▌▙▌▐▖▙▌▄▌▐▖█▌▌ ▐▖
