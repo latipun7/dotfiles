@@ -32,10 +32,6 @@ M.config = function()
   lvim.keys.visual_mode["p"] = [["_dP]]
   lvim.keys.visual_mode["P"] = [["_dP]]
 
-  -- Move text up and down
-  lvim.keys.visual_mode["<A-j>"] = ":m .+1<CR>gv"
-  lvim.keys.visual_mode["<A-k>"] = ":m .-2<CR>gv"
-
   -- WhichKey
   lvim.builtin.which_key.mappings["t"] =
     { "<Cmd>set list!<CR>", "Toggle hidden characters" }
