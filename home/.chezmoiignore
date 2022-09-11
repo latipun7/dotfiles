@@ -20,7 +20,7 @@
 
 {{- if eq .chezmoi.os "windows" }}
 # Ignore this in windows (*nix only files)
-.config/{bpytop,kitty,paru,certbot,fcitx5,godns,rofi,tmux,wgetrc}
+.config/{btop,kitty,paru,certbot,fcitx5,godns,rofi,tmux,wgetrc}
 .local/bin
 .local/share/{fcitx5,omz-custom,Xresources*}
 .p10k.zsh

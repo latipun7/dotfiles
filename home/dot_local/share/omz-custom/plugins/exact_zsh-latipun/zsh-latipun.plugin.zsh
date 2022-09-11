@@ -34,8 +34,8 @@ alias gruh='git reset --hard upstream/$(git_current_branch)'
 alias v='$VISUAL'
 alias cm=chezmoi
 
-if hash bpytop 2>/dev/null; then
-  alias top=bpytop
+if hash btop 2>/dev/null; then
+  alias top=btop
 fi
 
 # paru alias

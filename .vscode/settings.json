@@ -9,7 +9,7 @@
     "godns-download-url": "gotemplate",
     "ignore": "ignore",
     "config": "properties",
-    "bpytop.conf": "properties",
+    "btop.conf": "properties",
     "dot_editorconfig": "editorconfig",
     "kitty.conf": "properties",
     ".chezmoiignore": "gotemplate"
