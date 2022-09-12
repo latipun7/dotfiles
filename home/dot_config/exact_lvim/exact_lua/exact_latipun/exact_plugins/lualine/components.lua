@@ -91,7 +91,7 @@ local components = {
   diff = {
     "diff",
     source = diff_source,
-    symbols = { added = " ", modified = "柳", removed = " " },
+    symbols = { added = " ", modified = " ", removed = " " },
     diff_color = {
       added = { fg = colors.git.add, bg = colors.bg },
       modified = { fg = colors.git.change, bg = colors.bg },

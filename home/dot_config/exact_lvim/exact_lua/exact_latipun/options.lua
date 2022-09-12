@@ -15,7 +15,7 @@ M.config = function()
     fileencoding = "utf-8",
     fillchars = {
       fold = " ",
-      eob = " ", -- suppress ~ at EndOfBuffer
+      eob = " ",
       diff = "╱", -- alternatives = ⣿ ░ ─
       msgsep = "‾",
       foldopen = "▾",
@@ -62,7 +62,10 @@ M.config = function()
     vim.opt[key] = value
   end
 
+  ---@diagnostic disable-next-line
+  vim.opt.shortmess:append("W")
   vim.opt.formatoptions:remove({ "c", "r", "o" })
+
   vim.cmd("set whichwrap+=<,>,[,],h,l")
   vim.cmd("set iskeyword+=-")
 
