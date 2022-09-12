@@ -148,7 +148,15 @@ M.config = function()
     separator_style = os.getenv("KITTY_WINDOW_ID") and "slant" or "thin",
     right_mouse_command = "vert sbuffer %d",
     show_close_icon = false,
-    indicator = { style = "bold" },
+    indicator = {
+      icon = "▎",
+      style = "icon",
+    },
+    max_name_length = 18,
+    max_prefix_length = 15,
+    truncate_names = true,
+    tab_size = 18,
+    color_icons = true,
     show_buffer_close_icons = true,
   }
 end
