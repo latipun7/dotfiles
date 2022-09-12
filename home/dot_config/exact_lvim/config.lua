@@ -11,6 +11,7 @@ lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.terminal.open_mapping = "<C-Space>"
 lvim.builtin.bufferline.options.sort_by = "insert_after_current"
+lvim.builtin.global_statusline = true
 
 local alpha_opts = require("latipun.plugins.alpha-dashboard").config()
 lvim.builtin.alpha.mode = "custom"
@@ -48,6 +49,7 @@ lvim.builtin.project.patterns = {
 }
 
 require("latipun.plugins.bufferline").config()
+require("latipun.plugins.lualine").config()
 
 -- LSP
 lvim.lsp.diagnostics.virtual_text = false

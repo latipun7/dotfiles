@@ -20,7 +20,6 @@ M.config = function()
       notify = true,
       symbols_outline = true,
       indent_blankline = { enabled = true, colored_indent_levels = true },
-      bufferline = { enabled = true, italics = true, bolds = true },
     },
   })
 
