@@ -1,6 +1,9 @@
 -- general configs
 require("latipun.options").config()
 
+-- Keybindings
+require("latipun.keybindings").config()
+
 lvim.log.level = "warn"
 lvim.format_on_save = true
 lvim.transparent_window = true
@@ -10,6 +13,7 @@ lvim.colorscheme = "catppuccin"
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.terminal.open_mapping = "<C-Space>"
+lvim.builtin.terminal.execs = { { "lazygit", "<Leader>gg", " LazyGit" } }
 lvim.builtin.bufferline.options.sort_by = "insert_after_current"
 lvim.builtin.global_statusline = true
 
@@ -30,6 +34,7 @@ lvim.builtin.treesitter.ensure_installed = {
   "lua",
   "markdown",
   "markdown_inline",
+  "regex",
   "tsx",
   "typescript",
   "yaml",
@@ -83,9 +88,6 @@ require("latipun.plugins").config()
 
 -- Autocommands
 require("latipun.autocommands").config()
-
--- Keybindings
-require("latipun.keybindings").config()
 
 -- reload packer compiled without restarting nvim
 require("packer").init({

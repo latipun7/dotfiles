@@ -1,14 +1,14 @@
 local M = {}
 
 M.keybindings = function()
-  lvim.builtin.which_key.mappings["y"] = {
+  lvim.builtin.which_key.mappings.y = {
     "<Cmd>lua require('telescope').extensions.neoclip.default()<CR>",
-    " open yank history",
+    " Open yank history",
   }
 
-  lvim.builtin.which_key.mappings["m"] = {
+  lvim.builtin.which_key.mappings.m = {
     "<Cmd>lua require('telescope').extensions.macroscope.default()<CR>",
-    "ﮧ open macro history",
+    "ﮧ Open macro history",
   }
 end
 

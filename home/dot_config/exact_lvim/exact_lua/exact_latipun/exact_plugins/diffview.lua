@@ -1,15 +1,15 @@
 local M = {}
 
 M.keybindings = function()
-  lvim.builtin.which_key.mappings["g"]["d"] = {
+  lvim.builtin.which_key.mappings.g.d = {
     "<Cmd>DiffviewOpen<CR>",
     " Open diffview",
   }
-  lvim.builtin.which_key.mappings["g"]["h"] = {
+  lvim.builtin.which_key.mappings.g.h = {
     "<Cmd>DiffviewFileHistory<CR>",
     " Diff history",
   }
-  lvim.builtin.which_key.mappings["g"]["f"] = {
+  lvim.builtin.which_key.mappings.g.f = {
     "<Cmd>DiffviewFileHistory %<CR>",
     " Current file diff history",
   }

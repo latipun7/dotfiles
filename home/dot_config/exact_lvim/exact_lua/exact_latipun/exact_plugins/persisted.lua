@@ -1,7 +1,7 @@
 local M = {}
 
 M.keybindings = function()
-  lvim.builtin.which_key.mappings["S"] = {
+  lvim.builtin.which_key.mappings.S = {
     "<Cmd>lua require('telescope').extensions.persisted.persisted()<CR>",
     " pick session to load",
   }
