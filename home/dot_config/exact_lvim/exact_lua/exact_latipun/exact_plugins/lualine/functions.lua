@@ -143,6 +143,18 @@ local functions = {
     end
   end,
 
+  auto_format = function()
+    local exists, autocmds = pcall(vim.api.nvim_get_autocmds, {
+      group = "lsp_format_on_save",
+      event = "BufWritePre",
+    })
+    if not exists or #autocmds == 0 then
+      return ""
+    else
+      return ""
+    end
+  end,
+
   readonly = function()
     if vim.bo.readonly or not vim.bo.modifiable then
       return ""

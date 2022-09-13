@@ -72,7 +72,7 @@ local components = {
       return { fg = get_file_icon_color() }
     end,
     gui = "bold",
-    padding = 0,
+    padding = { left = 1, right = 0 },
   },
 
   filetype = {
@@ -117,6 +117,12 @@ local components = {
     cond = function()
       return (vim.g.persisting ~= nil)
     end,
+  },
+
+  auto_format = {
+    functions.auto_format,
+    color = { fg = colors.sapphire },
+    padding = 0,
   },
 
   readonly = { functions.readonly, color = { fg = colors.red } },

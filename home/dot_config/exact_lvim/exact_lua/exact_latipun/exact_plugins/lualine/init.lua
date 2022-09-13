@@ -22,16 +22,18 @@ M.config = function()
     },
 
     sections = {
-      lualine_a = { components.mode },
-      lualine_b = { components.git_branch },
-      lualine_c = {
+      lualine_a = { components.mode, components.git_branch },
+      lualine_b = {
         components.win_icon,
         components.filetype,
         components.filename,
         components.diff,
+      },
+      lualine_c = {
         components.python_env,
         components.testing,
         components.session,
+        components.auto_format,
       },
       lualine_x = {
         components.readonly,

@@ -73,6 +73,8 @@ M.config = function()
 
   lvim.builtin.which_key.mappings.t =
     { "<Cmd>set list!<CR>", " Toggle hidden characters" }
+  lvim.builtin.which_key.mappings.F =
+    { "<Cmd>LvimToggleFormatOnSave<CR>", " Toggle format on save" }
 
   -- Bufferline
   lvim.builtin.which_key.mappings.b = {

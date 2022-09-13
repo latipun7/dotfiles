@@ -5,17 +5,19 @@ require("latipun.options").config()
 require("latipun.keybindings").config()
 
 lvim.log.level = "warn"
-lvim.format_on_save = true
 lvim.transparent_window = true
+lvim.colorscheme = "catppuccin"
 
 -- LunarVim builtin configs
-lvim.colorscheme = "catppuccin"
+lvim.builtin.global_statusline = true
+
+lvim.builtin.bufferline.options.sort_by = "insert_after_current"
+
 lvim.builtin.notify.active = true
+
 lvim.builtin.terminal.active = true
 lvim.builtin.terminal.open_mapping = "<C-Space>"
 lvim.builtin.terminal.execs = { { "lazygit", "<Leader>gg", " LazyGit" } }
-lvim.builtin.bufferline.options.sort_by = "insert_after_current"
-lvim.builtin.global_statusline = true
 
 local alpha_opts = require("latipun.plugins.alpha-dashboard").config()
 lvim.builtin.alpha.mode = "custom"
