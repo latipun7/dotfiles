@@ -11,6 +11,7 @@ M.config = function()
   local title = "Persisted Session"
 
   require("persisted").setup({
+    silent = true,
     use_git_branch = true,
     autosave = true,
     autoload = false,

@@ -20,11 +20,23 @@ local function diagnostics_indicator(_, _, diagnostics)
 end
 
 local function highlight()
+  local colors = require("latipun.theme").current_colors()
   local ok, catppuccin =
     pcall(require, "catppuccin.groups.integrations.bufferline")
 
   if ok then
-    return catppuccin.get()
+    return catppuccin.get({
+      custom = {
+        all = {
+          -- SEE: https://github.com/akinsho/bufferline.nvim/issues/547
+          -- fill = { bg = "NONE" },
+          -- separator = { bg = "NONE" },
+          -- separator_selected = { bg = "NONE" },
+          group_label = { bg = colors.sapphire, fg = colors.bg },
+          group_separator = { fg = colors.sapphire },
+        },
+      },
+    })
   else
     return {
       buffer_selected = { bold = true, italic = true },
@@ -112,40 +124,45 @@ M.config = function()
         },
       },
     },
-    hover = { enabled = true, reveal = { "close" } },
     offsets = {
       {
         text = "ﰤ Explorer",
         filetype = "NvimTree",
-        highlight = "PanelHeading",
+        highlight = "BufferLineBufferSelected",
+        padding = 1,
       },
       {
         text = " Flutter Outline",
         filetype = "flutterToolsOutline",
-        highlight = "PanelHeading",
+        highlight = "BufferLineBufferSelected",
+        padding = 1,
       },
       {
         text = " Undotree",
         filetype = "undotree",
-        highlight = "PanelHeading",
+        highlight = "BufferLineBufferSelected",
+        padding = 1,
       },
       {
         text = " Packer",
         filetype = "packer",
-        highlight = "PanelHeading",
+        highlight = "BufferLineBufferSelected",
+        padding = 1,
       },
       {
         text = " Database Viewer",
         filetype = "dbui",
-        highlight = "PanelHeading",
+        highlight = "BufferLineBufferSelected",
+        padding = 1,
       },
       {
         text = " Diff View",
         filetype = "DiffviewFiles",
-        highlight = "PanelHeading",
+        highlight = "BufferLineBufferSelected",
+        padding = 1,
       },
     },
-    separator_style = os.getenv("KITTY_WINDOW_ID") and "slant" or "thin",
+    separator_style = "slant",
     right_mouse_command = "vert sbuffer %d",
     show_close_icon = false,
     indicator = {
