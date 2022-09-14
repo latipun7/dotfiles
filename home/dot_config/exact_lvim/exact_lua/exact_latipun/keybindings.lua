@@ -75,11 +75,12 @@ M.config = function()
     { "<Cmd>set list!<CR>", " Toggle hidden characters" }
   lvim.builtin.which_key.mappings.F =
     { "<Cmd>LvimToggleFormatOnSave<CR>", " Toggle format on save" }
+  lvim.builtin.which_key.mappings.c = { "<Cmd>Bdelete<CR>", " Close buffer" }
 
-  -- Bufferline
   lvim.builtin.which_key.mappings.b = {
     name = " Buffers",
     b = { "<Cmd>b#<CR>", " Previous" },
+    c = { [[<Cmd>silent! %bdelete|e#|bdelete#<CR>]], " Close all but this" },
     D = { "<Cmd>BufferLineSortByDirectory<CR>", " Sort by directory" },
     e = { "<Cmd>BufferLinePickClose<CR>", "ﲨ Pick which buffer to close" },
     f = { "<Cmd>Telescope buffers<CR>", " Find" },
@@ -88,6 +89,7 @@ M.config = function()
     L = { "<Cmd>BufferLineSortByExtension<CR>", " Sort by language" },
     l = { "<Cmd>BufferLineCloseRight<CR>", " Close all to the right" },
     p = { "<Cmd>BufferLineTogglePin<CR>", " Toggle pin" },
+    w = { "<Cmd>bufdo Bdelete<CR>", " Close all buffers" },
   }
 
   -- Git

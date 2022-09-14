@@ -109,18 +109,13 @@ M.config = function()
       end,
     },
     {
-      "famiu/bufdelete.nvim",
-      setup = function()
-        require("latipun.plugins.bufdelete").keybindings()
-      end,
-    },
-    {
       "ThePrimeagen/harpoon",
       requires = { { "nvim-lua/plenary.nvim" }, { "nvim-lua/popup.nvim" } },
       setup = function()
         require("latipun.plugins.harpoon").keybindings()
       end,
     },
+    { "famiu/bufdelete.nvim", event = "BufReadPre" },
     { "alker0/chezmoi.vim" },
     { "gpanders/editorconfig.nvim" },
     { "wakatime/vim-wakatime" },
