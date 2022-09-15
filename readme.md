@@ -15,9 +15,11 @@ _more at [screenshot history](https://github.com/latipun7/dotfiles/discussions/1
 
 ## What in this Repo
 
-This repo contains my personal configuration for Linux and Windows managed by [chezmoi](https://chezmoi.io).
+This repo contains my personal configuration for Linux, Android, and Windows
+managed by [chezmoi](https://chezmoi.io).
 Currently this is for my Arch Linux as server, Arch Linux for my daily driver desktop,
-and Windows (I don't have Mac yet, but I'm considering that too in this dotfiles).
+Android via Termux, and Windows (I don't have Mac yet,
+but I'm considering that too in this dotfiles).
 
 **Important**: You need [nerd fonts][nerd-fonts] in your terminal.
 Install the font of your choosing and use that font in your terminal.
