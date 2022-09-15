@@ -1,73 +1,29 @@
 -- general configs
 require("latipun.options").config()
 
--- Keybindings
-require("latipun.keybindings").config()
-
 lvim.log.level = "warn"
 lvim.transparent_window = true
 lvim.colorscheme = "catppuccin"
 
+-- Keybindings
+require("latipun.keybindings").config()
+
 -- LunarVim builtin configs
-lvim.builtin.global_statusline = true
-
-lvim.builtin.bufferline.options.sort_by = "insert_after_current"
-
-lvim.builtin.notify.active = true
-
-lvim.builtin.terminal.active = true
-lvim.builtin.terminal.open_mapping = "<C-Space>"
-lvim.builtin.terminal.execs = { { "lazygit", "<Leader>gg", " LazyGit" } }
-
-local alpha_opts = require("latipun.plugins.alpha-dashboard").config()
-lvim.builtin.alpha.mode = "custom"
-lvim.builtin.alpha.custom = { config = alpha_opts }
-
-lvim.builtin.treesitter.auto_install = true
-lvim.builtin.treesitter.highlight.enabled = true
-lvim.builtin.treesitter.highlight.additional_vim_regex_highlighting = { "yaml" }
-lvim.builtin.treesitter.ensure_installed = {
-  "bash",
-  "comment",
-  "css",
-  "html",
-  "javascript",
-  "json",
-  "lua",
-  "markdown",
-  "markdown_inline",
-  "regex",
-  "tsx",
-  "typescript",
-  "yaml",
-}
-
-lvim.builtin.project.detection_methods = { "pattern" }
-lvim.builtin.project.show_hidden = true
-lvim.builtin.project.patterns = {
-  ".git",
-  ".editorconfig",
-  ".hg",
-  ".bzr",
-  ".svn",
-  "_darcs",
-  "Makefile",
-  "package.json",
-}
-
-require("latipun.plugins.bufferline").config()
+require("latipun.lvim_builtin").config()
 require("latipun.plugins.lualine").config()
+require("latipun.plugins.telescope").config()
+require("latipun.plugins.bufferline").config()
 
 -- LSP
+local code_actions = require("lvim.lsp.null-ls.code_actions")
+local formatters = require("lvim.lsp.null-ls.formatters")
+local linters = require("lvim.lsp.null-ls.linters")
+
 lvim.lsp.diagnostics.virtual_text = false
 vim.list_extend(
   lvim.lsp.automatic_configuration.skipped_servers,
   { "sumneko_lua" }
 )
-
-local code_actions = require("lvim.lsp.null-ls.code_actions")
-local formatters = require("lvim.lsp.null-ls.formatters")
-local linters = require("lvim.lsp.null-ls.linters")
 
 code_actions.setup({
   { name = "eslint_d" },
@@ -92,6 +48,4 @@ require("latipun.plugins").config()
 require("latipun.autocommands").config()
 
 -- reload packer compiled without restarting nvim
-require("packer").init({
-  auto_reload_compiled = true,
-})
+require("packer").init({ auto_reload_compiled = true })
