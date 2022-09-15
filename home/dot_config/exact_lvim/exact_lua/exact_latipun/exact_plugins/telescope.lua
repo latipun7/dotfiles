@@ -1,6 +1,5 @@
 local M = {}
-local telescope_actions = require("telescope.actions.set")
-local action_state = require("telescope.actions.state")
+local actions_state = require("telescope.actions.state")
 local builtin = require("telescope.builtin")
 local actions = require("telescope.actions")
 local themes = require("telescope.themes")
@@ -30,7 +29,7 @@ local layout_config = function()
 end
 
 local function _multiopen(prompt_bufnr, open_cmd)
-  local picker = action_state.get_current_picker(prompt_bufnr)
+  local picker = actions_state.get_current_picker(prompt_bufnr)
   local num_selections = #picker:get_multi_selection()
   local border_contents = picker.prompt_border.contents[1]
 
@@ -135,9 +134,7 @@ end
 -- find files in the upper directory
 function M.find_updir()
   local up_dir = vim.fn.getcwd():gsub("(.*)/.*$", "%1")
-  local opts = {
-    cwd = up_dir,
-  }
+  local opts = { cwd = up_dir }
 
   builtin.find_files(opts)
 end
@@ -268,17 +265,6 @@ end
 M.config = function()
   lvim.builtin.telescope.defaults.layout_config = layout_config()
   lvim.builtin.telescope.defaults.dynamic_preview_title = true
-  lvim.builtin.telescope.pickers.find_files = {
-    attach_mappings = function(_)
-      telescope_actions.select:enhance({
-        post = function()
-          vim.cmd(":normal! zx")
-        end,
-      })
-      return true
-    end,
-    find_command = { "fd", "--type=file", "--hidden" },
-  }
   lvim.builtin.telescope.defaults.mappings = {
     i = {
       ["<C-c>"] = actions.close,
@@ -357,6 +343,33 @@ M.config = function()
     "%.epub",
     "%.flac",
     "%.tar.gz",
+  }
+  lvim.builtin.telescope.pickers = {
+    git_files = {
+      attach_mappings = function(_)
+        actions.file_edit:enhance({
+          post = function()
+            vim.cmd("normal! zx")
+          end,
+        })
+        return true
+      end,
+    },
+    find_files = {
+      attach_mappings = function(_)
+        actions.file_edit:enhance({
+          post = function()
+            vim.cmd("normal! zx")
+          end,
+        })
+        return true
+      end,
+      find_command = { "fd", "--type=file", "--hidden" },
+      hidden = true,
+    },
+    live_grep = {
+      only_sort_text = true,
+    },
   }
 end
 

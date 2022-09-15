@@ -131,6 +131,7 @@ M.config = function()
     name = " Treesitter",
     i = { "<Cmd>TSInstallInfo<CR>", "Info" },
     u = { "<Cmd>TSUpdateSync<CR>", "Update" },
+    h = { "<Cmd>TSBufToggle highlight<CR>", "Toggle highlight" },
   }
 end
 

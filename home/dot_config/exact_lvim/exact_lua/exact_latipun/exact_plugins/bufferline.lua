@@ -28,10 +28,6 @@ local function highlight()
     return catppuccin.get({
       custom = {
         all = {
-          -- SEE: https://github.com/akinsho/bufferline.nvim/issues/547
-          -- fill = { bg = "NONE" },
-          -- separator = { bg = "NONE" },
-          -- separator_selected = { bg = "NONE" },
           group_label = { bg = colors.sapphire, fg = colors.bg },
           group_separator = { fg = colors.sapphire },
         },
