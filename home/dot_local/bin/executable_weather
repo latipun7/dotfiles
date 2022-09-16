@@ -2,13 +2,13 @@
 
 set -euo pipefail
 
-DEFAULT="sleman"
+DEFAULT="Godean"
 CITY=""
 
 if [ $# -eq 0 ]; then
   CITY=$DEFAULT
 else
-  CITY=$1
+  CITY="$1"
 fi
 
-curl -fsLS wttr.in/"$CITY"
+exec curl -fsLS wttr.in/"$CITY"

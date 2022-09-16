@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+text="$*"
+if [ -z "${text}" ]; then
+  read -rp "Banner Text: " text
+fi
+
+cols=$(tput lines)
+tmux split-window \; resize-pane -y $((cols - 6)) \; send -t 1 "banner \"$text\"" Enter \; send -t 2 "fishes" Enter

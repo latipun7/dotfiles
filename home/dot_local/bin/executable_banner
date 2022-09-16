@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+clear=$'\033[2J'
+top=$'\033[H'
+
+trap 'setterm --cursor on; echo ${clear}; exit; trap -- - SIGINT SIGTERM' SIGTERM SIGINT
+
+text="$*"
+if [ -z "${text}" ]; then
+  read -rp "Banner Text: " text
+fi
+
+echo "${clear}"
+while true; do
+  echo "${top}"
+  figl <<<"$text" | lolcat
+  setterm --cursor off
+  sleep 1
+done

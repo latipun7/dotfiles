@@ -38,10 +38,27 @@ if hash btop 2>/dev/null; then
   alias top=btop
 fi
 
+if hash asciiquarium 2>/dev/null; then
+  alias fishes='asciiquarium --transparent'
+fi
+
 # paru alias
 if hash paru 2>/dev/null; then
   alias yay=paru
   alias yeet='paru -Rns'
+fi
+
+if hash pacman 2>/dev/null && hash yay 2>/dev/null; then
+  function backup-packages-list() {
+    comm -23 <(yay -Qqe | sort) <({ yay -Qqg base-devel; expac -l '\n' '%E' base; echo 'base' } | sort -u) > "$HOME/Documents/packages.list"
+  }
+
+  function get-packages-list() {
+    if ! [[ -s "$HOME/Documents/packages.list" ]]; then
+      backup-packages-list
+    fi
+    cat "$HOME/Documents/packages.list" | xargs
+  }
 fi
 
 # lsd alias
