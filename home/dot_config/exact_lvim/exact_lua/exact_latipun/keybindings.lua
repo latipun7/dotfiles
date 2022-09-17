@@ -126,6 +126,23 @@ M.config = function()
   lvim.builtin.which_key.mappings.p.name = " Packer"
   lvim.builtin.which_key.mappings.s.name = " Search"
 
+  -- LSP - Peek
+  lvim.builtin.which_key.mappings["lp"] = {
+    name = "Peek",
+    d = {
+      "<Cmd>lua require('latipun.peek').Peek('definition')<CR>",
+      "Definition",
+    },
+    t = {
+      "<Cmd>lua require('latipun.peek').Peek('typeDefinition')<CR>",
+      "Type definition",
+    },
+    i = {
+      "<Cmd>lua require('latipun.peek').Peek('implementation')<CR>",
+      "Implementation",
+    },
+  }
+
   -- Treesitter
   lvim.builtin.which_key.mappings.T = {
     name = " Treesitter",

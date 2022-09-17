@@ -20,6 +20,12 @@ local formatters = require("lvim.lsp.null-ls.formatters")
 local linters = require("lvim.lsp.null-ls.linters")
 
 lvim.lsp.diagnostics.virtual_text = false
+lvim.lsp.buffer_mappings.normal_mode["gp"] = {
+  function()
+    require("latipun.peek").Peek("definition")
+  end,
+  "Peek definition",
+}
 vim.list_extend(
   lvim.lsp.automatic_configuration.skipped_servers,
   { "sumneko_lua" }
