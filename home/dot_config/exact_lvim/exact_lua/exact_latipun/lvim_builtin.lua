@@ -22,6 +22,15 @@ M.config = function()
   lvim.builtin.alpha.mode = "custom"
   lvim.builtin.alpha.custom = { config = alpha_opts }
 
+  -- ▖  ▖▌ ▘  ▌   ▌
+  -- ▌▞▖▌▛▌▌▛▘▛▌▄▖▙▘█▌▌▌
+  -- ▛ ▝▌▌▌▌▙▖▌▌  ▛▖▙▖▙▌
+  --                  ▄▌
+
+  lvim.builtin.which_key.setup.plugins.marks = true
+  lvim.builtin.which_key.setup.plugins.registers = true
+  lvim.builtin.which_key.setup.plugins.presets.z = true
+
   -- ▄▖        ▘▗ ▗
   -- ▐ ▛▘█▌█▌▛▘▌▜▘▜▘█▌▛▘
   -- ▐ ▌ ▙▖▙▖▄▌▌▐▖▐▖▙▖▌
