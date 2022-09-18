@@ -58,6 +58,7 @@ M.config = function()
     splitright = true,
     swapfile = false,
     tabstop = 2,
+    timeoutlen = 250,
     undofile = true,
     updatetime = 300,
     wrap = true,

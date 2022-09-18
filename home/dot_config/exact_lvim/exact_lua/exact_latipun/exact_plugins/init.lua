@@ -109,6 +109,13 @@ M.config = function()
       end,
     },
     {
+      "max397574/better-escape.nvim",
+      event = "InsertEnter",
+      config = function()
+        require("better_escape").setup()
+      end,
+    },
+    {
       "ThePrimeagen/harpoon",
       requires = { { "nvim-lua/plenary.nvim" }, { "nvim-lua/popup.nvim" } },
       setup = function()
