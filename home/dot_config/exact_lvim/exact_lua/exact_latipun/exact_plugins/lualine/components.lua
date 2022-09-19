@@ -25,44 +25,14 @@ local function get_file_icon_color()
   end
 end
 
--- Color table for highlights
-local mode_color = {
-  n = colors.git.delete,
-  i = colors.green,
-  v = colors.yellow,
-  [""] = colors.blue,
-  V = colors.yellow,
-  c = colors.cyan,
-  no = colors.magenta,
-  s = colors.orange,
-  S = colors.orange,
-  ic = colors.yellow,
-  R = colors.violet,
-  Rv = colors.violet,
-  cv = colors.red,
-  ce = colors.red,
-  r = colors.cyan,
-  rm = colors.cyan,
-  ["r?"] = colors.cyan,
-  ["!"] = colors.red,
-  t = colors.red,
-}
-
 local components = {
-  mode = {
-    functions.mode,
-    color = function()
-      return { fg = mode_color[vim.fn.mode()], bg = colors.bg }
-    end,
-    padding = { left = 1, right = 0 },
-  },
+  mode = { functions.mode },
 
   git_branch = {
     "b:gitsigns_head",
-    icon = " ",
+    icon = "",
+    padding = { left = 0, right = 1 },
     cond = conditions.is_git_workspace,
-    color = { fg = colors.blue, bg = colors.bg },
-    padding = { right = 1 },
   },
 
   win_icon = {
@@ -71,7 +41,6 @@ local components = {
     color = function()
       return { fg = get_file_icon_color() }
     end,
-    gui = "bold",
     padding = { left = 1, right = 0 },
   },
 
@@ -79,30 +48,27 @@ local components = {
     "filetype",
     colored = true,
     icon_only = true,
+    padding = { left = 1, right = 0 },
   },
 
   filename = {
     functions.filename,
     cond = conditions.not_empty_buffer,
-    padding = { left = 0, right = 1 },
-    color = { fg = colors.fg, gui = "bold" },
+    color = { fg = colors.fg },
+    separator = "",
   },
 
   diff = {
     "diff",
     source = diff_source,
+    cond = conditions.is_git_workspace and conditions.is_in_width_limit,
     symbols = { added = " ", modified = " ", removed = " " },
-    diff_color = {
-      added = { fg = colors.git.add, bg = colors.bg },
-      modified = { fg = colors.git.change, bg = colors.bg },
-      removed = { fg = colors.git.delete, bg = colors.bg },
-    },
   },
 
-  python_env = {
-    functions.python_env,
-    color = { fg = colors.green },
-    cond = conditions.is_in_width_limit,
+  readonly = {
+    functions.readonly,
+    color = { fg = colors.red },
+    padding = { left = 1, right = 0 },
   },
 
   testing = {
@@ -110,40 +76,47 @@ local components = {
     cond = function()
       return functions.testing() ~= nil
     end,
+    padding = { left = 1, right = 0 },
   },
 
   session = {
     functions.session,
+    color = { fg = colors.flamingo },
     cond = function()
       return (vim.g.persisting ~= nil)
     end,
+    padding = { left = 1, right = 0 },
   },
 
   auto_format = {
     functions.auto_format,
     color = { fg = colors.sapphire },
-    padding = 0,
+    padding = { left = 1, right = 0 },
   },
 
-  readonly = { functions.readonly, color = { fg = colors.red } },
+  treesitter = {
+    functions.treesitter,
+    color = { fg = colors.green },
+  },
+
+  python_env = {
+    functions.python_env,
+    color = { fg = colors.green },
+    cond = conditions.is_large_width,
+    separator = "",
+  },
 
   diagnostic = {
     "diagnostics",
     sources = { "nvim_diagnostic" },
     symbols = {
-      error = kind.icons.error,
-      warn = kind.icons.warn,
-      info = kind.icons.info,
-      hint = kind.icons.hint,
+      error = kind.icons.error .. " ",
+      warn = kind.icons.warn .. " ",
+      info = kind.icons.info .. " ",
+      hint = kind.icons.hint .. " ",
     },
     cond = conditions.is_in_width_limit,
-  },
-
-  treesitter = {
-    functions.treesitter,
-    padding = 0,
-    color = { fg = colors.green },
-    cond = conditions.is_in_width_limit,
+    separator = "",
   },
 
   lsp_status = {
@@ -154,24 +127,35 @@ local components = {
 
   location = {
     "location",
-    padding = { left = 1 },
     color = { fg = colors.orange },
+    cond = conditions.not_empty_buffer,
   },
 
-  filesize = { functions.filesize, cond = conditions.not_empty_buffer },
+  filesize = {
+    functions.filesize,
+    cond = conditions.not_empty_buffer,
+    color = { fg = colors.sapphire },
+    padding = { left = 0, right = 1 },
+  },
 
   fileformat = {
     "fileformat",
     fmt = string.upper,
     icons_enabled = true,
-    color = { fg = colors.green, gui = "bold" },
+    cond = conditions.not_empty_buffer,
+    padding = { left = 0, right = 1 },
+  },
+
+  progress = {
+    "progress",
     cond = conditions.is_in_width_limit,
+    color = { fg = colors.bg, bg = colors.lavender },
   },
 
   scrollbar = {
     functions.scrollbar,
+    color = { fg = colors.red, bg = colors.lavender },
     padding = 0,
-    color = { fg = colors.yellow, bg = colors.bg },
   },
 }
 

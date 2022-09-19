@@ -21,6 +21,7 @@ tmux_conf_24b_colour=true
 %hidden thm_crust="#11111b"        # background
 %hidden thm_mantle="#181825"
 %hidden thm_text="#cdd6f4"         # foreground
+%hidden thm_surface0="#313244"
 %hidden thm_surface1="#45475a"
 %hidden thm_surface2="#585b70"
 %hidden thm_blue="#89b4fa"
@@ -56,12 +57,12 @@ tmux_conf_theme_pane_active_indicator="$thm_sky"
 
 # status line style
 tmux_conf_theme_message_fg="$thm_sky"
-tmux_conf_theme_message_bg="$thm_surface1"
+tmux_conf_theme_message_bg="$thm_surface0"
 tmux_conf_theme_message_attr="align=centre,bold"
 
 # status line command style (<prefix> : Escape)
 tmux_conf_theme_message_command_fg="$thm_sky"
-tmux_conf_theme_message_command_bg="$thm_surface1"
+tmux_conf_theme_message_command_bg="$thm_surface0"
 tmux_conf_theme_message_command_attr="align=centre,bold"
 
 # window modes style
@@ -78,10 +79,10 @@ tmux_conf_theme_status_attr="none"
 tmux_conf_theme_terminal_title="❐ #S ● #W"
 
 # status left/right sections separators
-tmux_conf_theme_left_separator_main=""
-tmux_conf_theme_left_separator_sub=""
-tmux_conf_theme_right_separator_main=""
-tmux_conf_theme_right_separator_sub=""
+tmux_conf_theme_left_separator_main=""
+tmux_conf_theme_left_separator_sub=""
+tmux_conf_theme_right_separator_main=""
+tmux_conf_theme_right_separator_sub=""
 
 # window status style
 tmux_conf_theme_window_status_fg="$thm_surface2"
@@ -108,14 +109,14 @@ tmux_conf_theme_window_status_bell_attr="blink,bold"
 
 # window last status style
 tmux_conf_theme_window_status_last_fg="$thm_blue"
-tmux_conf_theme_window_status_last_bg="$thm_surface1"
+tmux_conf_theme_window_status_last_bg="$thm_surface0"
 tmux_conf_theme_window_status_last_attr="none"
 
 # status left/right content:
 #   - separate main sections with "|"
 #   - separate subsections with ","
 tmux_conf_theme_status_left="  #S "
-tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , #(printf '%a,%e %b') , %I:%M %p | #{username}#{root} | #{hostname}#{online} "
+tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , #(printf '%a, %b %d') , %I:%M %p | #{username}#{root} | #{hostname}#{online} "
 
 # status left style
 tmux_conf_theme_status_left_fg="$thm_crust,$thm_crust,$thm_crust"
@@ -225,7 +226,8 @@ set -g status-keys vi
 set -g mode-keys vi
 
 setw -g automatic-rename-format "#{=/-13/..:pane_title}"
-set -g pane-border-status top
+set -g pane-border-status off
+set -g status-position top
 
 # override window status current
 setw -g window-status-current-format "#[fg=$tmux_conf_theme_status_bg,bg=$thm_status_current_index_bg,none]$tmux_conf_theme_left_separator_main#[fg=$thm_crust,bg=$thm_status_current_index_bg,$tmux_conf_theme_window_status_current_attr] $tmux_conf_theme_window_status_current_format #[fg=$tmux_conf_theme_window_status_current_bg,bg=$tmux_conf_theme_status_bg]$tmux_conf_theme_left_separator_main" #!important

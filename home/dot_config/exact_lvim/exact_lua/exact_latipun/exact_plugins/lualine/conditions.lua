@@ -1,4 +1,5 @@
-local window_width_limit = 80
+local window_width_limit = 100
+local window_large_width = 150
 
 local conditions = {
   not_empty_buffer = function()
@@ -10,7 +11,7 @@ local conditions = {
   end,
 
   is_large_width = function()
-    return vim.fn.winwidth(0) > 150
+    return vim.fn.winwidth(0) > window_large_width
   end,
 
   is_git_workspace = function()

@@ -1,13 +1,21 @@
 local M = {}
 local components = require("latipun.plugins.lualine.components")
+local catppuccino = require("lualine.themes.catppuccin")
+local colors = require("latipun.theme").current_colors()
+
+catppuccino.normal.b.bg = colors.bg_br
+catppuccino.insert.b.bg = colors.bg_br
+catppuccino.command.b.bg = colors.bg_br
+catppuccino.visual.b.bg = colors.bg_br
+catppuccino.replace.b.bg = colors.bg_br
 
 M.config = function()
   local config = {
     options = {
       icons_enabled = true,
-      component_separators = { left = "", right = "" },
-      section_separators = { left = "", right = "" },
-      theme = "catppuccin",
+      component_separators = "",
+      section_separators = { left = "", right = "" },
+      theme = catppuccino,
       disabled_filetypes = {
         "dashboard",
         "Outline",
@@ -30,15 +38,15 @@ M.config = function()
         components.diff,
       },
       lualine_c = {
-        components.python_env,
+        components.readonly,
         components.testing,
         components.session,
         components.auto_format,
+        components.treesitter,
       },
       lualine_x = {
-        components.readonly,
+        components.python_env,
         components.diagnostic,
-        components.treesitter,
         components.lsp_status,
       },
       lualine_y = {
@@ -46,16 +54,16 @@ M.config = function()
         components.filesize,
         components.fileformat,
       },
-      lualine_z = { components.scrollbar },
+      lualine_z = { components.progress, components.scrollbar },
     },
 
     inactive_sections = {
-      lualine_a = { "filename" },
-      lualine_v = {},
-      lualine_y = {},
-      lualine_z = {},
+      lualine_a = {},
+      lualine_b = { "filename" },
       lualine_c = {},
       lualine_x = {},
+      lualine_y = {},
+      lualine_z = {},
     },
   }
 

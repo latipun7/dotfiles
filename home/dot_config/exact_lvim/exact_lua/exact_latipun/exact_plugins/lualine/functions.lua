@@ -7,18 +7,18 @@ local functions = {
 
     local selector = math.floor(_time.hour / 8) + 1
     local normal_icons = {
-      "  ",
-      "  ",
-      "  ",
+      "",
+      "",
+      "",
     }
 
     if mod == "n" or mod == "no" or mod == "nov" then
       return normal_icons[selector]
     elseif mod == "i" or mod == "ic" or mod == "ix" then
       local insert_icons = {
-        "  ",
-        "  ",
-        "  ",
+        "",
+        "",
+        "",
       }
       return insert_icons[selector]
     elseif
@@ -28,17 +28,17 @@ local functions = {
       or mod == "Vs"
       or mod == "cv"
     then
-      local verbose_icons = {
-        " 勇",
-        "  ",
-        "  ",
+      local visual_icons = {
+        "",
+        "",
+        "",
       }
-      return verbose_icons[selector]
+      return visual_icons[selector]
     elseif mod == "c" or mod == "ce" then
       local command_icons = {
-        "  ",
-        "  ",
-        "  ",
+        "",
+        "",
+        "",
       }
       return command_icons[selector]
     elseif
@@ -51,9 +51,9 @@ local functions = {
       or mod == "Rv"
     then
       local replace_icons = {
-        "  ",
-        "  ",
-        "  ",
+        "",
+        "",
+        "",
       }
       return replace_icons[selector]
     end
@@ -184,7 +184,6 @@ local functions = {
     for _, client in pairs(buf_clients) do
       if client.name ~= "null-ls" then
         local _added_client = client.name
-        _added_client = string.sub(client.name, 1, 4)
         table.insert(buf_client_names, _added_client)
       end
     end
@@ -194,7 +193,6 @@ local functions = {
     local supported_formatters = {}
     for _, fmt in pairs(formatters.list_registered(buf_ft)) do
       local _added_formatter = fmt
-      _added_formatter = string.sub(fmt, 1, 4)
       table.insert(supported_formatters, _added_formatter)
     end
     vim.list_extend(buf_client_names, supported_formatters)
@@ -204,7 +202,6 @@ local functions = {
     local supported_linters = {}
     for _, lnt in pairs(linters.list_registered(buf_ft)) do
       local _added_linter = lnt
-      _added_linter = string.sub(lnt, 1, 4)
       table.insert(supported_linters, _added_linter)
     end
     vim.list_extend(buf_client_names, supported_linters)
