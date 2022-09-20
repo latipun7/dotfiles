@@ -30,6 +30,12 @@ local function highlight()
         all = {
           group_label = { bg = colors.sapphire, fg = colors.bg },
           group_separator = { fg = colors.sapphire },
+          offset_separator = {
+            bg = colors.dark,
+            fg = colors.fg,
+            italic = true,
+            bold = true,
+          },
         },
       },
     })
@@ -124,37 +130,37 @@ M.config = function()
       {
         text = "ﰤ Explorer",
         filetype = "NvimTree",
-        highlight = "BufferLineBufferSelected",
+        highlight = "BufferLineOffsetSeparator",
         padding = 1,
       },
       {
         text = " Flutter Outline",
         filetype = "flutterToolsOutline",
-        highlight = "BufferLineBufferSelected",
+        highlight = "BufferLineOffsetSeparator",
         padding = 1,
       },
       {
         text = " Undotree",
         filetype = "undotree",
-        highlight = "BufferLineBufferSelected",
+        highlight = "BufferLineOffsetSeparator",
         padding = 1,
       },
       {
         text = " Packer",
         filetype = "packer",
-        highlight = "BufferLineBufferSelected",
+        highlight = "BufferLineOffsetSeparator",
         padding = 1,
       },
       {
         text = " Database Viewer",
         filetype = "dbui",
-        highlight = "BufferLineBufferSelected",
+        highlight = "BufferLineOffsetSeparator",
         padding = 1,
       },
       {
         text = " Diff View",
         filetype = "DiffviewFiles",
-        highlight = "BufferLineBufferSelected",
+        highlight = "BufferLineOffsetSeparator",
         padding = 1,
       },
     },
