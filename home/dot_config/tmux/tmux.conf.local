@@ -217,7 +217,7 @@ unbind -
 unbind -n C-l
 bind _ split-window -v
 bind | split-window -h
-bind R respawn-pane -k \; display 'Pane respawned' # reload pane
+bind R respawn-pane -k \; display 'Pane respawned' \; run 'sleep 0.2' \; clear-history # reload pane
 
 # increase history size
 set -g history-limit 10000
