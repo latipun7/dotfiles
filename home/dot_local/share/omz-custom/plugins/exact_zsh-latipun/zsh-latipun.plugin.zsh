@@ -146,13 +146,22 @@ fi
 # ░▀░▀░▀▀▀░░▀░░▀▀░░▀▀▀░▀░▀░▀▀░░▀▀▀
 
 # https://unix.stackexchange.com/questions/517025/zsh-clear-scrollback-buffer
+# https://github.com/romkatv/powerlevel10k/issues/563#issuecomment-599010321
 function clear-scrollback-buffer {
-  clear && printf '\e[3J'
+  clear && printf '\e[3J' && printf '\n%.0s' {1..$(( $(tput lines) - 1 ))}
+  zle && zle .reset-prompt && zle -R
+}
+
+function clear-buffer {
+  printf '\e[2J' && printf '\n%.0s' {1..$(( $(tput lines) - 1 ))}
   zle && zle .reset-prompt && zle -R
 }
 
 zle -N clear-scrollback-buffer
 bindkey '^K' clear-scrollback-buffer
+
+zle -N clear-buffer
+bindkey '^L' clear-buffer
 
 # C-backspace to delete previous word
 bindkey '^H' backward-kill-word
