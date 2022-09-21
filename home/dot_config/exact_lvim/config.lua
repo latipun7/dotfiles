@@ -5,14 +5,14 @@ lvim.log.level = "warn"
 lvim.transparent_window = true
 lvim.colorscheme = "catppuccin"
 
--- Keybindings
-require("latipun.keybindings").config()
-
 -- LunarVim builtin configs
 require("latipun.lvim_builtin").config()
 require("latipun.plugins.lualine").config()
 require("latipun.plugins.telescope").config()
 require("latipun.plugins.bufferline").config()
+
+-- Keybindings
+require("latipun.keybindings").config()
 
 -- LSP
 local code_actions = require("lvim.lsp.null-ls.code_actions")

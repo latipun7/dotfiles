@@ -129,6 +129,12 @@ M.config = function()
     offsets = {
       {
         text = "ﰤ Explorer",
+        filetype = "neo-tree",
+        highlight = "BufferLineOffsetSeparator",
+        padding = 1,
+      },
+      {
+        text = "ﰤ Explorer",
         filetype = "NvimTree",
         highlight = "BufferLineOffsetSeparator",
         padding = 1,

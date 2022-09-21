@@ -122,6 +122,14 @@ M.config = function()
         require("latipun.plugins.harpoon").keybindings()
       end,
     },
+    {
+      "nvim-neo-tree/neo-tree.nvim",
+      branch = "v2.x",
+      requires = { "MunifTanjim/nui.nvim" },
+      config = function()
+        require("latipun.plugins.neotree").config()
+      end,
+    },
     { "famiu/bufdelete.nvim", event = "BufReadPre" },
     { "alker0/chezmoi.vim" },
     { "gpanders/editorconfig.nvim" },

@@ -55,17 +55,20 @@ M.icons = {
   term = "",
 }
 
-M.nvim_tree_icons = {
+M.tree_icons = {
   default = "",
   symlink = "",
   git = {
-    unstaged = "",
-    staged = "",
     unmerged = "",
-    renamed = "➜",
+    added = "",
+    deleted = "",
+    modified = "",
+    renamed = "",
     untracked = "",
-    deleted = "",
-    ignored = "◌",
+    ignored = "",
+    unstaged = "",
+    staged = "",
+    conflict = "",
   },
   folder = {
     arrow_closed = "",

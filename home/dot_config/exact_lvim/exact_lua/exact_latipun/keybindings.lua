@@ -45,9 +45,14 @@ M.config = function()
   -- ▛ ▝▌▌▌▌▙▖▌▌  ▛▖▙▖▙▌  ▛▖▙▖▙▌▙▌▌▌▌▙▌▌▌▌▙▌▄▌
   --                  ▄▌      ▄▌          ▄▌
 
-  lvim.builtin.nvimtree.on_config_done = function()
+  if lvim.builtin.nvimtree.active == true then
+    lvim.builtin.nvimtree.on_config_done = function()
+      lvim.builtin.which_key.mappings.e =
+        { "<Cmd>NvimTreeToggle<CR>", "ﰤ Explorer" }
+    end
+  else
     lvim.builtin.which_key.mappings.e =
-      { "<Cmd>NvimTreeToggle<CR>", "ﰤ Explorer" }
+      { "<Cmd>NeoTreeRevealToggle<CR>", "ﰤ Explorer" }
   end
 
   lvim.builtin.which_key.vmappings["/"] = {

@@ -24,7 +24,7 @@ M.config = function()
         "vista_kind",
         "TelescopePrompt",
       },
-      ignore_focus = { "NvimTree" },
+      ignore_focus = { "NvimTree", "neo-tree" },
       always_divide_middle = true,
       globalstatus = lvim.builtin.global_statusline,
     },
