@@ -96,7 +96,13 @@ local components = {
 
   treesitter = {
     functions.treesitter,
-    color = { fg = colors.green },
+    color = function()
+      local buf = vim.api.nvim_get_current_buf()
+      local ts = vim.treesitter.highlighter.active[buf]
+      return {
+        fg = ts and not vim.tbl_isempty(ts) and colors.green or colors.red,
+      }
+    end,
   },
 
   python_env = {

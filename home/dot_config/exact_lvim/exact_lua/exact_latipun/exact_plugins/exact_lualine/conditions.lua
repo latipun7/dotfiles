@@ -7,11 +7,11 @@ local conditions = {
   end,
 
   is_in_width_limit = function()
-    return vim.fn.winwidth(0) > window_width_limit
+    return vim.o.columns > window_width_limit
   end,
 
   is_large_width = function()
-    return vim.fn.winwidth(0) > window_large_width
+    return vim.o.columns > window_large_width
   end,
 
   is_git_workspace = function()

@@ -163,10 +163,7 @@ local functions = {
   end,
 
   treesitter = function()
-    if next(vim.treesitter.highlighter.active) then
-      return ""
-    end
-    return ""
+    return ""
   end,
 
   lsp_status = function(msg)
