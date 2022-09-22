@@ -10,6 +10,7 @@ require("latipun.lvim_builtin").config()
 require("latipun.plugins.lualine").config()
 require("latipun.plugins.telescope").config()
 require("latipun.plugins.bufferline").config()
+require("latipun.plugins.indent_blankline").config()
 
 -- Keybindings
 require("latipun.keybindings").config()

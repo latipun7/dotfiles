@@ -4,6 +4,7 @@ M.config = function()
   lvim.builtin.global_statusline = true
 
   lvim.builtin.illuminate.active = false
+  lvim.builtin.indentlines.active = true
   lvim.builtin.lir.active = false
   lvim.builtin.notify.active = true
   lvim.builtin.nvimtree.active = false

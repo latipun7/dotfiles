@@ -102,13 +102,6 @@ M.config = function()
       end,
     },
     {
-      "lukas-reineke/indent-blankline.nvim",
-      event = "BufReadPre",
-      config = function()
-        require("latipun.plugins.indent_blankline").config()
-      end,
-    },
-    {
       "max397574/better-escape.nvim",
       event = "InsertEnter",
       config = function()

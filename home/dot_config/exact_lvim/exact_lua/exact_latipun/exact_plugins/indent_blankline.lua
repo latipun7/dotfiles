@@ -1,13 +1,50 @@
 local M = {}
 
 M.config = function()
-  local status_ok, blankline = pcall(require, "indent_blankline")
-  if not status_ok then
-    return
-  end
-
-  blankline.setup({
+  lvim.builtin.indentlines.options = {
+    enabled = true,
+    bufname_exclude = { "README.md" },
+    buftype_exclude = { "terminal", "nofile" },
+    filetype_exclude = {
+      "alpha",
+      "log",
+      "gitcommit",
+      "dapui_scopes",
+      "dapui_stacks",
+      "dapui_watches",
+      "dapui_breakpoints",
+      "dapui_hover",
+      "LuaTree",
+      "dbui",
+      "UltestSummary",
+      "UltestOutput",
+      "vimwiki",
+      "markdown",
+      "json",
+      "txt",
+      "vista",
+      "NvimTree",
+      "git",
+      "TelescopePrompt",
+      "undotree",
+      "flutterToolsOutline",
+      "org",
+      "orgagenda",
+      "help",
+      "startify",
+      "dashboard",
+      "packer",
+      "neogitstatus",
+      "Outline",
+      "Trouble",
+      "lspinfo",
+      "", -- for all buffers without a file type
+    },
+    -- char = "▏",
+    char_list = { "", "┊", "┆", "¦", "|", "¦", "┆", "┊", "" },
+    show_trailing_blankline_indent = false,
     show_first_indent_level = false,
+    space_char_blankline = " ",
     use_treesitter = true,
     show_foldtext = false,
     show_current_context = true,
@@ -36,7 +73,7 @@ M.config = function()
       "import_statement",
       "operation_type",
     },
-  })
+  }
 end
 
 return M
