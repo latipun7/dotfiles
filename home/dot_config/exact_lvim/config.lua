@@ -1,9 +1,15 @@
 -- general configs
+vim.g.catppuccin_flavour = "mocha"
 require("latipun.options").config()
 
 lvim.log.level = "warn"
 lvim.transparent_window = true
-lvim.colorscheme = "catppuccin"
+
+-- Plugins
+require("latipun.plugins").config()
+
+-- Autocommands
+require("latipun.autocommands").config()
 
 -- LunarVim builtin configs
 require("latipun.lvim_builtin").config()
@@ -47,12 +53,6 @@ linters.setup({
   { name = "shellcheck" },
   { name = "zsh" },
 })
-
--- Plugins
-require("latipun.plugins").config()
-
--- Autocommands
-require("latipun.autocommands").config()
 
 -- reload packer compiled without restarting nvim
 require("packer").init({ auto_reload_compiled = true })
