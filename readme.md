@@ -9,6 +9,7 @@
 
 ## Screenshots
 
+![welcome screen](https://user-images.githubusercontent.com/20012970/191744493-87f1bfee-5758-4919-ab37-ff1338e904c3.gif)
 ![screenshot of tmux](https://user-images.githubusercontent.com/20012970/189244239-4a56f3ef-fddc-4353-ba54-808e96807142.png)
 
 _more at [screenshot history](https://github.com/latipun7/dotfiles/discussions/10) 📸_
