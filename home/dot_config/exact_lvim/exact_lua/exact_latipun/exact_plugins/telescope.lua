@@ -4,6 +4,43 @@ local builtin = require("telescope.builtin")
 local actions = require("telescope.actions")
 local themes = require("telescope.themes")
 
+local pickers = {
+  git_files = {
+    attach_mappings = function(_)
+      actions.file_edit:enhance({
+        post = function()
+          vim.cmd("normal! zx")
+        end,
+      })
+      return true
+    end,
+  },
+  find_files = {
+    attach_mappings = function(_)
+      actions.file_edit:enhance({
+        post = function()
+          vim.cmd("normal! zx")
+        end,
+      })
+      return true
+    end,
+    find_command = { "fd", "--type=file", "--hidden" },
+    hidden = true,
+  },
+  buffers = {
+    theme = "dropdown",
+    previewer = false,
+    initial_mode = "normal",
+  },
+  lsp_references = { theme = "dropdown", initial_mode = "normal" },
+  lsp_definitions = { theme = "dropdown", initial_mode = "normal" },
+  lsp_declarations = { theme = "dropdown", initial_mode = "normal" },
+  lsp_implementations = { theme = "dropdown", initial_mode = "normal" },
+  live_grep = { only_sort_text = true },
+  grep_string = { only_sort_text = true, theme = "dropdown" },
+  planets = { show_pluto = true, show_moon = true },
+}
+
 -- beautiful default layout for telescope prompt
 local layout_config = function()
   return {
@@ -344,33 +381,7 @@ M.config = function()
     "%.flac",
     "%.tar.gz",
   }
-  lvim.builtin.telescope.pickers = {
-    git_files = {
-      attach_mappings = function(_)
-        actions.file_edit:enhance({
-          post = function()
-            vim.cmd("normal! zx")
-          end,
-        })
-        return true
-      end,
-    },
-    find_files = {
-      attach_mappings = function(_)
-        actions.file_edit:enhance({
-          post = function()
-            vim.cmd("normal! zx")
-          end,
-        })
-        return true
-      end,
-      find_command = { "fd", "--type=file", "--hidden" },
-      hidden = true,
-    },
-    live_grep = {
-      only_sort_text = true,
-    },
-  }
+  lvim.builtin.telescope.pickers = pickers
 end
 
 return M
