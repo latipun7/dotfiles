@@ -18,6 +18,7 @@ M.config = function()
       which_key = true,
       hop = true,
       notify = true,
+      illuminate = true,
       symbols_outline = true,
       indent_blankline = { enabled = true, colored_indent_levels = true },
       navic = { enabled = true, custom_bg = "NONE" },
