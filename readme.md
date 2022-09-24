@@ -24,7 +24,7 @@ but I'm considering that too in this dotfiles).
 
 **Important**: You need [nerd fonts][nerd-fonts] in your terminal.
 Install the font of your choosing and use that font in your terminal.
-Personally, I use [Delugia Font][my-font].
+Personally, I use [Cascadia Code Nerd Font][my-font].
 
 ## Installation
 
@@ -55,4 +55,4 @@ and this list is what actually inspired me to get started with it.
 [awe-dot]: https://github.com/webpro/awesome-dotfiles#readme "Awesome Dotfiles"
 [bash]: https://www.gnu.org/software/bash/manual/bash.html "Bash Manual"
 [nerd-fonts]: https://www.nerdfonts.com/ "NerdFonts"
-[my-font]: https://github.com/adam7/delugia-code/releases "Download Delugia Font"
+[my-font]: https://github.com/ryanoasis/nerd-fonts/releases/latest/download/CascadiaCode.zip "Download Caskaydia NF"
