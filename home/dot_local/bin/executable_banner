@@ -1,19 +1,32 @@
 #!/usr/bin/env bash
 
-clear=$'\033[2J'
-top=$'\033[H'
+banner() {
+  [[ -z "$*" ]] && test -t 0 && echo "Write banner text. End it with CTRL-D on a new line"
 
-trap 'setterm --cursor on; echo ${clear}; exit; trap -- - SIGINT SIGTERM' SIGTERM SIGINT
+  clear=$'\033[2J'
+  top=$'\033[H'
 
-text="$*"
-if [ -z "${text}" ]; then
-  read -rp "Banner Text: " text
-fi
+  trap 'setterm --cursor on; echo ${clear}; exit; trap -- - SIGINT SIGTERM' SIGTERM SIGINT
 
-echo "${clear}"
-while true; do
-  echo "${top}"
-  figl <<<"$text" | lolcat
-  setterm --cursor off
-  sleep 1
-done
+  declare -a buf
+
+  if [[ -z "$*" ]]; then
+    while IFS= read -r line; do
+      buf+=("$line")
+    done
+  else
+    buf+=("$@")
+  fi
+
+  echo "${clear}"
+  while true; do
+    echo "${top}"
+    for line in "${buf[@]}"; do
+      figl <<<"${line}" | lolcat
+    done
+    setterm --cursor off
+    sleep 1
+  done
+}
+
+banner "$@"

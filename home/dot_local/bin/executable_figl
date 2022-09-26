@@ -1,19 +1,14 @@
 #!/usr/bin/env bash
 
-# Set the figlet default font, font directory, and centering as well as
-# defaults to passing it to lolcat for coloring.
+font=${FIGL_FONT:-future}
 
-figl() {
-  font=${FIGL_FONT:-future}
+declare -a buf
 
-  declare -a buf
-  while IFS= read -r line; do
-    buf+=("$line")
-  done
+test -t 0 && echo "Write figlet text. End it with CTRL-D on a new line"
+while IFS= read -r line; do
+  buf+=("$line")
+done
 
-  for line in "${buf[@]}"; do
-    figlet -f "$font" -c -t "${line}" | head -6
-  done
-}
-
-figl "$@"
+for line in "${buf[@]}"; do
+  figlet -f "$font" -c -t "${line}"
+done

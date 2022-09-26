@@ -1,9 +1,23 @@
 #!/usr/bin/env bash
 
-text="$*"
-if [ -z "${text}" ]; then
-  read -rp "Banner Text: " text
-fi
+bannerfish() {
+  [[ -z "$*" ]] && test -t 0 && echo "Write banner text. End it with CTRL-D on a new line"
 
-cols=$(tput lines)
-tmux split-window \; resize-pane -y $((cols - 6)) \; send -t 1 "banner \"$text\"" Enter \; send -t 2 "fishes" Enter
+  declare -a buf
+
+  if [[ -z "$*" ]]; then
+    while IFS= read -r line; do
+      buf+=("$line")
+    done
+  else
+    buf+=("$@")
+  fi
+
+  cols=$(tput lines)
+  tmux split-window \; resize-pane -y $((cols - 6 * ${#buf[@]})) \; send -t 2 "fishes" Enter
+
+  text=$(printf '"%s" ' "${buf[@]}")
+  tmux send -t 1 "banner ${text}" Enter
+}
+
+bannerfish "$@"
