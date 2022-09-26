@@ -32,7 +32,6 @@ zstyle ':autocomplete:*' ignored-input '(\*\*|..)'
 # tmux
 ZSH_TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
 ZSH_TMUX_DEFAULT_SESSION_NAME="L"
-ZSH_TMUX_AUTOSTART=true
 
 plugins=(
   git
