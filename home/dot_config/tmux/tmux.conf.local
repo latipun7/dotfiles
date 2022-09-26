@@ -116,7 +116,7 @@ tmux_conf_theme_window_status_last_attr="none"
 #   - separate main sections with "|"
 #   - separate subsections with ","
 tmux_conf_theme_status_left="  #S "
-tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , #(printf '%a, %b %d') , %I:%M %p | #{username}#{root} | #{hostname}#{online} "
+tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , #{weather} , #(printf '%a, %b %d') , %I:%M %p | #{username}#{root} | #{hostname}#{online} "
 
 # status left style
 tmux_conf_theme_status_left_fg="$thm_crust,$thm_crust,$thm_crust"
