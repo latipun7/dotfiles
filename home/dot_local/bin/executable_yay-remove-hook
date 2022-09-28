@@ -5,7 +5,11 @@
 admin="$(id -nu 1000)"
 cachedir="/home/$admin/.cache/yay"
 pkgdirs=$(find "$cachedir" -mindepth 1 -maxdepth 1 -type d)
-removed="$(comm -23 <(echo $pkgdirs | xargs -r basename -a | sort) <(yay -Qqm) | xargs -r printf "$cachedir/%s\n")"
+removed="$(comm -23 <(echo $pkgdirs | xargs -r basename -a | sort) <({
+  yay -Qqm
+  echo 'catppuccin-grub-theme-git'
+  echo 'font-symbola'
+} | sort -u) | xargs -r printf "$cachedir/%s\n")"
 
 [[ -z $removed ]] || echo -e "\033[0;33m==>\033[0m Remove everything for uninstalled foreign packages" &&
   echo $removed | xargs -rt rm -r
