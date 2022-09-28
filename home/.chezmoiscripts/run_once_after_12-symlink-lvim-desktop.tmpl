@@ -5,7 +5,7 @@ set -euo pipefail
 
 {{ template "functions-bin" }}
 
-if [ -z "$HOME/.local/share/applications/lvim.desktop" ]; then
+if ! [[ -r "$HOME/.local/share/applications/lvim.desktop" ]]; then
   mkdir -p "$HOME/.local/share/applications"
   ln -s "$HOME/.local/share/lunarvim/lvim/utils/desktop/lvim.desktop" "$HOME/.local/share/applications/lvim.desktop"
 fi
