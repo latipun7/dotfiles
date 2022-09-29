@@ -1,3 +1,5 @@
+@theme "catppuccin"
+
 element-text, element-icon, mode-switcher {
   background-color: inherit;
   text-color: inherit;
