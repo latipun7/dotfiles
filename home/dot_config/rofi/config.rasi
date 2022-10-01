@@ -1,8 +1,7 @@
 @import "latipun"
 
 configuration {
-  modi: "window,drun,run,ssh,clipboard:~/.config/rofi/scripts/clipboard";
-  display-clipboard: "   Clipboard ";
+  modi: "window,drun,run,ssh";
   display-window: "   Window ";
   display-run: "   Run ";
   display-ssh: "   SSH ";

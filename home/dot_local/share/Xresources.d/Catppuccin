@@ -3,37 +3,36 @@
 ! ┗━╸╹ ╹ ╹ ╹  ╹  ┗━┛┗━╸┗━╸╹╹ ╹    ╹ ╹ ╹┗━╸╹ ╹┗━╸
 
 *background: #1E1E2E
-*foreground: #D9E0EE
-*.cursorColor: #F5E0DC
+*foreground: #CDD6F4
 
-! Black
-*color0: #302D41 
-*color8: #575268 
+! black
+*color0: #45475A
+*color8: #585B70
 
-! Red
-*color1: #F28FAD
-*color9: #F28FAD
+! red
+*color1: #F38BA8
+*color9: #F38BA8
 
-! Green
-*color2: #ABE9B3
-*color10: #ABE9B3
+! green
+*color2: #A6E3A1
+*color10: #A6E3A1
 
-! Yellow
-*color3: #FAE3B0
-*color11:  #FAE3B0
+! yellow
+*color3: #F9E2AF
+*color11: #F9E2AF
 
-! Blue
-*color4: #96CDFB
-*color12: #96CDFB
+! blue
+*color4: #89B4FA
+*color12: #89B4FA
 
-! Maguve
-*color5: #DDB6F2
-*color13: #DDB6F2
+! magenta
+*color5: #F5C2E7
+*color13: #F5C2E7
 
-! Pink
-*color6: #F5C2E7
-*color14: #F5C2E7
+! cyan
+*color6: #94E2D5
+*color14: #94E2D5
 
-! Whites
-*color7: #C3BAC6
-*color15: #D9E0EE
+! white
+*color7: #BAC2DE
+*color15: #A6ADC8
