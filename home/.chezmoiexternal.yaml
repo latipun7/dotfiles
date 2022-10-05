@@ -5,7 +5,7 @@
 
 .config/bat/themes:
   type: archive
-  url: https://api.github.com/repos/catppuccin/bat/tarball
+  url: https://github.com/catppuccin/bat/archive/refs/heads/main.zip
   stripComponents: 1
   refreshPeriod: 168h
   include: ["*/*.tmTheme"]
@@ -41,28 +41,28 @@
 
 .local/share/omz-custom/themes/powerlevel10k:
   type: archive
-  url: https://api.github.com/repos/romkatv/powerlevel10k/tarball/{{ (gitHubLatestRelease "romkatv/powerlevel10k").TagName }}
+  url: https://github.com/romkatv/powerlevel10k/archive/refs/tags/{{ (gitHubLatestRelease "romkatv/powerlevel10k").TagName }}.tar.gz
   exact: true
   stripComponents: 1
   refreshPeriod: 168h
 
 .local/share/omz-custom/plugins/zsh-completions:
   type: archive
-  url: https://api.github.com/repos/zsh-users/zsh-completions/tarball
+  url: https://github.com/zsh-users/zsh-completions/archive/refs/heads/master.zip
   exact: true
   stripComponents: 1
   refreshPeriod: 168h
 
 .local/share/omz-custom/plugins/zsh-syntax-highlighting:
   type: archive
-  url: https://api.github.com/repos/zsh-users/zsh-syntax-highlighting/tarball
+  url: https://github.com/zsh-users/zsh-syntax-highlighting/archive/refs/heads/master.zip
   exact: true
   stripComponents: 1
   refreshPeriod: 168h
 
 .local/share/omz-custom/plugins/zsh-autosuggestions:
   type: archive
-  url: https://api.github.com/repos/zsh-users/zsh-autosuggestions/tarball
+  url: https://github.com/zsh-users/zsh-autosuggestions/archive/refs/heads/master.zip
   exact: true
   stripComponents: 1
   refreshPeriod: 168h
@@ -101,14 +101,14 @@
 
 .config/kitty/themes/catppuccin:
   type: archive
-  url: https://api.github.com/repos/catppuccin/kitty/tarball
+  url: https://github.com/catppuccin/kitty/archive/refs/heads/main.zip
   stripComponents: 1
   refreshPeriod: 168h
   include: ["*/*.conf"]
 
 .local/share/fcitx5/themes: # Catppuccin
   type: archive
-  url: https://api.github.com/repos/catppuccin/fcitx5/tarball
+  url: https://github.com/catppuccin/fcitx5/archive/refs/heads/main.zip
   stripComponents: 1
   refreshPeriod: 744h
   include: ["*/Catppuccin/**"]
@@ -140,7 +140,7 @@ www/adminer/adminer.css:
 
 www/adminer: # plugins
   type: archive
-  url: "https://api.github.com/repos/vrana/adminer/tarball"
+  url: https://github.com/vrana/adminer/archive/refs/heads/master.zip
   stripComponents: 1
   refreshPeriod: 744h
   include: ["*/plugins/**"]
