@@ -16,6 +16,7 @@ M.config = function()
       telescope = true,
       nvimtree = true,
       which_key = true,
+      harpoon = true,
       hop = true,
       neotree = true,
       notify = true,
