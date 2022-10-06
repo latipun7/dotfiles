@@ -77,7 +77,7 @@ M.config = function()
     button(
       "f",
       " " .. kind.icons.find .. " Find File",
-      "<Cmd>Telescope find_files<CR>"
+      "<Cmd>lua require('latipun.plugins.telescope').find_project_files()<CR>"
     ),
     button(
       "e",

@@ -66,7 +66,7 @@ M.config = function()
   }
   lvim.builtin.which_key.mappings[";"] = { "<Cmd>Alpha<CR>", "﵁ Dashboard" }
   lvim.builtin.which_key.mappings.f = {
-    require("lvim.core.telescope.custom-finders").find_project_files,
+    require("latipun.plugins.telescope").find_project_files,
     " Find File",
   }
 
