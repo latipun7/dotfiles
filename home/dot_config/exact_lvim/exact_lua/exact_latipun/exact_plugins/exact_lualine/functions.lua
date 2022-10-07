@@ -62,13 +62,9 @@ local functions = {
 
   win_icon = function()
     local fname = vim.fn.expand("%:p")
-    if string.find(fname, "term://") ~= nil then
-      return kind.icons.term
-    end
+    if string.find(fname, "term://") ~= nil then return kind.icons.term end
     local winnr = vim.api.nvim_win_get_number(vim.api.nvim_get_current_win())
-    if winnr > 10 then
-      winnr = 10
-    end
+    if winnr > 10 then winnr = 10 end
     local win = kind.numbers[winnr]
     return win
   end,
@@ -99,13 +95,9 @@ local functions = {
     local readonly = ""
     local modified = ""
 
-    if vim.bo.readonly then
-      readonly = " "
-    end
+    if vim.bo.readonly then readonly = " " end
 
-    if vim.bo.modified then
-      modified = " "
-    end
+    if vim.bo.modified then modified = " " end
 
     return show_name .. readonly .. modified
   end,
@@ -115,23 +107,15 @@ local functions = {
     if vim.bo.filetype == "python" then
       local venv = os.getenv("CONDA_DEFAULT_ENV") or os.getenv("VIRTUAL_ENV")
 
-      if venv then
-        return string.format(" (%s)", utils.env_cleanup(venv))
-      end
+      if venv then return string.format(" (%s)", utils.env_cleanup(venv)) end
     end
     return ""
   end,
 
   testing = function()
-    if vim.g.testing_status == "running" then
-      return ""
-    end
-    if vim.g.testing_status == "fail" then
-      return ""
-    end
-    if vim.g.testing_status == "pass" then
-      return ""
-    end
+    if vim.g.testing_status == "running" then return "" end
+    if vim.g.testing_status == "fail" then return "" end
+    if vim.g.testing_status == "pass" then return "" end
     return nil
   end,
 
@@ -156,15 +140,11 @@ local functions = {
   end,
 
   readonly = function()
-    if vim.bo.readonly or not vim.bo.modifiable then
-      return ""
-    end
+    if vim.bo.readonly or not vim.bo.modifiable then return "" end
     return ""
   end,
 
-  treesitter = function()
-    return ""
-  end,
+  treesitter = function() return "" end,
 
   lsp_status = function(msg)
     msg = msg or kind.icons.ls_inactive .. " " .. "LS Inactive"
@@ -209,9 +189,7 @@ local functions = {
   filesize = function()
     local function format_file_size(file)
       local size = vim.fn.getfsize(file)
-      if size <= 0 then
-        return ""
-      end
+      if size <= 0 then return "" end
       local sufixes = { "b", "k", "m", "g" }
       local i = 1
       while size > 1024 do
@@ -221,9 +199,7 @@ local functions = {
       return string.format("%.1f%s", size, sufixes[i])
     end
     local file = vim.fn.expand("%:p")
-    if string.len(file) == 0 then
-      return ""
-    end
+    if string.len(file) == 0 then return "" end
     return format_file_size(file)
   end,
 

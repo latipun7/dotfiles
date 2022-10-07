@@ -9,9 +9,7 @@ local pickers = {
   git_files = {
     attach_mappings = function(_)
       actions.file_edit:enhance({
-        post = function()
-          vim.cmd("normal! zx")
-        end,
+        post = function() vim.cmd("normal! zx") end,
       })
       return true
     end,
@@ -19,9 +17,7 @@ local pickers = {
   find_files = {
     attach_mappings = function(_)
       actions.file_edit:enhance({
-        post = function()
-          vim.cmd("normal! zx")
-        end,
+        post = function() vim.cmd("normal! zx") end,
       })
       return true
     end,
@@ -51,9 +47,7 @@ local layout_config = function()
     prompt_position = "bottom",
     horizontal = {
       preview_width = function(_, cols, _)
-        if cols < 120 then
-          return math.floor(cols * 0.5)
-        end
+        if cols < 120 then return math.floor(cols * 0.5) end
         return math.floor(cols * 0.6)
       end,
     },
@@ -284,15 +278,11 @@ function M.search_only_certain_files()
   })
 end
 
-function M.builtin()
-  builtin.builtin()
-end
+function M.builtin() builtin.builtin() end
 
 function M.git_files()
   local path = vim.fn.expand("%:h")
-  if path == "" then
-    path = nil
-  end
+  if path == "" then path = nil end
 
   local width = 0.45
   if path and string.find(path, "sourcegraph.*sourcegraph", 1, false) then

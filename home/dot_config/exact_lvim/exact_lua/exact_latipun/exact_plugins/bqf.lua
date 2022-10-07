@@ -2,9 +2,7 @@ local M = {}
 
 M.config = function()
   local status_ok, bqf = pcall(require, "bqf")
-  if not status_ok then
-    return
-  end
+  if not status_ok then return end
 
   bqf.setup({
     auto_resize_height = true,
@@ -37,9 +35,7 @@ M.config = function()
         local filename = vim.api.nvim_buf_get_name(bufnr)
         local fsize = vim.fn.getfsize(filename)
         -- file size greater than 10k can't be previewed automatically
-        if fsize > 100 * 1024 then
-          ret = false
-        end
+        if fsize > 100 * 1024 then ret = false end
         return ret
       end,
     },

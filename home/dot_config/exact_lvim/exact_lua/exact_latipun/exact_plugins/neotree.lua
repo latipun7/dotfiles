@@ -63,9 +63,7 @@ M.config = function()
       {
         event = "vim_buffer_enter",
         handler = function(_)
-          if vim.bo.filetype == "neo-tree" then
-            vim.wo.signcolumn = "auto"
-          end
+          if vim.bo.filetype == "neo-tree" then vim.wo.signcolumn = "auto" end
         end,
       },
     },

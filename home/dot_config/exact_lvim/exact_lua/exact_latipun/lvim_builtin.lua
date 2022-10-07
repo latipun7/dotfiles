@@ -156,15 +156,12 @@ M.config = function()
   -- ▌▝▌▙▌▐▖▌▐ ▙▌
   --           ▄▌
 
-  lvim.builtin.notify.opts.min_width = function()
-    return math.floor(vim.o.columns * 0.4)
-  end
-  lvim.builtin.notify.opts.max_width = function()
-    return math.floor(vim.o.columns * 0.4)
-  end
-  lvim.builtin.notify.opts.max_height = function()
-    return math.floor(vim.o.lines * 0.8)
-  end
+  lvim.builtin.notify.opts.min_width =
+    function() return math.floor(vim.o.columns * 0.4) end
+  lvim.builtin.notify.opts.max_width =
+    function() return math.floor(vim.o.columns * 0.4) end
+  lvim.builtin.notify.opts.max_height =
+    function() return math.floor(vim.o.lines * 0.8) end
   lvim.builtin.notify.opts.render = function(...)
     local notif = select(2, ...)
     local style = notif.title[1] == "" and "minimal" or "default"

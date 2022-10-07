@@ -19,9 +19,7 @@ M.config = function()
       local fallback_ft = vim.api.nvim_buf_get_option(event.buf, "filetype")
       local fallback_on_empty = fallback_name == "" and fallback_ft == ""
 
-      if fallback_on_empty then
-        vim.cmd("Alpha")
-      end
+      if fallback_on_empty then vim.cmd("Alpha") end
     end,
   })
 end

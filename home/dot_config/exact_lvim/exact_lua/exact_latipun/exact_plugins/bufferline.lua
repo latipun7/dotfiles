@@ -77,9 +77,7 @@ M.config = function()
           icon = kind.icons.config,
           matcher = function(buf)
             local filename = buf.filename
-            if filename == nil then
-              return false
-            end
+            if filename == nil then return false end
             return filename:match("go.mod")
               or filename:match("go.sum")
               or filename:match("Cargo.toml")
@@ -105,9 +103,7 @@ M.config = function()
           icon = kind.icons.docs,
           matcher = function(buf)
             for _, ext in ipairs({ "md", "txt", "org", "norg", "wiki" }) do
-              if ext == vim.fn.fnamemodify(buf.path, ":e") then
-                return true
-              end
+              if ext == vim.fn.fnamemodify(buf.path, ":e") then return true end
             end
           end,
         },

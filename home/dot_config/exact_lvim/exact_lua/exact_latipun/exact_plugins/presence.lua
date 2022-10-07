@@ -2,9 +2,7 @@ local M = {}
 
 M.config = function()
   local status_ok, presence = pcall(require, "presence")
-  if not status_ok then
-    return
-  end
+  if not status_ok then return end
 
   presence:setup({
     auto_update = true,

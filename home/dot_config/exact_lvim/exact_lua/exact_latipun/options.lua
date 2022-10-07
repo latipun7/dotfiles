@@ -76,9 +76,7 @@ M.config = function()
   vim.cmd("set whichwrap+=<,>,[,],h,l")
   vim.cmd("set iskeyword+=-")
 
-  if vim.fn.has("termguicolors") == 1 then
-    vim.opt.termguicolors = true
-  end
+  if vim.fn.has("termguicolors") == 1 then vim.opt.termguicolors = true end
 end
 
 return M

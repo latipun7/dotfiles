@@ -28,9 +28,7 @@ local linters = require("lvim.lsp.null-ls.linters")
 
 lvim.lsp.diagnostics.virtual_text = false
 lvim.lsp.buffer_mappings.normal_mode["gp"] = {
-  function()
-    require("latipun.peek").Peek("definition")
-  end,
+  function() require("latipun.peek").Peek("definition") end,
   "Peek definition",
 }
 vim.list_extend(

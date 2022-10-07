@@ -14,9 +14,7 @@ end
 
 M.config = function()
   local status_ok, neoclip = pcall(require, "neoclip")
-  if not status_ok then
-    return
-  end
+  if not status_ok then return end
 
   neoclip.setup({
     history = 50,

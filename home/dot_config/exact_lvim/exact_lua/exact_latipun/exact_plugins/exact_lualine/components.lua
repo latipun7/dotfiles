@@ -19,9 +19,7 @@ local function get_file_icon_color()
   local has_devicons, devicons = pcall(require, "nvim-web-devicons")
   if has_devicons then
     local icon, iconhl = devicons.get_icon(f_name, f_ext)
-    if icon ~= nil then
-      return vim.fn.synIDattr(vim.fn.hlID(iconhl), "fg")
-    end
+    if icon ~= nil then return vim.fn.synIDattr(vim.fn.hlID(iconhl), "fg") end
   end
 end
 
@@ -38,9 +36,7 @@ local components = {
   win_icon = {
     functions.win_icon,
     cond = conditions.not_empty_buffer,
-    color = function()
-      return { fg = get_file_icon_color() }
-    end,
+    color = function() return { fg = get_file_icon_color() } end,
     padding = { left = 1, right = 0 },
   },
 
@@ -73,18 +69,14 @@ local components = {
 
   testing = {
     functions.testing,
-    cond = function()
-      return functions.testing() ~= nil
-    end,
+    cond = function() return functions.testing() ~= nil end,
     padding = { left = 1, right = 0 },
   },
 
   session = {
     functions.session,
     color = { fg = colors.flamingo },
-    cond = function()
-      return (vim.g.persisting ~= nil)
-    end,
+    cond = function() return (vim.g.persisting ~= nil) end,
     padding = { left = 1, right = 0 },
   },
 
