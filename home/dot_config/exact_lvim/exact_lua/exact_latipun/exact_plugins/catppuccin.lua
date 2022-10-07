@@ -8,7 +8,6 @@ M.config = function()
 
   catppuccin.setup({
     term_colors = true,
-    compile = { enabled = true },
     integrations = {
       treesitter = true,
       cmp = true,

@@ -3,11 +3,7 @@ local M = {}
 M.config = function()
   lvim.builtin.global_statusline = true
 
-  lvim.builtin.breadcrumbs.active = true
-  lvim.builtin.illuminate.active = true
-  lvim.builtin.indentlines.active = true
   lvim.builtin.lir.active = false
-  lvim.builtin.notify.active = true
   lvim.builtin.nvimtree.active = false
 
   -- ▄▖       ▘    ▜   ▗▘▗       ▜   ▗        ▝▖
@@ -15,8 +11,7 @@ M.config = function()
   -- ▐ ▙▖▌ ▌▌▌▌▌▌█▌▐▖  ▐ ▐▖▙▌▙▌▙▌▐▖▙▖▐▖▙▖▌ ▌▌▌ ▌
   --                   ▝▖    ▄▌▄▌             ▗▘
 
-  lvim.builtin.terminal.active = true
-  lvim.builtin.terminal.open_mapping = "<C-Space>"
+  lvim.builtin.terminal.open_mapping = [[<C-\>]]
   lvim.builtin.terminal.execs = { { "lazygit", "<Leader>gg", " LazyGit" } }
 
   -- ▄▖▜   ▌     ▗▘ ▌    ▌ ▌        ▌▝▖

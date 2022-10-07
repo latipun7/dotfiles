@@ -53,6 +53,3 @@ linters.setup({
   { name = "shellcheck" },
   { name = "zsh" },
 })
-
--- reload packer compiled without restarting nvim
-require("packer").init({ auto_reload_compiled = true })

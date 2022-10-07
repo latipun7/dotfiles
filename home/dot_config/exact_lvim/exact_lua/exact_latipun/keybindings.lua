@@ -4,7 +4,7 @@ local expr_opts = { noremap = true, expr = true, silent = true }
 M.set_terminal_keymaps = function()
   local opts = { noremap = true, silent = true }
 
-  vim.api.nvim_buf_set_keymap(0, "t", "jk", [[<C-\><C-n>]], opts)
+  vim.api.nvim_buf_set_keymap(0, "t", "<A-Esc>", [[<C-\><C-n>]], opts)
   vim.api.nvim_buf_set_keymap(0, "t", "<C-h>", "<C-h>", opts)
   vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", "<C-j>", opts)
   vim.api.nvim_buf_set_keymap(0, "t", "<C-k>", "<C-k>", opts)

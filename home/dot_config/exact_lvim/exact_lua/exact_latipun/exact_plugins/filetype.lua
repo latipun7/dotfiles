@@ -10,6 +10,7 @@ M.config = function()
       literal = {
         ["dot_editorconfig"] = "dosini",
         [".gitignore"] = "conf",
+        ["rc.lua.test"] = "lua",
       },
 
       extensions = {
