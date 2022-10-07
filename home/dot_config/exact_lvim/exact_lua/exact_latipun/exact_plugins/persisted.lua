@@ -17,6 +17,11 @@ M.config = function()
     autoload = false,
     allowed_dirs = nil,
     ignored_dirs = nil,
+    should_autosave = function()
+      -- do not autosave if the alpha dashboard is the current filetype
+      if vim.bo.filetype == "alpha" then return false end
+      return true
+    end,
     after_source = function()
       local status_ok, _ = pcall(require, "notify")
       if status_ok then
