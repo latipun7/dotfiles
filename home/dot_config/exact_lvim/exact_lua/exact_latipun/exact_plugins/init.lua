@@ -86,6 +86,7 @@ M.config = function()
       config = function() require("latipun.plugins.neotree").config() end,
     },
     { "famiu/bufdelete.nvim", event = "BufReadPre" },
+    { "hrsh7th/cmp-cmdline", event = "CmdlineEnter" },
     { "alker0/chezmoi.vim" },
     { "gpanders/editorconfig.nvim" },
     { "wakatime/vim-wakatime" },

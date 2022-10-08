@@ -172,4 +172,21 @@ M.config = function()
   lvim.builtin.notify.opts.background_colour = "NormalFloat"
 end
 
+-- ▄▖▖  ▖▄▖
+-- ▌ ▛▖▞▌▙▌
+-- ▙▖▌▝ ▌▌
+
+M.setup_cmdline = function()
+  local found, cmp = pcall(require, "cmp")
+  if found then
+    cmp.setup.cmdline(":", {
+      mapping = cmp.mapping.preset.cmdline({}),
+      sources = {
+        { name = "cmdline" },
+        { name = "path" },
+      },
+    })
+  end
+end
+
 return M
