@@ -5,9 +5,20 @@ set -euo pipefail
 
 {{ template "functions-bin" }}
 
-if ! [[ -r "$HOME/.local/share/applications/lvim.desktop" ]]; then
-  mkdir -p "$HOME/.local/share/applications"
-  ln -s "$HOME/.local/share/lunarvim/lvim/utils/desktop/lvim.desktop" "$HOME/.local/share/applications/lvim.desktop"
+LUNARVIM_BASE_DIR="${LUNARVIM_BASE_DIR:-$HOME/.local/share/lunarvim/lvim}"
+XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+
+if ! [[ -r "$XDG_DATA_HOME/applications/lvim.desktop" ]]; then
+  for d in "$LUNARVIM_BASE_DIR"/utils/desktop/*/; do
+    size_folder=$(basename "$d")
+    mkdir -p "$XDG_DATA_HOME/icons/hicolor/$size_folder/apps/"
+    ln -s "$LUNARVIM_BASE_DIR/utils/desktop/$size_folder/lvim.svg" "$XDG_DATA_HOME/icons/hicolor/$size_folder/apps/lvim.svg"
+  done
+
+  mkdir -p "$XDG_DATA_HOME/applications"
+  ln -s "$LUNARVIM_BASE_DIR/utils/desktop/lvim.desktop" "$XDG_DATA_HOME/applications/lvim.desktop"
+
+  xdg-desktop-menu forceupdate
 fi
 
 success "${color6}LunarVim${reset} successfully installed!"
