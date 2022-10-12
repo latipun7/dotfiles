@@ -9,7 +9,7 @@ M.config = function()
     command = "lua require('latipun.keybindings').set_terminal_keymaps()",
   })
 
-  -- need bufdelete.nvim & alpha-dashboard
+  -- need bufdelete.nvim, neo-tree & alpha-dashboard
   local alpha_on_empty = create_augroup("alpha_on_empty", { clear = true })
   create_aucmd("User", {
     pattern = "BDeletePost*",
@@ -19,7 +19,11 @@ M.config = function()
       local fallback_ft = vim.api.nvim_buf_get_option(event.buf, "filetype")
       local fallback_on_empty = fallback_name == "" and fallback_ft == ""
 
-      if fallback_on_empty then vim.cmd("Alpha") end
+      if fallback_on_empty then
+        require("neo-tree").close_all()
+        vim.cmd("Alpha")
+        vim.cmd(event.buf .. "bwipeout")
+      end
     end,
   })
 end
