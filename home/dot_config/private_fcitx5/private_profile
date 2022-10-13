@@ -24,12 +24,6 @@ Name=arabic
 # Layout
 Layout=us
 
-[Groups/0/Items/3]
-# Name
-Name=keyboard-id-phoneticx
-# Layout
-Layout=
-
 [GroupOrder]
 0=Default
 

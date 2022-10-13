@@ -97,9 +97,9 @@ else
   export EDITOR=nvim
 fi
 
-# Browser
-if [ -n "$DISPLAY" ]; then
-  export BROWSER=vivaldi-stable
+if [[ -n "$DISPLAY" ]]; then
+  export BROWSER=brave
+  export TERMINAL=kitty
 else
   export BROWSER=lynx
 fi

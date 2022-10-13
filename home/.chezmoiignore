@@ -1,6 +1,7 @@
 # Ignorable list
 **/*.bak
 **/*.log
+**/*.old
 **/*.ori
 **/*.zwc
 .Xauthority
@@ -52,6 +53,7 @@ www
 {{- if .is_no_gui }}
 # Ignore if no GUI environment (desktop only files)
 .config/{fcitx5,kitty,rofi*}
+.local/bin/xterm
 .local/share/{fcitx5,rofimoji,Xresources*}
 .xprofile
 ###

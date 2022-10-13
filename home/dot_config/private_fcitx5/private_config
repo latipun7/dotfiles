@@ -5,7 +5,7 @@ EnumerateWithTriggerKeys=True
 EnumerateSkipFirst=False
 
 [Hotkey/TriggerKeys]
-0=Control+space
+0=Control+Shift+space
 
 [Hotkey/AltTriggerKeys]
 0=Shift_L
