@@ -4,9 +4,42 @@ M.config = function()
   local status_ok, noice = pcall(require, "noice")
   if not status_ok then return end
 
+  table.insert(lvim.builtin.breadcrumbs.winbar_filetype_exclude, "vim")
+
   noice.setup({
-    cmdline = {
-      view = "cmdline_popup",
+    views = {
+      cmdline_popup = {
+        win_options = {
+          winblend = 5,
+          winhighlight = {
+            Normal = "NormalFloat",
+            FloatBorder = "NoiceCmdlinePopupBorder",
+            IncSearch = "",
+            Search = "",
+          },
+          cursorline = false,
+        },
+        filter_options = {
+          {
+            filter = { event = "cmdline", find = "^%s*[/?]" },
+            opts = {
+              border = {
+                text = {
+                  top = " Search ",
+                },
+              },
+              win_options = {
+                winhighlight = {
+                  Normal = "NormalFloat",
+                  FloatBorder = "NoiceCmdlinePopupBorder",
+                  IncSearch = "",
+                  Search = "",
+                },
+              },
+            },
+          },
+        },
+      },
     },
     popupmenu = {
       enabled = false,
