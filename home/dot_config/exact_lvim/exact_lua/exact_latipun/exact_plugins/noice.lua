@@ -16,6 +16,10 @@ M.config = function()
     },
     routes = {
       {
+        view = "notify",
+        filter = { event = "msg_showmode" },
+      },
+      {
         filter = { event = "msg_show", kind = "search_count" },
         opts = { skip = true },
       },
@@ -24,27 +28,38 @@ M.config = function()
         filter = { event = "msg_show", min_height = 20 },
       },
       {
-        filter = { event = "msg_show", find = "E486:" },
+        filter = {
+          event = "msg_show",
+          find = "; before #",
+        },
         opts = { skip = true },
       },
       {
-        filter = { event = "msg_show", find = "; before #" },
+        filter = {
+          event = "msg_show",
+          find = "; after #",
+        },
         opts = { skip = true },
       },
       {
-        filter = { event = "msg_show", find = "; after #" },
+        filter = {
+          event = "msg_show",
+          find = " lines, ",
+        },
         opts = { skip = true },
       },
       {
-        filter = { event = "msg_show", find = " lines, " },
+        filter = {
+          event = "msg_show",
+          find = "go up one level",
+        },
         opts = { skip = true },
       },
       {
-        filter = { event = "msg_show", find = "go up one level" },
-        opts = { skip = true },
-      },
-      {
-        filter = { event = "msg_show", find = "yanked" },
+        filter = {
+          event = "msg_show",
+          find = "yanked",
+        },
         opts = { skip = true },
       },
       {
