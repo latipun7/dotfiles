@@ -15,6 +15,7 @@ M.config = function()
       which_key = true,
       harpoon = true,
       hop = true,
+      mason = true,
       neotree = true,
       notify = true,
       illuminate = true,
