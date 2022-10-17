@@ -69,8 +69,7 @@
 
 .local/share/omz-custom/plugins/zsh-autocomplete:
   type: archive
-  # url: https://github.com/marlonrichert/zsh-autocomplete/archive/d8bfbef46efc54c1189010a3b70d501b44487504.zip
-  url: https://github.com/marlonrichert/zsh-autocomplete/archive/refs/heads/483-omz-zstyle.zip
+  url: https://github.com/marlonrichert/zsh-autocomplete/archive/refs/heads/main.zip
   exact: true
   stripComponents: 1
   refreshPeriod: 168h
