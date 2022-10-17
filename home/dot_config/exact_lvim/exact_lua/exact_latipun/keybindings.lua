@@ -100,8 +100,14 @@ M.config = function()
   -- Git
   lvim.builtin.which_key.mappings.g = {
     name = " Git",
-    j = { "<Cmd>lua require('gitsigns').next_hunk()<CR>", " Next hunk" },
-    k = { "<Cmd>lua require('gitsigns').prev_hunk()<CR>", " Previous hunk" },
+    j = {
+      "<Cmd>lua require('gitsigns').next_hunk({navigation_message = false})<CR>",
+      " Next hunk",
+    },
+    k = {
+      "<Cmd>lua require('gitsigns').prev_hunk({navigation_message = false})<CR>",
+      " Previous hunk",
+    },
     l = { "<Cmd>lua require('gitsigns').blame_line()<CR>", "ﯙ Blame" },
     p = {
       "<Cmd>lua require('gitsigns').preview_hunk()<CR>",
