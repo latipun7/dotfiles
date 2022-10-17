@@ -27,6 +27,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # zsh-autocomplete configs
 zstyle ':autocomplete:*' min-input 1
 zstyle ':autocomplete:*' fzf-completion yes
+zstyle ':autocomplete:recent-dirs' backend zoxide
 zstyle ':autocomplete:*' ignored-input '(\*\*|..)'
 
 # tmux
