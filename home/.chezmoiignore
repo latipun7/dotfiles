@@ -52,7 +52,7 @@ www
 
 {{- if .is_no_gui }}
 # Ignore if no GUI environment (desktop only files)
-.config/{fcitx5,kitty,rofi*}
+.config/{fcitx5,kitty,rofi*,simplescreenrecorder}
 .local/bin/xterm
 .local/share/{fcitx5,rofimoji,Xresources*}
 .xprofile
