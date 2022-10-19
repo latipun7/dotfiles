@@ -1,6 +1,10 @@
 [Hotkey]
 # Enumerate when press trigger key repeatedly
 EnumerateWithTriggerKeys=True
+# Enumerate Input Method Forward
+EnumerateForwardKeys=
+# Enumerate Input Method Backward
+EnumerateBackwardKeys=
 # Skip first input method while enumerating
 EnumerateSkipFirst=False
 
@@ -9,12 +13,6 @@ EnumerateSkipFirst=False
 
 [Hotkey/AltTriggerKeys]
 0=Shift_L
-
-[Hotkey/EnumerateForwardKeys]
-0=Control+Shift_L
-
-[Hotkey/EnumerateBackwardKeys]
-0=Control+Shift_R
 
 [Hotkey/EnumerateGroupForwardKeys]
 0=Super+space
@@ -59,7 +57,7 @@ CompactInputMethodInformation=True
 # Show first input method information
 ShowFirstInputMethodInformation=True
 # Default page size
-DefaultPageSize=5
+DefaultPageSize=8
 # Override Xkb Option
 OverrideXkbOption=False
 # Custom Xkb Option
