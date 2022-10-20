@@ -35,10 +35,6 @@ M.config = function()
       config = function() require("latipun.plugins.dressing").config() end,
     },
     {
-      "nathom/filetype.nvim",
-      config = function() require("latipun.plugins.filetype").config() end,
-    },
-    {
       "sindrets/diffview.nvim",
       setup = function() require("latipun.plugins.diffview").keybindings() end,
       config = function() require("latipun.plugins.diffview").config() end,
