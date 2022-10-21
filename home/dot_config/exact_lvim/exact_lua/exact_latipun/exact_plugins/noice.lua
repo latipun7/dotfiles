@@ -5,6 +5,7 @@ M.config = function()
   if not status_ok then return end
 
   table.insert(lvim.builtin.breadcrumbs.winbar_filetype_exclude, "vim")
+  table.insert(lvim.builtin.breadcrumbs.winbar_filetype_exclude, "regex")
 
   noice.setup({
     views = {
