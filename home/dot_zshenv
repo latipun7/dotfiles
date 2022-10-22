@@ -50,6 +50,9 @@ export PGSERVICEFILE="$XDG_CONFIG_HOME/pg/pg_service.conf"
 # zsh
 export HISTFILE="$XDG_STATE_HOME/zsh/history"
 
+# CUDA
+export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv"
+
 # ░█▀█░█▀█░▀█▀░█░█░█▀▀
 # ░█▀▀░█▀█░░█░░█▀█░▀▀█
 # ░▀░░░▀░▀░░▀░░▀░▀░▀▀▀
