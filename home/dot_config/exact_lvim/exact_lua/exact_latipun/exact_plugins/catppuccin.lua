@@ -4,24 +4,38 @@ M.config = function()
   local status_ok, catppuccin = pcall(require, "catppuccin")
   if not status_ok then return end
 
+  local ucolors = require("catppuccin.utils.colors")
+  local mocha = require("catppuccin.palettes").get_palette("mocha")
+
   catppuccin.setup({
+    flavour = "mocha",
+    background = { light = "latte", dark = "mocha" },
     term_colors = true,
+    transparent_background = lvim.transparent_window,
     integrations = {
-      treesitter = true,
       cmp = true,
       gitsigns = true,
-      telescope = true,
-      nvimtree = true,
-      which_key = true,
       harpoon = true,
       hop = true,
+      illuminate = true,
+      indent_blankline = { enabled = true, colored_indent_levels = true },
       mason = true,
+      navic = { enabled = true, custom_bg = "NONE" },
       neotree = true,
       notify = true,
-      illuminate = true,
       symbols_outline = true,
-      indent_blankline = { enabled = true, colored_indent_levels = true },
-      navic = { enabled = true, custom_bg = "NONE" },
+      telescope = true,
+      treesitter = true,
+      which_key = true,
+    },
+    highlight_overrides = {
+      mocha = {
+        CursorLine = { bg = ucolors.darken(mocha.surface0, 0.64, mocha.base) },
+        NeoTreeTabActive = { bg = mocha.mantle },
+        NeoTreeTabInactive = { bg = mocha.base },
+        NeoTreeTabSeparatorActive = { fg = mocha.mantle, bg = mocha.mantle },
+        NeoTreeTabSeparatorInactive = { fg = mocha.base, bg = mocha.base },
+      },
     },
   })
 

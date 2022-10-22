@@ -1,5 +1,4 @@
 -- general configs
-vim.g.catppuccin_flavour = "mocha"
 require("latipun.options").config()
 
 lvim.log.level = "warn"
