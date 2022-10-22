@@ -1,0 +1,6 @@
+[options]
+background = checks
+
+[binds]
+<Tab> = next 1
+<Shift+ISO_Left_Tab> = prev 1
