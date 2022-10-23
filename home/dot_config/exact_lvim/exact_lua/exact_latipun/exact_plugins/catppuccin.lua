@@ -5,7 +5,6 @@ M.config = function()
   if not status_ok then return end
 
   local ucolors = require("catppuccin.utils.colors")
-  local mocha = require("catppuccin.palettes").get_palette("mocha")
 
   catppuccin.setup({
     flavour = "mocha",
@@ -29,13 +28,20 @@ M.config = function()
       which_key = true,
     },
     highlight_overrides = {
-      mocha = {
-        CursorLine = { bg = ucolors.darken(mocha.surface0, 0.64, mocha.base) },
-        NeoTreeTabActive = { bg = mocha.mantle },
-        NeoTreeTabInactive = { bg = mocha.base },
-        NeoTreeTabSeparatorActive = { fg = mocha.mantle, bg = mocha.mantle },
-        NeoTreeTabSeparatorInactive = { fg = mocha.base, bg = mocha.base },
-      },
+      mocha = function(mocha)
+        return {
+          CursorLine = { bg = ucolors.darken(mocha.surface0, 0.64, mocha.base) },
+          NeoTreeTabActive = { bg = mocha.mantle },
+          NeoTreeTabInactive = { bg = mocha.base },
+          NeoTreeTabSeparatorActive = { fg = mocha.mantle, bg = mocha.mantle },
+          NeoTreeTabSeparatorInactive = { fg = mocha.base, bg = mocha.base },
+          Cursor = { fg = mocha.crust, bg = mocha.sapphire },
+          lCursor = { fg = mocha.crust, bg = mocha.sapphire },
+          CursorIM = { fg = mocha.crust, bg = mocha.sapphire },
+          TermCursor = { fg = mocha.crust, bg = mocha.sapphire },
+          NoiceCursor = { fg = mocha.crust, bg = mocha.sapphire },
+        }
+      end,
     },
   })
 
