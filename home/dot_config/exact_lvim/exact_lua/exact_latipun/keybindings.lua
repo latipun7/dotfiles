@@ -137,6 +137,9 @@ M.config = function()
   lvim.builtin.which_key.mappings.p.name = " Packer"
   lvim.builtin.which_key.mappings.s.name = " Search"
 
+  lvim.builtin.which_key.mappings.Ln =
+    { "<Cmd>Telescope notify<CR>", "View notifications" }
+
   -- LSP - Peek
   lvim.builtin.which_key.mappings.lp = {
     name = "Peek",

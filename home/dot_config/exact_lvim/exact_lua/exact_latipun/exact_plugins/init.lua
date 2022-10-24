@@ -10,6 +10,12 @@ M.config = function()
       config = function() require("latipun.plugins.catppuccin").config() end,
     },
     {
+      "rcarriga/nvim-notify",
+      tag = "*",
+      requires = { "nvim-telescope/telescope.nvim" },
+      config = function() require("latipun.plugins.notify").config() end,
+    },
+    {
       "phaazon/hop.nvim",
       tag = "*",
       event = "BufRead",
