@@ -6,10 +6,11 @@ M.config = function()
 
   dressing.setup({
     input = {
-      get_config = function()
-        if vim.api.nvim_buf_get_option(0, "filetype") == "neo-tree" then
-          return { enabled = false }
-        end
+      override = function(conf)
+        -- position the input box above the cursor to not cover the word being renamed
+        conf.col = -1
+        conf.row = 0
+        return conf
       end,
     },
     select = {

@@ -138,7 +138,7 @@ M.config = function()
   lvim.builtin.which_key.mappings.s.name = " Search"
 
   -- LSP - Peek
-  lvim.builtin.which_key.mappings["lp"] = {
+  lvim.builtin.which_key.mappings.lp = {
     name = "Peek",
     d = {
       "<Cmd>lua require('latipun.peek').Peek('definition')<CR>",
@@ -152,6 +152,13 @@ M.config = function()
       "<Cmd>lua require('latipun.peek').Peek('implementation')<CR>",
       "Implementation",
     },
+  }
+
+  lvim.builtin.which_key.mappings.lr = { ":IncRename ", "Rename" }
+  lvim.builtin.which_key.mappings.lR = {
+    function() return ":IncRename " .. vim.fn.expand("<cword>") end,
+    "Rename keep",
+    expr = true,
   }
 
   -- Treesitter

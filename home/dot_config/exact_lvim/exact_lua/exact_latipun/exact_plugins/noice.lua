@@ -4,50 +4,24 @@ M.config = function()
   local status_ok, noice = pcall(require, "noice")
   if not status_ok then return end
 
-  table.insert(lvim.builtin.breadcrumbs.winbar_filetype_exclude, "vim")
-  table.insert(lvim.builtin.breadcrumbs.winbar_filetype_exclude, "regex")
-
   noice.setup({
-    views = {
-      cmdline_popup = {
-        win_options = {
-          winblend = 5,
-          winhighlight = {
-            Normal = "NormalFloat",
-            FloatBorder = "NoiceCmdlinePopupBorder",
-            IncSearch = "",
-            Search = "",
-          },
-          cursorline = false,
-        },
-        filter_options = {
-          {
-            filter = { event = "cmdline", find = "^%s*[/?]" },
-            opts = {
-              border = {
-                text = {
-                  top = " Search ",
-                },
-              },
-              win_options = {
-                winhighlight = {
-                  Normal = "NormalFloat",
-                  FloatBorder = "NoiceCmdlinePopupBorder",
-                  IncSearch = "",
-                  Search = "",
-                },
-              },
-            },
+    views = { split = { enter = true } },
+    cmdline = {
+      format = {
+        filter = { pattern = "^:%s*!", icon = "", lang = "bash" },
+        rename = {
+          pattern = "^:%s*IncRename%s+",
+          icon = "",
+          opts = {
+            relative = "cursor",
+            size = { min_width = 20 },
+            position = { row = -3, col = 0 },
           },
         },
       },
     },
-    popupmenu = {
-      enabled = false,
-    },
-    notify = {
-      enabled = lvim.builtin.notify.active,
-    },
+    popupmenu = { enabled = true },
+    notify = { enabled = true },
     routes = {
       {
         view = "notify",
@@ -59,7 +33,7 @@ M.config = function()
       },
       {
         view = "split",
-        filter = { event = "msg_show", min_height = 20 },
+        filter = { event = "msg_show", min_height = 10 },
       },
       {
         filter = {
