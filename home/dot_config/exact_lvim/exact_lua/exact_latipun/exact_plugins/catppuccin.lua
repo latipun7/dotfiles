@@ -44,8 +44,6 @@ M.config = function()
       end,
     },
   })
-
-  vim.cmd("colorscheme catppuccin")
 end
 
 return M

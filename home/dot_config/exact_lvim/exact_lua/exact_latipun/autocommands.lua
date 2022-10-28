@@ -4,6 +4,9 @@ local create_augroup = vim.api.nvim_create_augroup
 local create_aucmd = vim.api.nvim_create_autocmd
 
 M.config = function()
+  -- clear unused autocommands from LunarVim
+  vim.api.nvim_clear_autocmds({ pattern = "lir", group = "_filetype_settings" })
+
   create_aucmd("TermOpen", {
     pattern = "term://*",
     command = "lua require('latipun.keybindings').set_terminal_keymaps()",
