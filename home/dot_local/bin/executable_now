@@ -1,0 +1,116 @@
+#!/usr/bin/env bash
+#
+# SOURCE: https://askubuntu.com/questions/1020692/terminal-splash-screen-with-weather-calendar-time-sysinfo/1020693#1020693
+
+CITY="${CITY:-Godean}"
+
+# Setup for 92 character wide terminal
+DateColumn=34 # Default is 27 for 80 character line, 34 for 92 character line
+TimeColumn=61 # Default is 49 for   "   "   "   "    61 "   "   "   "
+
+curl -fsLSm3 "wttr.in/$CITY?0" >/tmp/now-weather
+
+readarray aWeather </tmp/now-weather
+rm -f /tmp/now-weather
+
+# Was valid weather report found or an error message?
+if [[ "${aWeather[0]}" == "Weather report:"* ]]; then
+  WeatherSuccess=true
+  echo "${aWeather[@]}"
+else
+  WeatherSuccess=false
+  echo "+============================+"
+  echo "| Weather unavailable now!!! |"
+  echo "| Check reason with command: |"
+  echo "|                            |"
+  echo "| curl -sSm3 wttr.in/City?0  |"
+  echo "+============================+"
+  echo " "
+fi
+echo " "
+
+#--------- DATE -------------------------------------------------------------
+
+# calendar current month with today highlighted.
+# colors 00=bright white, 31=red, 32=green, 33=yellow, 34=blue, 35=purple,
+#        36=cyan, 37=white
+
+tput sc # Save cursor position.
+# Move up 9 lines
+i=0
+while [ $((++i)) -lt 10 ]; do tput cuu1; done
+
+if [[ "$WeatherSuccess" == true ]]; then
+  Column=$((DateColumn - 10))
+  tput cuf $Column # Move x column number
+  printf "          "
+else
+  tput cuf $DateColumn # Move columns right
+fi
+
+# -h needed to turn off formating: https://askubuntu.com/questions/1013954/bash-substring-stringoffsetlength-error/1013960#1013960
+# -h not supported in Ubuntu 18.04. Use second answer: https://askubuntu.com/a/1028566/307523
+cal >/tmp/terminal1
+tr -cd '\11\12\15\40\60-\136\140-\176' </tmp/terminal1 >/tmp/terminal
+
+CalLineCnt=1
+Today=$(date +"%e")
+
+printf "\033[32m"
+
+while IFS= read -r Cal; do
+  printf "%s" "$Cal"
+  if [[ $CalLineCnt -gt 2 ]]; then
+    # See if today is on current line & invert background
+    tput cub 22
+    for ((j = 0; j <= 18; j += 3)); do
+      Test=${Cal:$j:2} # Current day on calendar line
+      if [[ "$Test" == "$Today" ]]; then
+        tput cuf 2
+        printf "\033[7m" # Reverse: [ 7 m
+        printf "%s" "$Today"
+        printf "\033[0m" # Normal: [ 0 m
+        printf "\033[32m"
+      else
+        tput cuf 3
+      fi
+    done
+  fi
+
+  tput cud1            # Down one line
+  tput cuf $DateColumn # Move columns right
+  CalLineCnt=$((++CalLineCnt))
+done </tmp/terminal
+
+printf "\033[00m"
+echo ""
+
+tput rc # Restore saved cursor position.
+
+#-------- TIME --------------------------------------------------------------
+
+tput sc # Save cursor position.
+# Move up 8 lines
+i=0
+while [ $((++i)) -lt 9 ]; do tput cuu1; done
+tput cuf $TimeColumn # Move columns right
+
+if hash toilet 2>/dev/null; then
+  echo " $(date +"%I:%M %P") " |
+    toilet -f future --filter border >/tmp/terminal
+elif hash figlet 2>/dev/null; then
+  date +"%I:%M %P" | figlet -f future >/tmp/terminal
+else
+  date +"%I:%M %P" >/tmp/terminal
+fi
+
+while IFS= read -r Time; do
+  printf "\033[01;36m"
+  printf "%s" "$Time"
+  tput cud1            # Up one line
+  tput cuf $TimeColumn # Move columns right
+done </tmp/terminal
+
+tput rc # Restore saved cursor position.
+
+exit 0
