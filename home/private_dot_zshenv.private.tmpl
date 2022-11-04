@@ -6,4 +6,5 @@ export HOMEBREW_GITHUB_API_TOKEN={{ $bootstrap.github_gist.value | trim }}
 export VSCE_PAT={{ $bootstrap.vsce_pat.value | trim }}
 export NPM_TOKEN={{ $bootstrap.npm.value | trim }}
 export OWM_APIKEY={{ $bootstrap.open_weather.value | trim }}
-export OWM_CITYID={{ $bootstrap.open_weather_cityid.value | trim }}
+export OWM_LAT={{ $bootstrap.open_weather_latitude.value | trim | quote }}
+export OWM_LON={{ $bootstrap.open_weather_longitude.value | trim | quote }}
