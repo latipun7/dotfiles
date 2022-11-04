@@ -92,7 +92,7 @@ if hash bat 2>/dev/null; then
 fi
 
 # kittens alias
-if hash kitty 2>/dev/null; then
+if [[ "$TERM" == *kitty* ]]; then
   alias ssh='kitty +kitten ssh'
   alias icat='kitty +kitten icat'
 fi
