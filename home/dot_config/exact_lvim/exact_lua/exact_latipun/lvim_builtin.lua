@@ -6,14 +6,6 @@ M.config = function()
   lvim.builtin.lir.active = false
   lvim.builtin.nvimtree.active = false
 
-  -- ▄▖       ▘    ▜   ▗▘▗       ▜   ▗        ▝▖
-  -- ▐ █▌▛▘▛▛▌▌▛▌▀▌▐   ▐ ▜▘▛▌▛▌▛▌▐ █▌▜▘█▌▛▘▛▛▌ ▌
-  -- ▐ ▙▖▌ ▌▌▌▌▌▌█▌▐▖  ▐ ▐▖▙▌▙▌▙▌▐▖▙▖▐▖▙▖▌ ▌▌▌ ▌
-  --                   ▝▖    ▄▌▄▌             ▗▘
-
-  lvim.builtin.terminal.open_mapping = [[<C-\>]]
-  lvim.builtin.terminal.execs = { { "lazygit", "<Leader>gg", " LazyGit" } }
-
   -- ▄▖▜   ▌     ▗▘ ▌    ▌ ▌        ▌▝▖
   -- ▌▌▐ ▛▌▛▌▀▌  ▐ ▛▌▀▌▛▘▛▌▛▌▛▌▀▌▛▘▛▌ ▌
   -- ▛▌▐▖▙▌▌▌█▌  ▐ ▙▌█▌▄▌▌▌▙▌▙▌█▌▌ ▙▌ ▌
@@ -31,6 +23,7 @@ M.config = function()
   lvim.builtin.which_key.setup.plugins.marks = true
   lvim.builtin.which_key.setup.plugins.registers = true
   lvim.builtin.which_key.setup.plugins.presets.z = true
+  lvim.builtin.which_key.setup.icons.group = ""
 
   -- ▄▖        ▘▗ ▗
   -- ▐ ▛▘█▌█▌▛▘▌▜▘▜▘█▌▛▘

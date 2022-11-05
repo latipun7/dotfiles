@@ -100,6 +100,10 @@ M.config = function()
   -- Git
   lvim.builtin.which_key.mappings.g = {
     name = " Git",
+    g = {
+      "<Cmd>lua require('lvim.core.terminal').lazygit_toggle()<CR>",
+      " LazyGit",
+    },
     j = {
       "<Cmd>lua require('gitsigns').next_hunk({navigation_message = false})<CR>",
       " Next hunk",
@@ -132,6 +136,8 @@ M.config = function()
     },
   }
 
+  lvim.builtin.dap.on_config_done =
+    function() lvim.builtin.which_key.mappings.d.name = " Debug" end
   lvim.builtin.which_key.mappings.L.name = " LunarVim"
   lvim.builtin.which_key.mappings.l.name = " LSP"
   lvim.builtin.which_key.mappings.p.name = " Packer"
