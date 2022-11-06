@@ -18,6 +18,9 @@ if hash npm 2>/dev/null; then
   eval "$(npm completion)"
 fi
 
+# terminal shell integration
+source ${0:A:h}/shell-integration
+
 # ░█▀█░█░░░▀█▀░█▀█░█▀▀░█▀▀░█▀▀
 # ░█▀█░█░░░░█░░█▀█░▀▀█░█▀▀░▀▀█
 # ░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀░▀▀▀
@@ -81,20 +84,31 @@ if hash bat 2>/dev/null; then
   alias catp='bat -pp'
 
   function cattail() {
-    tail "$@" | bat --language log
+    echo "$*"
+    if [[ "$*" == *(--follow|-[Ff] )* ]]; then
+      tail "$@" | bat --paging=never --language=log
+    else
+      tail "$@" | bat --language=log
+    fi
   }
   compdef _tail cattail
 
   function catjournal() {
-    journalctl "$@" | bat --language log
+    if [[ "$*" == *(--follow|-[Ff] )* ]]; then
+      journalctl "$@" | bat --paging=never --language=log
+    else
+      journalctl "$@" | bat --language=log
+    fi
   }
   compdef _journalctl catjournal
 fi
 
-# kittens alias
+# terminal alias
 if [[ "$TERM" == *kitty* ]]; then
   alias ssh='kitty +kitten ssh'
   alias icat='kitty +kitten icat'
+elif [[ "$TERM_PROGRAM" == WezTerm ]]; then
+  alias icat='wezterm imgcat'
 fi
 
 # nnn alias

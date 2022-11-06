@@ -1,0 +1,4 @@
+{{ $wezterm := lookPath "wezterm" -}}
+{{ if $wezterm -}}
+{{ output $wezterm "shell-completion" "--shell" "zsh" -}}
+{{ end -}}

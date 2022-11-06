@@ -6,19 +6,21 @@
 **/*.zwc
 .Xauthority
 .cache
+.config/awesome/modules # externals
 .config/lvim/ignore
 .config/lvim/lv-settings.lua
 .config/lvim/plugin/**
 .config/lvim/sessions
+.local/share/Trash
 .local/share/ansi-arts/** # git-repo
 .local/share/lunarvim/lvim/** # git-repo
 .local/share/oh-my-tmux/** # git-repo
 .local/share/oh-my-zsh/** # git-repo
 .local/share/rofimoji/{frecency,recent}
+.local/state
 .pki
 .ssh/known_hosts
-.zcompdump-*
-.zsh_history
+.var
 
 {{- if eq .chezmoi.os "windows" }}
 # Ignore this in windows (*nix only files)
@@ -52,13 +54,14 @@ www
 
 {{- if .is_no_gui }}
 # Ignore if no GUI environment (desktop only files)
-.config/{fcitx5,imv,kitty,rofi*,simplescreenrecorder}
-.local/bin/xterm
-.local/share/{fcitx5,rofimoji,Xresources*}
+.config/{fcitx5,imv,kitty,rofi*,simplescreenrecorder,wezterm}
+.local/bin/{color-picker,xterm}
+.local/share/{fcitx5,mpd,rofimoji,Xresources*}
 .xprofile
 ###
 {{- end }}
 
 {{- if not .is_arch_linux }}
+# Ignore if not Arch Linux (Arch Linux only files)
 .local/share/bin/yay-*
 {{- end }}

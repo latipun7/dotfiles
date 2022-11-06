@@ -3,17 +3,17 @@
 configuration {
   modi: "window,drun,run,ssh";
   display-window: "   Window ";
-  display-run: "   Run ";
+  display-run: "   Run ";
   display-ssh: "   SSH ";
   display-drun: "   Apps ";
   font: "monospace 13";
-  terminal: "kitty";
   sidebar-mode: true;
   show-icons: true;
+  terminal: "wezterm";
   ssh-client: "ssh";
-  ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";
+  ssh-command: "{terminal} start {ssh-client} {host} [-p {port}]";
   run-command: "{cmd}";
-  run-shell-command: "{terminal} -e {cmd}";
+  run-shell-command: "{terminal} start {cmd}";
   window-thumbnail: true;
   timeout {
     action: "kb-cancel";
