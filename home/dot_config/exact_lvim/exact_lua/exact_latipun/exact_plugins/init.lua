@@ -68,7 +68,6 @@ M.config = function()
     },
     {
       "andymass/vim-matchup",
-      event = "BufReadPost",
       config = function() require("latipun.plugins.matchup").config() end,
     },
     {

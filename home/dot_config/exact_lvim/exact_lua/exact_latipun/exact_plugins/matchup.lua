@@ -6,7 +6,7 @@ M.config = function()
   vim.g.matchup_matchparen_deferred = 1
   vim.g.matchup_matchparen_offscreen = { method = "popup" }
 
-  require("nvim-treesitter.configs").setup({ matchup = { enable = true } })
+  lvim.builtin.treesitter.matchup.enable = true
 end
 
 return M
