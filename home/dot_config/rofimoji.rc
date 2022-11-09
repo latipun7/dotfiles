@@ -1,2 +1,3 @@
-files = [emojis, nerd_font, arrows, ~/.local/share/rofimoji/latipun.csv]
+files = [emojis, nerd_font, arrows, ~/.local/share/rofimoji/*.csv]
 skin-tone = neutral
+action = menu
