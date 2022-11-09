@@ -19,6 +19,10 @@
 [[ ! -o 'no_brace_expand' ]] || p10k_config_opts+=('no_brace_expand')
 'builtin' 'setopt' 'no_aliases' 'no_sh_glob' 'brace_expand'
 
+function prompt_lf() {
+  p10k segment -f 3 -i ' lf' -t "$LF_LEVEL" -c "$LF_LEVEL"
+}
+
 () {
   emulate -L zsh -o extended_glob
 
@@ -86,6 +90,7 @@
     toolbox                 # toolbox name (https://github.com/containers/toolbox)
     context                 # user@hostname
     nordvpn                 # nordvpn connection status, linux only (https://nordvpn.com/)
+    lf                      # lf shell
     ranger                  # ranger shell (https://github.com/ranger/ranger)
     nnn                     # nnn shell (https://github.com/jarun/nnn)
     xplr                    # xplr shell (https://github.com/sayanarijit/xplr)
