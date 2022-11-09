@@ -68,7 +68,7 @@ M.config = function()
     },
     {
       "andymass/vim-matchup",
-      config = function() require("latipun.plugins.matchup").config() end,
+      setup = function() require("latipun.plugins.matchup").config() end,
     },
     {
       "max397574/better-escape.nvim",
@@ -99,6 +99,7 @@ M.config = function()
     { "famiu/bufdelete.nvim", event = "BufReadPre" },
     { "hrsh7th/cmp-cmdline", event = "CmdlineEnter" },
     { "alker0/chezmoi.vim" },
+    { "camnw/lf-vim" },
     { "gpanders/editorconfig.nvim" },
     { "wakatime/vim-wakatime" },
   }

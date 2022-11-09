@@ -36,7 +36,7 @@ M.config = function()
     foldnestmax = 3,
     foldtext = [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']],
     listchars = [[space:·,tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:›,precedes:‹]],
-    guifont = "Delugia:h13,monospace:h13",
+    guifont = "monospace:h13,Symbols Nerd Font:h13",
     hlsearch = true,
     ignorecase = true,
     mouse = "a",
@@ -51,7 +51,6 @@ M.config = function()
     showtabline = 2,
     signcolumn = "yes",
     smartcase = true,
-    smartindent = true,
     smarttab = true,
     softtabstop = 2,
     splitbelow = true,
@@ -69,9 +68,7 @@ M.config = function()
     vim.opt[key] = value
   end
 
-  ---@diagnostic disable-next-line
   vim.opt.shortmess:append("W")
-  vim.opt.formatoptions:remove({ "c", "r", "o" })
 
   vim.cmd("set whichwrap+=<,>,[,],h,l")
   vim.cmd("set iskeyword+=-")

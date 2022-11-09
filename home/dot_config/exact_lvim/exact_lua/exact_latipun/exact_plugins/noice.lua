@@ -5,6 +5,7 @@ M.config = function()
   if not status_ok then return end
 
   noice.setup({
+    lsp = { progress = { enabled = false } },
     views = { split = { enter = true } },
     cmdline = {
       format = {
@@ -20,21 +21,7 @@ M.config = function()
         },
       },
     },
-    popupmenu = { enabled = true },
-    notify = { enabled = true },
     routes = {
-      {
-        view = "notify",
-        filter = { event = "msg_showmode" },
-      },
-      {
-        filter = { event = "msg_show", kind = "search_count" },
-        opts = { skip = true },
-      },
-      {
-        view = "split",
-        filter = { event = "msg_show", min_height = 10 },
-      },
       {
         filter = {
           event = "msg_show",
@@ -73,6 +60,23 @@ M.config = function()
       {
         filter = { find = "No active Snippet" },
         opts = { skip = true },
+      },
+      {
+        view = "split",
+        filter = { event = "msg_show", min_height = 10 },
+      },
+      {
+        view = "notify",
+        filter = {
+          event = "msg_show",
+          kind = { "", "echo", "echomsg" },
+        },
+        opts = { replace = true, merge = true, title = "" },
+      },
+      {
+        view = "notify",
+        filter = { event = "msg_showmode" },
+        opts = { title = "" },
       },
     },
   })

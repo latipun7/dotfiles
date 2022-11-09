@@ -156,16 +156,6 @@ function M.find_string()
       horizontal = { width = { padding = 0.15 } },
       vertical = { preview_height = 0.75 },
     },
-    file_ignore_patterns = {
-      "vendor/*",
-      "node_modules",
-      "%.jpg",
-      "%.jpeg",
-      "%.png",
-      "%.svg",
-      "%.otf",
-      "%.ttf",
-    },
   }
   builtin.live_grep(opts)
 end
@@ -219,7 +209,7 @@ function M.project_search()
   builtin.find_files({
     previewer = false,
     layout_strategy = "vertical",
-    cwd = require("lspconfig/util").root_pattern(".git")(vim.fn.expand("%:p")),
+    cwd = require("lspconfig.util").root_pattern(".git")(vim.fn.expand("%:p")),
   })
 end
 
@@ -281,8 +271,7 @@ end
 function M.builtin() builtin.builtin() end
 
 function M.git_files()
-  local path = vim.fn.expand("%:h")
-  if path == "" then path = nil end
+  local path = vim.fn.expand("%:h") or nil
 
   local width = 0.45
   if path and string.find(path, "sourcegraph.*sourcegraph", 1, false) then
@@ -356,30 +345,30 @@ M.config = function()
     },
   }
   lvim.builtin.telescope.defaults.file_ignore_patterns = {
-    "vendor/*",
+    "__pycache__/",
+    "__pycache__/",
+    "vendor/",
+    "build/",
+    "env/",
+    "modules/",
+    "gradle/",
+    "smalljre_./",
+    "target/",
     "%.lock",
-    "__pycache__/*",
     "%.sqlite3",
     "%.ipynb",
-    "node_modules/*",
     "%.jpg",
     "%.jpeg",
     "%.png",
     "%.svg",
     "%.otf",
     "%.ttf",
-    ".git/",
+    "%.git/",
     "%.webp",
-    ".dart_tool/",
-    ".gradle/",
-    ".idea/",
-    ".settings/",
-    "__pycache__/",
-    "build/",
-    "env/",
-    "gradle/",
-    "node_modules/",
-    "target/",
+    "%.dart_tool/",
+    "%.gradle/",
+    "%.idea/",
+    "%.settings/",
     "%.pdb",
     "%.dll",
     "%.class",
@@ -391,8 +380,7 @@ M.config = function()
     "%.jar",
     "%.docx",
     "%.met",
-    "smalljre_*/*",
-    ".vale/",
+    "%.vale/",
     "%.burp",
     "%.mp4",
     "%.mkv",

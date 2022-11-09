@@ -12,6 +12,11 @@ M.config = function()
     command = "lua require('latipun.keybindings').set_terminal_keymaps()",
   })
 
+  create_aucmd({ "BufWinEnter", "BufRead", "BufNewFile" }, {
+    pattern = "*",
+    command = "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
+  })
+
   -- need bufdelete.nvim, neo-tree & alpha-dashboard
   local alpha_on_empty = create_augroup("alpha_on_empty", { clear = true })
   create_aucmd("User", {
