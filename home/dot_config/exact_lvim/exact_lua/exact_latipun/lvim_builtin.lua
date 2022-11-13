@@ -6,6 +6,10 @@ M.config = function()
   lvim.builtin.lir.active = false
   lvim.builtin.nvimtree.active = false
 
+  lvim.builtin.comment.pre_hook = function()
+    if vim.bo.filetype == "lf" then return "# %s" end
+  end
+
   -- ▄▖▜   ▌     ▗▘ ▌    ▌ ▌        ▌▝▖
   -- ▌▌▐ ▛▌▛▌▀▌  ▐ ▛▌▀▌▛▘▛▌▛▌▛▌▀▌▛▘▛▌ ▌
   -- ▛▌▐▖▙▌▌▌█▌  ▐ ▙▌█▌▄▌▌▌▙▌▙▌█▌▌ ▙▌ ▌

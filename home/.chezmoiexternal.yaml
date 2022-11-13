@@ -10,6 +10,11 @@
   refreshPeriod: 168h
   include: ["*/*.tmTheme"]
 
+.local/bin: # vimv
+  type: archive
+  url: {{ template "vimv-download-url" . }}
+  refreshPeriod: 168h
+
 {{ if ne .chezmoi.os "windows" -}}
 # ╻ ╻┏┓╻╻╻ ╻   ┏━┓┏┓╻╻  ╻ ╻
 # ┃ ┃┃┗┫┃┏╋┛   ┃ ┃┃┗┫┃  ┗┳┛

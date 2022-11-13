@@ -1,0 +1,17 @@
+{{- $url := `https://github.com/latipun7/vimv/releases/latest/download/` -}}
+
+{{- if (or (eq .chezmoi.os "linux") (eq .chezmoi.os "android")) -}}
+{{-   if eq .chezmoi.arch "arm64" -}}
+{{-     list $url "vimv-linux-aarch64.zip" | join "" -}}
+{{-   else -}}
+{{-     list $url "vimv-linux-x86_64.zip" | join "" -}}
+{{-   end -}}
+{{- else if eq .chezmoi.os "windows" -}}
+{{-   list $url "vimv-windows-x86_64.zip" | join "" -}}
+{{- else if eq .chezmoi.os "darwin" -}}
+{{-   if eq .chezmoi.arch "arm64" -}}
+{{-     list $url "vimv-macos-aarch64.zip" | join "" -}}
+{{-   else -}}
+{{-     list $url "vimv-macos-x86_64.zip" | join "" -}}
+{{-   end -}}
+{{- end -}}

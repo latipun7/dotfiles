@@ -64,16 +64,9 @@ if hash pacman 2>/dev/null && hash yay 2>/dev/null; then
   }
 fi
 
-# lsd alias
-if hash lsd 2>/dev/null; then
-  alias l='lsd -lA --group-dirs first'
-  alias ll='lsd -lA --group-dirs first --total-size'
-  alias lt='lsd --tree -A --group-dirs first'
-fi
-
 # exa alias
 if hash exa 2>/dev/null; then
-  alias l='exa --long --all --header --group-directories-first --icons --git'
+  alias ls='exa --long --all --header --group-directories-first --icons --git'
   alias ll='exa --long --all --header --group --group-directories-first --icons --git'
   alias lt='exa --tree --all --header --group-directories-first --icons --git --ignore-glob ".git|node_modules"'
 fi
@@ -111,28 +104,24 @@ elif [[ "$TERM_PROGRAM" == WezTerm ]]; then
   alias icat='wezterm imgcat'
 fi
 
-# nnn alias
-if hash nnn 2>/dev/null; then
-  function n() {
-    # Block nesting of nnn in subshells
-    if [ -n $NNNLVL ] && [ "${NNNLVL:-0}" -ge 1 ]; then
-      echo "nnn is already running"
-      return
-    fi
-
-    # Always `cd` on exit
-    export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
-
-    LC_COLLATE=C nnn "$@"
-
-    if [ -f "$NNN_TMPFILE" ]; then
-      source "$NNN_TMPFILE"
-      rm -f "$NNN_TMPFILE" > /dev/null
+# lf alias
+if hash lf 2>/dev/null; then
+  function lfcd() {
+    tmp="$(mktemp -t lf-cd-XXXXXX)"
+    lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+      dir="$(cat "$tmp")"
+      rm -f "$tmp"
+      if [ -d "$dir" ]; then
+        if [ "$dir" != "$(pwd)" ]; then
+          cd "$dir"
+        fi
+      fi
     fi
   }
-  compdef _nnn n
+  compdef _lf lfcd
 
-  alias N='sudo -E nnn -d'
+  alias l=lfcd
 fi
 
 # lazygit alias

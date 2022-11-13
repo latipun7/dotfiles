@@ -1,0 +1,294 @@
+# ┏━┓┏━┓╺┳╸╻┏━┓┏┓╻┏━┓
+# ┃ ┃┣━┛ ┃ ┃┃ ┃┃┗┫┗━┓
+# ┗━┛╹   ╹ ╹┗━┛╹ ╹┗━┛
+
+set cleaner ~/.config/lf/cleaner
+set drawbox
+set errorfmt "\033[1m\033[38;5;233m\033[48;5;1m%s\033[0m"
+set hidden
+set icons
+set ifs "\n"
+set incsearch
+set incfilter
+set mouse
+set previewer ~/.config/lf/previewer
+set promptfmt "\033[35;1m%u@%h\033[0m:\033[34;1m%d\033[0m\033[2m%f\033[0m"
+set scrolloff 8
+set shell zsh
+set shellflag '-c'
+set shellopts '-ey'
+set tabstop 2
+set truncatechar ''
+
+# ┏━┓╺┳╸┏━┓┏━┓╺┳╸╻ ╻┏━┓
+# ┗━┓ ┃ ┣━┫┣┳┛ ┃ ┃ ┃┣━┛
+# ┗━┛ ╹ ╹ ╹╹┗╸ ╹ ┗━┛╹
+
+# warn about nested instance
+%[ $LF_LEVEL -eq 1 ] || echo "Warning: You're in a nested lf instance!"
+
+# set pane ratios based on terminal column width
+${{
+  w=$(tput cols)
+  if [ $w -le 39 ]; then
+    lf -remote "send $id set ratios 1"
+  elif [ $w -le 80 ]; then
+    lf -remote "send $id set ratios 1:2"
+  else
+    lf -remote "send $id set ratios 1:2:3"
+  fi
+}}
+
+cmd on-cd &{{
+  # show current directory in window title
+  printf "\033]0; $(echo $PWD | sed "s|$HOME|~|") - LF\007" > /dev/tty
+
+  # show git status on lf prompt
+  GITSTATUS_DIR=~/.local/share/omz-custom/themes/powerlevel10k/gitstatus
+  GITSTATUS_LF="$GITSTATUS_DIR/lf-gitstatus.zwc"
+  GITSTATUS_PLUGIN="$GITSTATUS_DIR/gitstatus.plugin.zsh"
+  if [[ ! -f "$GITSTATUS_LF" ]]; then
+    cp "$GITSTATUS_PLUGIN" "$GITSTATUS_LF"
+    sed -i "/\[\[ -o .interactive. \]\]/d" "$GITSTATUS_LF"
+  fi
+  source "$GITSTATUS_LF"
+  typeset -g p=""
+  typeset -g git=""
+  function update_gitstatus() {
+    gitstatus_stop 'LF' && gitstatus_start -s -1 -u -1 -c -1 -d -1 'LF'
+    gitstatus_query 'LF' || return 66 # error
+    [[ $VCS_STATUS_RESULT == 'ok-sync' ]] || return 0 # not a git repo
+    local clean="\033[32m"
+    local modified="\033[33m"
+    local untracked="\033[36m"
+    local conflicted="\033[31m"
+    local where  # branch name, tag or commit
+    if [[ -n $VCS_STATUS_LOCAL_BRANCH ]]; then
+      where=" $VCS_STATUS_LOCAL_BRANCH"
+    elif [[ -n $VCS_STATUS_TAG ]]; then
+      p+=" \033[0m#"
+      where=$VCS_STATUS_TAG
+    else
+      p+=" \033[0m@"
+      where=${VCS_STATUS_COMMIT[1,8]}
+    fi
+    (( $#where > 32 )) && where[13,-13]="…"  # truncate long branch names and tags
+    p+="${clean}${where//\%/%%}"             # escape %
+    (( VCS_STATUS_COMMITS_BEHIND )) && p+=" ${clean}⇣${VCS_STATUS_COMMITS_BEHIND}"
+    (( VCS_STATUS_COMMITS_AHEAD && !VCS_STATUS_COMMITS_BEHIND )) && p+=" "
+    (( VCS_STATUS_COMMITS_AHEAD )) && p+="${clean}⇡${VCS_STATUS_COMMITS_AHEAD}"
+    (( VCS_STATUS_PUSH_COMMITS_BEHIND )) && p+=" ${clean}⇠${VCS_STATUS_PUSH_COMMITS_BEHIND}"
+    (( VCS_STATUS_PUSH_COMMITS_AHEAD && !VCS_STATUS_PUSH_COMMITS_BEHIND )) && p+=" "
+    (( VCS_STATUS_PUSH_COMMITS_AHEAD )) && p+="${clean}⇢${VCS_STATUS_PUSH_COMMITS_AHEAD}"
+    (( VCS_STATUS_STASHES )) && p+=" ${clean}*${VCS_STATUS_STASHES}"
+    [[ -n $VCS_STATUS_ACTION ]] && p+=" ${conflicted}${VCS_STATUS_ACTION}"
+    (( VCS_STATUS_NUM_CONFLICTED )) && p+=" ${conflicted}~${VCS_STATUS_NUM_CONFLICTED}"
+    (( VCS_STATUS_NUM_STAGED )) && p+=" ${modified}+${VCS_STATUS_NUM_STAGED}"
+    (( VCS_STATUS_NUM_UNSTAGED )) && p+=" ${modified}!${VCS_STATUS_NUM_UNSTAGED}"
+    (( VCS_STATUS_NUM_UNTRACKED )) && p+=" ${untracked}?${VCS_STATUS_NUM_UNTRACKED}"
+    return 0
+  }
+  update_gitstatus
+  git="${p}"
+  fmt="\033[35;1m%u@%h\033[0m:\033[34;1m%d\033[0m\033[2m%f\033[0m\033[1m$git\033[0m"
+  lf -remote "send $id set promptfmt \"$fmt\""
+}}
+on-cd
+
+# ┏━╸┏━┓┏┳┓┏┳┓┏━┓┏┓╻╺┳┓┏━┓
+# ┃  ┃ ┃┃┃┃┃┃┃┣━┫┃┗┫ ┃┃┗━┓
+# ┗━╸┗━┛╹ ╹╹ ╹╹ ╹╹ ╹╺┻┛┗━┛
+
+# special command override
+
+cmd open ${{
+  case $(file --mime-type -Lb $f) in
+    text/*|*/xml|inode/x-empty) $EDITOR $f ;;
+    *) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done ;;
+  esac
+}}
+
+#####
+
+cmd hard-reload &{{
+  [ -d ~/.cache/lf ] && rm -rf ~/.cache/lf
+  lf -remote "send $id reload"
+}}
+
+cmd add-new %{{
+  printf "New file or directory name (dirs end with a '/'): "
+  read -r answer
+  [[ -z "$answer" ]] && exit
+
+  if [[ -e "$answer" ]]; then
+    lf -remote "send $id select '${answer}'"
+    lf -remote "send $id echoerr 'File/directory already exist'"
+    exit 1
+  fi
+
+  if [[ "${answer: -1}" == "/" ]]; then
+    mkdir -p "$answer"
+  else
+    if [[ "$answer" == */* ]]; then
+      install -Dm644 /dev/null "$answer"
+    else
+      touch "$answer"
+    fi
+  fi
+  lf -remote "send $id select '${answer}'"
+}}
+
+cmd bulk-rename !{{
+  printf '\n%.0s' {1..$(( $(tput lines) - 1 ))} && printf '\e[H' # push viewport
+  vimv --git -- $(basename -a -- $fx)
+  lf -remote "send $id load"
+  lf -remote "send $id unselect"
+}}
+
+cmd remove %{{
+  printf "Sure want to remove permanently? (y/N) "
+  read -r answer
+  case "$answer" in
+    [Yy]*) rm -rf $fx ;;
+    [Nn]*) exit ;;
+    *) exit ;;
+  esac
+  lf -remote "send $id load"
+  lf -remote "send $id echo \"\033[1;32mPermanent delete success!\033[0m\""
+}}
+
+cmd trash &{{
+  trash-put $fx
+  lf -remote "send $id load"
+  lf -remote "send $id echo \"\033[1;32mSuccessfully moved to trash!\033[0m\""
+}}
+
+cmd restore-trash ${{
+  printf '\n%.0s' {1..$(( $(tput lines) - 1 ))} && printf '\e[H' # push viewport
+  trash-restore
+}}
+
+cmd trash-list !{{
+  printf '\n%.0s' {1..$(( $(tput lines) - 1 ))} && printf '\e[H' # push viewport
+  trash-list
+}}
+
+cmd exe-toggle &{{
+  for f in $fx; do
+    if [[ -x $f ]]; then
+      chmod -x $f
+    else
+      chmod +x $f
+    fi
+  done
+  lf -remote "send $id reload"
+}}
+
+cmd zoxide %{{
+  result="$(zoxide query --exclude "${PWD}" -- "$@")"
+  lf -remote "send ${id} cd '${result}'"
+}}
+
+cmd zoxide-interactive ${{
+  printf '\n%.0s' {1..$(( $(tput lines) - 1 ))} && printf '\e[H' # push viewport
+  result="$(zoxide query --interactive --score --exclude "${PWD}" -- "$@" | sed 's/^ *[0-9]* //')"
+  lf -remote "send ${id} cd '${result}'"
+}}
+
+cmd link %{{
+  set -- $(cat ~/.local/share/lf/files)
+  mode="$1"
+  shift
+  if [ "$#" -lt 1 ]; then
+    lf -remote "send $id echo no files to link"
+    exit
+  fi
+  case "$mode" in
+    # symbolically copy mode is indicating a soft link
+    copy) ln -sr -t . -- "$@" ;;
+    # while a move mode is indicating a hard link
+    move) ln -t . -- "$@" ;;
+  esac
+  rm ~/.local/share/lf/files
+  lf -remote "send clear"
+}}
+
+cmd jump ${{
+  res="$(fd --hidden --follow | fzf --reverse --info=inline --header=$'Jump to location\n\n' --prompt '👟 jump> ' | sed 's/\\/\\\\/g;s/"/\\"/g')"
+  if [ -d "$res" ]; then
+    cmd="cd"
+  elif [ -f "$res" ]; then
+    cmd="select"
+  else
+    exit 0
+  fi
+  lf -remote "send $id $cmd '${res}'"
+}}
+
+cmd find-text-content ${{
+  rg_prefix="rg --column --line-number --no-heading --color=always --smart-case"
+  initial_query="${*:-}"
+  IFS=: selected=(${=$( \
+    FZF_DEFAULT_COMMAND="$rg_prefix $(printf %q "$initial_query")" \
+    fzf --ansi --info=inline --reverse \
+        --color "hl:-1:underline,hl+:-1:underline:reverse" \
+        --disabled --query "$initial_query" \
+        --bind "change:reload(sleep 0.1; $rg_prefix {q} || true)" \
+        --bind "ctrl-f:unbind(change,ctrl-f)+change-prompt(🔍 fzf> )+enable-search+clear-query+rebind(ctrl-r)" \
+        --bind "ctrl-r:unbind(ctrl-r)+change-prompt(🔍 ripgrep> )+disable-search+reload($rg_prefix {q} || true)+rebind(change,ctrl-f)" \
+        --prompt '🔍 ripgrep> ' \
+        --delimiter : \
+        --header $'╱ CTRL-R (ripgrep search mode) ╱ CTRL-F (fzf fuzzy search mode) ╱\n\n' \
+        --preview 'bat --color=always --highlight-line {2} {1}' \
+        --preview-window 'up,60%,border-bottom,+{2}+3/3,~3' ||
+    true
+  )})
+  if [ -n "$selected" ]; then
+    lvim "${selected[1]}" "+call cursor(${selected[2]},${selected[3]})"
+  else
+    exit 0
+  fi
+}}
+
+# ┏┓ ╻┏┓╻╺┳┓╻┏┓╻┏━╸┏━┓
+# ┣┻┓┃┃┗┫ ┃┃┃┃┗┫┃╺┓┗━┓
+# ┗━┛╹╹ ╹╺┻┛╹╹ ╹┗━┛┗━┛
+
+# remove default bindings
+map d
+map f
+map gh
+
+# basic function
+map a add-new
+map DD remove
+map dd trash
+map dl trash-list
+map dr restore-trash
+map e $$EDITOR
+map fF find-back
+map ff find
+map fj jump
+map fm %file -Lb --mime-type $f
+map fs find-text-content
+map P link
+map R bulk-rename
+map x cut
+map Z zoxide-interactive
+map z push :zoxide<space>
+map . set hidden!
+map * exe-toggle
+map <c-r> hard-reload
+map <enter> open
+
+# quick navigation
+map gh cd ~
+map gc cd ~/.config
+map gs cd ~/.local/share
+map gH cd ~/.local/share/chezmoi
+map gD cd ~/Downloads
+map gr cd /
+map ge cd /etc
+map gd cd /home/data
+map gp cd /home/data/pictures
+map gS cd /usr/share

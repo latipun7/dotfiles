@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+CACHEDIR="${XDG_CACHE_HOME:-$HOME/.cache}/lf"
+CACHE="$CACHEDIR/thumbnail.$(stat --printf '%n\0%i\0%F\0%s\0%W\0%Y' -- "$(readlink -f "$1")" | sha256sum | awk '{print $1}')"
+
+filetype="$(file -Lb --mime-type "$1")"
+
+function image() {
+  if hash kitty 2>/dev/null; then
+    kitty +icat --silent --transfer-mode=stream --place="$(($2 - 2))x$(($3 - 4))@${4}x$(($5 + 2))" "$1"
+    exit 69
+  else
+    chafa -s "$(($2 - 2))x$(($3 - 2))" -f symbols "$1"
+  fi
+}
+
+function preview() {
+  [ ! -d "$CACHEDIR" ] && mkdir -p "$CACHEDIR"
+
+  if [ ! -f "${CACHE}.jpg" ]; then
+    case "$1" in
+      video) ffmpegthumbnailer -m -s0 -i "$2" -o "${CACHE}.jpg" ;;
+      pdf) pdftoppm -jpeg -f 1 -singlefile "$2" "$CACHE" ;;
+    esac
+  fi
+
+  image "${CACHE}.jpg" "$3" "$4" "$5" "$6"
+}
+
+function main() {
+  case "$filetype" in
+    image/*) image "$@" ;;
+    video/*) preview video "$@" ;;
+    *pdf) preview pdf "$@" ;;
+    *) pistol "$@" ;;
+  esac
+
+}
+
+main "$@"
