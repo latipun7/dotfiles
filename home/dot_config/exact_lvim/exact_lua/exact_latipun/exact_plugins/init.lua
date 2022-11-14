@@ -96,6 +96,10 @@ M.config = function()
       "smjonas/inc-rename.nvim",
       config = function() require("inc_rename").setup() end,
     },
+    {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      after = "nvim-treesitter",
+    },
     { "famiu/bufdelete.nvim", event = "BufReadPre" },
     { "hrsh7th/cmp-cmdline", event = "CmdlineEnter" },
     { "alker0/chezmoi.vim" },

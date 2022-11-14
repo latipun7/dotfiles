@@ -54,6 +54,7 @@ local default_opts = {
         },
       },
       workspace = {
+        checkThirdParty = false,
         preloadFileSize = 10000,
         library = {
           "/usr/share/awesome/lib",

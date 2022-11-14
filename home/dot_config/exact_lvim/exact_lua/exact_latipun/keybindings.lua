@@ -136,8 +136,7 @@ M.config = function()
     },
   }
 
-  lvim.builtin.dap.on_config_done =
-    function() lvim.builtin.which_key.mappings.d.name = " Debug" end
+  lvim.builtin.which_key.mappings.d.name = " Debug"
   lvim.builtin.which_key.mappings.L.name = " LunarVim"
   lvim.builtin.which_key.mappings.l.name = " LSP"
   lvim.builtin.which_key.mappings.p.name = " Packer"
