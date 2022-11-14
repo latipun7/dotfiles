@@ -35,7 +35,7 @@
   url: https://github.com/catppuccin/btop/raw/main/catppuccin_mocha.theme
   refreshPeriod: 168h
 
-# oh-my-zsh
+# oh-my-zsh [[[
 .local/share/oh-my-zsh:
   type: git-repo
   url: https://github.com/ohmyzsh/ohmyzsh.git
@@ -78,17 +78,19 @@
   exact: true
   stripComponents: 1
   refreshPeriod: 168h
+# ]]]
 
-# LunarVim
+# LunarVim [[[
 .local/share/lunarvim/lvim:
   type: git-repo
   url: https://github.com/LunarVim/LunarVim.git
   clone:
-    args: ["--branch", "rolling", "--depth", "1"]
+    args: ["--depth", "1"]
   pull:
     args: ["--dry-run"] # Update via `lvim +LvimUpdate`
+# ]]]
 
-# oh-my-tmux
+# oh-my-tmux [[[
 .local/share/oh-my-tmux:
   type: git-repo
   url: https://github.com/gpakosz/.tmux.git
@@ -97,6 +99,7 @@
     args: ["--depth", "1"]
   pull:
     args: ["--dry-run"] # update/pull manually
+# ]]]
 {{ end -}}
 
 {{ if .is_linux_gui -}}
@@ -117,6 +120,43 @@
   stripComponents: 1
   refreshPeriod: 744h
   include: ["*/Catppuccin/**"]
+
+# AwesomeWM [[[
+.config/awesome/modules/bling:
+  type: git-repo
+  url: https://github.com/BlingCorp/bling.git
+  refreshPeriod: 168h
+  clone:
+    args: ["--depth", "1"]
+
+.config/awesome/modules/color:
+  type: git-repo
+  url: https://github.com/andOrlando/color.git
+  refreshPeriod: 168h
+  clone:
+    args: ["--depth", "1"]
+
+.config/awesome/modules/layout-machi:
+  type: git-repo
+  url: https://github.com/xinhaoyuan/layout-machi.git
+  refreshPeriod: 168h
+  clone:
+    args: ["--depth", "1"]
+
+.config/awesome/modules/rubato:
+  type: git-repo
+  url: https://github.com/andOrlando/rubato.git
+  refreshPeriod: 168h
+  clone:
+    args: ["--depth", "1"]
+
+.config/awesome/modules/upower:
+  type: git-repo
+  url: https://github.com/Aire-One/awesome-battery_widget.git
+  refreshPeriod: 168h
+  clone:
+    args: ["--depth", "1"]
+# ]]]
 {{- end }}
 
 {{ if .is_server -}}
@@ -133,6 +173,7 @@
     command: tar
     args: ["--extract", "--gzip", "--file", "/dev/stdin", "--to-stdout", "godns"]
 
+# Adminer [[[
 www/adminer/adminer.php:
   type: file
   url: https://www.adminer.org/latest-en.php
@@ -149,6 +190,7 @@ www/adminer: # plugins
   stripComponents: 1
   refreshPeriod: 744h
   include: ["*/plugins/**"]
+# ]]]
 {{- end }}
 
 {{ if eq .chezmoi.os "windows" -}}
