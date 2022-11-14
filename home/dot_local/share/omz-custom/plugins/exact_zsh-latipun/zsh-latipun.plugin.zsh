@@ -154,17 +154,28 @@ function clear-scrollback-buffer {
   clear && printf '\e[3J' && printf '\n%.0s' {1..$(( $(tput lines) - 1 ))}
   zle && zle .reset-prompt && zle -R
 }
+zle -N clear-scrollback-buffer
 
-function clear-buffer {
-  printf '\e[2J' && printf '\n%.0s' {1..$(( $(tput lines) - 1 ))}
+function push-viewport {
+  printf '\n%.0s' {1..$(( $(tput lines) ))}
   zle && zle .reset-prompt && zle -R
 }
+zle -N push-viewport
 
-zle -N clear-scrollback-buffer
 bindkey '^K' clear-scrollback-buffer
+bindkey '^L' push-viewport
+bindkey '^H' backward-kill-word # <C-BS>
+bindkey '^V' describe-key-briefly
+bindkey -M menuselect '^N' down-history
+bindkey -M menuselect '^P' up-history
+bindkey -M menuselect '^J' down-history
+bindkey -M menuselect '^K' up-history
+bindkey -M menuselect '^L' forward-char
+bindkey -M menuselect '^H' backward-char
 
-zle -N clear-buffer
-bindkey '^L' clear-buffer
+# need zsh-autosuggestions plugin above this plugin
+bindkey '^ ' autosuggest-accept # <C-Space>
 
-# C-backspace to delete previous word
-bindkey '^H' backward-kill-word
+# need zsh-autocomplete plugin above this plugin
+bindkey '^N' down-line-or-select
+bindkey '^P' up-line-or-search
