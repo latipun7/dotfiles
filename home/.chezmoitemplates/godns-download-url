@@ -12,6 +12,6 @@
 {{-   end -}}
 {{- else if eq $os "windows" -}}
 {{-   list $url "godns_" $tag "_Windows_x86_64.tar.gz" | join "" -}}
-{{- else -}}
+{{- else if eq $os "darwin" -}}
 {{-   list $url "godns_" $tag "_Darwin_x86_64.tar.gz" | join "" -}}
 {{- end -}}
