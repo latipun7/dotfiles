@@ -250,6 +250,16 @@ cmd find-text-content ${{
   fi
 }}
 
+cmd lazygit ${{
+  export LAZYGIT_NEW_DIR_FILE=~/.config/lazygit/newdir
+  GIT_PAGER='delta --paging=never' lazygit "$@"
+  newdir="$(cat $LAZYGIT_NEW_DIR_FILE)"
+  if [ -f $LAZYGIT_NEW_DIR_FILE ]; then
+    lf -remote "send $id cd $newdir"
+    rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
+  fi
+}}
+
 # ┏┓ ╻┏┓╻╺┳┓╻┏┓╻┏━╸┏━┓
 # ┣┻┓┃┃┗┫ ┃┃┃┃┗┫┃╺┓┗━┓
 # ┗━┛╹╹ ╹╺┻┛╹╹ ╹┗━┛┗━┛
@@ -278,11 +288,13 @@ map Z zoxide-interactive
 map z push :zoxide<space>
 map . set hidden!
 map * exe-toggle
+map <c-g> lazygit
 map <c-r> hard-reload
 map <enter> open
 
 # quick navigation
 map gh cd ~
+map gC cd ~/.cache
 map gc cd ~/.config
 map gs cd ~/.local/share
 map gH cd ~/.local/share/chezmoi

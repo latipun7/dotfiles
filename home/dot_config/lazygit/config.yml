@@ -1,6 +1,26 @@
 gui:
   showIcons: true
+  authorColors:
+    "Latif Sulistyo": magenta
+  theme:
+    selectedLineBgColor: [reverse]
+    selectedRangeBgColor: [reverse]
 git:
+  branchLogCmd: "git log --graph --color=always --pretty='%Cred%h%Creset -%C(auto)% d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' {{branchName}} --"
+  allBranchesLogCmd: "git log --graph --color=always --pretty='%Cred%h%Creset -%C(auto)% d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --all"
   paging:
     colorArg: always
     pager: delta --paging=never
+customCommands:
+  - key: "F"
+    context: "remotes"
+    description: "fetch a remote branch as a new local branch"
+    command: "git fetch {{index .SelectedRemote.Name }} {{index .PromptResponses 0}}:{{index .PromptResponses 1}}"
+    prompts:
+      - type: "input"
+        title: "Remote Branch Name"
+        initialValue: ""
+      - type: "input"
+        title: "New Local Branch Name"
+        initialValue: ""
+    loadingText: "fetching branch"
