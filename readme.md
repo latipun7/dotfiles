@@ -10,9 +10,8 @@
 ## Screenshots
 
 ![welcome screen](https://user-images.githubusercontent.com/20012970/191744493-87f1bfee-5758-4919-ab37-ff1338e904c3.gif)
-![screenshot of tmux](https://user-images.githubusercontent.com/20012970/189244239-4a56f3ef-fddc-4353-ba54-808e96807142.png)
 
-_more at [screenshot history](https://github.com/latipun7/dotfiles/discussions/10) 📸_
+_more at [screenshot history 📸](https://github.com/latipun7/dotfiles/discussions/10)_
 
 ## What in this Repo
 
@@ -24,7 +23,7 @@ but I'm considering that too in this dotfiles).
 
 **Important**: You need [nerd fonts][nerd-fonts] in your terminal.
 Install the font of your choosing and use that font in your terminal.
-Personally, I use [Cascadia Code Nerd Font][my-font].
+Personally, I use Cascadia Code + Nerd Fonts.
 
 ## Installation
 
@@ -55,4 +54,3 @@ and this list is what actually inspired me to get started with it.
 [awe-dot]: https://github.com/webpro/awesome-dotfiles#readme "Awesome Dotfiles"
 [bash]: https://www.gnu.org/software/bash/manual/bash.html "Bash Manual"
 [nerd-fonts]: https://www.nerdfonts.com/ "NerdFonts"
-[my-font]: https://github.com/ryanoasis/nerd-fonts/releases/latest/download/CascadiaCode.zip "Download Caskaydia NF"
