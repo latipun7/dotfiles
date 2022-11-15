@@ -1,3 +1,5 @@
+# -*-zsh-*- vim:ft=zsh
+
 {{ $bootstrap := bitwardenFields "item" "71d96432-cd58-4fcf-a870-ae2f01159fba" -}}
 
 export GH_TOKEN={{ $bootstrap.github_repo.value | trim }}
