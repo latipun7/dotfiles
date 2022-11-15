@@ -18,9 +18,6 @@ if hash npm 2>/dev/null; then
   eval "$(npm completion)"
 fi
 
-# terminal shell integration
-source ${0:A:h}/shell-integration
-
 # ░█▀█░█░░░▀█▀░█▀█░█▀▀░█▀▀░█▀▀
 # ░█▀█░█░░░░█░░█▀█░▀▀█░█▀▀░▀▀█
 # ░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀░▀▀▀
