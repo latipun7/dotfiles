@@ -1,23 +1,13 @@
 # Ignorable list
-**/*.bak
-**/*.log
-**/*.old
-**/*.ori
-**/*.zwc
+**/*.{bak,log,old,ori,zwc}
 .Xauthority
+.android
 .cache
-.config/awesome/modules # externals
-.config/lvim/ignore
-.config/lvim/lv-settings.lua
-.config/lvim/plugin/**
-.config/lvim/sessions
-.local/share/Trash
-.local/share/ansi-arts/** # git-repo
-.local/share/lunarvim/lvim/** # git-repo
-.local/share/oh-my-tmux/** # git-repo
-.local/share/oh-my-zsh/** # git-repo
-.local/share/rofimoji/{frecency,recent}
-.local/state
+.config/{Authy Desktop,Bitwarden CLI,lazygit/state.yml,wakatime/**}
+.config/awesome/modules # externals git-repo
+.config/lvim/{ignore,lv-settings.lua,plugin/**,sessions}
+.local/share/{Trash,rofimoji/{frecency,recent}}
+.local/share/{ansi-arts/**,lunarvim/lvim/**,oh-my-tmux/**,oh-my-zsh/**} # git-repo
 .pki
 .ssh/known_hosts
 .var
@@ -63,5 +53,5 @@ www
 
 {{- if not .is_arch_linux }}
 # Ignore if not Arch Linux (Arch Linux only files)
-.local/share/bin/yay-*
+.local/bin/yay-*
 {{- end }}
