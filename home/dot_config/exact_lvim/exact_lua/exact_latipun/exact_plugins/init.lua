@@ -88,6 +88,7 @@ M.config = function()
     },
     {
       "folke/noice.nvim",
+      tag = "*",
       event = "VimEnter",
       requires = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
       config = function() require("latipun.plugins.noice").config() end,

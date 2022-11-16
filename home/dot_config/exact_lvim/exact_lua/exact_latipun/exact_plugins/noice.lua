@@ -5,7 +5,6 @@ M.config = function()
   if not status_ok then return end
 
   noice.setup({
-    lsp = { progress = { enabled = false } },
     views = { split = { enter = true } },
     cmdline = {
       format = {
