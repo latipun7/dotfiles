@@ -106,6 +106,7 @@ cmd open ${{
     text/*|*/xml|inode/x-empty) $EDITOR $f ;;
     *) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done ;;
   esac
+  lf -remote "send $id on-cd"
 }}
 
 #####
@@ -252,12 +253,18 @@ cmd find-text-content ${{
 
 cmd lazygit ${{
   export LAZYGIT_NEW_DIR_FILE=~/.config/lazygit/newdir
-  GIT_PAGER='delta --paging=never' lazygit "$@"
+  lazygit "$@"
   newdir="$(cat $LAZYGIT_NEW_DIR_FILE)"
   if [ -f $LAZYGIT_NEW_DIR_FILE ]; then
     lf -remote "send $id cd $newdir"
     rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
   fi
+  lf -remote "send $id on-cd"
+}}
+
+cmd edit ${{
+  $EDITOR
+  lf -remote "send $id on-cd"
 }}
 
 # ┏┓ ╻┏┓╻╺┳┓╻┏┓╻┏━╸┏━┓
@@ -275,7 +282,8 @@ map DD remove
 map dd trash
 map dl trash-list
 map dr restore-trash
-map e $$EDITOR
+map e edit
+map i $bat --paging=always --pager='less -Ri' $f
 map fF find-back
 map ff find
 map fj jump
