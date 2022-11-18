@@ -54,12 +54,13 @@ local default_opts = {
         },
       },
       workspace = {
-        checkThirdParty = false,
         preloadFileSize = 10000,
         library = {
           "/usr/share/awesome/lib",
           "/usr/share/awesome/themes",
           "/usr/share/lua/5.4",
+          "${3rd}/busted/library",
+          "${3rd}/luassert/library",
         },
       },
     },
@@ -72,8 +73,12 @@ if current_lvim_config == lvim_config or current_lvim_dot == lvim_dot then
   default_opts.settings.Lua.runtime.special = { reload = "require" }
   default_opts.settings.Lua.diagnostics.globals =
     { "vim", "lvim", "packer_plugins", "reload" }
-  default_opts.settings.Lua.workspace.library =
-    { vim.fn.expand("$VIMRUNTIME"), get_lvim_base_dir() }
+  default_opts.settings.Lua.workspace.library = {
+    vim.fn.expand("$VIMRUNTIME"),
+    get_lvim_base_dir(),
+    "${3rd}/busted/library",
+    "${3rd}/luassert/library",
+  }
 end
 
 local lsp_manager = require("lvim.lsp.manager")
