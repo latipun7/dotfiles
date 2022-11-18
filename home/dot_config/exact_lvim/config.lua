@@ -36,7 +36,7 @@ lvim.lsp.buffer_mappings.normal_mode["gp"] = {
 
 vim.list_extend(
   lvim.lsp.automatic_configuration.skipped_servers,
-  { "sumneko_lua" }
+  { "sumneko_lua", "powershell_es" }
 )
 
 code_actions.setup({
