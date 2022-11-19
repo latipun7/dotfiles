@@ -168,17 +168,16 @@ end
 -- ▌ ▛▖▞▌▙▌
 -- ▙▖▌▝ ▌▌
 
-M.setup_cmdline = function()
-  local found, cmp = pcall(require, "cmp")
-  if found then
-    cmp.setup.cmdline(":", {
-      mapping = cmp.mapping.preset.cmdline({}),
-      sources = {
-        { name = "cmdline" },
-        { name = "path" },
-      },
-    })
-  end
-end
+lvim.builtin.cmp.cmdline.enable = true
+lvim.builtin.cmp.cmdline.options = {
+  {
+    type = ":",
+    sources = { { name = "cmdline" }, { name = "path" } },
+  },
+  {
+    type = { "/", "?" },
+    sources = { { name = "buffer" } },
+  },
+}
 
 return M
