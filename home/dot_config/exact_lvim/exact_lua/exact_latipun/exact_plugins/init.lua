@@ -94,6 +94,10 @@ M.config = function()
       config = function() require("latipun.plugins.noice").config() end,
     },
     {
+      "j-hui/fidget.nvim",
+      config = function() require("latipun.plugins.fidget").config() end,
+    },
+    {
       "smjonas/inc-rename.nvim",
       config = function() require("inc_rename").setup() end,
     },
