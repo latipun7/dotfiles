@@ -1,4 +1,5 @@
 local M = {}
+local Log = require("lvim.core.log")
 
 M.config = function()
   lvim.builtin.global_statusline = true
@@ -33,11 +34,50 @@ M.config = function()
   -- ▐ ▛▘█▌█▌▛▘▌▜▘▜▘█▌▛▘
   -- ▐ ▌ ▙▖▙▖▄▌▌▐▖▐▖▙▖▌
 
+  local function disable_highlight(lang, buf)
+    if vim.tbl_contains({ "latex" }, lang) then return true end
+
+    local filetype = vim.api.nvim_buf_get_option(buf, "filetype")
+    if filetype:find("chezmoi") then return true end
+
+    local max_filesize = 1024 * 1024
+    local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+    if ok and stats and stats.size > max_filesize then
+      if lvim.builtin.illuminate.active then
+        pcall(require("illuminate").pause_buf)
+      end
+
+      vim.schedule(function()
+        vim.api.nvim_buf_call(buf, function()
+          vim.cmd("setlocal noswapfile noundofile")
+
+          if vim.tbl_contains({ "json" }, lang) then
+            vim.cmd("NoMatchParen")
+            vim.cmd("syntax off")
+            vim.cmd("syntax clear")
+            vim.cmd("setlocal nocursorline nolist bufhidden=unload")
+
+            vim.api.nvim_create_autocmd({ "BufDelete" }, {
+              callback = function()
+                vim.cmd("DoMatchParen")
+                vim.cmd("syntax on")
+              end,
+              buffer = buf,
+            })
+          end
+        end)
+      end)
+
+      Log:info("File larger than 1MB, turned off treesitter for this buffer")
+
+      return true
+    end
+  end
+
   lvim.builtin.treesitter.auto_install = true
   lvim.builtin.treesitter.highlight.enabled = true
   lvim.builtin.treesitter.matchup.enable = true
-  lvim.builtin.treesitter.highlight.additional_vim_regex_highlighting =
-    { "yaml" }
+  lvim.builtin.treesitter.highlight.disable = disable_highlight
   lvim.builtin.treesitter.query_linter = {
     enable = true,
     use_virtual_text = true,
