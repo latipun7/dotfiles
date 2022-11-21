@@ -82,7 +82,7 @@ M.config = function()
     },
     {
       "nvim-neo-tree/neo-tree.nvim",
-      branch = "v2.x",
+      tag = "*",
       requires = { "MunifTanjim/nui.nvim" },
       config = function() require("latipun.plugins.neotree").config() end,
     },
@@ -92,6 +92,12 @@ M.config = function()
       event = "VimEnter",
       requires = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
       config = function() require("latipun.plugins.noice").config() end,
+    },
+    {
+      "toppair/peek.nvim",
+      ft = "markdown",
+      disable = not (vim.fn.executable("deno") == 1),
+      run = "deno task --quiet build:fast",
     },
     {
       "j-hui/fidget.nvim",

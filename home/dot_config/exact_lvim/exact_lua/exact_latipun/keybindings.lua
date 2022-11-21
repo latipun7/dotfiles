@@ -55,6 +55,11 @@ M.config = function()
       { "<Cmd>NeoTreeRevealToggle<CR>", "ﰤ Explorer" }
   end
 
+  lvim.builtin.which_key.mappings.P = {
+    "<Cmd>lua require('peek').open()<CR>",
+    " Previewer open",
+  }
+
   lvim.builtin.which_key.vmappings["/"] = {
     "<Plug>(comment_toggle_linewise_visual)",
     " Toggle comment linewise",
