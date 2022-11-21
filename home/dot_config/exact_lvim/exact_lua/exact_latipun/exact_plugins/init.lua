@@ -36,11 +36,6 @@ M.config = function()
       config = function() require("latipun.plugins.persisted").config() end,
     },
     {
-      "stevearc/dressing.nvim",
-      event = "BufWinEnter",
-      config = function() require("latipun.plugins.dressing").config() end,
-    },
-    {
       "sindrets/diffview.nvim",
       setup = function() require("latipun.plugins.diffview").keybindings() end,
       config = function() require("latipun.plugins.diffview").config() end,
