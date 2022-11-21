@@ -100,6 +100,12 @@ M.config = function()
       run = "deno task --quiet build:fast",
     },
     {
+      "windwp/nvim-spectre",
+      event = "BufRead",
+      setup = function() require("latipun.plugins.spectre").keybindings() end,
+      config = function() require("latipun.plugins.spectre").config() end,
+    },
+    {
       "j-hui/fidget.nvim",
       config = function() require("latipun.plugins.fidget").config() end,
     },
