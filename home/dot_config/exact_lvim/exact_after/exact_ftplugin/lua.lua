@@ -37,6 +37,7 @@ local default_opts = {
       },
       completion = { callSnippet = "Both" },
       diagnostics = {
+        unusedLocalExclude = { "_*", "test_*" },
         globals = {
           "awesome",
           "mouse",
