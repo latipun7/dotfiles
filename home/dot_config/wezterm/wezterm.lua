@@ -145,6 +145,7 @@ return {
       action = act({ CloseCurrentPane = { confirm = true } }),
     },
     { key = "Enter", mods = "LEADER", action = "ActivateCopyMode" },
+    { key = "Space", mods = "LEADER", action = "QuickSelect" },
     { key = "z", mods = "LEADER", action = "TogglePaneZoomState" },
     { key = "s", mods = "LEADER", action = "ShowLauncher" },
     {
