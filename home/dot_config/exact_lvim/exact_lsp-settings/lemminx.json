@@ -1,0 +1,11 @@
+{
+  "xml.server.workDir": "~/.cache/lemminx",
+  "xml.downloadExternalResources.enabled": true,
+  "xml.symbols.showReferencedGrammars": true,
+  "xml.fileAssociations": [
+    {
+      "systemId": "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11-flat.dtd",
+      "pattern": "**/*.svg"
+    }
+  ]
+}
