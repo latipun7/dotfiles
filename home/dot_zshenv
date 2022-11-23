@@ -105,7 +105,7 @@ fi
 
 if [[ -n "$DISPLAY" ]]; then
   export BROWSER=brave
-  export TERMINAL=wezterm
+  export TERMINAL='wezterm start'
 else
   export BROWSER=lynx
 fi
