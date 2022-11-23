@@ -14,9 +14,9 @@ bannerfish() {
   fi
 
   cols=$(tput lines)
-  tmux split-window \; resize-pane -y $((cols - 6 * ${#buf[@]})) \; send -t 2 "fishes" Enter
+  text=$(printf "'%s' " "${buf[@]}")
 
-  text=$(printf '"%s" ' "${buf[@]}")
+  tmux split-window \; resize-pane -y $((cols - 6 * ${#buf[@]})) \; send -t 2 "fishes" Enter
   tmux send -t 1 "banner ${text}" Enter
 }
 
