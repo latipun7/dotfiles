@@ -20,7 +20,7 @@ if neodev_ok then
 end
 
 local default_opts = {
-  root_dir = util.root_pattern("dot_stylua.toml", ".stylua.toml"),
+  root_dir = util.root_pattern("symlink_dot_stylua.toml.tmpl", ".stylua.toml"),
   settings = {
     Lua = {
       runtime = {
