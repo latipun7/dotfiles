@@ -1,5 +1,6 @@
 local M = {}
 local Log = require("lvim.core.log")
+local kind = require("latipun.lsp_kind")
 
 M.config = function()
   lvim.builtin.global_statusline = true
@@ -208,6 +209,45 @@ end
 -- ▌ ▛▖▞▌▙▌
 -- ▙▖▌▝ ▌▌
 
+local cmp_border = {
+  { "╭", "NoiceCmdlinePopupBorder" },
+  { "─", "NoiceCmdlinePopupBorder" },
+  { "╮", "NoiceCmdlinePopupBorder" },
+  { "│", "NoiceCmdlinePopupBorder" },
+  { "╯", "NoiceCmdlinePopupBorder" },
+  { "─", "NoiceCmdlinePopupBorder" },
+  { "╰", "NoiceCmdlinePopupBorder" },
+  { "│", "NoiceCmdlinePopupBorder" },
+}
+local cmp_sources = {
+  calc = "(Calc)",
+  treesitter = "(TS)",
+}
+
+lvim.builtin.cmp.window.completion.border = cmp_border
+lvim.builtin.cmp.window.documentation.border = cmp_border
+lvim.builtin.cmp.sources = {
+  { name = "nvim_lsp" },
+  { name = "buffer", max_item_count = 5, keyword_length = 5 },
+  { name = "path", max_item_count = 5 },
+  { name = "luasnip", max_item_count = 3 },
+  { name = "calc" },
+  { name = "treesitter" },
+}
+lvim.builtin.cmp.formatting = {
+  fields = { "kind", "abbr", "menu" },
+  format = function(entry, vim_item)
+    if entry.source.name == "cmdline" then
+      vim_item.kind = "⌘"
+      vim_item.menu = ""
+      return vim_item
+    end
+    vim_item.menu = cmp_sources[entry.source.name] or vim_item.kind
+    vim_item.kind = kind.cmp_kind[vim_item.kind] or vim_item.kind
+
+    return vim_item
+  end,
+}
 lvim.builtin.cmp.cmdline.enable = true
 lvim.builtin.cmp.cmdline.options = {
   {

@@ -114,6 +114,8 @@ M.config = function()
     },
     { "famiu/bufdelete.nvim", event = "BufReadPre" },
     { "hrsh7th/cmp-cmdline", event = "CmdlineEnter" },
+    { "hrsh7th/cmp-calc" },
+    { "ray-x/cmp-treesitter" },
     { "alker0/chezmoi.vim" },
     { "camnw/lf-vim" },
     { "gpanders/editorconfig.nvim" },
