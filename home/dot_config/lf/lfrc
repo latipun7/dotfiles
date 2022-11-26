@@ -103,7 +103,7 @@ on-cd
 
 cmd open ${{
   case $(file --mime-type -Lb $f) in
-    text/*|*/xml|inode/x-empty) $EDITOR $f ;;
+    text/* | */xml | */json | inode/x-empty) $EDITOR $f ;;
     *) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done ;;
   esac
   lf -remote "send $id on-cd"
