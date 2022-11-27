@@ -167,7 +167,7 @@ M.config = function()
     },
   }
 
-  lvim.builtin.which_key.mappings.lr = { ":IncRename ", "Rename (new name)" }
+  lvim.builtin.which_key.mappings.l.r = { ":IncRename ", "Rename (new name)" }
   lvim.builtin.which_key.mappings.lR = {
     function() return ":IncRename " .. vim.fn.expand("<cword>") end,
     "Rename (keep name)",
