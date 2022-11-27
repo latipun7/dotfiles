@@ -28,6 +28,10 @@ local pickers = {
     theme = "dropdown",
     previewer = false,
     initial_mode = "normal",
+    mappings = {
+      i = { ["<C-d>"] = actions.delete_buffer },
+      n = { ["dd"] = actions.delete_buffer },
+    },
   },
   lsp_references = { theme = "dropdown", initial_mode = "normal" },
   lsp_definitions = { theme = "dropdown", initial_mode = "normal" },
@@ -44,7 +48,6 @@ local layout_config = function()
     width = 0.90,
     height = 0.85,
     preview_cutoff = 120,
-    prompt_position = "bottom",
     horizontal = {
       preview_width = function(_, cols, _)
         if cols < 120 then return math.floor(cols * 0.5) end
