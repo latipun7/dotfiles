@@ -6,18 +6,18 @@ lvim.transparent_window = true
 lvim.colorscheme = "catppuccin"
 lvim.format_on_save.enabled = true
 
--- Plugins
-require("latipun.plugins").config()
-
--- Autocommands
-require("latipun.autocommands").config()
-
 -- LunarVim builtin configs
 require("latipun.lvim_builtin").config()
 require("latipun.plugins.lualine").config()
 require("latipun.plugins.telescope").config()
 require("latipun.plugins.bufferline").config()
 require("latipun.plugins.indent_blankline").config()
+
+-- Plugins
+require("latipun.plugins").config()
+
+-- Autocommands
+require("latipun.autocommands").config()
 
 -- Keybindings
 require("latipun.keybindings").config()
@@ -32,6 +32,11 @@ lvim.lsp.installer.setup.automatic_installation = true
 lvim.lsp.buffer_mappings.normal_mode["gp"] = {
   function() require("latipun.peek").Peek("definition") end,
   "Peek definition",
+}
+lvim.lsp.null_ls.setup = {
+  should_attach = function(bufnr)
+    return not vim.api.nvim_buf_get_name(bufnr):match("tmpl$")
+  end,
 }
 
 vim.list_extend(
