@@ -22,6 +22,16 @@ M.config = function()
       config = function() require("latipun.plugins.hop").config() end,
     },
     {
+      "eandrju/cellular-automaton.nvim",
+      cmd = "CellularAutomaton",
+      setup = function()
+        lvim.builtin.which_key.mappings.X = {
+          "<Cmd>CellularAutomaton make_it_rain<CR>",
+          " See it yourself!",
+        }
+      end,
+    },
+    {
       "NvChad/nvim-colorizer.lua",
       event = "BufReadPre",
       config = function() require("latipun.plugins.colorizer").config() end,
