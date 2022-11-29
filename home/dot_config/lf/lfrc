@@ -251,6 +251,16 @@ cmd find-text-content ${{
   fi
 }}
 
+cmd view-logs ${{
+  FZF_DEFAULT_COMMAND="fd --hidden --extension=log --exclude='*Brave*' --type=file . /var/log /etc /usr /tmp ~" \
+  fzf --ansi --info=inline --reverse --prompt '📜 log file> ' \
+      --header $'╱ CTRL-O (open in pager) ╱\n\n' \
+      --bind "ctrl-o:execute(bat --paging=always --pager='less -Ri' {1} > /dev/tty)" \
+      --preview 'tail --lines=125 --follow {1} | bat --paging=never --language=log --color=always' \
+      --preview-window 'up,70%,border-bottom,follow' ||
+  true
+}}
+
 cmd lazygit ${{
   export LAZYGIT_NEW_DIR_FILE=~/.config/lazygit/newdir
   lazygit "$@"
@@ -289,6 +299,7 @@ map ff find
 map fj jump
 map fm %file -Lb --mime-type $f
 map fs find-text-content
+map L view-logs
 map P link
 map R bulk-rename
 map x cut
