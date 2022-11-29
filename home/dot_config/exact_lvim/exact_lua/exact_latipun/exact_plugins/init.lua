@@ -82,7 +82,7 @@ M.config = function()
     },
     {
       "nvim-neo-tree/neo-tree.nvim",
-      tag = "*",
+      branch = "v2.x",
       requires = { "MunifTanjim/nui.nvim" },
       config = function() require("latipun.plugins.neotree").config() end,
     },
