@@ -21,6 +21,11 @@ function preview() {
     case "$1" in
       video) ffmpegthumbnailer -m -s0 -i "$2" -o "${CACHE}.jpg" ;;
       pdf) pdftoppm -jpeg -f 1 -singlefile "$2" "$CACHE" ;;
+      office)
+        libreoffice --convert-to jpg "$2" --outdir "$CACHEDIR/${2%/*}" &>/dev/null
+        filename="$(printf "%s" "${2##*/}" | cut -d. -f1)"
+        mv "$CACHEDIR/${2%/*}/$filename.jpg" "$CACHE.jpg"
+        ;;
     esac
   fi
 
@@ -32,9 +37,9 @@ function main() {
     image/*) image "$@" ;;
     video/*) preview video "$@" ;;
     *pdf) preview pdf "$@" ;;
+    */*office* | */*document*) preview office "$@" || pistol "$@" ;;
     *) pistol "$@" ;;
   esac
-
 }
 
 main "$@"
