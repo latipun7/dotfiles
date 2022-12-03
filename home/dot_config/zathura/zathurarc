@@ -1,0 +1,6 @@
+include catppuccin-mocha
+
+set default-bg          "rgba(30, 30, 46, 0.5)"
+set recolor-lightcolor  "rgba(30, 30, 46, 0.5)"
+set index-bg            "rgba(30, 30, 46, 0.5)"
+set render-loading-bg   "rgba(30, 30, 46, 0.5)"

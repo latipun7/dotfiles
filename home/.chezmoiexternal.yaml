@@ -107,6 +107,13 @@
 # ┃  ┃┃┗┫┃ ┃┏╋┛   ┃╺┓┃ ┃┃   ┃ ┃┃┗┫┃  ┗┳┛
 # ┗━╸╹╹ ╹┗━┛╹ ╹   ┗━┛┗━┛╹   ┗━┛╹ ╹┗━╸ ╹
 
+.config/zathura:
+  type: archive
+  url: https://github.com/catppuccin/zathura/archive/refs/heads/main.zip
+  stripComponents: 2
+  refreshPeriod: 168h
+  include: ["*", "*/src/**"]
+
 .config/kitty/themes/catppuccin:
   type: archive
   url: https://github.com/catppuccin/kitty/archive/refs/heads/main.zip
