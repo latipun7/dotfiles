@@ -62,6 +62,7 @@ local default_opts = {
           "/usr/share/lua/5.4",
           "${3rd}/busted/library",
           "${3rd}/luassert/library",
+          vim.fn.expand("$XDG_DATA_HOME/lua-definitions"),
         },
       },
     },
