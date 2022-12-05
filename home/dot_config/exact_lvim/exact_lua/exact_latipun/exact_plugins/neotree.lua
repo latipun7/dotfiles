@@ -28,7 +28,7 @@ M.config = function()
     },
     window = {
       position = "left",
-      width = 39,
+      width = 30,
       mappings = {
         h = "close_node",
         l = "open",
