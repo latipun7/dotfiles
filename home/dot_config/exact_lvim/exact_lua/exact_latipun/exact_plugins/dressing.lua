@@ -6,7 +6,7 @@ M.config = function()
 
   dressing.setup({
     input = {
-      winblend = 0,
+      win_options = { winblend = 0 },
       override = function(conf)
         -- position the input box above the cursor to not cover the word being renamed
         conf.col = -1
