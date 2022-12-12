@@ -7,18 +7,16 @@ EnumerateForwardKeys=
 EnumerateBackwardKeys=
 # Skip first input method while enumerating
 EnumerateSkipFirst=False
+# Enumerate Input Method Group Forward
+EnumerateGroupForwardKeys=
+# Enumerate Input Method Group Backward
+EnumerateGroupBackwardKeys=
 
 [Hotkey/TriggerKeys]
 0=Control+Shift+space
 
 [Hotkey/AltTriggerKeys]
 0=Shift_L
-
-[Hotkey/EnumerateGroupForwardKeys]
-0=Super+space
-
-[Hotkey/EnumerateGroupBackwardKeys]
-0=Shift+Super+space
 
 [Hotkey/ActivateKeys]
 0=Hangul_Hanja
@@ -27,10 +25,10 @@ EnumerateSkipFirst=False
 0=Hangul_Romaja
 
 [Hotkey/PrevPage]
-0=Up
+0=Page_Up
 
 [Hotkey/NextPage]
-0=Down
+0=Next
 
 [Hotkey/PrevCandidate]
 0=Shift+Tab
@@ -57,7 +55,7 @@ CompactInputMethodInformation=True
 # Show first input method information
 ShowFirstInputMethodInformation=True
 # Default page size
-DefaultPageSize=8
+DefaultPageSize=9
 # Override Xkb Option
 OverrideXkbOption=False
 # Custom Xkb Option

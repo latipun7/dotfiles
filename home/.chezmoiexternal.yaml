@@ -121,12 +121,12 @@
   refreshPeriod: 168h
   include: ["*/*.conf"]
 
-.local/share/fcitx5/themes: # Catppuccin
+.local/share/fcitx5/themes: # catppuccin-*
   type: archive
   url: https://github.com/catppuccin/fcitx5/archive/refs/heads/main.zip
-  stripComponents: 1
-  refreshPeriod: 744h
-  include: ["*/Catppuccin/**"]
+  stripComponents: 2
+  refreshPeriod: 168h
+  include: ["*","*/src/**"]
 
 # AwesomeWM [[[
 .config/awesome/modules/bling:
