@@ -316,6 +316,7 @@ function M.grep_string_visual()
 end
 
 M.config = function()
+  lvim.builtin.telescope.theme = ""
   lvim.builtin.telescope.defaults.layout_config = layout_config()
   lvim.builtin.telescope.defaults.dynamic_preview_title = true
   lvim.builtin.telescope.defaults.mappings = {
