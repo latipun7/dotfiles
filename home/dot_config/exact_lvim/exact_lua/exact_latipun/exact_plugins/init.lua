@@ -1,6 +1,12 @@
 local M = {}
 
 M.config = function()
+  -- NOTE: watchout for https://github.com/LunarVim/LunarVim/pull/3647 gets merged
+  -- replace packer with lazy.nvim
+  -- we need to change `run` to `build`
+  -- and `tag` to `version`
+  -- and `requires` to `dependencies`
+
   -- Additional Plugins
   lvim.plugins = {
     {
