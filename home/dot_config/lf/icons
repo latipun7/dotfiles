@@ -139,7 +139,7 @@ fi             # FILE
 *.sol           ﲹ
 *.pem           
 
-# file names (vim-devicons) (case-insensitive not supported in lf)
+# file names (vim-devicons) (case-insensitive filename not supported in lf)
 *gruntfile.coffee       
 *gruntfile.js           
 *gruntfile.ls           

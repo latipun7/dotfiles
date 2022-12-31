@@ -20,6 +20,10 @@ ZSH_COMPDUMP="$ZSH_CACHE_DIR/.zcompdump-${SHORT_HOST:-${(%):-%m}}-${ZSH_VERSION}
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
+if hash vivid 2>/dev/null; then
+  export LS_COLORS="$(vivid generate ~/.config/vivid/catppuccin-mocha.yml)"
+fi
+
 zstyle ':omz:update' mode reminder
 zstyle ':omz:update' frequency 7
 
