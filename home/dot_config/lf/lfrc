@@ -206,7 +206,7 @@ cmd link %{{
   fi
   case "$mode" in
     # symbolically copy mode is indicating a soft link
-    copy) ln -sr -t . -- "$@" ;;
+    copy) ln -st . -- "$@" ;;
     # while a move mode is indicating a hard link
     move) ln -t . -- "$@" ;;
   esac
