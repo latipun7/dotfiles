@@ -50,6 +50,9 @@ tmux_conf_theme_pane_border_style=thin
 # pane borders colours:
 tmux_conf_theme_pane_border="$thm_surface1"
 tmux_conf_theme_pane_active_border="$thm_blue"
+%if #{>=:#{version},3.2}
+tmux_conf_theme_pane_active_border="#{?pane_in_mode,$thm_yellow,#{?synchronize-panes,$thm_red,$thm_blue}}"
+%endif
 
 # pane indicator colours (when hit <prefix> + q)
 tmux_conf_theme_pane_indicator="$thm_blue"
