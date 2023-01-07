@@ -140,7 +140,6 @@ M.config = function()
     { "ray-x/cmp-treesitter" },
     { "alker0/chezmoi.vim" },
     { "camnw/lf-vim" },
-    { "gpanders/editorconfig.nvim" },
     { "wakatime/vim-wakatime" },
   }
 end
