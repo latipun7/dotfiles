@@ -4,14 +4,6 @@ M.config = function()
   local status_ok, noice = pcall(require, "noice")
   if not status_ok then return end
 
-  local focused = true
-  vim.api.nvim_create_autocmd("FocusGained", {
-    callback = function() focused = true end,
-  })
-  vim.api.nvim_create_autocmd("FocusLost", {
-    callback = function() focused = false end,
-  })
-
   noice.setup({
     lsp = {
       progress = { enabled = false },
@@ -50,13 +42,6 @@ M.config = function()
       },
     },
     routes = {
-      {
-        filter = {
-          cond = function() return not focused end,
-        },
-        view = "notify_send",
-        opts = { stop = false },
-      },
       {
         filter = {
           event = "msg_show",
