@@ -21,6 +21,7 @@ M.config = function()
   })
 
   require("telescope").load_extension("notify")
+  vim.notify = require("notify")
 end
 
 return M

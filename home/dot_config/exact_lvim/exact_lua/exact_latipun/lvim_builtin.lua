@@ -8,7 +8,7 @@ M.config = function()
   lvim.builtin.bigfile.active = true
   lvim.builtin.nvimtree.active = false
   lvim.builtin.latipun = {
-    noice = { active = true },
+    noice = { active = false },
   }
 
   lvim.builtin.comment.pre_hook = function()
