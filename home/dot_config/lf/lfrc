@@ -277,6 +277,10 @@ cmd edit ${{
   lf -remote "send $id on-cd"
 }}
 
+cmd yank-dirname $dirname -- "$f" | head -c-1 | xclip -i -selection clipboard
+cmd yank-path $printf '%s' "$fx" | xclip -i -selection clipboard
+cmd yank-basename $basename -a -- $fx | head -c-1 | xclip -i -selection clipboard
+
 # ┏┓ ╻┏┓╻╺┳┓╻┏┓╻┏━╸┏━┓
 # ┣┻┓┃┃┗┫ ┃┃┃┃┗┫┃╺┓┗━┓
 # ┗━┛╹╹ ╹╺┻┛╹╹ ╹┗━┛┗━┛
