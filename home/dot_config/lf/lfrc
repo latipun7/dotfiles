@@ -192,7 +192,8 @@ cmd zoxide %{{
 
 cmd zoxide-interactive ${{
   printf '\n%.0s' {1..$(( $(tput lines) - 1 ))} && printf '\e[H' # push viewport
-  result="$(zoxide query --interactive --score --exclude "${PWD}" -- "$@" | sed 's/^ *[0-9]* //')"
+  # result = fzf the result | replace score to empty characters | remove leading and trailing whitespaces
+  result="$(zoxide query --interactive --score --exclude "${PWD}" -- "$@" | sed 's/^ *[0-9]*\.[0-9]* *//' | awk '{$1=$1};1')"
   lf -remote "send ${id} cd '${result}'"
 }}
 
