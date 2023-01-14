@@ -1,36 +1,31 @@
 local M = {}
 
 M.config = function()
-  -- NOTE: watchout for https://github.com/LunarVim/LunarVim/pull/3647 gets merged
-  -- replace packer with lazy.nvim
-  -- we need to change `run` to `build`
-  -- and `tag` to `version`
-  -- and `requires` to `dependencies`
-
   -- Additional Plugins
   lvim.plugins = {
     {
       "catppuccin/nvim",
-      as = "catppuccin",
-      run = ":CatppuccinCompile",
+      name = "catppuccin",
+      build = ":CatppuccinCompile",
+      priority = 9999,
       config = function() require("latipun.plugins.catppuccin").config() end,
     },
     {
       "rcarriga/nvim-notify",
-      tag = "*",
-      requires = { "nvim-telescope/telescope.nvim" },
+      version = "*",
+      dependencies = { "nvim-telescope/telescope.nvim" },
       config = function() require("latipun.plugins.notify").config() end,
     },
     {
       "phaazon/hop.nvim",
-      tag = "*",
+      version = "*",
       event = "BufRead",
       config = function() require("latipun.plugins.hop").config() end,
     },
     {
       "eandrju/cellular-automaton.nvim",
       cmd = "CellularAutomaton",
-      setup = function()
+      init = function()
         lvim.builtin.which_key.mappings.X = {
           "<Cmd>CellularAutomaton make_it_rain<CR>",
           " See it yourself!",
@@ -48,43 +43,50 @@ M.config = function()
     },
     {
       "olimorris/persisted.nvim",
-      setup = function() require("latipun.plugins.persisted").keybindings() end,
+      lazy = true,
+      init = function() require("latipun.plugins.persisted").keybindings() end,
       config = function() require("latipun.plugins.persisted").config() end,
     },
     {
       "stevearc/dressing.nvim",
-      event = "BufWinEnter",
+      event = "VeryLazy",
       config = function() require("latipun.plugins.dressing").config() end,
     },
     {
       "sindrets/diffview.nvim",
-      setup = function() require("latipun.plugins.diffview").keybindings() end,
+      lazy = true,
+      cmd = { "DiffviewOpen", "DiffviewFileHistory" },
+      init = function() require("latipun.plugins.diffview").keybindings() end,
       config = function() require("latipun.plugins.diffview").config() end,
     },
     {
       "kevinhwang91/nvim-bqf",
-      tag = "*",
+      version = "*",
       event = "BufRead",
       config = function() require("latipun.plugins.bqf").config() end,
     },
     {
       "akinsho/git-conflict.nvim",
-      tag = "*",
+      version = "*",
+      event = "VeryLazy",
       config = function() require("git-conflict").setup() end,
     },
     {
       "kylechui/nvim-surround",
-      tag = "*",
+      version = "*",
+      event = "BufRead",
       config = function() require("nvim-surround").setup() end,
     },
     {
       "AckslD/nvim-neoclip.lua",
-      setup = function() require("latipun.plugins.neoclip").keybindings() end,
+      lazy = true,
+      init = function() require("latipun.plugins.neoclip").keybindings() end,
       config = function() require("latipun.plugins.neoclip").config() end,
     },
     {
       "andymass/vim-matchup",
-      setup = function() require("latipun.plugins.matchup").config() end,
+      event = "BufRead",
+      init = function() require("latipun.plugins.matchup").config() end,
     },
     {
       "max397574/better-escape.nvim",
@@ -93,52 +95,56 @@ M.config = function()
     },
     {
       "ThePrimeagen/harpoon",
-      requires = { { "nvim-lua/plenary.nvim" }, { "nvim-lua/popup.nvim" } },
-      setup = function() require("latipun.plugins.harpoon").keybindings() end,
+      lazy = true,
+      dependencies = { { "nvim-lua/plenary.nvim" }, { "nvim-lua/popup.nvim" } },
+      init = function() require("latipun.plugins.harpoon").keybindings() end,
     },
     {
       "nvim-neo-tree/neo-tree.nvim",
       branch = "v2.x",
-      requires = { "MunifTanjim/nui.nvim" },
+      lazy = true,
+      cmd = { "Neotree", "NeoTreeRevealToggle" },
+      dependencies = { "MunifTanjim/nui.nvim" },
       config = function() require("latipun.plugins.neotree").config() end,
     },
     {
       "folke/noice.nvim",
-      tag = "*",
-      event = "VimEnter",
-      disable = not lvim.builtin.latipun.noice.active,
-      requires = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
+      version = "*",
+      event = "VeryLazy",
+      enabled = lvim.builtin.latipun.noice.active,
+      dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
       config = function() require("latipun.plugins.noice").config() end,
     },
     {
       "toppair/peek.nvim",
       ft = "markdown",
-      disable = not (vim.fn.executable("deno") == 1),
-      run = "deno task --quiet build:fast",
+      enabled = (vim.fn.executable("deno") == 1),
+      build = "deno task --quiet build:fast",
     },
     {
       "windwp/nvim-spectre",
-      event = "BufRead",
-      setup = function() require("latipun.plugins.spectre").keybindings() end,
+      lazy = true,
+      init = function() require("latipun.plugins.spectre").keybindings() end,
       config = function() require("latipun.plugins.spectre").config() end,
     },
     {
       "j-hui/fidget.nvim",
+      event = "BufRead",
       config = function() require("latipun.plugins.fidget").config() end,
     },
     {
       "smjonas/inc-rename.nvim",
+      event = "BufReadPre",
       config = function() require("inc_rename").setup() end,
     },
     {
       "nvim-treesitter/nvim-treesitter-textobjects",
-      after = "nvim-treesitter",
+      event = "VeryLazy",
     },
+    { "alker0/chezmoi.vim", priority = 99999 }, -- BUG: https://github.com/folke/lazy.nvim/discussions/369
     { "famiu/bufdelete.nvim", event = "BufReadPre" },
-    { "hrsh7th/cmp-cmdline", event = "CmdlineEnter" },
-    { "hrsh7th/cmp-calc" },
-    { "ray-x/cmp-treesitter" },
-    { "alker0/chezmoi.vim" },
+    { "hrsh7th/cmp-calc", event = { "InsertEnter", "CmdlineEnter" } },
+    { "ray-x/cmp-treesitter", event = { "InsertEnter", "CmdlineEnter" } },
     { "camnw/lf-vim" },
     { "wakatime/vim-wakatime" },
   }

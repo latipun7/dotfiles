@@ -144,7 +144,7 @@ M.config = function()
   lvim.builtin.which_key.mappings.d.name = " Debug"
   lvim.builtin.which_key.mappings.L.name = " LunarVim"
   lvim.builtin.which_key.mappings.l.name = " LSP"
-  lvim.builtin.which_key.mappings.p.name = " Packer"
+  lvim.builtin.which_key.mappings.p.name = " Plugins"
   lvim.builtin.which_key.mappings.s.name = " Search"
 
   lvim.builtin.which_key.mappings.Ln =

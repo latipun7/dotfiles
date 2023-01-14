@@ -44,6 +44,8 @@ M.config = function()
       end,
     },
   })
+
+  lvim.colorscheme = "catppuccin"
 end
 
 return M

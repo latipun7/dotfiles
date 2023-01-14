@@ -113,7 +113,7 @@ M.config = function()
           matcher = function(buf)
             return vim.startswith(
               buf.path,
-              string.format("%s/site/pack/packer", vim.fn.stdpath("data"))
+              string.format("%s/site/pack/lazy", vim.fn.stdpath("data"))
             ) or vim.startswith(
               buf.path,
               vim.fn.expand("$VIMRUNTIME")
@@ -148,8 +148,8 @@ M.config = function()
         padding = 1,
       },
       {
-        text = " Packer",
-        filetype = "packer",
+        text = " Plugins",
+        filetype = "lazy",
         highlight = "BufferLineOffsetSeparator",
         padding = 1,
       },

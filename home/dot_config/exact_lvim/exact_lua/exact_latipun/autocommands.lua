@@ -14,7 +14,9 @@ M.config = function()
 
   create_aucmd({ "BufWinEnter", "BufRead", "BufNewFile" }, {
     pattern = "*",
-    command = "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
+    callback = function()
+      vim.cmd("setlocal formatoptions-=c formatoptions-=r formatoptions-=o")
+    end,
   })
 
   -- need bufdelete.nvim, neo-tree & alpha-dashboard

@@ -3,7 +3,6 @@ require("latipun.options").config()
 
 lvim.log.level = "warn"
 lvim.transparent_window = true
-lvim.colorscheme = "catppuccin"
 lvim.format_on_save.enabled = true
 lvim.reload_config_on_save = false
 

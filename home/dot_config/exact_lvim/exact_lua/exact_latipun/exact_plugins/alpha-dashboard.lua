@@ -27,7 +27,7 @@ M.config = function()
 
   local date = os.date("%a %d %b")
   local plugins =
-    #vim.fn.globpath(get_runtime_dir() .. "/site/pack/packer/*", "*", 0, 1)
+    #vim.fn.globpath(get_runtime_dir() .. "/site/pack/lazy/*", "*", 0, 1)
 
   local heading = {
     type = "text",

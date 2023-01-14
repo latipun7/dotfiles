@@ -1,5 +1,37 @@
 local M = {}
-local colors = require("catppuccin.palettes").get_palette()
+
+local colors = {}
+
+local ok, catppuccin = pcall(require, "catppuccin.palettes")
+if ok then
+  colors = catppuccin.get_palette()
+else
+  colors = {
+    rosewater = "#ffffff",
+    flamingo = "#ffffff",
+    mauve = "#ffffff",
+    pink = "#ffffff",
+    red = "#ffffff",
+    maroon = "#ffffff",
+    peach = "#ffffff",
+    yellow = "#ffffff",
+    green = "#ffffff",
+    blue = "#ffffff",
+    sky = "#ffffff",
+    teal = "#ffffff",
+    sapphire = "#ffffff",
+    lavender = "#ffffff",
+    text = "#ffffff",
+    overlay2 = "#ffffff",
+    overlay1 = "#ffffff",
+    overlay0 = "#ffffff",
+    surface1 = "#ffffff",
+    surface0 = "#ffffff",
+    mantle = "#ffffff",
+    base = "#ffffff",
+    crust = "#ffffff",
+  }
+end
 
 M.current_colors = function()
   return {

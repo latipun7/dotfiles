@@ -105,7 +105,7 @@ local functions = {
   python_env = function()
     local utils = require("lvim.core.lualine.utils")
     if vim.bo.filetype == "python" then
-      local venv = os.getenv("CONDA_DEFAULT_ENV") or os.getenv("VIRTUAL_ENV")
+      local venv = vim.env.CONDA_DEFAULT_ENV or vim.env.VIRTUAL_ENV
 
       if venv then return string.format(" (%s)", utils.env_cleanup(venv)) end
     end

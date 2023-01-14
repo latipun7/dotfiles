@@ -1,15 +1,18 @@
 local M = {}
 local components = require("latipun.plugins.lualine.components")
-local catppuccino = require("lualine.themes.catppuccin")
-local colors = require("latipun.theme").current_colors()
-
-catppuccino.normal.b.bg = colors.bg_br
-catppuccino.insert.b.bg = colors.bg_br
-catppuccino.command.b.bg = colors.bg_br
-catppuccino.visual.b.bg = colors.bg_br
-catppuccino.replace.b.bg = colors.bg_br
+local ok, catppuccino = pcall(require, "lualine.themes.catppuccin")
 
 M.config = function()
+  if not ok then return end
+
+  local colors = require("latipun.theme").current_colors()
+
+  catppuccino.normal.b.bg = colors.bg_br
+  catppuccino.insert.b.bg = colors.bg_br
+  catppuccino.command.b.bg = colors.bg_br
+  catppuccino.visual.b.bg = colors.bg_br
+  catppuccino.replace.b.bg = colors.bg_br
+
   local config = {
     options = {
       icons_enabled = true,

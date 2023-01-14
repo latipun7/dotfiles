@@ -73,8 +73,7 @@ if current_lvim_config == lvim_config or current_lvim_dot == lvim_dot then
   default_opts.settings.Lua.runtime.version = "LuaJIT"
   default_opts.settings.Lua.runtime.path = { "?.lua", "?/init.lua" }
   default_opts.settings.Lua.runtime.special = { reload = "require" }
-  default_opts.settings.Lua.diagnostics.globals =
-    { "vim", "lvim", "packer_plugins", "reload" }
+  default_opts.settings.Lua.diagnostics.globals = { "vim", "lvim", "reload" }
   default_opts.settings.Lua.workspace.library = {
     vim.fn.expand("$VIMRUNTIME"),
     get_lvim_base_dir(),
