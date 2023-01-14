@@ -77,8 +77,7 @@ M.config = function()
 
   lvim.builtin.which_key.mappings.h =
     { "<Cmd>nohlsearch<CR>", " No Highlight" }
-  lvim.builtin.which_key.mappings.q =
-    { "<Cmd>lua require('lvim.utils.functions').smart_quit()<CR>", " Quit" }
+  lvim.builtin.which_key.mappings.q = { "<Cmd>confirm q<CR>", " Quit" }
   lvim.builtin.which_key.mappings.w = { "<Cmd>silent w!<CR>", " Save" }
 
   lvim.builtin.which_key.mappings.t =
