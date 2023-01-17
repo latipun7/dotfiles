@@ -12,6 +12,7 @@ M.config = function()
     term_colors = true,
     transparent_background = lvim.transparent_window,
     integrations = {
+      barbecue = { dim_dirname = true },
       cmp = true,
       gitsigns = true,
       harpoon = true,

@@ -33,6 +33,16 @@ M.config = function()
       end,
     },
     {
+      "utilyre/barbecue.nvim",
+      enabled = lvim.builtin.latipun.barbecue.active,
+      dependencies = {
+        "neovim/nvim-lspconfig",
+        "SmiteshP/nvim-navic",
+        "nvim-tree/nvim-web-devicons",
+      },
+      config = function() require("latipun.plugins.barbecue").config() end,
+    },
+    {
       "NvChad/nvim-colorizer.lua",
       event = "BufReadPre",
       config = function() require("latipun.plugins.colorizer").config() end,

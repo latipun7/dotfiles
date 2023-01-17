@@ -2,14 +2,19 @@ local M = {}
 local kind = require("latipun.lsp_kind")
 
 M.config = function()
+  local ok, devicons = pcall(require, "nvim-web-devicons")
+  if ok then devicons.set_default_icon("", "#6d8086") end
+
+  lvim.builtin.latipun = {
+    barbecue = { active = true },
+    noice = { active = false },
+  }
+
   lvim.builtin.global_statusline = true
 
   lvim.builtin.lir.active = false
   lvim.builtin.bigfile.active = true
   lvim.builtin.nvimtree.active = false
-  lvim.builtin.latipun = {
-    noice = { active = false },
-  }
 
   lvim.builtin.comment.pre_hook = function()
     if vim.bo.filetype == "lf" then return "# %s" end
