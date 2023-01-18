@@ -7,7 +7,7 @@ M.config = function()
 
   lvim.builtin.latipun = {
     barbecue = { active = true },
-    noice = { active = false },
+    noice = { active = true },
   }
 
   lvim.builtin.global_statusline = true
