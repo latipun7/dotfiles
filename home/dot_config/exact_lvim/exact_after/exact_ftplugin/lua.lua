@@ -1,7 +1,7 @@
 local util = require("lspconfig.util")
 
 local file_name = vim.fn.expand("%:p")
-local lvim_config = get_config_dir()
+local lvim_config = get_config_dir() or vim.env.XDG_CONFIG_HOME .. "/lvim"
 local current_lvim_config = string.sub(file_name, 1, string.len(lvim_config))
 local lvim_dot = vim.env.XDG_DATA_HOME .. "/chezmoi/home/dot_config/exact_lvim"
 local current_lvim_dot = string.sub(file_name, 1, string.len(lvim_dot))

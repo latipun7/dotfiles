@@ -6,7 +6,6 @@ M.config = function()
     {
       "catppuccin/nvim",
       name = "catppuccin",
-      build = ":CatppuccinCompile",
       priority = 9999,
       config = function() require("latipun.plugins.catppuccin").config() end,
     },
