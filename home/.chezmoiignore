@@ -53,7 +53,7 @@ www
 
 {{- if not .is_linux_gui }}
 # Ignore if not Linux GUI environment (Linx GUI only files)
-.config/zathura
+.config/{dunst,zathura}
 {{- end }}
 
 {{- if not .is_arch_linux }}

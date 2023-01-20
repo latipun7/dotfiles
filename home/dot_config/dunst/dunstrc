@@ -1,0 +1,99 @@
+[global]
+  monitor = 0
+  follow = none
+
+  enable_posix_regex = true
+
+  width = 300
+  height = 300
+  origin = top-right
+  offset = 20x20
+  scale = 0
+  notification_limit = 0
+
+  progress_bar = true
+  progress_bar_height = 10
+  progress_bar_frame_width = 1
+  progress_bar_min_width = 150
+  progress_bar_max_width = 300
+
+  indicate_hidden = true
+
+  gap_size = 5
+
+  padding = 8
+  horizontal_padding = 8
+  text_icon_padding = 0
+
+  frame_width = 3
+  frame_color = "#74c7ec"
+
+  sort = true
+
+  font = system-ui 11
+  line_height = 0
+  markup = full
+  alignment = left
+  vertical_alignment = center
+
+  stack_duplicates = true
+  hide_duplicate_count = false
+  show_indicators = true
+
+  enable_recursive_icon_lookup = true
+  icon_theme = "Papirus-Dark,Adwaita"
+  icon_position = left
+  min_icon_size = 32
+  max_icon_size = 128
+
+  sticky_history = true
+  history_length = 25
+
+  dmenu = /usr/bin/fuzzel -p '🔔 ' --dmenu --width 80
+  browser = /usr/bin/xdg-open
+  always_run_script = true
+  title = Dunst
+  class = Dunst
+  corner_radius = 10
+  ignore_dbusclose = false
+
+  mouse_left_click = do_action, close_current
+  mouse_middle_click = close_all
+  mouse_right_click = close_current
+
+  highlight = "#f2cdcd"
+
+[urgency_low]
+  background = "#1E1E2E"
+  foreground = "#CDD6F4"
+  timeout = 5
+
+[urgency_normal]
+  background = "#1E1E2E"
+  foreground = "#CDD6F4"
+  timeout = 7
+
+[urgency_critical]
+  background = "#1E1E2E"
+  foreground = "#CDD6F4"
+  frame_color = "#f38ba8"
+  timeout = 0
+
+[history-ignore]
+   # This notification will not be saved in history
+   summary = "Music"
+   history_ignore = true
+
+[telegram-low]
+  summary = "Telegram"
+  urgency = low
+
+[critical-instagram]
+  summary = "Instagram"
+  urgency = critical
+
+[no-double-instagram]
+  summary = "Instagram"
+  body = ".*You have unseen notifications.*"
+  history_ignore = true
+  urgency = low
