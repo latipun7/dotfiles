@@ -131,6 +131,12 @@ M.config = function()
       build = "deno task --quiet build:fast",
     },
     {
+      "eraserhd/parinfer-rust",
+      ft = { "yuck", "lisp", "clojure" },
+      enabled = (vim.fn.executable("cargo") == 1),
+      build = "cargo build --release",
+    },
+    {
       "windwp/nvim-spectre",
       lazy = true,
       init = function() require("latipun.plugins.spectre").keybindings() end,
@@ -155,6 +161,7 @@ M.config = function()
     { "hrsh7th/cmp-calc", event = { "InsertEnter", "CmdlineEnter" } },
     { "ray-x/cmp-treesitter", event = { "InsertEnter", "CmdlineEnter" } },
     { "camnw/lf-vim" },
+    { "elkowar/yuck.vim" },
     { "wakatime/vim-wakatime" },
   }
 end
