@@ -5,6 +5,7 @@ vim.filetype.add({
   },
   filename = {
     ["rc.lua.test"] = "lua",
+    ["dunstrc"] = "confini",
   },
   pattern = { -- regex
     [".*ignore"] = "gitignore",
