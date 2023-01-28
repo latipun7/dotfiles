@@ -40,6 +40,10 @@ lvim.lsp.null_ls.setup = {
 }
 
 vim.list_extend(
+  lvim.lsp.automatic_configuration.skipped_filetypes,
+  { "css", "scss" }
+)
+vim.list_extend(
   lvim.lsp.automatic_configuration.skipped_servers,
   { "sumneko_lua", "powershell_es" }
 )
