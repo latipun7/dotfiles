@@ -55,32 +55,16 @@
   title = Dunst
   class = Dunst
   corner_radius = 10
-  ignore_dbusclose = false
+  ignore_dbusclose = true
 
   mouse_left_click = do_action, close_current
   mouse_middle_click = close_all
   mouse_right_click = close_current
 
   highlight = "#f2cdcd"
-
-[urgency_low]
-  background = "#1E1E2E"
-  foreground = "#CDD6F4"
-  timeout = 5
-
-[urgency_normal]
-  background = "#1E1E2E"
-  foreground = "#CDD6F4"
-  timeout = 7
-
-[urgency_critical]
-  background = "#1E1E2E"
-  foreground = "#CDD6F4"
-  frame_color = "#f38ba8"
-  timeout = 0
+  set_transient = false
 
 [history-ignore]
-   # This notification will not be saved in history
    summary = "Music"
    history_ignore = true
 
@@ -88,12 +72,34 @@
   summary = "Telegram"
   urgency = low
 
-[critical-instagram]
+[instagram-sent-reel]
   summary = "Instagram"
+  body = ".*Sent a reel.*"
   urgency = critical
 
-[no-double-instagram]
+[instagram-critical]
+  summary = "Instagram"
+  body = ".*dyahafifa16.*"
+  urgency = critical
+
+[instagram-no-double]
   summary = "Instagram"
   body = ".*You have unseen notifications.*"
-  history_ignore = true
   urgency = low
+  history_ignore = true
+
+[urgency_low]
+  background = "#1E1E2E"
+  foreground = "#CDD6F4"
+  override_dbus_timeout = "3s"
+
+[urgency_normal]
+  background = "#1E1E2E"
+  foreground = "#CDD6F4"
+  override_dbus_timeout = "7s"
+
+[urgency_critical]
+  background = "#1E1E2E"
+  foreground = "#CDD6F4"
+  frame_color = "#f38ba8"
+  override_dbus_timeout = "1d"
