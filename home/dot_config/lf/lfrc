@@ -278,9 +278,32 @@ cmd edit ${{
   lf -remote "send $id on-cd"
 }}
 
-cmd yank-dirname $dirname -- "$f" | head -c-1 | xclip -i -selection clipboard
-cmd yank-path $printf '%s' "$fx" | xclip -i -selection clipboard
-cmd yank-basename $basename -a -- $fx | head -c-1 | xclip -i -selection clipboard
+cmd yank-dirname &{{
+  if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
+    dirname -- "$f" | head -c-1 | wl-copy
+  else
+    dirname -- "$f" | head -c-1 | xclip -i -selection clipboard
+  fi
+  lf -remote "send $id echo \"\033[1;32mDirectory path of this file copied to clipboard!\033[0m\""
+}}
+
+cmd yank-path &{{
+  if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
+    printf '%s' "$fx" | wl-copy
+  else
+    printf '%s' "$fx" | xclip -i -selection clipboard
+  fi
+  lf -remote "send $id echo \"\033[1;32mFile path copied to clipboard!\033[0m\""
+}}
+
+cmd yank-basename &{{
+  if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
+    basename -a -- $fx | head -c-1 | wl-copy
+  else
+    basename -a -- $fx | head -c-1 | xclip -i -selection clipboard
+  fi
+  lf -remote "send $id echo \"\033[1;32mFile name copied to clipboard!\033[0m\""
+}}
 
 # ┏┓ ╻┏┓╻╺┳┓╻┏┓╻┏━╸┏━┓
 # ┣┻┓┃┃┗┫ ┃┃┃┃┗┫┃╺┓┗━┓
