@@ -71,7 +71,7 @@ M.config = function()
     {
       "kevinhwang91/nvim-bqf",
       version = "*",
-      event = "BufRead",
+      event = "WinEnter",
       config = function() require("latipun.plugins.bqf").config() end,
     },
     {

@@ -20,6 +20,11 @@ M.config = function()
   -- ▛▌▙▌▙▌▌▐▖▌▙▌▌▌█▌▐▖  ▛▖▙▖▙▌▙▌▌▌▌▙▌▌▌▌▙▌▄▌
   --                         ▄▌          ▄▌
 
+  lvim.keys.normal_mode["<CR>"] = {
+    "<Cmd>lua require('latipun.options').maximize_current_split()<CR>",
+    { noremap = true, silent = true, nowait = true },
+  }
+
   lvim.keys.normal_mode["<C-s>"] = "<Cmd>silent w<CR>"
 
   -- Move virtual lines (lines that wrap)
