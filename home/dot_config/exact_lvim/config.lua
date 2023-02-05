@@ -41,7 +41,7 @@ lvim.lsp.null_ls.setup = {
 
 vim.list_extend(
   lvim.lsp.automatic_configuration.skipped_filetypes,
-  { "css", "scss" }
+  { "css", "scss", "c" }
 )
 vim.list_extend(
   lvim.lsp.automatic_configuration.skipped_servers,
