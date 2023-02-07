@@ -7,7 +7,8 @@ M.config = function()
   noice.setup({
     lsp = {
       progress = { enabled = false },
-      -- override markdown rendering so that cmp and other plugins use Treesitter
+      signature = { enabled = false, auto_open = { enabled = false } },
+      hover = { enabled = false },
       override = {
         ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
         ["vim.lsp.util.stylize_markdown"] = true,
@@ -42,6 +43,10 @@ M.config = function()
       },
     },
     routes = {
+      {
+        view = "notify",
+        filter = { event = "msg_showmode" },
+      },
       {
         filter = {
           event = "msg_show",
@@ -86,6 +91,10 @@ M.config = function()
       },
       {
         filter = { find = "No active Snippet" },
+        opts = { skip = true },
+      },
+      {
+        filter = { find = "waiting for cargo metadata" },
         opts = { skip = true },
       },
       {
