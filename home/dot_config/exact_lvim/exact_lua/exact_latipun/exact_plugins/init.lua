@@ -156,6 +156,26 @@ M.config = function()
       "nvim-treesitter/nvim-treesitter-textobjects",
       event = "VeryLazy",
     },
+    {
+      "lvimuser/lsp-inlayhints.nvim",
+      config = function() require("lsp-inlayhints").setup() end,
+      enabled = lvim.builtin.latipun.inlay_hints.active,
+    },
+    {
+      "simrat39/rust-tools.nvim",
+      lazy = true,
+      ft = { "rust", "rs" },
+      config = function() require("latipun.plugins.rust_tools").config() end,
+      enabled = lvim.builtin.latipun.rust_programming.active,
+    },
+    {
+      "saecki/crates.nvim",
+      event = { "BufRead Cargo.toml" },
+      dependencies = { { "nvim-lua/plenary.nvim" } },
+      config = function() require("crates").setup() end,
+      enabled = lvim.builtin.latipun.rust_programming.active,
+    },
+    { "rouge8/neotest-rust", event = { "BufEnter *.rs" } },
     { "alker0/chezmoi.vim", priority = 99999 }, -- BUG: https://github.com/folke/lazy.nvim/discussions/369
     { "famiu/bufdelete.nvim", event = "BufReadPre" },
     { "hrsh7th/cmp-calc", event = { "InsertEnter", "CmdlineEnter" } },

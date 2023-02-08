@@ -55,6 +55,7 @@ code_actions.setup({
 
 formatters.setup({
   { name = "prettierd" },
+  { name = "rustfmt" },
   { command = "shfmt", args = { "-i", "2", "-ci" } },
 })
 

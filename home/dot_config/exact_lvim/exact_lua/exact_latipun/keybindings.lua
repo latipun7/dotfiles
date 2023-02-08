@@ -185,6 +185,13 @@ M.config = function()
     u = { "<Cmd>TSUpdateSync<CR>", "Update" },
     h = { "<Cmd>TSBufToggle highlight<CR>", "Toggle highlight" },
   }
+
+  if lvim.builtin.latipun.inlay_hints.active then
+    lvim.builtin.which_key.mappings["I"] = {
+      "<Cmd>lua require('lsp-inlayhints').toggle()<CR>",
+      "󰊈 Toggle Inlay Hints",
+    }
+  end
 end
 
 return M
