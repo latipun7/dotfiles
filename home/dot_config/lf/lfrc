@@ -349,5 +349,6 @@ map gD cd ~/Downloads
 map gr cd /
 map ge cd /etc
 map gd cd /home/data
-map gp cd /home/data/pictures
+map gP cd /home/data/pictures
+map gp cd /home/data/projects
 map gS cd /usr/share
