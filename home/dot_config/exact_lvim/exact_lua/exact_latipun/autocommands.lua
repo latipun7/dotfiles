@@ -19,7 +19,7 @@ M.config = function()
     end,
   })
 
-  -- need bufdelete.nvim, neo-tree & alpha-dashboard
+  -- needs bufdelete.nvim, neo-tree & alpha-dashboard
   local alpha_on_empty = create_augroup("alpha_on_empty", { clear = true })
   create_aucmd("User", {
     pattern = "BDeletePost*",
@@ -37,9 +37,19 @@ M.config = function()
     end,
   })
 
+  -- needs alpha
+  -- hide tab line when showing dashboard
+  local dashboard_setting = create_augroup("dashboard_setting", {})
+  create_aucmd("User", {
+    pattern = "AlphaReady",
+    group = dashboard_setting,
+    command = "set showtabline=0 | autocmd BufUnload <buffer> set showtabline="
+      .. vim.opt.showtabline._value,
+  })
+
   if lvim.builtin.latipun.inlay_hints.active then
-    local group = vim.api.nvim_create_augroup("LspAttach_inlayhints", {})
-    vim.api.nvim_create_autocmd("LspAttach", {
+    local group = create_augroup("LspAttach_inlayhints", {})
+    create_aucmd("LspAttach", {
       group = group,
       callback = function(args)
         if not (args.data and args.data.client_id) then return end
