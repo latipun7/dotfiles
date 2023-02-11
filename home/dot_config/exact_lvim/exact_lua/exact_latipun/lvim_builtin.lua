@@ -202,6 +202,7 @@ M.config = function()
   }
   local cmp_sources = {
     calc = "(Calc)",
+    crates = "(Crates)",
     treesitter = "(TS)",
   }
 
@@ -209,7 +210,7 @@ M.config = function()
   lvim.builtin.cmp.window.documentation.border = cmp_border
   lvim.builtin.cmp.sources = {
     { name = "nvim_lsp" },
-    { name = "buffer", max_item_count = 5, keyword_length = 5 },
+    { name = "buffer", max_item_count = 5, keyword_length = 3 },
     { name = "path", max_item_count = 5 },
     { name = "luasnip", max_item_count = 3 },
     { name = "calc" },
@@ -249,12 +250,40 @@ M.config = function()
     vim.lsp.handlers["textDocument/hover"] = require("noice.lsp.hover").on_hover
   end
 
-  lvim.lsp.buffer_mappings.normal_mode["gA"] = {
+  lvim.lsp.buffer_mappings.normal_mode.gA = {
     "<Cmd>lua if vim.bo.filetype == 'rust' then vim.cmd[[RustHoverActions]] else vim.lsp.codelens.run() end<CR>",
     "CodeLens Action",
   }
 
+  lvim.lsp.buffer_mappings.normal_mode.K = {
+    "<Cmd>lua require('latipun.lvim_builtin').show_documentation()<CR>",
+    "Show Documentation",
+  }
+
   lvim.lsp.on_attach_callback = M.lsp_on_attach_callback
+end
+
+M.show_documentation = function()
+  local filetype = vim.bo.filetype
+  if vim.tbl_contains({ "vim", "help" }, filetype) then
+    vim.cmd("h " .. vim.fn.expand("<cword>"))
+  elseif vim.tbl_contains({ "man" }, filetype) then
+    vim.cmd("Man " .. vim.fn.expand("<cword>"))
+  elseif
+    vim.fn.expand("%:t") == "Cargo.toml"
+    and require("crates").popup_available()
+  then
+    require("crates").show_popup()
+  elseif filetype == "rust" then
+    local found, rt = pcall(require, "rust-tools")
+    if found then
+      rt.hover_actions.hover_actions()
+    else
+      vim.lsp.buf.hover()
+    end
+  else
+    vim.lsp.buf.hover()
+  end
 end
 
 M.lsp_on_attach_callback = function(client, _)
@@ -273,58 +302,23 @@ M.lsp_on_attach_callback = function(client, _)
   }
 
   if client.name == "rust_analyzer" then
-    mappings["H"] = {
+    mappings.H = {
       "<Cmd>lua require('lvim.core.terminal')._exec_toggle({cmd='cargo clippy;read',count=2,direction='float'})<CR>",
       "󱫆 Clippy",
     }
     if lvim.builtin.latipun.rust_programming.active then
-      mappings["lA"] = { "<Cmd>RustHoverActions<CR>", "Hover Actions" }
-      mappings["lm"] = { "<Cmd>RustExpandMacro<CR>", "Expand Macro" }
-      mappings["le"] = { "<Cmd>RustRunnables<CR>", "Runnables" }
-      mappings["lD"] = { "<Cmd>RustDebuggables<CR>", "Debuggables" }
-      mappings["lP"] = { "<Cmd>RustParentModule<CR>", "Parent Module" }
-      mappings["lv"] = { "<Cmd>RustViewCrateGraph<CR>", "View Crate Graph" }
-      mappings["lR"] = {
+      mappings.lA = { "<Cmd>RustHoverActions<CR>", "Hover Actions" }
+      mappings.lm = { "<Cmd>RustExpandMacro<CR>", "Expand Macro" }
+      mappings.le = { "<Cmd>RustRunnables<CR>", "Runnables" }
+      mappings.lD = { "<Cmd>RustDebuggables<CR>", "Debuggables" }
+      mappings.lP = { "<Cmd>RustParentModule<CR>", "Parent Module" }
+      mappings.lv = { "<Cmd>RustViewCrateGraph<CR>", "View Crate Graph" }
+      mappings.lR = {
         "<Cmd>lua require('rust-tools.workspace_refresh')._reload_workspace_from_cargo_toml()<CR>",
         "Reload Workspace",
       }
-      mappings["lc"] = { "<Cmd>RustOpenCargo<CR>", "Open Cargo" }
-      mappings["lo"] = { "<Cmd>RustOpenExternalDocs<CR>", "Open External Docs" }
-    end
-  elseif client.name == "taplo" then
-    if lvim.builtin.latipun.rust_programming.active then
-      mappings["lt"] =
-        { "<Cmd>lua require('crates').toggle()<CR>", "Toggle Crate" }
-      mappings["lu"] =
-        { "<Cmd>lua require('crates').update_crate()<CR>", "Update Crate" }
-      mappings["lU"] =
-        { "<Cmd>lua require('crates').upgrade_crate()<CR>", "Upgrade Crate" }
-      mappings["lg"] =
-        { "<Cmd>lua require('crates').update_all_crates()<CR>", "Update All" }
-      mappings["lG"] =
-        { "<Cmd>lua require('crates').upgrade_all_crates()<CR>", "Upgrade All" }
-      mappings["lH"] =
-        { "<Cmd>lua require('crates').open_homepage()<CR>", "Open HomePage" }
-      mappings["lD"] = {
-        "<Cmd>lua require('crates').open_documentation()<CR>",
-        "Open Documentation",
-      }
-      mappings["lR"] = {
-        "<Cmd>lua require('crates').open_repository()<CR>",
-        "Open Repository",
-      }
-      mappings["lv"] = {
-        "<Cmd>lua require('crates').show_versions_popup()<CR>",
-        "Show Versions",
-      }
-      mappings["lF"] = {
-        "<Cmd>lua require('crates').show_features_popup()<CR>",
-        "Show Features",
-      }
-      mappings["lD"] = {
-        "<Cmd>lua require('crates').show_dependencies_popup()<CR>",
-        "Show Dependencies",
-      }
+      mappings.lc = { "<Cmd>RustOpenCargo<CR>", "Open Cargo" }
+      mappings.lo = { "<Cmd>RustOpenExternalDocs<CR>", "Open External Docs" }
     end
   end
 

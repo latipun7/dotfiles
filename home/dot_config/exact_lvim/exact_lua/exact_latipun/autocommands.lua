@@ -47,6 +47,19 @@ M.config = function()
       .. vim.opt.showtabline._value,
   })
 
+  create_aucmd("BufRead", {
+    group = create_augroup("CmpSourceCargo", { clear = true }),
+    pattern = "Cargo.toml",
+    callback = function()
+      require("cmp").setup.buffer({
+        sources = {
+          { name = "buffer", max_item_count = 5, keyword_length = 3 },
+          { name = "crates" },
+        },
+      })
+    end,
+  })
+
   if lvim.builtin.latipun.inlay_hints.active then
     local group = create_augroup("LspAttach_inlayhints", {})
     create_aucmd("LspAttach", {

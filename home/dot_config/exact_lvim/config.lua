@@ -45,7 +45,7 @@ vim.list_extend(
 )
 vim.list_extend(
   lvim.lsp.automatic_configuration.skipped_servers,
-  { "sumneko_lua", "powershell_es" }
+  { "sumneko_lua", "powershell_es", "rust_analyzer" }
 )
 
 code_actions.setup({
