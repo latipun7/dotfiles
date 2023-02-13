@@ -247,7 +247,10 @@ M.config = function()
   -- ▙▖▄▌▌
 
   if lvim.builtin.latipun.noice.active then
-    vim.lsp.handlers["textDocument/hover"] = require("noice.lsp.hover").on_hover
+    local status_ok, noice = pcall(require, "noice.lsp.hover")
+    if status_ok then
+      vim.lsp.handlers["textDocument/hover"] = noice.on_hover
+    end
   end
 
   lvim.lsp.buffer_mappings.normal_mode.gA = {
