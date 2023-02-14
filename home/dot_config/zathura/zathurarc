@@ -1,6 +1,15 @@
 include catppuccin-mocha
 
+# make background transparent
 set default-bg          "rgba(30, 30, 46, 0.5)"
 set recolor-lightcolor  "rgba(30, 30, 46, 0.5)"
 set index-bg            "rgba(30, 30, 46, 0.5)"
 set render-loading-bg   "rgba(30, 30, 46, 0.5)"
+
+# options
+set recolor true
+set recolor-reverse-video true
+set window-title-basename true
+set window-title-home-tilde true
+set window-title-page true
+set guioptions ''
