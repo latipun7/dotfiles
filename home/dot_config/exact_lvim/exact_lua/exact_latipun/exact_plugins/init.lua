@@ -88,7 +88,6 @@ M.config = function()
     },
     {
       "AckslD/nvim-neoclip.lua",
-      lazy = true,
       init = function() require("latipun.plugins.neoclip").keybindings() end,
       config = function() require("latipun.plugins.neoclip").config() end,
     },
@@ -163,7 +162,6 @@ M.config = function()
     },
     {
       "simrat39/rust-tools.nvim",
-      lazy = true,
       ft = { "rust", "rs" },
       config = function() require("latipun.plugins.rust_tools").config() end,
       enabled = lvim.builtin.latipun.rust_programming.active,
