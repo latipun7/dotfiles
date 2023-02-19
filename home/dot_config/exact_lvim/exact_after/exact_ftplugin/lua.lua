@@ -86,4 +86,4 @@ local lsp_manager = require("lvim.lsp.manager")
 local formatters = require("lvim.lsp.null-ls.formatters")
 
 formatters.setup({ { name = "stylua" } })
-lsp_manager.setup("sumneko_lua", default_opts)
+lsp_manager.setup("lua_ls", default_opts)
