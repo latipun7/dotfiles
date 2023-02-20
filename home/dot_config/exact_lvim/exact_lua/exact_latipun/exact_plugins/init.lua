@@ -172,17 +172,13 @@ M.config = function()
       config = function() require("crates").setup() end,
       enabled = lvim.builtin.latipun.rust_programming.active,
     },
-    {
-      "alker0/chezmoi.vim",
-      lazy = false,
-      init = function() vim.g["chezmoi#use_tmp_buffer"] = true end,
-    },
     { "rouge8/neotest-rust", event = { "BufEnter *.rs" } },
     { "famiu/bufdelete.nvim", event = "BufReadPre" },
     { "hrsh7th/cmp-calc", event = { "InsertEnter", "CmdlineEnter" } },
     { "ray-x/cmp-treesitter", event = { "InsertEnter", "CmdlineEnter" } },
     { "camnw/lf-vim" },
     { "elkowar/yuck.vim" },
+    { "alker0/chezmoi.vim" },
     { "wakatime/vim-wakatime" },
   }
 end
