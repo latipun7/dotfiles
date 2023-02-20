@@ -52,7 +52,6 @@ M.config = function()
     },
     {
       "olimorris/persisted.nvim",
-      lazy = true,
       init = function() require("latipun.plugins.persisted").keybindings() end,
       config = function() require("latipun.plugins.persisted").config() end,
     },
