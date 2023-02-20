@@ -137,8 +137,8 @@ fi
 
 # bitwarden alias
 if hash bw 2>/dev/null; then
-  alias bw-login='eval "$(bw login | grep -oE --color=never "(export BW_SESSION=".+")")"'
-  alias bw-unlock='eval "$(bw unlock | grep -oE --color=never "(export BW_SESSION=".+")")"'
+  alias bw-login='eval "export BW_SESSION=$(bw login --raw)"'
+  alias bw-unlock='eval "export BW_SESSION=$(bw unlock --raw)"'
 fi
 
 # ░█░█░█▀▀░█░█░█▀▄░▀█▀░█▀█░█▀▄░█▀▀

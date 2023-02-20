@@ -176,11 +176,13 @@ function login_bitwarden() {
   step "Login / unlock bitwarden vault..."
 
   # login and unlock `bw`, if already login, unlock if not unlocked yet.
-  if bw login; then
-    eval "$(bw unlock | grep -oE --color=never "(export BW_SESSION=".+")")"
+  if login="$(bw login --raw)"; then
+    export BW_SESSION="$login"
   else
-    ! (env | grep -q 'BW_SESSION') &&
-      eval "$(bw unlock | grep -oE --color=never "(export BW_SESSION=".+")")"
+    if ! (env | grep -q 'BW_SESSION'); then
+      session="$(bw unlock --raw)"
+      export BW_SESSION="$session"
+    fi
   fi
 }
 
