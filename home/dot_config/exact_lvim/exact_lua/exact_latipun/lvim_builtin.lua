@@ -6,10 +6,11 @@ M.config = function()
   if ok then devicons.set_default_icon("", "#6d8086") end
 
   lvim.builtin.latipun = {
-    barbecue = { active = true },
     noice = { active = true },
-    rust_programming = { active = true },
+    barbecue = { active = true },
     inlay_hints = { active = true },
+    rust_programming = { active = true },
+    tsjs_programming = { active = true },
   }
 
   lvim.builtin.global_statusline = true

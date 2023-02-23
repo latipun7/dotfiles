@@ -172,6 +172,52 @@ M.config = function()
       config = function() require("crates").setup() end,
       enabled = lvim.builtin.latipun.rust_programming.active,
     },
+    {
+      "jose-elias-alvarez/typescript.nvim",
+      ft = {
+        "javascript",
+        "javascriptreact",
+        "javascript.jsx",
+        "typescript",
+        "typescriptreact",
+        "typescript.tsx",
+      },
+      config = function() require("latipun.plugins.typescript").config() end,
+      enabled = lvim.builtin.latipun.tsjs_programming.active,
+    },
+    {
+      "vuki656/package-info.nvim",
+      event = { "BufReadPre", "BufNew" },
+      config = function() require("package-info").setup() end,
+      enabled = lvim.builtin.latipun.tsjs_programming.active,
+    },
+    {
+      "mxsdev/nvim-dap-vscode-js",
+      ft = {
+        "javascript",
+        "javascriptreact",
+        "javascript.jsx",
+        "typescript",
+        "typescriptreact",
+        "typescript.tsx",
+      },
+      event = { "BufReadPre", "BufNew" },
+      config = function()
+        require("dap-vscode-js").setup({
+          debugger_path = vim.fn.stdpath("data")
+            .. "/mason/packages/js-debug-adapter",
+          debugger_cmd = { "js-debug-adapter" },
+          adapters = {
+            "pwa-node",
+            "pwa-chrome",
+            "pwa-msedge",
+            "node-terminal",
+            "pwa-extensionHost",
+          },
+        })
+      end,
+      enabled = lvim.builtin.latipun.tsjs_programming.active,
+    },
     { "rouge8/neotest-rust", event = { "BufEnter *.rs" } },
     { "famiu/bufdelete.nvim", event = "BufReadPre" },
     { "hrsh7th/cmp-calc", event = { "InsertEnter", "CmdlineEnter" } },
