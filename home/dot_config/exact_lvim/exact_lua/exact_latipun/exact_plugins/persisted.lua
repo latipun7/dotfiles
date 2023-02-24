@@ -8,8 +8,6 @@ M.keybindings = function()
 end
 
 M.config = function()
-  local title = "Persisted Session"
-
   require("persisted").setup({
     silent = true,
     use_git_branch = true,
@@ -22,38 +20,38 @@ M.config = function()
       if vim.bo.filetype == "alpha" then return false end
       return true
     end,
-    after_source = function()
-      local status_ok, _ = pcall(require, "notify")
+  })
+
+  local create_augroup = vim.api.nvim_create_augroup
+  local create_aucmd = vim.api.nvim_create_autocmd
+
+  local title = "Persisted Session"
+
+  local persisted_hooks = create_augroup("persisted_hooks", { clear = true })
+
+  create_aucmd("User", {
+    pattern = "PersistedLoadPost",
+    group = persisted_hooks,
+    callback = function(session)
+      vim.notify(
+        "Loaded session " .. session.data,
+        vim.log.levels.INFO,
+        { title = title }
+      )
+    end,
+  })
+
+  create_aucmd("User", {
+    pattern = "PersistedTelescopeLoadPre",
+    group = persisted_hooks,
+    callback = function()
+      local status_ok, _ = pcall(require, "bufdelete")
       if status_ok then
-        vim.notify("Loaded session", vim.log.levels.INFO, { title = title })
+        vim.api.nvim_input("<Esc><Cmd>bufdo Bdelete<CR>")
       else
-        print("Loaded session")
+        vim.api.nvim_input("<Esc><Cmd>%bd<CR>")
       end
     end,
-    telescope = {
-      before_source = function()
-        local status_ok, _ = pcall(require, "bufdelete")
-        if status_ok then
-          vim.api.nvim_input("<Esc><Cmd>bufdo Bdelete<CR>")
-        else
-          vim.api.nvim_input("<Esc><Cmd>%bd<CR>")
-        end
-      end,
-      after_source = function(session)
-        vim.defer_fn(function()
-          local status_ok, _ = pcall(require, "notify")
-          if status_ok then
-            vim.notify(
-              "Loaded session " .. session.name,
-              vim.log.levels.INFO,
-              { title = title }
-            )
-          else
-            print("Loaded session " .. session.name)
-          end
-        end, 0)
-      end,
-    },
   })
 
   require("telescope").load_extension("persisted")
