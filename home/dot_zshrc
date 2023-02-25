@@ -1,6 +1,8 @@
 # -*-zsh-*- vim:ft=zsh
 
+# push prompt to the bottom of screen
 printf '\n%.0s' {1..$(( $(tput lines) ))}
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -20,19 +22,17 @@ ZSH_COMPDUMP="$ZSH_CACHE_DIR/.zcompdump-${SHORT_HOST:-${(%):-%m}}-${ZSH_VERSION}
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-if hash vivid 2>/dev/null; then
-  export LS_COLORS="$(vivid generate ~/.config/vivid/catppuccin-mocha.yml)"
-fi
+HIST_STAMPS="yyyy-mm-dd"
 
-zstyle ':omz:update' mode reminder
 zstyle ':omz:update' frequency 7
 
-HIST_STAMPS="yyyy-mm-dd"
+if hash vivid 2>/dev/null; then
+  DISABLE_LS_COLORS=true
+fi
 
 # zsh-autocomplete configs
 zstyle ':autocomplete:*' min-input 1
 zstyle ':autocomplete:*' fzf-completion yes
-zstyle ':autocomplete:recent-dirs' backend zoxide
 zstyle ':autocomplete:*' ignored-input '(\*\*|..)'
 
 # tmux

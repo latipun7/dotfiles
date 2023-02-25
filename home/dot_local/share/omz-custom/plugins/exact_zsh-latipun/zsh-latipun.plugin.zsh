@@ -18,6 +18,15 @@ if hash npm 2>/dev/null; then
   eval "$(npm completion)"
 fi
 
+# populate LS_COLORS
+if hash vivid 2>/dev/null; then
+  LS_COLORS="$(vivid generate ~/.config/vivid/catppuccin-mocha.yml)"
+  export LS_COLORS
+
+  # take advantage of LS_COLORS for zsh completion
+  zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+fi
+
 # ░█▀█░█░░░▀█▀░█▀█░█▀▀░█▀▀░█▀▀
 # ░█▀█░█░░░░█░░█▀█░▀▀█░█▀▀░▀▀█
 # ░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀░▀▀▀
