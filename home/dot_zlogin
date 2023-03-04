@@ -4,6 +4,10 @@
 #     Login Command     #
 #=======================#
 
-if hash fortune 2>/dev/null && hash ponysay 2>/dev/null; then
-  hash chara 2>/dev/null && chara
+if hash fortune 2>/dev/null && hash chara 2>/dev/null; then
+  if hash lolcat 2>/dev/null; then
+    fortune | lolcat -f | chara say --random
+  else
+    fortune | chara say --random
+  fi
 fi

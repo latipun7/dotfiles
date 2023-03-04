@@ -1,0 +1,4 @@
+{{ $chara := lookPath "chara" -}}
+{{ if $chara -}}
+{{ output $chara "completions" "--shell" "zsh" -}}
+{{ end -}}
