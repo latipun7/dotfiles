@@ -72,10 +72,11 @@ fi
 
 # Custom path
 ! (echo "$PATH" | grep -q "$HOME/.local/bin") && homeexe="$HOME/.local/bin"
-hash cargo 2>/dev/null && cargoexe="$XDG_DATA_HOME/cargo/bin"
+hash cargo 2>/dev/null && cargoexe="$CARGO_HOME/bin"
+hash go 2>/dev/null && goexe="$GOPATH/bin"
 brewpythonexe=$(hash brew 2>/dev/null && echo "$(brew --prefix)/opt/python/libexec/bin")
 
-pathexe=("$homeexe" "$cargoexe" "$brewpythonexe" "$PATH")
+pathexe=("$homeexe" "$cargoexe" "$goexe" "$brewpythonexe" "$PATH")
 
 PATH=$(concat ":" "${pathexe[@]}")
 export PATH
@@ -103,9 +104,9 @@ else
   export EDITOR=nvim
 fi
 
-if [[ -n "$DISPLAY" ]]; then
+if [[ "$(hostnamectl chassis)" != 'server' && "$(hostnamectl chassis)" != *hostnamectl* ]]; then
+  export TERMINAL="wezterm start"
   export BROWSER=brave
-  export TERMINAL='wezterm start'
 else
   export BROWSER=lynx
 fi
