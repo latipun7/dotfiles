@@ -16,8 +16,12 @@ M.config = function()
     allowed_dirs = nil,
     ignored_dirs = nil,
     should_autosave = function()
-      -- do not autosave if the alpha dashboard is the current filetype
       if vim.bo.filetype == "alpha" then return false end
+
+      if vim.api.nvim_buf_get_name(0):match("COMMIT_EDITMSG") then
+        return false
+      end
+
       return true
     end,
   })
