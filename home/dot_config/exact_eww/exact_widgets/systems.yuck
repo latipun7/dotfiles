@@ -1,0 +1,47 @@
+(defwidget systems []
+  (box
+    :class "systems-widget"
+    :space-evenly false
+    :spacing 5
+
+    (circular-progress
+      :class "cpubar"
+      :value "${EWW_CPU.avg}"
+      :thickness 3
+      (eventbox
+        :tooltip "using ${round(EWW_CPU.avg,0)}% cpu"
+        :onclick "${EWW_CMD} open --toggle system-menu"
+        :cursor "pointer"
+        (label :class "icon-text"
+               :text "󰻠"
+               :limit-width 1
+               :wrap false)))
+
+    (circular-progress
+      :class "membar"
+      :value "${EWW_RAM.used_mem_perc}"
+      :thickness 3
+      (eventbox
+        :tooltip "using ${round(EWW_RAM.used_mem / 1000000000,2)}GB/${round(EWW_RAM.total_mem / 1000000000,2)}GB memory"
+        :onclick "${EWW_CMD} open --toggle system-menu"
+        :cursor "pointer"
+        (label :class "icon-text"
+               :text "󰍛"
+               :limit-width 1
+               :wrap false)))
+
+    (eventbox
+      :visible {objectlength(EWW_BATTERY) > 0 ? true : false}
+      :tooltip "${EWW_BATTERY["BAT0"].capacity}% battery"
+      :onclick "${EWW_CMD} open --toggle system-menu"
+      :cursor "pointer"
+      (box
+        :space-evenly false
+        :spacing 3
+        :style "color: ${EWW_BATTERY["BAT0"].capacity <= 15 ? "#f38ba8" : EWW_BATTERY["BAT0"].capacity <= 35 ? "#f9e2af" : "#a6e3a1"};"
+        (label
+          :class "batbar"
+          :limit-width 2
+          :wrap false
+          :text "${EWW_BATTERY["BAT0"].capacity <= 10 ? "󰁺" : EWW_BATTERY["BAT0"].capacity <= 20 ? "󰁻" : EWW_BATTERY["BAT0"].capacity <= 30 ? "󰁼" : EWW_BATTERY["BAT0"].capacity <= 40 ? "󰁽" : EWW_BATTERY["BAT0"].capacity <= 50 ? "󰁾" : EWW_BATTERY["BAT0"].capacity <= 60 ? "󰁿" : EWW_BATTERY["BAT0"].capacity <= 70 ? "󰂀" : EWW_BATTERY["BAT0"].capacity <= 80 ? "󰂁" : EWW_BATTERY["BAT0"].capacity <= 90 ? "󰂂" : "󰁹"}")
+        (label :class "batlabel" :text "${EWW_BATTERY["BAT0"].capacity}%")))))

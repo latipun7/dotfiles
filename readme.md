@@ -28,7 +28,7 @@ Personally, I use `Cascadia Code` + `Symbols Nerd Font`.
 
 Here's the list of what included in this dotfiles:
 
-- [`awesomeWM`](https://awesomewm.org/) - Amazing Window Manager _**(SOON, TBA)**_.
+- [`Hyprland`](https://hyprland.org/) - Beautiful tiling Wayland compositor.
 - [`LunarVim`](https://www.lunarvim.org) - NeoVim as an IDE.
 - [`WezTerm`](https://wezfurlong.org/wezterm/) - Cross-platform terminal emulator.
 - [`tmux`](https://github.com/tmux/tmux) - Terminal multiplexer _(no Windows)_.

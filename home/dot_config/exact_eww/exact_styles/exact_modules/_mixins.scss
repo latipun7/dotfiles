@@ -1,0 +1,21 @@
+@use "variables" as *;
+@use "colors" as c;
+
+@mixin pill {
+  padding: 0 10px;
+  border-radius: $rounded;
+  background-color: c.$surface0;
+}
+
+@mixin window {
+  border: 1px solid c.$sapphire;
+  border-radius: $rounded;
+  background-color: c.$base;
+  color: c.$text;
+}
+
+@mixin surface {
+  background-color: c.$surface0;
+  border-radius: $rounded;
+  padding: 1rem;
+}

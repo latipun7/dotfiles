@@ -1,0 +1,172 @@
+@use "sass:color";
+@use "modules/mixins" as m;
+@use "modules/colors" as c;
+@use "modules/variables" as v;
+
+.bar {
+  font: 1rem system-ui;
+  padding: 3px 10px;
+  background-color: color.change(c.$crust, $alpha: 0.3);
+
+  .left-part {
+    .launcher-widget {
+      border-radius: v.$rounded;
+
+      &:hover {
+        background-color: color.change(c.$catred, $alpha: 0.3);
+      }
+    }
+
+    .workspaces-widget {
+      @include m.pill;
+      font: 1.25rem monospace;
+
+      .workspace-entry {
+        margin: 0 2px;
+
+        &.occupied {
+          color: c.$mauve;
+        }
+
+        &.empty {
+          color: c.$catlavender;
+        }
+
+        &.current {
+          color: c.$catyellow;
+        }
+
+        &.urgent {
+          color: c.$catred;
+        }
+      }
+    }
+
+    .music-widget {
+      @include m.pill;
+
+      .song-cover-art {
+        border-radius: v.$rounded;
+        background-position: center;
+        background-size: cover;
+        margin: 3px 0;
+        min-height: 24px;
+        min-width: 24px;
+      }
+
+      .icons {
+        font: 1.3rem monospace;
+        color: c.$subtext1;
+
+        button {
+          margin-left: 5px;
+        }
+      }
+
+      .music-title label {
+        margin-left: 5px;
+      }
+    }
+  }
+
+  .center-part,
+  .right-part {
+    @include m.pill;
+
+    .bar-widget {
+      .network-icon,
+      .volume-icon,
+      .bright-icon {
+        font: 1.3rem monospace;
+      }
+
+      .network-icon {
+        color: c.$catgreen;
+      }
+
+      .volume-icon {
+        color: c.$mauve;
+      }
+
+      .bright-icon {
+        color: c.$sky;
+      }
+
+      .network-label label {
+        margin-left: 0.5rem;
+      }
+
+      scale {
+        margin: 0 -0.5rem;
+        min-width: 4rem;
+
+        trough {
+          background-color: c.$crust;
+          border-radius: v.$rounded;
+          margin: 0 1rem;
+          min-height: 10px;
+          min-width: 70px;
+        }
+      }
+
+      .volumebar highlight {
+        border-radius: v.$rounded;
+        background-image: linear-gradient(to right, c.$text, c.$sky);
+      }
+
+      .brightbar highlight {
+        border-radius: v.$rounded;
+        background-image: linear-gradient(to right, c.$catlavender, c.$peach);
+      }
+    }
+
+    .systems-widget {
+      .membar,
+      .cpubar {
+        font: 0.9rem monospace;
+        background-color: c.$crust;
+      }
+
+      .membar {
+        color: c.$peach;
+      }
+
+      .cpubar {
+        color: c.$catblue;
+      }
+
+      .batbar {
+        font: 1.25rem monospace;
+      }
+
+      .batlabel {
+        font-size: 0.9rem;
+      }
+
+      .icon-text {
+        padding: 0.5rem;
+      }
+    }
+
+    .separator {
+      color: c.$surface1;
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+
+    .time-widget {
+      font: 1.25rem monospace;
+
+      .time-sep {
+        color: c.$sapphire;
+        margin: 0 3px;
+      }
+
+      .time-date {
+        font: 0.9rem system-ui;
+        margin-left: 5px;
+        color: c.$peach;
+      }
+    }
+  }
+}

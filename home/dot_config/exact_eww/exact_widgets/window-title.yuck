@@ -1,0 +1,4 @@
+(defwidget window-title []
+  (box :space-evenly false :spacing 5
+    (box :style 'background: url("${title.icon_path}") center / 19px no-repeat' :width 19)
+    (label :visible {strlength(title.title) > 0 ? true : false} :text "${title.title}" :limit-width 119 :show_truncated true)))

@@ -1,0 +1,42 @@
+; Variables
+
+(defvar osd_vol false)
+(defvar osd_bright false)
+(defvar music_reveal false)
+(defvar network_reveal false)
+(defvar bright_reveal false)
+(defvar volume_reveal false)
+
+(defpoll time :interval "5s" `date +'{"hour": "%H", "minute": "%M", "day": "%A", "day_s": "%a", "date": "%d", "month_s": "%b", "year": "%Y"}'`)
+
+(deflisten music "bash ./scripts/music")
+
+(deflisten title "eww-hyprbar title")
+(deflisten workspace "eww-hyprbar workspaces")
+
+(deflisten airplane "bash ./scripts/airplane")
+(deflisten bluetooth "bash ./scripts/bluetooth")
+(deflisten brightness "bash ./scripts/brightness")
+(deflisten net "bash ./scripts/networks")
+(deflisten volume "bash ./scripts/volume")
+
+; Widgets
+
+(include "./widgets/launcher.yuck")
+(include "./widgets/separator.yuck")
+(include "./widgets/systems.yuck")
+(include "./widgets/time.yuck")
+(include "./widgets/music.yuck")
+(include "./widgets/window-title.yuck")
+(include "./widgets/workspaces.yuck")
+(include "./widgets/bar-network.yuck")
+(include "./widgets/bar-volume.yuck")
+(include "./widgets/bar-brightness.yuck")
+
+; Windows
+
+(include "./windows/bar.yuck")
+(include "./windows/calendar.yuck")
+(include "./windows/system-menu.yuck")
+(include "./windows/osd.yuck")
+(include "./windows/music.yuck")

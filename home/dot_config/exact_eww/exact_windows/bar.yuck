@@ -1,0 +1,37 @@
+; Main bar window
+(defwindow bar
+  :monitor 0
+  :geometry (geometry :x "0%"
+              :y "0%"
+              :width "100%"
+              :anchor "top center")
+  :stacking "fg"
+  :exclusive true
+  (partition))
+
+(defwidget partition []
+  (centerbox :class "bar" :orientation "horizontal"
+    (left) (center) (right)))
+
+(defwidget left []
+  (box :class "left-part"
+       :orientation "horizontal"
+       :space-evenly false
+       :halign "start"
+       :spacing 10
+    (launcher) (workspaces :spaces {workspace.spaces.Ok}) (music)))
+
+(defwidget center []
+  (box :class "center-part"
+       :orientation "horizontal"
+       :space-evenly false
+       :halign "center"
+    (window-title)))
+
+(defwidget right []
+  (box :class "right-part"
+       :orientation "horizontal"
+       :space-evenly false
+       :halign "end"
+       :spacing 10
+    (network) (bright) (volume) (separator) (systems) (separator) (time)))

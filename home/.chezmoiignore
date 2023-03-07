@@ -53,7 +53,7 @@ www
 
 {{- if not .is_linux_gui }}
 # Ignore if not Linux GUI environment (Linx GUI only files)
-.config/{dunst,zathura}
+.config/{dunst,eww,gtk-2.0,gtk-3.0,gtk-4.0,hypr,zathura,mimeapps.list}
 {{- end }}
 
 {{- if not .is_arch_linux }}

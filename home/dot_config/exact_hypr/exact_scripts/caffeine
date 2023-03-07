@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+if pgrep -x sleep >/dev/null; then
+  dunstify -r 4444 -i /usr/share/icons/Papirus-Dark/symbolic/status/my-caffeine-on-symbolic.svg "Caffeine Enabled"
+  killall swayidle
+  bash ~/.config/hypr/scripts/lock-on-sleep &
+else
+  dunstify -r 4444 -i /usr/share/icons/Papirus-Dark/symbolic/status/my-caffeine-off-symbolic.svg "Caffeine Disabled"
+  killall swayidle
+  bash ~/.config/hypr/scripts/sleep &
+fi

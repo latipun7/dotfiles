@@ -1,0 +1,218 @@
+(defwindow system-menu
+  :monitor 0
+  :stacking "fg"
+  :geometry (geometry :x "20px"
+                      :y "20px"
+                      :width "21%"
+                      :anchor "right top")
+  (system-menu))
+
+(defwidget system-menu []
+  (box
+    :class "system-menu-widget"
+    :space-evenly false
+    :orientation "vertical"
+    (box
+      :class "top-row"
+      :space-evenly false
+      (label
+        :class "time"
+        :text "${time.hour}:${time.minute}")
+      (box
+        :class "date-box"
+        :space-evenly false
+        (label
+          :class "date"
+          :text "${time.date} ${time.month_s} ${time.year}")
+        (label
+          :class "day"
+          :text {time.day})))
+
+    (box
+      :class "settings-row"
+      :space-evenly true
+      (box
+        :class "setting-box"
+        :space-evenly false
+        :orientation "v"
+        (centerbox
+          :class "element ${net.class}"
+          (eventbox
+            :onclick "bash scripts/networks toggle"
+            :cursor "pointer"
+            (box :class "icon"
+              {net.icon}))
+          (label
+            :class "separator"
+            :text "│")
+          (eventbox
+            :onclick "eww close system-menu && nm-connection-editor &"
+            :cursor "pointer"
+            (box :class "icon"
+              "󰅂")))
+        (label
+          :text {net.ssid}
+          :xalign 0.5
+          :limit-width 15))
+
+      (box
+        :class "setting-box"
+        :space-evenly false
+        :orientation "v"
+        (centerbox
+          :class "element ${bluetooth.class}"
+          (eventbox
+            :onclick "bash scripts/bluetooth toggle"
+            :cursor "pointer"
+            (box :class "icon"
+              {bluetooth.icon}))
+          (label
+            :class "separator"
+            :text "│")
+          (eventbox
+            :onclick "eww close system-menu && blueman-manager &"
+            :cursor "pointer"
+            (box :class "icon"
+              "󰅂")))
+        (label
+          :text {bluetooth.text}
+          :xalign 0.5
+          :tooltip "${bluetooth.text} ${bluetooth.battery}"
+          :limit-width 15))
+
+      (box
+        :class "setting-box"
+        :space-evenly false
+        :orientation "v"
+        (box
+          :class "element ${airplane.class}"
+          (eventbox
+            :onclick "bash scripts/airplane toggle"
+            :cursor "pointer"
+            (box :class "icon"
+              {airplane.icon})))
+        (label
+          :text "Airplane Mode"
+          :xalign 0.5
+          :limit-width 16)))
+
+    (box
+      :class "sliders-row"
+      :orientation "vertical"
+      (box
+        :class "slider-box"
+        :space-evenly false
+        (eventbox
+          :onclick "bash scripts/volume mute SINK"
+          :cursor "pointer"
+          (box :class "icon"
+            {volume.icon}))
+        (scale
+          :class "volume-bar"
+          :value {volume.percent}
+          :tooltip "volume on ${volume.percent}%"
+          :onchange "bash scripts/volume setvol SINK {}"))
+      (box
+        :class "slider-box"
+        :space-evenly false
+        (eventbox
+          :onclick "bash scripts/volume mute SOURCE"
+          :cursor "pointer"
+          (box :class "icon"
+            {volume.mic_icon}))
+        (scale
+          :class "volume-bar"
+          :value {volume.microphone}
+          :tooltip "mic on ${volume.microphone}%"
+          :onchange "bash scripts/volume setvol SOURCE {}"))
+      (box
+        :class "slider-box"
+        :space-evenly false
+        (button
+          :class "icon"
+          {brightness.icon})
+        (scale
+          :class "brightness-bar"
+          :value {brightness.level}
+          :tooltip "brightness on ${brightness.level}%"
+          :onchange "brightnessctl set {}%")))
+
+    (box
+      :class "system-info-row"
+      :space-evenly true
+      (box
+        :class "sys-box"
+        :space-evenly false
+        :halign "start"
+        (circular-progress
+          :value "${EWW_CPU.avg}"
+          :class "sys-cpu"
+          :thickness 3
+          (label
+            :text "󰻠"
+            :class "sys-icon-cpu"))
+        (box
+          :orientation "v"
+          :vexpand false
+          (label
+            :text "cpu"
+            :halign "start"
+            :class "sys-text-cpu")
+          (label
+            :text "${round(EWW_CPU.avg,2)}%"
+            :halign "start"
+            :class "sys-text-sub")
+          (label
+            :text "${EWW_CPU.cores[0].freq} MHz"
+            :halign "start"
+            :class "sys-text-sub")))
+
+      (box
+        :class "sys-box"
+        :space-evenly false
+        :halign "end"
+        (circular-progress
+          :value {EWW_RAM.used_mem_perc}
+          :class "sys-mem"
+          :thickness 3
+          (label
+            :text "󰍛"
+            :class "sys-icon-mem"))
+        (box
+          :orientation "v"
+          (label
+            :text "memory"
+            :halign "start"
+            :class "sys-text-mem")
+          (label
+            :text "${round(EWW_RAM.used_mem / 1000000000,1)}GB | ${round(EWW_RAM.total_mem / 1000000000,1)}GB"
+            :halign "start"
+            :class "sys-text-sub"))))
+
+    (centerbox
+      :class "bottom-row"
+      (box
+        :visible {objectlength(EWW_BATTERY) > 0 ? true : false}
+        :class "battery-box"
+        :space-evenly false
+        :halign "start"
+        (label
+          :class "battery-icon"
+          :style "color: ${EWW_BATTERY["BAT0"].capacity <= 15 ? "#f38ba8" : EWW_BATTERY["BAT0"].capacity <= 35 ? "#f9e2af" : "#a6e3a1"};"
+          :text "${EWW_BATTERY["BAT0"].capacity <= 10 ? "󰁺" : EWW_BATTERY["BAT0"].capacity <= 20 ? "󰁻" : EWW_BATTERY["BAT0"].capacity <= 30 ? "󰁼" : EWW_BATTERY["BAT0"].capacity <= 40 ? "󰁽" : EWW_BATTERY["BAT0"].capacity <= 50 ? "󰁾" : EWW_BATTERY["BAT0"].capacity <= 60 ? "󰁿" : EWW_BATTERY["BAT0"].capacity <= 70 ? "󰂀" : EWW_BATTERY["BAT0"].capacity <= 80 ? "󰂁" : EWW_BATTERY["BAT0"].capacity <= 90 ? "󰂂" : "󰁹"}")
+        (label
+          :class "battery-percentage"
+          :text "${EWW_BATTERY["BAT0"].capacity}%")
+        (label
+          :class "battery-status"
+          :text {EWW_BATTERY["BAT0"].status}))
+      (label)
+      (box
+        :space-evenly false
+        :halign "end"
+        (eventbox
+          :halign "end"
+          :onclick "bash ~/.config/hypr/scripts/logout"
+          :cursor "pointer"
+          (box :class "power-button"
+            "⏻"))))))

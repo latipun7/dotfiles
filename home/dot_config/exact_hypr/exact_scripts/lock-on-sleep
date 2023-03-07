@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+swayidle -w before-sleep "bash $XDG_CONFIG_HOME/hypr/scripts/lock"

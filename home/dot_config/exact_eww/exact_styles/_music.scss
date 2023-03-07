@@ -1,0 +1,63 @@
+@use "modules/colors" as c;
+@use "modules/variables" as v;
+
+.music-window {
+  margin: 5px 5px 10px;
+  border-radius: v.$rounded;
+  border: 1px solid c.$sapphire;
+  box-shadow: 0 2px 3px c.$mantle;
+  background-color: c.$base;
+  border: 1px solid c.$crust;
+  color: c.$text;
+
+  .music-cover-art {
+    background-position: center;
+    background-size: cover;
+    border-radius: 8px;
+    margin: 1em;
+    min-height: 170px;
+    min-width: 170px;
+  }
+
+  .music-box {
+    margin: 1rem 1rem 1rem 0;
+
+    .music-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    .music-artist {
+      color: c.$subtext1;
+    }
+
+    .music-button-box {
+      font: 2.1rem monospace;
+      color: c.$subtext1;
+
+      button {
+        margin: 5px;
+      }
+    }
+
+    .music-time {
+      color: c.$subtext1;
+      margin: 0 1rem;
+    }
+
+    .music-bar scale {
+      highlight {
+        background-image: linear-gradient(to right, c.$catteal, c.$sky);
+        border-radius: 24px;
+      }
+
+      trough {
+        background-color: c.$crust;
+        border-radius: 24px;
+        margin-top: 0;
+        min-height: 10px;
+        min-width: 170px;
+      }
+    }
+  }
+}

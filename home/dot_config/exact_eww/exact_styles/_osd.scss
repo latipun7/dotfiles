@@ -1,0 +1,39 @@
+@use "modules/colors" as c;
+
+.osd-window {
+  border-radius: 9999px;
+  min-width: 10px;
+  min-height: 40px;
+}
+
+.osd-var {
+  margin: 0 5px;
+  background-color: c.$surface0;
+  border-radius: 9999px;
+  min-width: 100px;
+  min-height: 37px;
+  padding: 7px;
+}
+
+.osd-circle {
+  background-color: c.$crust;
+  color: c.$text;
+}
+
+.osd-incircle {
+  font-size: 19pt;
+  padding: 6px;
+  color: c.$text;
+}
+
+.osd-incircle-bright {
+  font-size: 19pt;
+  padding: 6px;
+  color: c.$text;
+}
+
+.osd-text {
+  font-size: 15pt;
+  color: c.$text;
+  padding-right: 5px;
+}

@@ -10,10 +10,14 @@
   refreshPeriod: 168h
   include: ["*/*.tmTheme"]
 
-.local/bin: # vimv
-  type: archive
+.local/bin/vimv: # vimv
+  type: file
   url: {{ template "vimv-download-url" . }}
+  executable: true
   refreshPeriod: 168h
+  filter:
+    command: gzip
+    args: ["--decompress", "--to-stdout", "--suffix", ".zip"]
 
 {{ if ne .chezmoi.os "windows" -}}
 # ╻ ╻┏┓╻╻╻ ╻   ┏━┓┏┓╻╻  ╻ ╻
@@ -126,44 +130,23 @@
   url: https://github.com/catppuccin/fcitx5/archive/refs/heads/main.zip
   stripComponents: 2
   refreshPeriod: 168h
-  include: ["*","*/src/**"]
+  include: ["*", "*/src/**"]
 
-# AwesomeWM [[[
-.config/awesome/modules/bling:
-  type: git-repo
-  url: https://github.com/BlingCorp/bling.git
+.config/hypr/themes:
+  type: archive
+  url: https://github.com/catppuccin/hyprland/archive/refs/heads/main.zip
+  stripComponents: 2
   refreshPeriod: 168h
-  clone:
-    args: ["--depth", "1"]
+  include: ["*", "*/themes/*.conf"]
 
-.config/awesome/modules/color:
-  type: git-repo
-  url: https://github.com/andOrlando/color.git
+.local/bin/eww-hyprbar:
+  type: file
+  url: https://github.com/latipun7/eww-hyprbar/releases/latest/download/eww-hyprbar-linux-x86_64.zip
+  executable: true
   refreshPeriod: 168h
-  clone:
-    args: ["--depth", "1"]
-
-.config/awesome/modules/layout-machi:
-  type: git-repo
-  url: https://github.com/xinhaoyuan/layout-machi.git
-  refreshPeriod: 168h
-  clone:
-    args: ["--depth", "1"]
-
-.config/awesome/modules/rubato:
-  type: git-repo
-  url: https://github.com/andOrlando/rubato.git
-  refreshPeriod: 168h
-  clone:
-    args: ["--depth", "1"]
-
-.config/awesome/modules/upower:
-  type: git-repo
-  url: https://github.com/Aire-One/awesome-battery_widget.git
-  refreshPeriod: 168h
-  clone:
-    args: ["--depth", "1"]
-# ]]]
+  filter:
+    command: gzip
+    args: ["--decompress", "--to-stdout", "--suffix", ".zip"]
 {{- end }}
 
 {{ if .is_server -}}
