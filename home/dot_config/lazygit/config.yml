@@ -5,22 +5,23 @@ gui:
   theme:
     selectedLineBgColor: [reverse]
     selectedRangeBgColor: [reverse]
+
 git:
   branchLogCmd: "git log --graph --color=always --pretty='%Cred%h%Creset -%C(auto)% d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' {{branchName}} --"
   allBranchesLogCmd: "git log --graph --color=always --pretty='%Cred%h%Creset -%C(auto)% d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --all"
   paging:
     colorArg: always
     pager: delta --paging=never
+
 customCommands:
-  - key: "F"
-    context: "remotes"
-    description: "fetch a remote branch as a new local branch"
-    command: "git fetch {{index .SelectedRemote.Name }} {{index .PromptResponses 0}}:{{index .PromptResponses 1}}"
+  - key: "D"
+    context: "tags"
+    description: "Delete tag on both remote and local"
+    command: "git push --delete {{ index .PromptResponses 0 }} {{ index .SelectedTag.Name }} && git tag --delete {{ index .SelectedTag.Name }}"
     prompts:
-      - type: "input"
-        title: "Remote Branch Name"
-        initialValue: ""
-      - type: "input"
-        title: "New Local Branch Name"
-        initialValue: ""
-    loadingText: "fetching branch"
+      - type: "menuFromCommand"
+        title: 'Remote to delete tag "{{ index .SelectedTag.Name }}" from:'
+        command: "git remote show"
+        filter: "(?P<remote>.*)"
+        valueFormat: "{{ .remote }}"
+    loadingText: "Deleting tag"
