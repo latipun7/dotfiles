@@ -18,9 +18,7 @@ M.config = function()
     should_autosave = function()
       if vim.bo.filetype == "alpha" then return false end
 
-      if vim.api.nvim_buf_get_name(0):match("COMMIT_EDITMSG") then
-        return false
-      end
+      if vim.api.nvim_buf_get_name(0):match("COMMIT_EDITMSG") then return false end
 
       return true
     end,
@@ -36,13 +34,7 @@ M.config = function()
   create_aucmd("User", {
     pattern = "PersistedLoadPost",
     group = persisted_hooks,
-    callback = function(session)
-      vim.notify(
-        "Loaded session " .. session.data,
-        vim.log.levels.INFO,
-        { title = title }
-      )
-    end,
+    callback = function(session) vim.notify("Loaded session " .. session.data, vim.log.levels.INFO, { title = title }) end,
   })
 
   create_aucmd("User", {

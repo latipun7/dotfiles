@@ -15,9 +15,7 @@ M.config = function()
       end,
       get_config = function()
         if lvim.builtin.latipun.noice.active then return { enabled = false } end
-        if vim.api.nvim_buf_get_option(0, "filetype") == "neo-tree" then
-          return { enabled = false }
-        end
+        if vim.api.nvim_buf_get_option(0, "filetype") == "neo-tree" then return { enabled = false } end
       end,
     },
     select = {

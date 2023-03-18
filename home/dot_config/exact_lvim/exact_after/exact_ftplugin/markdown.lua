@@ -41,9 +41,7 @@ require("nvim-surround").buffer_setup({
         local language = nil
         if cur then
           for child_node in cur:iter_children() do
-            if child_node:type() == "info_string" then
-              language = query.get_node_text(child_node:child(0), 0)
-            end
+            if child_node:type() == "info_string" then language = query.get_node_text(child_node:child(0), 0) end
           end
         end
 

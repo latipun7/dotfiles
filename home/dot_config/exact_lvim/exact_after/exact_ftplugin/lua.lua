@@ -12,9 +12,7 @@ if neodev_ok then
 
   neodev.setup({
     override = function(root_dir, library)
-      if neodev_util.has_file(root_dir, lvim_dot) then
-        library.enabled = true
-      end
+      if neodev_util.has_file(root_dir, lvim_dot) then library.enabled = true end
     end,
   })
 end

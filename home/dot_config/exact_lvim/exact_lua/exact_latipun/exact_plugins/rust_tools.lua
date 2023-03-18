@@ -44,10 +44,8 @@ M.config = function()
       },
     },
   }
-  local mason_path =
-    vim.fn.glob(vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/")
-  local vscode_path = vim.fn.expand("~/")
-    .. ".vscode/extensions/vadimcn.vscode-lldb-1.8.1/"
+  local mason_path = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/")
+  local vscode_path = vim.fn.expand("~/") .. ".vscode/extensions/vadimcn.vscode-lldb-1.8.1/"
 
   local path = ""
   local debugger_found = true
@@ -57,34 +55,21 @@ M.config = function()
     path = vscode_path
   else
     debugger_found = false
-    vim.notify(
-      "please install codelldb using :Mason or via vscode",
-      vim.log.levels.WARN
-    )
+    vim.notify("please install codelldb using :Mason or via vscode", vim.log.levels.WARN)
   end
 
   if debugger_found then
     local codelldb_path = path .. "adapter/codelldb"
     local liblldb_path = path .. "lldb/lib/liblldb.so"
 
-    if vim.fn.has("mac") == 1 then
-      liblldb_path = path .. "lldb/lib/liblldb.dylib"
-    end
+    if vim.fn.has("mac") == 1 then liblldb_path = path .. "lldb/lib/liblldb.dylib" end
 
-    if
-      vim.fn.filereadable(codelldb_path) and vim.fn.filereadable(liblldb_path)
-    then
+    if vim.fn.filereadable(codelldb_path) and vim.fn.filereadable(liblldb_path) then
       opts.dap = {
-        adapter = require("rust-tools.dap").get_codelldb_adapter(
-          codelldb_path,
-          liblldb_path
-        ),
+        adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
       }
     else
-      vim.notify(
-        "please reinstall codellb, i cannot find liblldb or codelldb itself",
-        vim.log.levels.WARN
-      )
+      vim.notify("please reinstall codellb, i cannot find liblldb or codelldb itself", vim.log.levels.WARN)
     end
   end
   rust_tools.setup(opts)

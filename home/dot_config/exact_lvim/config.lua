@@ -34,19 +34,11 @@ lvim.lsp.buffer_mappings.normal_mode["gp"] = {
   "Peek definition",
 }
 lvim.lsp.null_ls.setup = {
-  should_attach = function(bufnr)
-    return not vim.api.nvim_buf_get_name(bufnr):match("tmpl$")
-  end,
+  should_attach = function(bufnr) return not vim.api.nvim_buf_get_name(bufnr):match("tmpl$") end,
 }
 
-vim.list_extend(
-  lvim.lsp.automatic_configuration.skipped_filetypes,
-  { "css", "scss", "c" }
-)
-vim.list_extend(
-  lvim.lsp.automatic_configuration.skipped_servers,
-  { "lua_ls", "powershell_es", "rust_analyzer" }
-)
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_filetypes, { "css", "scss", "c" })
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "lua_ls", "powershell_es", "rust_analyzer" })
 
 code_actions.setup({
   { name = "eslint_d" },

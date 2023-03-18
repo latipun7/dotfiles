@@ -52,12 +52,10 @@ M.config = function()
 
   if lvim.builtin.nvimtree.active == true then
     lvim.builtin.nvimtree.on_config_done = function()
-      lvim.builtin.which_key.mappings.e =
-        { "<Cmd>NvimTreeToggle<CR>", "ﰤ Explorer" }
+      lvim.builtin.which_key.mappings.e = { "<Cmd>NvimTreeToggle<CR>", "ﰤ Explorer" }
     end
   else
-    lvim.builtin.which_key.mappings.e =
-      { "<Cmd>NeoTreeRevealToggle<CR>", "ﰤ Explorer" }
+    lvim.builtin.which_key.mappings.e = { "<Cmd>NeoTreeRevealToggle<CR>", "ﰤ Explorer" }
   end
 
   lvim.builtin.which_key.mappings.P = {
@@ -80,15 +78,12 @@ M.config = function()
     " Find File",
   }
 
-  lvim.builtin.which_key.mappings.h =
-    { "<Cmd>nohlsearch<CR>", " No Highlight" }
+  lvim.builtin.which_key.mappings.h = { "<Cmd>nohlsearch<CR>", " No Highlight" }
   lvim.builtin.which_key.mappings.q = { "<Cmd>confirm q<CR>", " Quit" }
   lvim.builtin.which_key.mappings.w = { "<Cmd>silent w!<CR>", " Save" }
 
-  lvim.builtin.which_key.mappings.t =
-    { "<Cmd>set list!<CR>", " Toggle hidden characters" }
-  lvim.builtin.which_key.mappings.F =
-    { "<Cmd>LvimToggleFormatOnSave<CR>", " Toggle format on save" }
+  lvim.builtin.which_key.mappings.t = { "<Cmd>set list!<CR>", " Toggle hidden characters" }
+  lvim.builtin.which_key.mappings.F = { "<Cmd>LvimToggleFormatOnSave<CR>", " Toggle format on save" }
   lvim.builtin.which_key.mappings.c = { "<Cmd>Bdelete<CR>", " Close buffer" }
 
   lvim.builtin.which_key.mappings.b = {
@@ -151,8 +146,7 @@ M.config = function()
   lvim.builtin.which_key.mappings.p.name = " Plugins"
   lvim.builtin.which_key.mappings.s.name = " Search"
 
-  lvim.builtin.which_key.mappings.Ln =
-    { "<Cmd>Telescope notify<CR>", "View notifications" }
+  lvim.builtin.which_key.mappings.Ln = { "<Cmd>Telescope notify<CR>", "View notifications" }
 
   -- LSP - Peek
   lvim.builtin.which_key.mappings.lp = {

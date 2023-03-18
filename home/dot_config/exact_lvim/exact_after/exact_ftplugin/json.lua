@@ -1,8 +1,6 @@
 if vim.fn.expand("%:t") == "package.json" then
   local whk_status, whk = pcall(require, "which-key")
-  if not whk_status or not lvim.builtin.latipun.tsjs_programming.active then
-    return
-  end
+  if not whk_status or not lvim.builtin.latipun.tsjs_programming.active then return end
 
   whk.register({
     n = {

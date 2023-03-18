@@ -21,13 +21,7 @@ local functions = {
         "",
       }
       return insert_icons[selector]
-    elseif
-      mod == "V"
-      or mod == "v"
-      or mod == "vs"
-      or mod == "Vs"
-      or mod == "cv"
-    then
+    elseif mod == "V" or mod == "v" or mod == "vs" or mod == "Vs" or mod == "cv" then
       local visual_icons = {
         "",
         "",
@@ -41,15 +35,7 @@ local functions = {
         "",
       }
       return command_icons[selector]
-    elseif
-      mod == "r"
-      or mod == "rm"
-      or mod == "r?"
-      or mod == "R"
-      or mod == "Rc"
-      or mod == "Rv"
-      or mod == "Rv"
-    then
+    elseif mod == "r" or mod == "rm" or mod == "r?" or mod == "R" or mod == "Rc" or mod == "Rv" or mod == "Rv" then
       local replace_icons = {
         "",
         "",
@@ -77,13 +63,11 @@ local functions = {
       and string.find(fname, "lazygit;#toggleterm") ~= nil
       and (vim.fn.has("linux") == 1 or vim.fn.has("mac") == 1)
     then
-      local git_repo_cmd = io.popen('git remote get-url origin | tr -d "\n"')
-        or ""
+      local git_repo_cmd = io.popen('git remote get-url origin | tr -d "\n"') or ""
       local git_repo = git_repo_cmd:read("*a")
       git_repo_cmd:close()
 
-      local git_branch_cmd = io.popen('git branch --show-current | tr -d "\n"')
-        or ""
+      local git_branch_cmd = io.popen('git branch --show-current | tr -d "\n"') or ""
       local git_branch = git_branch_cmd:read("*a")
       git_branch_cmd:close()
 
@@ -150,9 +134,7 @@ local functions = {
     msg = msg or kind.icons.ls_inactive .. " " .. "LS Inactive"
     local buf_clients = vim.lsp.buf_get_clients()
     if next(buf_clients) == nil then
-      if type(msg) == "boolean" or #msg == 0 then
-        return kind.icons.ls_inactive .. " " .. "LS Inactive"
-      end
+      if type(msg) == "boolean" or #msg == 0 then return kind.icons.ls_inactive .. " " .. "LS Inactive" end
       return msg
     end
     local buf_ft = vim.bo.filetype

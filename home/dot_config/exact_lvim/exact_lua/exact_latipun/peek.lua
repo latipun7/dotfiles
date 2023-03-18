@@ -12,8 +12,7 @@ local function create_floating_file(location, opts)
 
   -- Set some defaults
   opts = opts or {}
-  local close_events = opts.close_events
-    or { "CursorMoved", "CursorMovedI", "BufHidden", "InsertCharPre" }
+  local close_events = opts.close_events or { "CursorMoved", "CursorMovedI", "BufHidden", "InsertCharPre" }
 
   -- location may be LocationLink or Location
   local uri = location.targetUri or location.uri
@@ -26,10 +25,7 @@ local function create_floating_file(location, opts)
   local contents = vim.api.nvim_buf_get_lines(
     bufnr,
     range.start.line,
-    math.min(
-      range["end"].line + 1 + (opts.context or 15),
-      range.start.line + (opts.max_height or 15)
-    ),
+    math.min(range["end"].line + 1 + (opts.context or 15), range.start.line + (opts.max_height or 15)),
     false
   )
   if next(contents) == nil then
@@ -38,11 +34,7 @@ local function create_floating_file(location, opts)
   end
   local width, height = vim.lsp.util._make_floating_popup_size(contents, opts)
   local if_nil = vim.F.if_nil
-  opts = vim.lsp.util.make_floating_popup_options(
-    if_nil(width, 30),
-    if_nil(height, 15),
-    opts
-  )
+  opts = vim.lsp.util.make_floating_popup_options(if_nil(width, 30), if_nil(height, 15), opts)
   -- Don't make it minimal as it is meant to be fully featured
   opts["style"] = nil
 
@@ -51,19 +43,12 @@ local function create_floating_file(location, opts)
   local winnr = vim.api.nvim_open_win(bufnr, false, opts)
   vim.api.nvim_win_set_option(winnr, "winblend", 0)
 
-  vim.api.nvim_win_set_cursor(
-    winnr,
-    { range.start.line + 1, range.start.character }
-  )
+  vim.api.nvim_win_set_cursor(winnr, { range.start.line + 1, range.start.character })
   vim.api.nvim_buf_set_var(bufnr, "lsp_floating_window", winnr)
 
   -- Set some autocmds to close the window
   vim.api.nvim_command(
-    string.format(
-      "autocmd %s <buffer> ++once lua pcall(vim.api.nvim_win_close, %d, true)",
-      unpack(close_events),
-      winnr
-    )
+    string.format("autocmd %s <buffer> ++once lua pcall(vim.api.nvim_win_close, %d, true)", unpack(close_events), winnr)
   )
 
   return bufnr, winnr
@@ -86,9 +71,7 @@ local function preview_location_callback(result)
   end
 end
 
-local function preview_location_callback_new_signature(_, result)
-  return preview_location_callback(result)
-end
+local function preview_location_callback_new_signature(_, result) return preview_location_callback(result) end
 
 function M.open_file()
   -- Get the file currently open in the floating window
@@ -128,10 +111,7 @@ function M.Peek(what)
   if vim.tbl_contains(vim.api.nvim_list_wins(), M.floating_win) then
     local success_1, _ = pcall(vim.api.nvim_set_current_win, M.floating_win)
     if not success_1 then
-      vim.notify(
-        "peek: You cannot edit the current file in a preview!",
-        vim.log.levels.ERROR
-      )
+      vim.notify("peek: You cannot edit the current file in a preview!", vim.log.levels.ERROR)
       return
     end
 
@@ -149,18 +129,10 @@ function M.Peek(what)
     -- Make a new request and then create the new window in the callback
     local params = vim.lsp.util.make_position_params()
     local preview_callback = preview_location_callback_new_signature
-    local success, _ = pcall(
-      vim.lsp.buf_request,
-      0,
-      "textDocument/" .. what,
-      params,
-      preview_callback
-    )
+    local success, _ = pcall(vim.lsp.buf_request, 0, "textDocument/" .. what, params, preview_callback)
     if not success then
       vim.notify(
-        'peek: Error calling LSP method "textDocument/'
-          .. what
-          .. '". The current language lsp might not support it.',
+        'peek: Error calling LSP method "textDocument/' .. what .. '". The current language lsp might not support it.',
         vim.log.levels.ERROR
       )
     end

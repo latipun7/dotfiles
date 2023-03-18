@@ -204,8 +204,7 @@ M.config = function()
       event = { "BufReadPre", "BufNew" },
       config = function()
         require("dap-vscode-js").setup({
-          debugger_path = vim.fn.stdpath("data")
-            .. "/mason/packages/js-debug-adapter",
+          debugger_path = vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter",
           debugger_cmd = { "js-debug-adapter" },
           adapters = {
             "pwa-node",

@@ -4,9 +4,7 @@ if vim.fn.expand("%:t") == "Cargo.toml" then
   lsp_manager.setup("taplo")
 
   local whk_status, whk = pcall(require, "which-key")
-  if not whk_status or not lvim.builtin.latipun.rust_programming.active then
-    return
-  end
+  if not whk_status or not lvim.builtin.latipun.rust_programming.active then return end
 
   whk.register({
     C = {

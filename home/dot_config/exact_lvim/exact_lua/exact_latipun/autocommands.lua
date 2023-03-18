@@ -14,9 +14,7 @@ M.config = function()
 
   create_aucmd({ "BufWinEnter", "BufRead", "BufNewFile" }, {
     pattern = "*",
-    callback = function()
-      vim.cmd("setlocal formatoptions-=c formatoptions-=r formatoptions-=o")
-    end,
+    callback = function() vim.cmd("setlocal formatoptions-=c formatoptions-=r formatoptions-=o") end,
   })
 
   -- needs bufdelete.nvim, neo-tree & alpha-dashboard
@@ -43,8 +41,7 @@ M.config = function()
   create_aucmd("User", {
     pattern = "AlphaReady",
     group = dashboard_setting,
-    command = "set showtabline=0 | autocmd BufUnload <buffer> set showtabline="
-      .. vim.opt.showtabline._value,
+    command = "set showtabline=0 | autocmd BufUnload <buffer> set showtabline=" .. vim.opt.showtabline._value,
   })
 
   create_aucmd("BufRead", {

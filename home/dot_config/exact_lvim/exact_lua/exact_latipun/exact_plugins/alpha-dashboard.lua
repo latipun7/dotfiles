@@ -26,8 +26,7 @@ M.config = function()
   dashboard.section.header.opts.hl = "Error"
 
   local date = os.date("%a %d %b")
-  local plugins =
-    #vim.fn.globpath(get_runtime_dir() .. "/site/pack/lazy/*", "*", 0, 1)
+  local plugins = #vim.fn.globpath(get_runtime_dir() .. "/site/pack/lazy/*", "*", 0, 1)
 
   local heading = {
     type = "text",
@@ -40,11 +39,7 @@ M.config = function()
 
   local plugin_count = {
     type = "text",
-    val = "└─ "
-      .. kind.icons.plug
-      .. " "
-      .. plugins
-      .. " plugins in total ─┘",
+    val = "└─ " .. kind.icons.plug .. " " .. plugins .. " plugins in total ─┘",
     opts = {
       position = "center",
       hl = "String",
@@ -63,8 +58,7 @@ M.config = function()
   }
 
   local function button(shortcut, text, keybind, keybind_opts)
-    local dashboard_button =
-      dashboard.button(shortcut, text, keybind, keybind_opts)
+    local dashboard_button = dashboard.button(shortcut, text, keybind, keybind_opts)
 
     dashboard_button.opts.hl_shortcut = "Number"
     dashboard_button.opts.hl = "Function"
@@ -79,36 +73,16 @@ M.config = function()
       " " .. kind.icons.find .. " Find File",
       "<Cmd>lua require('latipun.plugins.telescope').find_project_files()<CR>"
     ),
-    button(
-      "e",
-      " " .. kind.icons.file .. " New File",
-      "<Cmd>ene <Bar> startinsert <CR>"
-    ),
+    button("e", " " .. kind.icons.file .. " New File", "<Cmd>ene <Bar> startinsert <CR>"),
     button(
       "l",
       " " .. kind.icons.magic .. " Restore Last Session",
       "<Cmd>lua require('persisted').load({ last = true })<CR>"
     ),
-    button(
-      "s",
-      " " .. kind.icons.magic .. " Restore Directory Session",
-      "<Cmd>lua require('persisted').load()<CR>"
-    ),
-    button(
-      "p",
-      " " .. kind.icons.worker .. " Recent Projects",
-      "<Cmd>Telescope projects<CR>"
-    ),
-    button(
-      "r",
-      " " .. kind.icons.clock .. " Recent Files",
-      "<Cmd>Telescope oldfiles<CR>"
-    ),
-    button(
-      "c",
-      " " .. kind.icons.settings .. " Edit Config File",
-      "<Cmd>e " .. get_config_dir() .. "/config.lua<CR>"
-    ),
+    button("s", " " .. kind.icons.magic .. " Restore Directory Session", "<Cmd>lua require('persisted').load()<CR>"),
+    button("p", " " .. kind.icons.worker .. " Recent Projects", "<Cmd>Telescope projects<CR>"),
+    button("r", " " .. kind.icons.clock .. " Recent Files", "<Cmd>Telescope oldfiles<CR>"),
+    button("c", " " .. kind.icons.settings .. " Edit Config File", "<Cmd>e " .. get_config_dir() .. "/config.lua<CR>"),
     button("q", " " .. kind.icons.exit .. " Quit", "<Cmd>qa<CR>"),
   }
 

@@ -52,8 +52,7 @@ M.config = function()
     local filetype = vim.api.nvim_buf_get_option(buf, "filetype")
     if filetype:find("chezmoi") then return true end
 
-    local status_ok, big_file_detected =
-      pcall(vim.api.nvim_buf_get_var, buf, "bigfile_disable_treesitter")
+    local status_ok, big_file_detected = pcall(vim.api.nvim_buf_get_var, buf, "bigfile_disable_treesitter")
     return status_ok and big_file_detected
   end
 
@@ -249,9 +248,7 @@ M.config = function()
 
   if lvim.builtin.latipun.noice.active then
     local status_ok, noice = pcall(require, "noice.lsp.hover")
-    if status_ok then
-      vim.lsp.handlers["textDocument/hover"] = noice.on_hover
-    end
+    if status_ok then vim.lsp.handlers["textDocument/hover"] = noice.on_hover end
   end
 
   lvim.lsp.buffer_mappings.normal_mode.gA = {
@@ -273,10 +270,7 @@ M.show_documentation = function()
     vim.cmd("h " .. vim.fn.expand("<cword>"))
   elseif vim.tbl_contains({ "man" }, filetype) then
     vim.cmd("Man " .. vim.fn.expand("<cword>"))
-  elseif
-    vim.fn.expand("%:t") == "Cargo.toml"
-    and require("crates").popup_available()
-  then
+  elseif vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
     require("crates").show_popup()
   elseif filetype == "rust" then
     local found, rt = pcall(require, "rust-tools")

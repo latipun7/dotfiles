@@ -10,9 +10,7 @@ local function diagnostics_indicator(_, _, diagnostics)
   }
 
   for name, count in pairs(diagnostics) do
-    if symbols[name] and count > 0 then
-      table.insert(result_table, symbols[name] .. count)
-    end
+    if symbols[name] and count > 0 then table.insert(result_table, symbols[name] .. count) end
   end
 
   local result = table.concat(result_table, " ")
@@ -21,8 +19,7 @@ end
 
 local function highlight()
   local colors = require("latipun.theme").current_colors()
-  local ok, catppuccin =
-    pcall(require, "catppuccin.groups.integrations.bufferline")
+  local ok, catppuccin = pcall(require, "catppuccin.groups.integrations.bufferline")
 
   if ok then
     return catppuccin.get({
@@ -93,9 +90,7 @@ M.config = function()
           icon = kind.icons.test,
           matcher = function(buf)
             local name = buf.filename
-            return name:match("_spec")
-              or name:match("_test")
-              or name:match("test_")
+            return name:match("_spec") or name:match("_test") or name:match("test_")
           end,
         },
         {
@@ -111,13 +106,9 @@ M.config = function()
           name = "deps",
           icon = kind.icons.code_action,
           matcher = function(buf)
-            return vim.startswith(
-              buf.path,
-              string.format("%s/site/pack/lazy", vim.fn.stdpath("data"))
-            ) or vim.startswith(
-              buf.path,
-              vim.fn.expand("$VIMRUNTIME")
-            ) or string.find(buf.path, "node_modules")
+            return vim.startswith(buf.path, string.format("%s/site/pack/lazy", vim.fn.stdpath("data")))
+              or vim.startswith(buf.path, vim.fn.expand("$VIMRUNTIME"))
+              or string.find(buf.path, "node_modules")
           end,
         },
       },

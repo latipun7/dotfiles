@@ -68,12 +68,7 @@ local function _multiopen(prompt_bufnr, open_cmd)
   local num_selections = #picker:get_multi_selection()
   local border_contents = picker.prompt_border.contents[1]
 
-  if
-    not (
-      string.find(border_contents, "Find Files")
-      or string.find(border_contents, "Git Files")
-    )
-  then
+  if not (string.find(border_contents, "Find Files") or string.find(border_contents, "Git Files")) then
     actions.select_default(prompt_bufnr)
     return
   end
@@ -97,21 +92,13 @@ local function _multiopen(prompt_bufnr, open_cmd)
   end
 end
 
-local function multi_selection_open_vsplit(prompt_bufnr)
-  _multiopen(prompt_bufnr, "vsplit")
-end
+local function multi_selection_open_vsplit(prompt_bufnr) _multiopen(prompt_bufnr, "vsplit") end
 
-local function multi_selection_open_split(prompt_bufnr)
-  _multiopen(prompt_bufnr, "split")
-end
+local function multi_selection_open_split(prompt_bufnr) _multiopen(prompt_bufnr, "split") end
 
-local function multi_selection_open_tab(prompt_bufnr)
-  _multiopen(prompt_bufnr, "tabe")
-end
+local function multi_selection_open_tab(prompt_bufnr) _multiopen(prompt_bufnr, "tabe") end
 
-local function multi_selection_open(prompt_bufnr)
-  _multiopen(prompt_bufnr, "edit")
-end
+local function multi_selection_open(prompt_bufnr) _multiopen(prompt_bufnr, "edit") end
 
 function M.find_project_files(opts)
   opts = opts or {}
@@ -122,20 +109,11 @@ function M.find_project_files(opts)
     opts.cwd = vim.loop.cwd()
   end
 
-  local _, ret = telescope_utils.get_os_command_output(
-    { "git", "rev-parse", "--show-toplevel" },
-    opts.cwd
-  )
+  local _, ret = telescope_utils.get_os_command_output({ "git", "rev-parse", "--show-toplevel" }, opts.cwd)
 
   if ret ~= 0 then
-    local in_worktree = telescope_utils.get_os_command_output(
-      { "git", "rev-parse", "--is-inside-work-tree" },
-      opts.cwd
-    )
-    local in_bare = telescope_utils.get_os_command_output(
-      { "git", "rev-parse", "--is-bare-repository" },
-      opts.cwd
-    )
+    local in_worktree = telescope_utils.get_os_command_output({ "git", "rev-parse", "--is-inside-work-tree" }, opts.cwd)
+    local in_bare = telescope_utils.get_os_command_output({ "git", "rev-parse", "--is-bare-repository" }, opts.cwd)
 
     if in_worktree[1] ~= "true" and in_bare[1] ~= "true" then
       builtin.find_files(opts)
@@ -272,9 +250,7 @@ function M.git_files()
   local path = vim.fn.expand("%:h") or nil
 
   local width = 0.45
-  if path and string.find(path, "sourcegraph.*sourcegraph", 1, false) then
-    width = 0.6
-  end
+  if path and string.find(path, "sourcegraph.*sourcegraph", 1, false) then width = 0.6 end
 
   local opts = themes.get_dropdown({
     winblend = 5,
