@@ -22,7 +22,7 @@ function main() {
       open "$1" discord
       ;;
     term)
-      open "$1" wezterm start --always-new-process --class scratch-term
+      open "$1" wezterm start --class scratch-term
       ;;
     calc)
       open "$1" qalculate-gtk

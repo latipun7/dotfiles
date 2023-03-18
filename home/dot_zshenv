@@ -105,7 +105,7 @@ else
 fi
 
 if [[ "$(hostnamectl chassis)" != 'server' && "$(hostnamectl chassis)" != *hostnamectl* ]]; then
-  export TERMINAL="wezterm start"
+  export TERMINAL=wezterm
   export BROWSER=brave
 else
   export BROWSER=lynx
