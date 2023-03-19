@@ -7,7 +7,7 @@ filetype="$(file -Lb --mime-type "$1")"
 
 function image() {
   if hash kitty 2>/dev/null; then
-    kitten icat --transfer-mode=memory --stdin=no --place="$(($2 - 2))x$(($3 - 4))@${4}x$(($5 + 2))" "$1" < /dev/null > /dev/tty
+    kitten icat --transfer-mode=memory --stdin=no --place="$(($2 - 2))x$(($3 - 4))@${4}x$(($5 + 2))" "$1" </dev/null >/dev/tty
     exit 69
   else
     chafa -s "$(($2 - 2))x$(($3 - 2))" -f symbols "$1"

@@ -12,7 +12,7 @@ if [ "$HYPRGAMEMODE" = 1 ]; then
     keyword general:border_size 1;\
     keyword decoration:rounding 0"
   pkill -fx "bash $XDG_CONFIG_HOME/hypr/scripts/random-wallpapers /home/data/pictures/wallpapers" &>/dev/null
-  sleep 0.3 && swww img /home/data/pictures/wallpapers/cat-pacman.png
+  sleep 0.3 && swww img /home/data/pictures/unused-wallpapers/cat-pacman.png
   exit
 fi
 
