@@ -9,11 +9,6 @@ configuration {
   font: "monospace 13";
   sidebar-mode: true;
   show-icons: true;
-  terminal: "wezterm";
-  ssh-client: "ssh";
-  ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";
-  run-command: "{cmd}";
-  run-shell-command: "{terminal} -e {cmd}";
   window-thumbnail: true;
   timeout {
     action: "kb-cancel";
