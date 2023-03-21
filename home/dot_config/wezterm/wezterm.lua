@@ -131,8 +131,6 @@ return {
     -- motions
     { mods = "CTRL|SHIFT", key = "U", action = act.ScrollByPage(-0.5) },
     { mods = "CTRL|SHIFT", key = "D", action = act.ScrollByPage(0.5) },
-    { mods = "CTRL|SHIFT", key = "B", action = act.ScrollByPage(-1) },
-    { mods = "CTRL|SHIFT", key = "F", action = act.ScrollByPage(1) },
     { mods = "SHIFT", key = "PageUp", action = act.ScrollByPage(-1) },
     { mods = "SHIFT", key = "PageDown", action = act.ScrollByPage(1) },
     { mods = "CTRL|SHIFT", key = "PageUp", action = act.ScrollToPrompt(-1) },
