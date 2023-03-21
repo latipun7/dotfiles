@@ -305,22 +305,6 @@ cmd yank-basename &{{
   lf -remote "send $id echo \"\033[1;32mFile name copied to clipboard!\033[0m\""
 }}
 
-cmd rename-before-ext &{{
-  # get 'basename' of the selection
-  filename="${f##*/}"
-  # quote it so we won't deal with quotes in the lf -remote command
-  filename="$(printf '%q' "$filename")"
-  filename="${filename// /<space>}"
-  lf -remote "send $id push :rename<space>$filename<a-b><c-b>"
-}}
-
-cmd rename-edit &{{
-  filename="${f##*/}"
-  filename="$(printf '%q' "$filename")"
-  filename="${filename// /<space>}"
-  lf -remote "send $id push :rename<space>$filename"
-}}
-
 # ┏┓ ╻┏┓╻╺┳┓╻┏┓╻┏━╸┏━┓
 # ┣┻┓┃┃┗┫ ┃┃┃┃┗┫┃╺┓┗━┓
 # ┗━┛╹╹ ╹╺┻┛╹╹ ╹┗━┛┗━┛
@@ -329,7 +313,6 @@ cmd rename-edit &{{
 map d
 map f
 map gh
-map r
 
 # basic function
 map a add-new
@@ -347,9 +330,6 @@ map fs find-text-content
 map L view-logs
 map P link
 map R bulk-rename
-map rc push :rename<space>
-map re rename-edit
-map rr rename-before-ext
 map x cut
 map Z zoxide-interactive
 map z push :zoxide<space>
