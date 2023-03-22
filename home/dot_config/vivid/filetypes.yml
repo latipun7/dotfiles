@@ -101,6 +101,7 @@ markup:
     - .markdown
     - .md
     - .mdown
+    - .org
     - .rst
     - .xml
 
@@ -115,7 +116,7 @@ programming:
     clojure: [.clj]
     crystal: [.cr]
     csharp: [.cs, .csx]
-    css: [css]
+    css: [.css, .sass, .scss]
     cxx:
       [
         .c,
@@ -138,6 +139,7 @@ programming:
     dart: [.dart]
     diff: [.diff, .patch]
     elixir: [.ex, .exs]
+    emacs: [.elc]
     elm: [.elm]
     erlang: [.erl]
     fsharp: [.fs, .fsi, .fsx]
@@ -249,6 +251,9 @@ programming:
 
     continuous-integration:
       - appveyor.yml
+      - ci-cd.yaml
+      - ci-cd.yml
+      - .gitlab-ci.yml
       - .travis.yml
 
 media:
@@ -267,16 +272,18 @@ media:
     - .svg
     - .tif
     - .tiff
-    - .xcf
     - .webp
+    - .xcf
 
   audio:
     - .aif
+    - .ape
     - .wma
     - .wv
     - .aac
     - .au
     - .flac
+    - .m3u
     - .m4a
     - .mid
     - .midi
@@ -312,6 +319,7 @@ media:
     - .fon
     - .otf
     - .ttf
+    - .woff
 
 office:
   document:
@@ -346,6 +354,7 @@ archives:
     - .apk
     - .deb
     - .rpm
+    - .xbps
 
   ros:
     - .bag
