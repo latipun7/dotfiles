@@ -4,10 +4,8 @@
 .android
 .cache
 .config/{Authy Desktop,Bitwarden CLI,fcitx5/conf/cached_layouts,lazygit/state.yml,wakatime/**}
-.config/awesome/modules # externals git-repo
 .config/lvim/{ignore,lv-settings.lua,plugin/**,sessions,lazy-lock.json}
 .local/share/{Trash,rofimoji/{frecency,recent}}
-.local/share/{ansi-arts/**,lunarvim/lvim/**,oh-my-tmux/**,oh-my-zsh/**} # externals git-repo
 .pki
 .ssh/known_hosts
 .var
