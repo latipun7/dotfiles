@@ -27,7 +27,7 @@ M.config = function()
       init = function()
         lvim.builtin.which_key.mappings.X = {
           "<Cmd>CellularAutomaton make_it_rain<CR>",
-          " See it yourself!",
+          "󰇹 See it yourself!",
         }
       end,
     },

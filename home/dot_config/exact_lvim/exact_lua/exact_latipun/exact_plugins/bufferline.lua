@@ -115,13 +115,13 @@ M.config = function()
     },
     offsets = {
       {
-        text = "ﰤ Explorer",
+        text = "󰜦 Explorer",
         filetype = "neo-tree",
         highlight = "BufferLineOffsetSeparator",
         padding = 1,
       },
       {
-        text = "ﰤ Explorer",
+        text = "󰜦 Explorer",
         filetype = "NvimTree",
         highlight = "BufferLineOffsetSeparator",
         padding = 1,
@@ -139,13 +139,13 @@ M.config = function()
         padding = 1,
       },
       {
-        text = " Plugins",
+        text = "󰇚 Plugins",
         filetype = "lazy",
         highlight = "BufferLineOffsetSeparator",
         padding = 1,
       },
       {
-        text = " Database Viewer",
+        text = "󰆼 Database Viewer",
         filetype = "dbui",
         highlight = "BufferLineOffsetSeparator",
         padding = 1,

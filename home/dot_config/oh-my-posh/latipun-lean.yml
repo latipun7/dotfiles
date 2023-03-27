@@ -27,7 +27,7 @@ blocks:
 
       - type: git
         style: plain
-        template: "<white>on</> {{ .UpstreamIcon }} {{ .HEAD }}{{ .BranchStatus }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0}}  {{ .StashCount }}{{ end }}{{ if gt .WorktreeCount 0}}  {{ .WorktreeCount }}{{ end }} "
+        template: "<white>on</> {{ .UpstreamIcon }} {{ .HEAD }}{{ .BranchStatus }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0}} 󰆓 {{ .StashCount }}{{ end }}{{ if gt .WorktreeCount 0}}  {{ .WorktreeCount }}{{ end }} "
         foreground: green
         properties:
           fetch_status: true
@@ -55,12 +55,12 @@ blocks:
 
       - type: project
         style: plain
-        template: "{{ if .Version }} {{.Version}} {{ end }}"
+        template: "{{ if .Version }}󰏗 {{.Version}} {{ end }}"
         foreground: cyan
 
       - type: session
         style: plain
-        template: "<lightWhite>with</> {{ if .SSHSession }} {{ end }}{{ .UserName }}<blue>@</>{{ .HostName }}"
+        template: "<lightWhite>with</> {{ if .SSHSession }}󰌘 {{ end }}{{ .UserName }}<blue>@</>{{ .HostName }}"
         foreground: magenta
 
   - type: prompt

@@ -132,19 +132,19 @@ tmux_conf_theme_status_right_bg="$thm_crust,$thm_red,$thm_text"
 tmux_conf_theme_status_right_attr="none,bold,bold"
 
 # pairing indicator
-tmux_conf_theme_pairing=""
+tmux_conf_theme_pairing="󰌘"
 tmux_conf_theme_pairing_fg="none"
 tmux_conf_theme_pairing_bg="none"
 tmux_conf_theme_pairing_attr="none"
 
 # prefix indicator
-tmux_conf_theme_prefix=""
+tmux_conf_theme_prefix="󰌌"
 tmux_conf_theme_prefix_fg="none"
 tmux_conf_theme_prefix_bg="none"
 tmux_conf_theme_prefix_attr="none"
 
 # mouse indicator
-tmux_conf_theme_mouse=""
+tmux_conf_theme_mouse="󰍽"
 tmux_conf_theme_mouse_fg="none"
 tmux_conf_theme_mouse_bg="none"
 tmux_conf_theme_mouse_attr="none"
@@ -162,8 +162,8 @@ tmux_conf_theme_synchronized_bg="none"
 tmux_conf_theme_synchronized_attr="none"
 
 # battery bar symbols
-tmux_conf_battery_bar_symbol_full="ﱢ"
-tmux_conf_battery_bar_symbol_empty="ﱡ"
+tmux_conf_battery_bar_symbol_full="󰝤"
+tmux_conf_battery_bar_symbol_empty="󰝣"
 
 # battery bar length (in number of symbols), possible values are:
 #   - auto

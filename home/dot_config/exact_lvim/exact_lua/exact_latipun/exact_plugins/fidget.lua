@@ -40,7 +40,7 @@ M.config = function()
         " ",
       },
       done = "",
-      commenced = " ",
+      commenced = "󰆅 ",
       completed = " ",
     },
     timer = {

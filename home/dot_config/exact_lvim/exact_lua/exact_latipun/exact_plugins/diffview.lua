@@ -7,11 +7,11 @@ M.keybindings = function()
   }
   lvim.builtin.which_key.mappings.g.h = {
     "<Cmd>DiffviewFileHistory<CR>",
-    " Diff history",
+    "󰋚 Diff history",
   }
   lvim.builtin.which_key.mappings.g.f = {
     "<Cmd>DiffviewFileHistory %<CR>",
-    " Current file diff history",
+    "󰋚 Current file diff history",
   }
 end
 

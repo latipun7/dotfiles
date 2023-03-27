@@ -7,7 +7,7 @@ local functions = {
 
     local selector = math.floor(_time.hour / 8) + 1
     local normal_icons = {
-      "",
+      "󰊠",
       "",
       "",
     }
@@ -16,7 +16,7 @@ local functions = {
       return normal_icons[selector]
     elseif mod == "i" or mod == "ic" or mod == "ix" then
       local insert_icons = {
-        "",
+        "󰏒",
         "",
         "",
       }
@@ -30,7 +30,7 @@ local functions = {
       return visual_icons[selector]
     elseif mod == "c" or mod == "ce" then
       local command_icons = {
-        "",
+        "󰱫",
         "",
         "",
       }
@@ -79,7 +79,7 @@ local functions = {
     local readonly = ""
     local modified = ""
 
-    if vim.bo.readonly then readonly = " " end
+    if vim.bo.readonly then readonly = " 󰄭" end
 
     if vim.bo.modified then modified = " " end
 
@@ -105,9 +105,9 @@ local functions = {
 
   session = function()
     if vim.g.persisting then
-      return ""
+      return "󰅠"
     elseif vim.g.persisting == false then
-      return ""
+      return "󰅣"
     end
   end,
 
@@ -119,7 +119,7 @@ local functions = {
     if not exists or #autocmds == 0 then
       return ""
     else
-      return ""
+      return "󰉼"
     end
   end,
 

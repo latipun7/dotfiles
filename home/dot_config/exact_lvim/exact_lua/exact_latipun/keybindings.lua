@@ -52,10 +52,10 @@ M.config = function()
 
   if lvim.builtin.nvimtree.active == true then
     lvim.builtin.nvimtree.on_config_done = function()
-      lvim.builtin.which_key.mappings.e = { "<Cmd>NvimTreeToggle<CR>", "ﰤ Explorer" }
+      lvim.builtin.which_key.mappings.e = { "<Cmd>NvimTreeToggle<CR>", "󰜦 Explorer" }
     end
   else
-    lvim.builtin.which_key.mappings.e = { "<Cmd>NeoTreeRevealToggle<CR>", "ﰤ Explorer" }
+    lvim.builtin.which_key.mappings.e = { "<Cmd>NeoTreeRevealToggle<CR>", "󰜦 Explorer" }
   end
 
   lvim.builtin.which_key.mappings.P = {
@@ -72,18 +72,18 @@ M.config = function()
     "<Plug>(comment_toggle_linewise_current)",
     " Toggle comment current line",
   }
-  lvim.builtin.which_key.mappings[";"] = { "<Cmd>Alpha<CR>", "﵁ Dashboard" }
+  lvim.builtin.which_key.mappings[";"] = { "<Cmd>Alpha<CR>", "󰡃 Dashboard" }
   lvim.builtin.which_key.mappings.f = {
     require("latipun.plugins.telescope").find_project_files,
-    " Find File",
+    "󰈞 Find File",
   }
 
-  lvim.builtin.which_key.mappings.h = { "<Cmd>nohlsearch<CR>", " No Highlight" }
-  lvim.builtin.which_key.mappings.q = { "<Cmd>confirm q<CR>", " Quit" }
+  lvim.builtin.which_key.mappings.h = { "<Cmd>nohlsearch<CR>", "󰉃 No Highlight" }
+  lvim.builtin.which_key.mappings.q = { "<Cmd>confirm q<CR>", "󰗼 Quit" }
   lvim.builtin.which_key.mappings.w = { "<Cmd>silent w!<CR>", " Save" }
 
   lvim.builtin.which_key.mappings.t = { "<Cmd>set list!<CR>", " Toggle hidden characters" }
-  lvim.builtin.which_key.mappings.F = { "<Cmd>LvimToggleFormatOnSave<CR>", " Toggle format on save" }
+  lvim.builtin.which_key.mappings.F = { "<Cmd>LvimToggleFormatOnSave<CR>", "󰉼 Toggle format on save" }
   lvim.builtin.which_key.mappings.c = { "<Cmd>Bdelete<CR>", " Close buffer" }
 
   lvim.builtin.which_key.mappings.b = {
@@ -91,10 +91,10 @@ M.config = function()
     b = { "<Cmd>b#<CR>", " Previous" },
     c = { [[<Cmd>silent! %bdelete|e#|bdelete#<CR>]], " Close all but this" },
     D = { "<Cmd>BufferLineSortByDirectory<CR>", " Sort by directory" },
-    e = { "<Cmd>BufferLinePickClose<CR>", "ﲨ Pick which buffer to close" },
-    f = { "<Cmd>Telescope buffers<CR>", " Find" },
+    e = { "<Cmd>BufferLinePickClose<CR>", "󰞪 Pick which buffer to close" },
+    f = { "<Cmd>Telescope buffers<CR>", "󰍉 Find" },
     h = { "<Cmd>BufferLineCloseLeft<CR>", " Close all to the left" },
-    j = { "<Cmd>BufferLinePick<CR>", " Jump" },
+    j = { "<Cmd>BufferLinePick<CR>", "󰀜 Jump" },
     L = { "<Cmd>BufferLineSortByExtension<CR>", " Sort by language" },
     l = { "<Cmd>BufferLineCloseRight<CR>", " Close all to the right" },
     p = { "<Cmd>BufferLineTogglePin<CR>", " Toggle pin" },
@@ -116,10 +116,10 @@ M.config = function()
       "<Cmd>lua require('gitsigns').prev_hunk({navigation_message = false})<CR>",
       " Previous hunk",
     },
-    l = { "<Cmd>lua require('gitsigns').blame_line()<CR>", "ﯙ Blame" },
+    l = { "<Cmd>lua require('gitsigns').blame_line()<CR>", " Blame" },
     p = {
       "<Cmd>lua require('gitsigns').preview_hunk()<CR>",
-      " Preview hunk",
+      "󰆊 Preview hunk",
     },
     r = { "<Cmd>lua require('gitsigns').reset_hunk()<CR>", " Reset hunk" },
     R = {
@@ -136,14 +136,14 @@ M.config = function()
     c = { "<Cmd>Telescope git_commits<CR>", " Checkout commit" },
     C = {
       "<Cmd>Telescope git_bcommits<CR>",
-      "ﰖ Checkout commit (for current file)",
+      "󰜘 Checkout commit (for current file)",
     },
   }
 
   lvim.builtin.which_key.mappings.d.name = " Debug"
   lvim.builtin.which_key.mappings.L.name = " LunarVim"
   lvim.builtin.which_key.mappings.l.name = " LSP"
-  lvim.builtin.which_key.mappings.p.name = " Plugins"
+  lvim.builtin.which_key.mappings.p.name = "󰏖 Plugins"
   lvim.builtin.which_key.mappings.s.name = " Search"
 
   lvim.builtin.which_key.mappings.Ln = { "<Cmd>Telescope notify<CR>", "View notifications" }

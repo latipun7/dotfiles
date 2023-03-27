@@ -5,14 +5,14 @@ M.config = function()
     icons = {
       plug = " ",
       calendar = " ",
-      find = " ",
-      file = " ",
+      find = "󰈞 ",
+      file = "󰈙 ",
       magic = " ",
-      worker = "華",
+      worker = "󰖵",
       git = " ",
-      clock = " ",
+      clock = "󰋚 ",
       settings = " ",
-      exit = " ",
+      exit = "󰍃 ",
     },
   }
 

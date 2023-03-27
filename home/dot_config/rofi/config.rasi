@@ -5,7 +5,7 @@ configuration {
   display-window: "   Window ";
   display-run: "   Run ";
   display-ssh: "   SSH ";
-  display-drun: "   Apps ";
+  display-drun: " 󰀻  Apps ";
   font: "monospace 13";
   sidebar-mode: true;
   show-icons: true;

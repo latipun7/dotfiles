@@ -5,12 +5,12 @@ M.keybindings = function()
 
   lvim.builtin.which_key.mappings.y = {
     "<Cmd>Telescope neoclip<CR>",
-    " Open yank history",
+    "󰅏 Open yank history",
   }
 
   lvim.builtin.which_key.mappings.m = {
     "<Cmd>Telescope macroscope<CR>",
-    "ﮧ Open macro history",
+    "󰚩 Open macro history",
   }
 end
 
