@@ -81,7 +81,7 @@ M.config = function()
     "gitattributes",
     "gitignore",
     "graphql",
-    "help",
+    "vimdoc",
     "html",
     "javascript",
     "jsdoc",
