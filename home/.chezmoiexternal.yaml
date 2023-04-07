@@ -36,7 +36,7 @@
 
 .config/btop/themes/catppuccin-mocha.theme:
   type: file
-  url: https://github.com/catppuccin/btop/raw/main/catppuccin_mocha.theme
+  url: https://github.com/catppuccin/btop/raw/main/themes/catppuccin_mocha.theme
   refreshPeriod: 168h
 
 # oh-my-zsh [[[
