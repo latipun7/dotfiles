@@ -1,0 +1,19 @@
+{{- $url := `https://github.com/doronbehar/pistol/releases/latest/download/` -}}
+
+{{- if (or (eq .chezmoi.os "linux") (eq .chezmoi.os "android")) -}}
+{{-   if eq .chezmoi.arch "arm" -}}
+{{-     list $url "pistol-static-armv7l" | join "" -}}
+{{-   else if eq .chezmoi.arch "arm64" -}}
+{{-     list $url "pistol-static-aarch64" | join "" -}}
+{{-   else -}}
+{{-     list $url "pistol-static-x86_64" | join "" -}}
+{{-   end -}}
+{{- else if eq .chezmoi.os "windows" -}}
+{{-   list $url "pistol-static-x86_64" | join "" -}}
+{{- else if eq .chezmoi.os "darwin" -}}
+{{-   if eq .chezmoi.arch "arm64" -}}
+{{-     list $url "pistol-static-aarch64" | join "" -}}
+{{-   else -}}
+{{-     list $url "pistol-static-x86_64" | join "" -}}
+{{-   end -}}
+{{- end -}}
