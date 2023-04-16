@@ -179,9 +179,9 @@ bindkey -M menuselect '^K' up-history
 bindkey -M menuselect '^L' forward-char
 bindkey -M menuselect '^H' backward-char
 
+# tab & S-tab go straight to the menu and cycle there
+bindkey '\t' down-line-or-select "$terminfo[kcbt]" down-line-or-select
+bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
+
 # need zsh-autosuggestions plugin above this plugin
 bindkey '^ ' autosuggest-accept # <C-Space>
-
-# need zsh-autocomplete plugin above this plugin
-bindkey '^N' down-line-or-select
-bindkey '^P' up-line-or-search
