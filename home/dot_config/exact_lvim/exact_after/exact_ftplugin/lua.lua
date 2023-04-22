@@ -60,6 +60,7 @@ local default_opts = {
           "/usr/share/lua/5.4",
           "${3rd}/busted/library",
           "${3rd}/luassert/library",
+          "${3rd}/luv/library",
           vim.fn.expand("$XDG_DATA_HOME/lua-definitions"),
         },
       },
@@ -77,6 +78,7 @@ if current_lvim_config == lvim_config or current_lvim_dot == lvim_dot then
     get_lvim_base_dir(),
     "${3rd}/busted/library",
     "${3rd}/luassert/library",
+    "${3rd}/luv/library",
   }
 end
 
