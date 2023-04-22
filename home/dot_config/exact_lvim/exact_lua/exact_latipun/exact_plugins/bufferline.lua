@@ -73,7 +73,7 @@ M.config = function()
           name = "config",
           icon = kind.icons.config,
           matcher = function(buf)
-            local filename = buf.filename
+            local filename = vim.api.nvim_buf_get_name(buf.id)
             if filename == nil then return false end
             return filename:match("go.mod")
               or filename:match("go.sum")
@@ -89,7 +89,7 @@ M.config = function()
           name = "tests",
           icon = kind.icons.test,
           matcher = function(buf)
-            local name = buf.filename
+            local name = vim.api.nvim_buf_get_name(buf.id)
             return name:match("_spec") or name:match("_test") or name:match("test_")
           end,
         },
