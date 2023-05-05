@@ -27,7 +27,8 @@ local code_actions = require("lvim.lsp.null-ls.code_actions")
 local formatters = require("lvim.lsp.null-ls.formatters")
 local linters = require("lvim.lsp.null-ls.linters")
 
-lvim.lsp.diagnostics.virtual_text = false
+vim.diagnostic.config({ virtual_text = false })
+
 lvim.lsp.installer.setup.automatic_installation = true
 lvim.lsp.buffer_mappings.normal_mode["gp"] = {
   function() require("latipun.peek").Peek("definition") end,
