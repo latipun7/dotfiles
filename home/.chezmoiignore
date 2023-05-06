@@ -3,7 +3,7 @@
 .Xauthority
 .android
 .cache
-.config/{Authy Desktop,Bitwarden CLI,fcitx5/conf/cached_layouts,lazygit/state.yml,wakatime/**}
+.config/{Authy Desktop,Bitwarden CLI,fcitx5/conf/cached_layouts,lazygit/state.yml,rbw,wakatime/**}
 .config/lvim/{ignore,lv-settings.lua,plugin/**,sessions,lazy-lock.json}
 .local/share/{Trash,rofimoji/{frecency,recent}}
 .pki
