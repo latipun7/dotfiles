@@ -51,7 +51,7 @@ function fail() {
 
 #===================================================0
 
-deps=(gzip chezmoi git wget curl tar lazygit fd rg nvim grep delta)
+deps=(gzip chezmoi git wget curl tar lazygit fd rg nvim grep delta rbw)
 
 function print_missing_dep_msg() {
   if [ "$#" -eq 1 ]; then
@@ -72,120 +72,6 @@ function check_dependencies() {
   info "OK!"
 }
 
-function get_fnm_url() {
-  latest_url='https://github.com/Schniz/fnm/releases/latest/download'
-
-  if [[ "$(uname -s)" == *Linux* ]]; then
-    case "$(uname -m)" in
-      arm | armv7*)
-        URL="$latest_url/fnm-arm32.zip"
-        ;;
-      aarch* | armv8*)
-        URL="$latest_url/fnm-arm64.zip"
-        ;;
-      *)
-        URL="$latest_url/fnm-linux.zip"
-        ;;
-    esac
-  fi
-
-  if [[ "$(uname -s)" == *Darwin* ]]; then
-    USE_HOMEBREW="true"
-  fi
-}
-
-function install_fnm() {
-  step "Install ${color6}fnm${reset}"
-
-  if [ "${USE_HOMEBREW:-false}" = "true" ]; then
-    if hash brew 2>/dev/null; then
-      step "Brewing ${color6}fnm${reset} ..."
-      brew install fnm
-    else
-      fail "Missing ${color6}brew${reset}!\n    Not installing due to missing dependencies."
-    fi
-  else
-    DOWNLOAD_DIR="$(mktemp -d --tmpdir "fnm-XXXXX")"
-    INSTALL_DIR="$HOME/.local/bin"
-
-    mkdir -p "$INSTALL_DIR"
-
-    step "Downloading $URL ..."
-
-    if ! curl --progress-bar -fsLSo "$DOWNLOAD_DIR/fnm.zip" "$URL"; then
-      fail "Download ${color6}fnm${reset} failed. Check that the release/filename are correct."
-    fi
-
-    gzip -dS .zip "$DOWNLOAD_DIR/fnm.zip"
-
-    if [ -f "$DOWNLOAD_DIR/fnm" ]; then
-      mv "$DOWNLOAD_DIR/fnm" "$INSTALL_DIR/fnm"
-    else
-      mv "$DOWNLOAD_DIR/fnm/fnm" "$INSTALL_DIR/fnm"
-    fi
-
-    chmod +x "$INSTALL_DIR/fnm"
-
-    if ! (echo "$PATH" | grep -q '/.local/bin:'); then
-      export PATH=$INSTALL_DIR:$PATH
-    fi
-
-    rm -rf "$DOWNLOAD_DIR" # clean temp directory
-  fi
-
-  DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/fnm"
-  mkdir -p "$DATA_DIR"
-  export FNM_DIR=$DATA_DIR
-}
-
-function setup_fnm_node() {
-  if [[ "$(uname -o)" == *[Aa]ndroid* ]]; then
-    if ! hash node 2>/dev/null; then
-      step "Install latest nodeJS..."
-      pkg install nodejs
-    fi
-  else
-    if ! hash fnm 2>/dev/null; then
-      get_fnm_url
-      install_fnm
-    fi
-
-    hash fnm &>/dev/null && eval "$(fnm env --use-on-cd)"
-
-    step "Install latest LTS nodeJS..."
-    fnm install --lts && fnm use 'lts/*'
-  fi
-
-  step "Install global node modules..."
-
-  export npm_config_cache="$HOME/.cache/npm"
-  export npm_config_userconfig="$HOME/.config/npmrc"
-
-  corepack enable
-  ! [[ "$(uname -o)" == *[Aa]ndroid* ]] && npm update --global --loglevel=error
-  ! hash bw 2>/dev/null && npm install @bitwarden/cli --global --loglevel=error
-
-  if [[ "$(uname -o)" == *[Aa]ndroid* ]]; then
-    success "${color6}node${reset} and ${color6}bitwarden cli${reset} already installed!"
-  else
-    success "${color6}fnm${reset}, ${color6}node${reset}, and ${color6}bitwarden cli${reset} already installed!"
-  fi
-}
-
-function login_bitwarden() {
-  step "Login / unlock bitwarden vault..."
-
-  # login and unlock `bw`, if already login, unlock if not unlocked yet.
-  if login="$(bw login --raw)"; then
-    export BW_SESSION="$login"
-  else
-    if ! (env | grep -q 'BW_SESSION'); then
-      session="$(bw unlock --raw)"
-      export BW_SESSION="$session"
-    fi
-  fi
-}
-
 function bootstrap_dotfiles() {
   step "Install dotfiles..."
   chezmoi init latipun7 --apply --verbose
@@ -193,8 +79,6 @@ function bootstrap_dotfiles() {
 
 function main() {
   check_dependencies
-  setup_fnm_node
-  login_bitwarden
   bootstrap_dotfiles
   success "All done 👏\n    Please restart your terminal 🎉"
 }
