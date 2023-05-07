@@ -617,6 +617,39 @@ Set-PSReadLineKeyHandler -Key Alt+a `
   [Microsoft.PowerShell.PSConsoleReadLine]::SelectForwardChar($null, ($nextAst.Extent.EndOffset - $nextAst.Extent.StartOffset) - $endOffsetAdjustment)
 }
 
+# Allow you to type a Unicode code point, then pressing `Alt+x` to transform it into a Unicode char.
+Set-PSReadLineKeyHandler -Chord 'Alt+x' `
+                         -BriefDescription ToUnicodeChar `
+                         -LongDescription "Transform Unicode code point into a UTF-16 encoded string" `
+                         -ScriptBlock {
+    $buffer = $null
+    $cursor = 0
+    [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref] $buffer, [ref] $cursor)
+    if ($cursor -lt 4) {
+        return
+    }
+
+    $number = 0
+    $isNumber = [int]::TryParse(
+        $buffer.Substring($cursor - 4, 4),
+        [System.Globalization.NumberStyles]::AllowHexSpecifier,
+        $null,
+        [ref] $number)
+
+    if (-not $isNumber) {
+        return
+    }
+
+    try {
+        $unicode = [char]::ConvertFromUtf32($number)
+    } catch {
+        return
+    }
+
+    [Microsoft.PowerShell.PSConsoleReadLine]::Delete($cursor - 4, 4)
+    [Microsoft.PowerShell.PSConsoleReadLine]::Insert($unicode)
+}
+
 #===============================================================================#
 
 Set-PSReadLineKeyHandler -Chord Tab -Function MenuComplete
