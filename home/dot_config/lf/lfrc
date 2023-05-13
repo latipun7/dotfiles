@@ -3,14 +3,15 @@
 # ┗━┛╹   ╹ ╹┗━┛╹ ╹┗━┛
 
 set cleaner ~/.config/lf/cleaner
-set drawbox
+set drawbox true
 set errorfmt "\033[1m\033[38;5;233m\033[48;5;1m%s\033[0m"
-set hidden
-set icons
+set hidden true
+set icons true
 set ifs "\n"
-set incsearch
-set incfilter
-set mouse
+set incsearch true
+set incfilter true
+set mouse true
+set relativenumber true
 set previewer ~/.config/lf/previewer
 set promptfmt "\033[35;1m%u@%h\033[0m:\033[34;1m%d\033[0m\033[2m%f\033[0m"
 set scrolloff 8
