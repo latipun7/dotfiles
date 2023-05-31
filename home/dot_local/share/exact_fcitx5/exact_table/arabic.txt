@@ -1,7 +1,10 @@
+; libime_tabledict arabic.txt arabic.user.dict
+
 Length=3
 KeyCode=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'1234567890?!.,;~></%_()
 Prompt=
 ConstructPhrase=
+
 [Data]
 % ٪
 ' ع
@@ -51,6 +54,7 @@ m م
 n ن
 n' ۨ
 ng ڭ
+ny پ
 q ق
 r ر
 s س
