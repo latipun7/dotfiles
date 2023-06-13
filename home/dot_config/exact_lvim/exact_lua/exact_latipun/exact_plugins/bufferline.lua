@@ -73,7 +73,10 @@ M.config = function()
           name = "config",
           icon = kind.icons.config,
           matcher = function(buf)
-            local filename = vim.api.nvim_buf_get_name(buf.id)
+            local name = vim.api.nvim_buf_get_name(buf.id)
+            local filename_arr = vim.split(name, "/", { plain = true })
+            local filename = nil
+            if #filename_arr > 0 then filename = filename_arr[#filename_arr] end
             if filename == nil then return false end
             return filename:match("go.mod")
               or filename:match("go.sum")
