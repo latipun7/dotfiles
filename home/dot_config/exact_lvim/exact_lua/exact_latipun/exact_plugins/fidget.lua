@@ -40,8 +40,8 @@ M.config = function()
         " ",
       },
       done = "",
-      commenced = "󰆅 ",
-      completed = " ",
+      commenced = "",
+      completed = "",
     },
     timer = {
       spinner_rate = 100,

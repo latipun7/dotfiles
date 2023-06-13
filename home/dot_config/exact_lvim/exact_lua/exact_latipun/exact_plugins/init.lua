@@ -142,6 +142,7 @@ M.config = function()
     },
     {
       "j-hui/fidget.nvim",
+      branch = "legacy",
       event = "BufRead",
       config = function() require("latipun.plugins.fidget").config() end,
     },
