@@ -213,6 +213,16 @@ M.config = function()
       end,
       enabled = lvim.builtin.latipun.tsjs_programming.active,
     },
+    {
+      "folke/trouble.nvim",
+      event = "VeryLazy",
+      cmd = "Trouble",
+      opts = {
+        auto_close = true,
+        padding = false,
+        use_diagnostic_signs = true,
+      },
+    },
     { "rouge8/neotest-rust", event = { "BufEnter *.rs" } },
     { "famiu/bufdelete.nvim", event = "BufReadPre" },
     { "hrsh7th/cmp-calc", event = { "InsertEnter", "CmdlineEnter" } },

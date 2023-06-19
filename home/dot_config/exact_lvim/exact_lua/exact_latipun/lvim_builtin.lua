@@ -255,6 +255,14 @@ M.config = function()
     "CodeLens Action",
   }
 
+  lvim.lsp.buffer_mappings.normal_mode.gr = { "<Cmd>TroubleToggle lsp_references<CR>", "Goto References" }
+  lvim.lsp.buffer_mappings.normal_mode.gd = { "<Cmd>TroubleToggle lsp_definitions<CR>", "Goto Definition" }
+  lvim.lsp.buffer_mappings.normal_mode.gI = { "<Cmd>TroubleToggle lsp_implementations<CR>", "Goto Implementation" }
+  lvim.lsp.buffer_mappings.normal_mode.gp = {
+    function() require("latipun.peek").Peek("definition") end,
+    "Peek definition",
+  }
+
   lvim.lsp.buffer_mappings.normal_mode.K = {
     "<Cmd>lua require('latipun.lvim_builtin').show_documentation()<CR>",
     "Show Documentation",

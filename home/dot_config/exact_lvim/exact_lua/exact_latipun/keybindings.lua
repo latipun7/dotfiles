@@ -150,7 +150,7 @@ M.config = function()
 
   -- LSP - Peek
   lvim.builtin.which_key.mappings.lp = {
-    name = "Peek",
+    name = " Peek",
     d = {
       "<Cmd>lua require('latipun.peek').Peek('definition')<CR>",
       "Definition",
@@ -163,6 +163,18 @@ M.config = function()
       "<Cmd>lua require('latipun.peek').Peek('implementation')<CR>",
       "Implementation",
     },
+  }
+
+  -- LSP - Trouble
+  lvim.builtin.which_key.mappings.lt = {
+    name = " Trouble",
+    t = { "<Cmd>TroubleToggle<CR>", "Toggle Views" },
+    d = { "<Cmd>TroubleToggle document_diagnostics<CR>", "Document Diagnostics" },
+    f = { "<Cmd>TroubleToggle lsp_definitions<CR>", "Definitions" },
+    l = { "<Cmd>TroubleToggle loclist<CR>", "Location List" },
+    q = { "<Cmd>TroubleToggle quickfix<CR>", "Quick Fix" },
+    r = { "<Cmd>TroubleToggle lsp_references<CR>", "References" },
+    w = { "<Cmd>TroubleToggle workspace_diagnostics<CR>", "Workspace Diagnostics" },
   }
 
   lvim.builtin.which_key.mappings.l.r = { ":IncRename ", "Rename (new name)" }

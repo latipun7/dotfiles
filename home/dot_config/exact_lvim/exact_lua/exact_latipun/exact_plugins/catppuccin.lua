@@ -26,6 +26,7 @@ M.config = function()
       symbols_outline = true,
       telescope = true,
       treesitter = true,
+      lsp_trouble = true,
       which_key = true,
     },
     highlight_overrides = {
