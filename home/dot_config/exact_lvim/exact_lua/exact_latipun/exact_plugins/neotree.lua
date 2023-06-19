@@ -12,6 +12,20 @@ M.config = function()
       winbar = true,
       statusline = false,
       tabs_layout = "active",
+      sources = {
+        {
+          source = "filesystem",
+          display_name = " 󰉓 Files ",
+        },
+        {
+          source = "buffers",
+          display_name = " 󰈙 Buffers ",
+        },
+        {
+          source = "git_status",
+          display_name = " 󰊢 Git ",
+        },
+      },
     },
     default_component_configs = {
       indent = {
