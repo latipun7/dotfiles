@@ -8,7 +8,6 @@ M.config = function()
   lvim.builtin.latipun = {
     noice = { active = true },
     barbecue = { active = true },
-    inlay_hints = { active = true },
     rust_programming = { active = true },
     tsjs_programming = { active = true },
   }

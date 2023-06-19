@@ -156,11 +156,6 @@ M.config = function()
       event = "VeryLazy",
     },
     {
-      "lvimuser/lsp-inlayhints.nvim",
-      config = function() require("lsp-inlayhints").setup() end,
-      enabled = lvim.builtin.latipun.inlay_hints.active,
-    },
-    {
       "simrat39/rust-tools.nvim",
       ft = { "rust", "rs" },
       config = function() require("latipun.plugins.rust_tools").config() end,
