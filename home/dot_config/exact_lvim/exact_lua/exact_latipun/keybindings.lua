@@ -192,10 +192,9 @@ M.config = function()
     h = { "<Cmd>TSBufToggle highlight<CR>", "Toggle highlight" },
   }
 
-  lvim.builtin.which_key.mappings["I"] = {
-    "<Cmd>lua require('vim.lsp._inlay_hint').refresh()<CR>",
-    "󰊈 Toggle Inlay Hints",
-  }
+  if vim.fn.has("nvim-0.10") == 1 then
+    lvim.builtin.which_key.mappings.I = { "<Cmd>lua vim.lsp.buf.inlay_hint(0)<CR>", "󰊈 Toggle Inlay Hints" }
+  end
 end
 
 return M
