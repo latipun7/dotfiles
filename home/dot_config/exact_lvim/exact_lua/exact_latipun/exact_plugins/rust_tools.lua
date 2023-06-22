@@ -8,18 +8,7 @@ M.config = function()
     tools = {
       executor = require("rust-tools.executors").termopen, -- can be quickfix or termopen
       reload_workspace_from_cargo_toml = true,
-      inlay_hints = {
-        auto = true,
-        only_current_line = false,
-        show_parameter_hints = true,
-        parameter_hints_prefix = "<-",
-        other_hints_prefix = "=>",
-        max_len_align = false,
-        max_len_align_padding = 1,
-        right_align = false,
-        right_align_padding = 7,
-        highlight = "Comment",
-      },
+      inlay_hints = { auto = false },
       hover_actions = {
         border = {
           { "╭", "FloatBorder" },
@@ -38,25 +27,14 @@ M.config = function()
       on_attach = function(client, bufnr) require("lvim.lsp").common_on_attach(client, bufnr) end,
       on_init = require("lvim.lsp").common_on_init,
       capabilities = require("lvim.lsp").common_capabilities(),
-      settings = {
-        ["rust-analyzer"] = {
-          inlayHints = { locationLinks = false },
-          lens = {
-            enable = true,
-          },
-          checkOnSave = {
-            enable = true,
-            command = "clippy",
-          },
-        },
-      },
     },
   }
+
   local mason_path = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/")
   local vscode_path = vim.fn.expand("~/") .. ".vscode/extensions/vadimcn.vscode-lldb-1.8.1/"
-
   local path = ""
   local debugger_found = true
+
   if M.dir_exists(mason_path) then
     path = mason_path
   elseif M.dir_exists(vscode_path) then

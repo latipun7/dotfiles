@@ -8,5 +8,8 @@ if status_ok then
   for _, client in pairs(buf_clients) do
     if client.name == "rust_analyzer" then lsp_active = true end
   end
-  if not lsp_active then vim.cmd([[LspStart rust_analyzer]]) end
+  if not lsp_active then
+    vim.cmd([[LspStart rust_analyzer]])
+    vim.defer_fn(function() vim.lsp.buf.inlay_hint(0, true) end, 0)
+  end
 end
