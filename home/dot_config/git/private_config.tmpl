@@ -34,12 +34,18 @@
 [fetch]
   prune = true
 
-[merge]
-  autostash = true
-  conflictstyle = diff3
-
 [diff]
-  colorMoved = default
+  tool = nvimdiff
+
+[merge]
+  tool = nvimdiff3
+  autostash = true
+
+[difftool "nvimdiff"]
+  cmd = \"$EDITOR\" -d \"$LOCAL\" \"$REMOTE\"
+
+[mergetool "nvimdiff3"]
+  cmd = \"$EDITOR\" -d \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
 
 [interactive]
   diffFilter = delta --color-only
