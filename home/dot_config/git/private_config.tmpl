@@ -21,6 +21,7 @@
 [user]
   email = {{ .email }}
   name = {{ .name }}
+  signingKey = {{ .email }}
 
 [init]
   defaultBranch = main
@@ -33,6 +34,12 @@
 
 [fetch]
   prune = true
+
+[commit]
+  gpgSign = true
+
+[tag]
+  gpgSign = true
 
 [diff]
   tool = nvimdiff
