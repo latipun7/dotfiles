@@ -24,7 +24,10 @@ M.config = function()
       },
     },
     server = {
-      on_attach = function(client, bufnr) require("lvim.lsp").common_on_attach(client, bufnr) end,
+      on_attach = function(client, bufnr)
+        require("lvim.lsp").common_on_attach(client, bufnr)
+        vim.lsp.buf.inlay_hint(bufnr, true)
+      end,
       on_init = require("lvim.lsp").common_on_init,
       capabilities = require("lvim.lsp").common_capabilities(),
     },
