@@ -122,7 +122,7 @@ local function on_attach(client, bufnr)
   M.buf_map(bufnr, "n", "gx", ":set opfunc=v:lua.css_to_js<CR>g@")
   M.buf_map(bufnr, "n", "gxx", ":CssToJs<CR>")
   M.buf_map(bufnr, "v", "gx", ":CssToJs<CR>")
-  vim.lsp.buf.inlay_hint(bufnr, true)
+  if vim.fn.has("nvim-0.10") == 1 then vim.lsp.inlay_hint(bufnr, true) end
 end
 
 M.config = function()

@@ -26,7 +26,7 @@ M.config = function()
     server = {
       on_attach = function(client, bufnr)
         require("lvim.lsp").common_on_attach(client, bufnr)
-        vim.lsp.buf.inlay_hint(bufnr, true)
+        if vim.fn.has("nvim-0.10") == 1 then vim.lsp.inlay_hint(bufnr, true) end
       end,
       on_init = require("lvim.lsp").common_on_init,
       capabilities = require("lvim.lsp").common_capabilities(),

@@ -194,7 +194,7 @@ M.config = function()
   }
 
   if vim.fn.has("nvim-0.10") == 1 then
-    lvim.builtin.which_key.mappings.I = { "<Cmd>lua vim.lsp.buf.inlay_hint(0)<CR>", "󰊈 Toggle Inlay Hints" }
+    lvim.builtin.which_key.mappings.I = { "<Cmd>lua vim.lsp.inlay_hint(0)<CR>", "󰊈 Toggle Inlay Hints" }
   end
 end
 
