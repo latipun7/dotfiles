@@ -59,7 +59,7 @@ fi
 
 if hash pacman 2>/dev/null && hash yay 2>/dev/null; then
   function backup-packages-list() {
-    comm -23 <(yay -Qqe | sort) <({ yay -Qqg base-devel; expac -l '\n' '%E' base; echo 'base' } | sort -u) > "$HOME/Documents/packages.list"
+    comm -23 <(yay -Qqe | sort) <({ expac -l '\n' '%E' base base-devel; echo 'base\nbase-devel' } | sort -u) > "$HOME/Documents/packages.list"
   }
 
   function get-packages-list() {
