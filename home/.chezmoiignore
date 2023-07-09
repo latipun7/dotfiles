@@ -42,7 +42,7 @@ www
 
 {{- if .is_no_gui }}
 # Ignore if no GUI environment (desktop only files)
-.config/{awesome,copyq,fcitx5,imv,kitty,rofi*,simplescreenrecorder,wezterm}
+.config/{awesome,copyq,fcitx5,imv,kitty,rofi*,simplescreenrecorder,wezterm,xsettingsd}
 .local/bin/{color-picker,xterm}
 .local/share/{fcitx5,mpd,rofimoji,Xresources*}
 .xprofile
