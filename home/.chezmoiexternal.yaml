@@ -7,14 +7,14 @@
   type: archive
   url: https://github.com/catppuccin/bat/archive/refs/heads/main.zip
   stripComponents: 1
-  refreshPeriod: 168h
+  refreshPeriod: 132h
   include: ["*/*.tmTheme"]
 
 .local/bin/vimv: # vimv
   type: file
   url: {{ template "vimv-download-url" . }}
   executable: true
-  refreshPeriod: 168h
+  refreshPeriod: 132h
   filter:
     command: gzip
     args: ["--decompress", "--to-stdout", "--suffix", ".zip"]
@@ -23,7 +23,7 @@
   type: file
   url: {{ template "pistol-download-url" . }}
   executable: true
-  refreshPeriod: 168h
+  refreshPeriod: 132h
 
 {{ if ne .chezmoi.os "windows" -}}
 # ╻ ╻┏┓╻╻╻ ╻   ┏━┓┏┓╻╻  ╻ ╻
@@ -35,7 +35,7 @@
   type: file
   url: {{ template "fnm-download-url" . }}
   executable: true
-  refreshPeriod: 168h
+  refreshPeriod: 132h
   filter:
     command: gzip
     args: ["--decompress", "--to-stdout", "--suffix", ".zip"]
@@ -43,7 +43,7 @@
 .config/btop/themes/catppuccin-mocha.theme:
   type: file
   url: https://github.com/catppuccin/btop/raw/main/themes/catppuccin_mocha.theme
-  refreshPeriod: 168h
+  refreshPeriod: 132h
 
 # oh-my-zsh [[[
 .local/share/oh-my-zsh:
@@ -59,35 +59,35 @@
   url: https://github.com/romkatv/powerlevel10k/archive/refs/tags/{{ (gitHubLatestRelease "romkatv/powerlevel10k").TagName }}.tar.gz
   exact: true
   stripComponents: 1
-  refreshPeriod: 168h
+  refreshPeriod: 132h
 
 .local/share/omz-custom/plugins/zsh-completions:
   type: archive
   url: https://github.com/zsh-users/zsh-completions/archive/refs/heads/master.zip
   exact: true
   stripComponents: 1
-  refreshPeriod: 168h
+  refreshPeriod: 132h
 
 .local/share/omz-custom/plugins/zsh-syntax-highlighting:
   type: archive
   url: https://github.com/zsh-users/zsh-syntax-highlighting/archive/refs/heads/master.zip
   exact: true
   stripComponents: 1
-  refreshPeriod: 168h
+  refreshPeriod: 132h
 
 .local/share/omz-custom/plugins/zsh-autosuggestions:
   type: archive
   url: https://github.com/zsh-users/zsh-autosuggestions/archive/refs/heads/master.zip
   exact: true
   stripComponents: 1
-  refreshPeriod: 168h
+  refreshPeriod: 132h
 
 .local/share/omz-custom/plugins/zsh-autocomplete:
   type: archive
   url: https://github.com/marlonrichert/zsh-autocomplete/archive/refs/heads/main.zip
   exact: true
   stripComponents: 1
-  refreshPeriod: 168h
+  refreshPeriod: 132h
 # ]]]
 
 # LunarVim [[[
@@ -104,7 +104,7 @@
 .local/share/oh-my-tmux:
   type: git-repo
   url: https://github.com/gpakosz/.tmux.git
-  refreshPeriod: 168h
+  refreshPeriod: 132h
   clone:
     args: ["--depth", "1"]
   pull:
@@ -121,38 +121,29 @@
   type: archive
   url: https://github.com/catppuccin/zathura/archive/refs/heads/main.zip
   stripComponents: 2
-  refreshPeriod: 168h
+  refreshPeriod: 132h
   include: ["*", "*/src/**"]
 
 .config/kitty/themes/catppuccin:
   type: archive
   url: https://github.com/catppuccin/kitty/archive/refs/heads/main.zip
   stripComponents: 1
-  refreshPeriod: 168h
+  refreshPeriod: 132h
   include: ["*/*.conf"]
 
 .local/share/fcitx5/themes: # catppuccin-*
   type: archive
   url: https://github.com/catppuccin/fcitx5/archive/refs/heads/main.zip
   stripComponents: 2
-  refreshPeriod: 168h
+  refreshPeriod: 132h
   include: ["*", "*/src/**"]
 
 .config/hypr/themes:
   type: archive
   url: https://github.com/catppuccin/hyprland/archive/refs/heads/main.zip
   stripComponents: 2
-  refreshPeriod: 168h
+  refreshPeriod: 132h
   include: ["*", "*/themes/*.conf"]
-
-.local/bin/eww-hyprbar:
-  type: file
-  url: https://github.com/latipun7/eww-hyprbar/releases/latest/download/eww-hyprbar-linux-x86_64.zip
-  executable: true
-  refreshPeriod: 168h
-  filter:
-    command: gzip
-    args: ["--decompress", "--to-stdout", "--suffix", ".zip"]
 {{- end }}
 
 {{ if .is_server -}}
@@ -164,7 +155,7 @@
   type: file
   url: {{ template "godns-download-url" . }}
   executable: true
-  refreshPeriod: 168h
+  refreshPeriod: 132h
   filter:
     command: tar
     args: ["--extract", "--gzip", "--file", "/dev/stdin", "--to-stdout", "godns"]
@@ -197,7 +188,7 @@ www/adminer: # plugins
 .local/bin: # fnm.exe
   type: archive
   url: {{ template "fnm-download-url" . }}
-  refreshPeriod: 168h
+  refreshPeriod: 132h
 
 .local/bin/jq.exe:
   type: file
@@ -214,10 +205,10 @@ www/adminer: # plugins
 .termux/colors.properties:
   type: file
   url: https://github.com/catppuccin/termux/raw/main/Mocha/colors.properties
-  refreshPeriod: 168h
+  refreshPeriod: 132h
 
 .termux: # font.ttf
   type: archive
   url: https://drive.google.com/uc?export=download&id=1oKvdW1-7xrwOkyUqRiLjTK0KLDe2qNIZ
-  refreshPeriod: 168h
+  refreshPeriod: 132h
 {{- end }}
