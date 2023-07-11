@@ -178,7 +178,7 @@ M.config = function()
         "typescriptreact",
         "typescript.tsx",
       },
-      config = function() require("latipun.plugins.typescript").config() end,
+      config = function() require("latipun.plugins.tsserver").config() end,
       enabled = lvim.builtin.latipun.tsjs_programming.active,
     },
     {
