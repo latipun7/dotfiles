@@ -29,7 +29,6 @@ local linters = require("lvim.lsp.null-ls.linters")
 
 vim.diagnostic.config({ virtual_text = false })
 
-lvim.lsp.installer.setup.automatic_installation = true
 lvim.lsp.buffer_mappings.normal_mode["gp"] = {
   function() require("latipun.peek").Peek("definition") end,
   "Peek definition",
@@ -39,7 +38,10 @@ lvim.lsp.null_ls.setup = {
 }
 
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_filetypes, { "css", "scss", "c" })
-vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "lua_ls", "powershell_es", "rust_analyzer" })
+vim.list_extend(
+  lvim.lsp.automatic_configuration.skipped_servers,
+  { "lua_ls", "powershell_es", "rust_analyzer", "tsserver" }
+)
 
 code_actions.setup({
   { name = "eslint_d" },
