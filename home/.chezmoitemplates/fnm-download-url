@@ -1,4 +1,5 @@
-{{- $url := `https://github.com/Schniz/fnm/releases/latest/download/` -}}
+{{- /* Pin version for now. See: https://github.com/Schniz/fnm/issues/1006 */ -}}
+{{- $url := `https://github.com/Schniz/fnm/releases/download/v1.34.0/` -}}
 
 {{- if (or (eq .chezmoi.os "linux") (eq .chezmoi.os "android")) -}}
 {{-   if eq .chezmoi.arch "arm" -}}
