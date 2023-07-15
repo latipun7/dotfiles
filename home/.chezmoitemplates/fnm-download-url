@@ -1,16 +1,16 @@
 {{- /* Pin version for now. See: https://github.com/Schniz/fnm/issues/1006 */ -}}
 {{- $url := `https://github.com/Schniz/fnm/releases/download/v1.34.0/` -}}
 
-{{- if (or (eq .chezmoi.os "linux") (eq .chezmoi.os "android")) -}}
+{{- if eq .chezmoi.os "linux" -}}
 {{-   if eq .chezmoi.arch "arm" -}}
 {{-     list $url "fnm-arm32.zip" | join "" -}}
 {{-   else if eq .chezmoi.arch "arm64" -}}
 {{-     list $url "fnm-arm64.zip" | join "" -}}
-{{-   else -}}
+{{-   else if eq .chezmoi.arch "amd64" -}}
 {{-     list $url "fnm-linux.zip" | join "" -}}
 {{-   end -}}
-{{- else if eq .chezmoi.os "windows" -}}
+{{- else if (and (eq .chezmoi.os "windows") (eq .chezmoi.arch "amd64")) -}}
 {{-   list $url "fnm-windows.zip" | join "" -}}
-{{- else if eq .chezmoi.os "darwin" -}}
+{{- else if (and (eq .chezmoi.os "darwin") (eq .chezmoi.arch "amd64")) -}}
 {{-   list $url "fnm-macos.zip" | join "" -}}
 {{- end -}}

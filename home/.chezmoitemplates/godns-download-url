@@ -3,15 +3,9 @@
 {{- $os := .chezmoi.os -}}
 
 {{- if eq $os "linux" -}}
-{{-   if eq .chezmoi.arch "arm" -}}
-{{-     list $url "godns_" $tag "_Linux_armv6.tar.gz" | join "" -}}
-{{-   else if eq .chezmoi.arch "arm64" -}}
+{{-   if eq .chezmoi.arch "arm64" -}}
 {{-     list $url "godns_" $tag "_Linux_arm64.tar.gz" | join "" -}}
-{{-   else -}}
+{{-   else if eq .chezmoi.arch "amd64" -}}
 {{-     list $url "godns_" $tag "_Linux_x86_64.tar.gz" | join "" -}}
 {{-   end -}}
-{{- else if eq $os "windows" -}}
-{{-   list $url "godns_" $tag "_Windows_x86_64.tar.gz" | join "" -}}
-{{- else if eq $os "darwin" -}}
-{{-   list $url "godns_" $tag "_Darwin_x86_64.tar.gz" | join "" -}}
 {{- end -}}

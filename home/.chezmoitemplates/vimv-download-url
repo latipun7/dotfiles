@@ -1,17 +1,13 @@
-{{- $url := `https://github.com/latipun7/vimv/releases/latest/download/` -}}
+{{- $url := `https://github.com/latipun7/vimv-releases/releases/latest/download/` -}}
 
-{{- if (or (eq .chezmoi.os "linux") (eq .chezmoi.os "android")) -}}
+{{- if eq .chezmoi.os "linux" -}}
 {{-   if eq .chezmoi.arch "arm64" -}}
-{{-     list $url "vimv-linux-aarch64.zip" | join "" -}}
-{{-   else -}}
-{{-     list $url "vimv-linux-x86_64.zip" | join "" -}}
+{{-     list $url "vimv-aarch64-unknown-linux-gnu.zip" | join "" -}}
+{{-   else if eq .chezmoi.arch "amd64" -}}
+{{-     list $url "vimv-x86_64-unknown-linux-gnu.zip" | join "" -}}
 {{-   end -}}
-{{- else if eq .chezmoi.os "windows" -}}
-{{-   list $url "vimv-windows-x86_64.zip" | join "" -}}
-{{- else if eq .chezmoi.os "darwin" -}}
-{{-   if eq .chezmoi.arch "arm64" -}}
-{{-     list $url "vimv-macos-aarch64.zip" | join "" -}}
-{{-   else -}}
-{{-     list $url "vimv-macos-x86_64.zip" | join "" -}}
-{{-   end -}}
+{{- else if (and (eq .chezmoi.os "windows") (eq .chezmoi.arch "amd64")) -}}
+{{-   list $url "vimv-x86_64-pc-windows-gnu.zip" | join "" -}}
+{{- else if (and (eq .chezmoi.os "darwin") (eq .chezmoi.arch "amd64")) -}}
+{{-   list $url "vimv-x86_64-apple-darwin.zip" | join "" -}}
 {{- end -}}
