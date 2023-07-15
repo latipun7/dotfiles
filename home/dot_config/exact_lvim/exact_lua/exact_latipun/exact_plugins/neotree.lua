@@ -12,20 +12,6 @@ M.config = function()
       winbar = true,
       statusline = false,
       tabs_layout = "active",
-      sources = {
-        {
-          source = "filesystem",
-          display_name = " 󰉓 Files ",
-        },
-        {
-          source = "buffers",
-          display_name = " 󰈙 Buffers ",
-        },
-        {
-          source = "git_status",
-          display_name = " 󰊢 Git ",
-        },
-      },
     },
     default_component_configs = {
       indent = {
@@ -66,7 +52,7 @@ M.config = function()
         },
         never_show = { ".DS_Store" },
       },
-      follow_current_file = false,
+      follow_current_file = { enabled = false },
       hijack_netrw_behavior = "open_current",
       use_libuv_file_watcher = true,
     },

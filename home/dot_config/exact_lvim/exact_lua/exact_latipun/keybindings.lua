@@ -55,7 +55,7 @@ M.config = function()
       lvim.builtin.which_key.mappings.e = { "<Cmd>NvimTreeToggle<CR>", "󰜦 Explorer" }
     end
   else
-    lvim.builtin.which_key.mappings.e = { "<Cmd>NeoTreeRevealToggle<CR>", "󰜦 Explorer" }
+    lvim.builtin.which_key.mappings.e = { "<Cmd>Neotree reveal toggle<CR>", "󰜦 Explorer" }
   end
 
   lvim.builtin.which_key.mappings.P = {

@@ -108,9 +108,9 @@ M.config = function()
     },
     {
       "nvim-neo-tree/neo-tree.nvim",
-      branch = "v2.x",
+      branch = "v3.x",
       lazy = true,
-      cmd = { "Neotree", "NeoTreeRevealToggle" },
+      cmd = { "Neotree" },
       dependencies = { "MunifTanjim/nui.nvim" },
       config = function() require("latipun.plugins.neotree").config() end,
     },
