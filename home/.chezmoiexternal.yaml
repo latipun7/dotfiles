@@ -19,12 +19,6 @@
     command: gzip
     args: ["--decompress", "--to-stdout", "--suffix", ".zip"]
 
-.local/bin/pistol:
-  type: file
-  url: {{ template "pistol-download-url" . }}
-  executable: true
-  refreshPeriod: 132h
-
 {{ if ne .chezmoi.os "windows" -}}
 # ╻ ╻┏┓╻╻╻ ╻   ┏━┓┏┓╻╻  ╻ ╻
 # ┃ ┃┃┗┫┃┏╋┛   ┃ ┃┃┗┫┃  ┗┳┛

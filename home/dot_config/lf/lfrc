@@ -322,7 +322,7 @@ map dd trash
 map dl trash-list
 map dr restore-trash
 map e edit
-map i $bat --paging=always --pager='less -Ri' $f
+map i $INFO=true ~/.config/lf/previewer $f | less -Ri
 map fF find-back
 map ff find
 map fj jump

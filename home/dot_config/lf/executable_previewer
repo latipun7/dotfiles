@@ -1,45 +1,162 @@
 #!/usr/bin/env bash
 
+# File previewer for lf, terminal based file manager.
+#
+# Dependencies:
+#   - coreutils
+#   - awk (gawk)
+#   - file
+#   - optional: For image preview:
+#       - wezterm & kitty or just kitty or chafa
+#       - convert (imagemagick)
+#   - optional: unzip
+#   - optional: gnome-epub-thumbnailer
+#   - optional: fontimages (fontforge)
+#   - optional: libreoffice
+#   - optional: pdftoppm
+#   - optional: ffmpegthumbnailer
+#   - optional: tar
+#   - optional: atool or bsdtar
+#   - optional: glow or lowdown
+#   - optional: w3m or lynx or elinks
+#   - optional: bat
+#   - optional: jq
+#   - optional: ffmpeg
+#   - optional: mediainfo
+#   - optional: ddjvu (djvulibre)
+
 CACHEDIR="${XDG_CACHE_HOME:-$HOME/.cache}/lf"
 CACHE="$CACHEDIR/thumbnail.$(stat --printf '%n\0%i\0%F\0%s\0%W\0%Y' -- "$(readlink -f "$1")" | sha256sum | awk '{print $1}')"
+COLS="${2:-$(tput cols)}"
 
-filetype="$(file -Lb --mime-type "$1")"
+function exists() { hash "$1" 2>/dev/null; }
 
-function image() {
-  if hash kitty 2>/dev/null; then
-    kitten icat --transfer-mode=memory --stdin=no --place="$(($2 - 2))x$(($3 - 4))@${4}x$(($5 + 2))" "$1" </dev/null >/dev/tty
-    exit 69
+function pager() {
+  if exists bat; then
+    bat --paging=never --color=always --style=numbers,grid --terminal-width="$((COLS - 3))" "$1"
   else
-    chafa -s "$(($2 - 2))x$(($3 - 2))" -f symbols "$1"
+    fold -sw "$((COLS - 3))" "$1"
   fi
 }
 
-function preview() {
+function handle_fallback() {
+  printf -- "------- \033[1;31mFile Type Classification\033[0m -------\n"
+  file --brief "$1" | fold -sw "$((COLS - 3))" && exit 0
+  exit 0
+}
+
+function image_preview() {
+  if [[ -z "$INFO" ]]; then
+    if exists kitty; then
+      kitten icat --transfer-mode=memory --stdin=no --place="$(($2 - 2))x$(($3 - 4))@${4}x$(($5 + 2))" "$1" </dev/null >/dev/tty
+      exit 69
+    elif exists chafa; then
+      chafa -s "$(($2 - 2))x$(($3 - 2))" -f symbols "$1" && exit 0
+    else
+      handle_fallback "$@"
+    fi
+  else
+    mediainfo "$1" || handle_fallback "$@"
+  fi
+}
+
+function generate_preview() {
   [ ! -d "$CACHEDIR" ] && mkdir -p "$CACHEDIR"
 
-  if [ ! -f "${CACHE}.jpg" ]; then
+  # if no image cache of this file, generate the image cache
+  if [[ "$(compgen -G "${CACHE}.*")" == "" ]]; then
     case "$1" in
-      video) ffmpegthumbnailer -m -s0 -i "$2" -o "${CACHE}.jpg" ;;
-      pdf) pdftoppm -jpeg -f 1 -singlefile "$2" "$CACHE" ;;
+      audio) ffmpeg -i "$2" -filter_complex "scale=iw*min(1\,min($3/iw\,ih)):-1" "${CACHE}.jpg" -y || handle_fallback "$2" ;;
+      djvu) ddjvu -format=ppm -page=1 "$2" "${CACHE}.jpg" || handle_fallback "$2" ;;
+      epub) gnome-epub-thumbnailer "$2" "${CACHE}.jpg" || handle_fallback "$2" ;;
+      font)
+        fontimages -o "${CACHE}.png" --pixelsize "60" --fontname --pixelsize "40" \
+          --text "  ABCDEFGHIJKLMNOPQRSTUVWXYZ  " \
+          --text "  abcdefghijklmnopqrstuvwxyz  " \
+          --text "  0123456789.:,;(*!?') ff fl fi ffi ffl  " \
+          --text "  The quick brown fox jumps over the lazy dog.  " \
+          "$2" || handle_fallback "$2"
+        convert "${CACHE}.png" "${CACHE}.jpg"
+        ;;
       office)
-        libreoffice --convert-to jpg "$2" --outdir "$CACHEDIR/${2%/*}" &>/dev/null
+        libreoffice --convert-to jpg "$2" --outdir "$CACHEDIR/${2%/*}" &>/dev/null || handle_fallback "$2"
         filename="$(printf "%s" "${2##*/}" | cut -d. -f1)"
         mv "$CACHEDIR/${2%/*}/$filename.jpg" "$CACHE.jpg"
         ;;
+      pdf) pdftoppm -jpeg -f 1 -singlefile "$2" "$CACHE" || handle_fallback "$2" ;;
+      video) ffmpegthumbnailer -m -s0 -i "$2" -o "${CACHE}.jpg" || handle_fallback "$2" ;;
     esac
   fi
 
-  image "${CACHE}.jpg" "$3" "$4" "$5" "$6"
+  # display image cache if no $INFO environment
+  if [[ -z "$INFO" ]]; then
+    image_preview "${CACHE}.jpg" "$3" "$4" "$5" "$6"
+  # otherwise display the info of that file
+  else
+    case "$1" in
+      audio | video) mediainfo "$2" || handle_fallback "$2" ;;
+      *) handle_fallback "$2" ;;
+    esac
+  fi
+}
+
+function handle_extension() {
+  FILE_EXTENSION="${1##*.}"
+  FILE_EXTENSION_LOWER="$(printf "%s" "${FILE_EXTENSION}" | tr '[:upper:]' '[:lower:]')"
+
+  case "$FILE_EXTENSION_LOWER" in
+    pdf) generate_preview pdf "$@" ;;
+    gz | bz2) tar -tvf "$1" && exit 0 ;;
+    json) jq --color-output . "$1" && exit 0 ;;
+    md) if exists glow; then
+      glow -s dark -w "$((COLS - 5))" "$1" && exit 0
+    elif exists lowdown; then
+      lowdown -Tterm "$1" && exit 0
+    else
+      pager "$1" && exit 0
+    fi ;;
+    htm | html | xhtml)
+      if exists w3m; then
+        w3m "$1" && exit 0
+      elif exists lynx; then
+        lynx "$1" && exit 0
+      elif exists elinks; then
+        elinks "$1" && exit 0
+      else
+        pager "$1" && exit 0
+      fi
+      ;;
+    7z | a | ace | alz | arc | arj | bz | cab | cpio | deb | jar | lha | lz | lzh | lzma | lzo | \
+      rar | rpm | rz | t7z | tar | tbz | tbz2 | tgz | tlz | txz | tz | tzo | war | xpi | xz | z)
+      if exists atool; then
+        atool -l "$1" && exit 0
+      elif exists bsdtar; then
+        bsdtar -tvf "$1" && exit 0
+      fi
+      ;;
+  esac
+}
+
+function handle_mime() {
+  MIMETYPE="$(file --dereference --brief --mime-type "$1")"
+
+  case "$MIMETYPE" in
+    */epub* | */*book*) generate_preview epub "$@" ;;
+    image/vnd.djvu) generate_preview djvu "$@" ;;
+    image/*) image_preview "$@" ;;
+    video/*) generate_preview video "$@" ;;
+    audio/*) generate_preview audio "$@" ;;
+    application/font* | application/*opentype | font/*) generate_preview font "$@" ;;
+    */*office* | */*document* | */*msword | */*ms-excel) generate_preview office "$@" ;;
+    application/zip) unzip -l "$1" && exit 0 ;;
+    text/*) pager "$1" && exit 0 ;;
+  esac
 }
 
 function main() {
-  case "$filetype" in
-    image/*) image "$@" ;;
-    video/*) preview video "$@" ;;
-    *pdf) preview pdf "$@" ;;
-    */*office* | */*document*) preview office "$@" || pistol "$@" ;;
-    *) pistol "$@" ;;
-  esac
+  handle_extension "$@"
+  handle_mime "$@"
+  handle_fallback "$@"
 }
 
 main "$@"
