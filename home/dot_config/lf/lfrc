@@ -32,11 +32,11 @@ set truncatechar ''
 ${{
   w=$(tput cols)
   if [ $w -le 39 ]; then
-    lf -remote "send $id set ratios 1"
+    while [[ -n $(lf -remote "send $id set ratios 1") ]]; do sleep 0.3; done
   elif [ $w -le 80 ]; then
-    lf -remote "send $id set ratios 1:2"
+    while [[ -n $(lf -remote "send $id set ratios 1:2") ]]; do sleep 0.3; done
   else
-    lf -remote "send $id set ratios 1:2:3"
+    while [[ -n $(lf -remote "send $id set ratios 1:2:3") ]]; do sleep 0.3; done
   fi
 }}
 
@@ -92,7 +92,7 @@ cmd on-cd &{{
   update_gitstatus
   git="${p}"
   fmt="\033[35;1m%u@%h\033[0m:\033[34;1m%d\033[0m\033[2m%f\033[0m\033[1m$git\033[0m"
-  lf -remote "send $id set promptfmt \"$fmt\""
+  while [[ -n $(lf -remote "send $id set promptfmt \"$fmt\"") ]]; do sleep 0.3; done
 }}
 on-cd
 
