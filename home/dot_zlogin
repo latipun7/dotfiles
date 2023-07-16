@@ -6,8 +6,8 @@
 
 if hash fortune 2>/dev/null && hash chara 2>/dev/null; then
   if hash lolcat 2>/dev/null; then
-    fortune | lolcat -f | chara say --random --width=$(( ${COLUMNS:-55} - 6 ))
+    fortune | lolcat -f | chara say --random --width=$((${COLUMNS:-55} - 8))
   else
-    fortune | chara say --random --width=$(( ${COLUMNS:-55} - 6 ))
+    fortune | chara say --random --width=$((${COLUMNS:-55} - 8))
   fi
 fi
