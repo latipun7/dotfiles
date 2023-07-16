@@ -10,6 +10,11 @@
   refreshPeriod: 132h
   include: ["*/*.tmTheme"]
 
+{{ if (and (ne .chezmoi.os "windows") (ne .chezmoi.os "android")) -}}
+# ╻ ╻┏┓╻╻╻ ╻   ┏┓╻┏━┓   ┏━┓┏┓╻╺┳┓┏━┓┏━┓╻╺┳┓
+# ┃ ┃┃┗┫┃┏╋┛   ┃┗┫┃ ┃   ┣━┫┃┗┫ ┃┃┣┳┛┃ ┃┃ ┃┃
+# ┗━┛╹ ╹╹╹ ╹   ╹ ╹┗━┛   ╹ ╹╹ ╹╺┻┛╹┗╸┗━┛╹╺┻┛
+
 .local/bin/vimv: # vimv
   type: file
   url: {{ template "vimv-download-url" . }}
@@ -18,11 +23,6 @@
   filter:
     command: gzip
     args: ["--decompress", "--to-stdout", "--suffix", ".zip"]
-
-{{ if ne .chezmoi.os "windows" -}}
-# ╻ ╻┏┓╻╻╻ ╻   ┏━┓┏┓╻╻  ╻ ╻
-# ┃ ┃┃┗┫┃┏╋┛   ┃ ┃┃┗┫┃  ┗┳┛
-# ┗━┛╹ ╹╹╹ ╹   ┗━┛╹ ╹┗━╸ ╹
 
 .local/bin/fnm:
   # NOTE: workaround of https://github.com/actions/upload-artifact/issues/38
@@ -33,6 +33,12 @@
   filter:
     command: gzip
     args: ["--decompress", "--to-stdout", "--suffix", ".zip"]
+{{ end -}}
+
+{{ if ne .chezmoi.os "windows" -}}
+# ╻ ╻┏┓╻╻╻ ╻   ┏━┓┏┓╻╻  ╻ ╻
+# ┃ ┃┃┗┫┃┏╋┛   ┃ ┃┃┗┫┃  ┗┳┛
+# ┗━┛╹ ╹╹╹ ╹   ┗━┛╹ ╹┗━╸ ╹
 
 .config/btop/themes/catppuccin-mocha.theme:
   type: file
