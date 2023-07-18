@@ -142,7 +142,7 @@ cmd add-new %{{
 
 cmd bulk-rename !{{
   printf '\n%.0s' {1..$(( $(tput lines) - 1 ))} && printf '\e[H' # push viewport
-  vimv --git -- $(basename -a -- $fx)
+  vimv $(basename -a -- $fx)
   lf -remote "send $id load"
   lf -remote "send $id unselect"
 }}
