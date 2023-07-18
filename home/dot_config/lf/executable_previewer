@@ -9,7 +9,6 @@
 #   - optional: For image preview:
 #       - wezterm & kitty or just kitty or chafa
 #       - convert (imagemagick)
-#   - optional: unzip
 #   - optional: gnome-epub-thumbnailer
 #   - optional: fontimages (fontforge)
 #   - optional: libreoffice
@@ -40,8 +39,9 @@ function pager() {
 }
 
 function handle_fallback() {
-  printf -- "------- \033[1;31mFile Type Classification\033[0m -------\n"
-  file --brief "$1" | fold -sw "$((COLS - 3))" && exit 0
+  printf -- "----- \033[1;31mFile Type Classification\033[0m -----\n"
+  file --brief "$1" | fold -sw "$((COLS - 3))"
+  echo -e "\n$MIMETYPE"
   exit 0
 }
 
@@ -105,16 +105,15 @@ function handle_extension() {
   FILE_EXTENSION_LOWER="$(printf "%s" "${FILE_EXTENSION}" | tr '[:upper:]' '[:lower:]')"
 
   case "$FILE_EXTENSION_LOWER" in
-    pdf) generate_preview pdf "$@" ;;
+    7z | a | ace | alz | arc | arj | bz | cab | cpio | deb | jar | lha | lz | lzh | lzma | lzo | \
+      rar | rpm | rz | t7z | tar | tbz | tbz2 | tgz | tlz | txz | tz | tzo | war | xpi | xz | z | zip)
+      if exists atool; then
+        atool -l "$1" && exit 0
+      elif exists bsdtar; then
+        bsdtar -tvf "$1" && exit 0
+      fi
+      ;;
     gz | bz2) tar -tvf "$1" && exit 0 ;;
-    json) jq --color-output . "$1" && exit 0 ;;
-    md) if exists glow; then
-      glow -s dark -w "$((COLS - 5))" "$1" && exit 0
-    elif exists lowdown; then
-      lowdown -Tterm "$1" && exit 0
-    else
-      pager "$1" && exit 0
-    fi ;;
     htm | html | xhtml)
       if exists w3m; then
         w3m "$1" && exit 0
@@ -126,14 +125,16 @@ function handle_extension() {
         pager "$1" && exit 0
       fi
       ;;
-    7z | a | ace | alz | arc | arj | bz | cab | cpio | deb | jar | lha | lz | lzh | lzma | lzo | \
-      rar | rpm | rz | t7z | tar | tbz | tbz2 | tgz | tlz | txz | tz | tzo | war | xpi | xz | z)
-      if exists atool; then
-        atool -l "$1" && exit 0
-      elif exists bsdtar; then
-        bsdtar -tvf "$1" && exit 0
+    md)
+      if exists glow; then
+        glow -s dark -w "$((COLS - 5))" "$1" && exit 0
+      elif exists lowdown; then
+        lowdown -Tterm "$1" && exit 0
+      else
+        pager "$1" && exit 0
       fi
       ;;
+    pdf) generate_preview pdf "$@" ;;
   esac
 }
 
@@ -141,15 +142,15 @@ function handle_mime() {
   MIMETYPE="$(file --dereference --brief --mime-type "$1")"
 
   case "$MIMETYPE" in
-    */epub* | */*book*) generate_preview epub "$@" ;;
+    application/epub* | application/*book*) generate_preview epub "$@" ;;
+    application/font* | application/*opentype | font/*) generate_preview font "$@" ;;
+    audio/*) generate_preview audio "$@" ;;
     image/vnd.djvu) generate_preview djvu "$@" ;;
     image/*) image_preview "$@" ;;
-    video/*) generate_preview video "$@" ;;
-    audio/*) generate_preview audio "$@" ;;
-    application/font* | application/*opentype | font/*) generate_preview font "$@" ;;
-    */*office* | */*document* | */*msword | */*ms-excel) generate_preview office "$@" ;;
-    application/zip) unzip -l "$1" && exit 0 ;;
     text/*) pager "$1" && exit 0 ;;
+    video/*) generate_preview video "$@" ;;
+    */*json) jq --color-output . "$1" && exit 0 ;;
+    */*office* | */*document* | */*msword | */*ms-excel) generate_preview office "$@" ;;
   esac
 }
 
