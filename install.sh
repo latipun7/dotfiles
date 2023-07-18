@@ -53,20 +53,13 @@ function fail() {
 
 deps=(gzip chezmoi git wget curl tar lazygit fd rg nvim grep delta rbw)
 
-function print_missing_dep_msg() {
-  if [ "$#" -eq 1 ]; then
-    fail "Unable to find dependency ${color6}$1${reset}.\n    Please install it first and re-run the installer."
-  fi
-  exit 1
-}
-
 function check_dependencies() {
   step "Checking dependencies..."
 
   for dep in "${deps[@]}"; do
-    if ! hash "$dep" 2>/dev/null; then
-      print_missing_dep_msg "$dep"
-    fi
+    type -p "$dep" &>/dev/null || {
+      fail "Could not find '${color6}${dep}${reset}', is it installed?" >&2
+    }
   done
 
   info "OK!"
