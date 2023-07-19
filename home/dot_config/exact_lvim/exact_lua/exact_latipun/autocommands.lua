@@ -28,7 +28,7 @@ M.config = function()
       local fallback_on_empty = fallback_name == "" and fallback_ft == ""
 
       if fallback_on_empty then
-        require("neo-tree").close_all()
+        vim.cmd("Neotree close")
         vim.cmd("Alpha")
         vim.cmd(event.buf .. "bwipeout")
       end
