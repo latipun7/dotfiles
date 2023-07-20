@@ -17,6 +17,7 @@ M.config = function()
     ignored_dirs = nil,
     should_autosave = function()
       if vim.bo.filetype == "alpha" then return false end
+      if vim.bo.filetype == "" then return false end
       if vim.api.nvim_buf_get_name(0):match("COMMIT_EDITMSG") then return false end
 
       return true
