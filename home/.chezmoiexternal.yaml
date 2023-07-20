@@ -15,24 +15,18 @@
 # ┃ ┃┃┗┫┃┏╋┛   ┃┗┫┃ ┃   ┣━┫┃┗┫ ┃┃┣┳┛┃ ┃┃ ┃┃
 # ┗━┛╹ ╹╹╹ ╹   ╹ ╹┗━┛   ╹ ╹╹ ╹╺┻┛╹┗╸┗━┛╹╺┻┛
 
-.local/bin/vimv: # vimv
-  type: file
+.local/bin/vimv:
+  type:  archive-file
   url: {{ template "vimv-download-url" . }}
-  executable: true
+  path: vimv
   refreshPeriod: 132h
-  filter:
-    command: gzip
-    args: ["--decompress", "--to-stdout", "--suffix", ".zip"]
 
 .local/bin/fnm:
-  # NOTE: workaround of https://github.com/actions/upload-artifact/issues/38
-  type: file
+  type: archive-file
   url: {{ template "fnm-download-url" . }}
+  path: fnm
   executable: true
   refreshPeriod: 132h
-  filter:
-    command: gzip
-    args: ["--decompress", "--to-stdout", "--suffix", ".zip"]
 {{ end -}}
 
 {{ if ne .chezmoi.os "windows" -}}
@@ -152,13 +146,10 @@
 # ┗━┛┗━╸╹┗╸┗┛ ┗━╸╹┗╸   ┗━┛╹ ╹┗━╸ ╹
 
 .local/bin/godns:
-  type: file
+  type: archive-file
   url: {{ template "godns-download-url" . }}
-  executable: true
+  path: godns
   refreshPeriod: 132h
-  filter:
-    command: tar
-    args: ["--extract", "--gzip", "--file", "/dev/stdin", "--to-stdout", "godns"]
 
 # Adminer [[[
 www/adminer/adminer.php:
@@ -185,9 +176,10 @@ www/adminer: # plugins
 # ┃╻┃┃┃┗┫ ┃┃┃ ┃┃╻┃┗━┓   ┃ ┃┃┗┫┃  ┗┳┛
 # ┗┻┛╹╹ ╹╺┻┛┗━┛┗┻┛┗━┛   ┗━┛╹ ╹┗━╸ ╹
 
-.local/bin: # fnm.exe
-  type: archive
+.local/bin/fnm.exe:
+  type: archive-file
   url: {{ template "fnm-download-url" . }}
+  path: fnm.exe
   refreshPeriod: 132h
 
 .local/bin/jq.exe:
