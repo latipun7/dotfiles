@@ -58,6 +58,7 @@ M.config = function()
   lvim.builtin.treesitter.auto_install = true
   lvim.builtin.treesitter.highlight.enabled = true
   lvim.builtin.treesitter.matchup.enable = true
+  lvim.builtin.treesitter.autotag.enable = true
   lvim.builtin.treesitter.highlight.disable = disable_highlight
   lvim.builtin.treesitter.query_linter = {
     enable = true,
