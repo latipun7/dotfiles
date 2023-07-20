@@ -194,6 +194,11 @@ www/adminer: # plugins
 # ┣━┫┃┗┫ ┃┃┣┳┛┃ ┃┃ ┃┃   ┃ ┃┃┗┫┃  ┗┳┛
 # ╹ ╹╹ ╹╺┻┛╹┗╸┗━┛╹╺┻┛   ┗━┛╹ ╹┗━╸ ╹
 
+.local/bin/chara:
+  type: archive-file
+  url: https://github.com/latipun7/charasay/releases/latest/download/chara-aarch64-linux-android.zip
+  refreshPeriod: 132h
+
 .termux/colors.properties:
   type: file
   url: https://github.com/catppuccin/termux/raw/main/Mocha/colors.properties
