@@ -7,6 +7,7 @@ set index-bg            "rgba(30, 30, 46, 0.5)"
 set render-loading-bg   "rgba(30, 30, 46, 0.5)"
 
 # options
+set sandbox none
 set recolor true
 set recolor-reverse-video true
 set window-title-basename true
