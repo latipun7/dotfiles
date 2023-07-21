@@ -152,7 +152,10 @@ fi
 export GPG_TTY="$TTY"
 
 # Batman syntax highlight for man pages -> https://github.com/sharkdp/bat#man
-hash bat 2>/dev/null && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+if hash bat 2>/dev/null; then
+  export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+  export MANROFFOPT="-c"
+fi
 
 # Misc
 export LESS='--RAW-CONTROL-CHARS --ignore-case'
