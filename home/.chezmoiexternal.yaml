@@ -197,6 +197,7 @@ www/adminer: # plugins
 .local/bin/chara:
   type: archive-file
   url: https://github.com/latipun7/charasay/releases/latest/download/chara-aarch64-linux-android.zip
+  path: chara
   refreshPeriod: 132h
 
 .termux/colors.properties:
