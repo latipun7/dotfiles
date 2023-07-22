@@ -1,5 +1,6 @@
 gui:
   showIcons: true
+  nerdFontsVersion: 3
   authorColors:
     "Latif Sulistyo": magenta
   theme:
