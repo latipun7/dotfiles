@@ -38,7 +38,7 @@ M.config = function()
   lvim.keys.insert_mode["<C-l>"] = "<C-o>l"
 
   -- Paste still contains yanked words
-  lvim.keys.visual_mode["p"] = [["_dP]]
+  lvim.keys.visual_mode["p"] = [["_dp]]
   lvim.keys.visual_mode["P"] = [["_dP]]
 
   -- Bufferline
