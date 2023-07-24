@@ -10,7 +10,7 @@
 #       - wezterm & kitty or just kitty or chafa
 #       - convert (imagemagick)
 #   - optional: gnome-epub-thumbnailer
-#   - optional: fontimages (fontforge)
+#   - optional: fontimage (fontforge)
 #   - optional: libreoffice
 #   - optional: pdftoppm
 #   - optional: ffmpegthumbnailer
@@ -70,7 +70,7 @@ function generate_preview() {
       djvu) ddjvu -format=ppm -page=1 "$2" "${CACHE}.jpg" || handle_fallback "$2" ;;
       epub) gnome-epub-thumbnailer "$2" "${CACHE}.jpg" || handle_fallback "$2" ;;
       font)
-        fontimages -o "${CACHE}.png" --pixelsize "60" --fontname --pixelsize "40" \
+        fontimage -o "${CACHE}.png" --pixelsize "60" --fontname --pixelsize "40" \
           --text "  ABCDEFGHIJKLMNOPQRSTUVWXYZ  " \
           --text "  abcdefghijklmnopqrstuvwxyz  " \
           --text "  0123456789.:,;(*!?') ff fl fi ffi ffl  " \
