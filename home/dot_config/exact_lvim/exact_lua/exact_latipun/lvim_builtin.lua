@@ -22,6 +22,9 @@ M.config = function()
     if vim.bo.filetype == "lf" then return "# %s" end
   end
 
+  local snip_ok, luasnip = pcall(require, "luasnip")
+  if snip_ok then luasnip.filetype_extend("astro", { "typescript", "javascript", "html" }) end
+
   -- ▄▖▜   ▌     ▗▘ ▌    ▌ ▌        ▌▝▖
   -- ▌▌▐ ▛▌▛▌▀▌  ▐ ▛▌▀▌▛▘▛▌▛▌▛▌▀▌▛▘▛▌ ▌
   -- ▛▌▐▖▙▌▌▌█▌  ▐ ▙▌█▌▄▌▌▌▙▌▙▌█▌▌ ▙▌ ▌
@@ -209,12 +212,53 @@ M.config = function()
   lvim.builtin.cmp.window.completion.border = cmp_border
   lvim.builtin.cmp.window.documentation.border = cmp_border
   lvim.builtin.cmp.sources = {
-    { name = "nvim_lsp" },
+    {
+      name = "copilot",
+      -- keyword_length = 0,
+      max_item_count = 3,
+      trigger_characters = {
+        {
+          ".",
+          ":",
+          "(",
+          "'",
+          '"',
+          "[",
+          ",",
+          "#",
+          "*",
+          "@",
+          "|",
+          "=",
+          "-",
+          "{",
+          "/",
+          "\\",
+          "+",
+          "?",
+          " ",
+          -- "\t",
+          -- "\n",
+        },
+      },
+    },
+    {
+      name = "nvim_lsp",
+      entry_filter = function(entry, ctx)
+        local cmp_kind = require("cmp.types.lsp").CompletionItemKind[entry:get_kind()]
+        if cmp_kind == "Snippet" and ctx.prev_context.filetype == "java" then return false end
+        return true
+      end,
+    },
     { name = "buffer", max_item_count = 5, keyword_length = 3 },
     { name = "path", max_item_count = 5 },
-    { name = "luasnip", max_item_count = 3 },
+    { name = "luasnip" },
+    { name = "cmp_tabnine" },
+    { name = "nvim_lua" },
     { name = "calc" },
     { name = "treesitter" },
+    { name = "crates" },
+    { name = "tmux" },
   }
   lvim.builtin.cmp.formatting = {
     fields = { "kind", "abbr", "menu" },
