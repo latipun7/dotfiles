@@ -103,6 +103,7 @@ on-cd
 # special command override
 
 cmd open ${{
+  if hash exo-open; then; OPENER=exo-open; fi
   case $(file --mime-type -Lb $f) in
     text/* | */xml | */json | inode/x-empty) $EDITOR $f ;;
     *) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done ;;
