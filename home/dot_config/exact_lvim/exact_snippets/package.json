@@ -1,0 +1,18 @@
+{
+  "name": "nvim-snippets",
+  "author": "latipun7",
+  "engines": {
+    "vscode": "^1.11.0"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "language": [
+          "typescript",
+          "typescriptreact"
+        ],
+        "path": "./typescript.json"
+      }
+    ]
+  }
+}
