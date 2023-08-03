@@ -237,6 +237,7 @@ M.config = function()
     },
     {
       "folke/trouble.nvim",
+      version = "*",
       event = "VeryLazy",
       cmd = "Trouble",
       opts = {
