@@ -1,18 +1,25 @@
 #!/usr/bin/env bash
 # shellcheck disable=2086,2046
 
-# Assuming yay is run by user with UID 1000
+# Assuming yay/paru is run by user with UID 1000
 admin="$(id -nu 1000)"
+
+CMD=yay
 cachedir="/home/$admin/.cache/yay"
+if hash paru 2>/dev/null; then
+  CMD=paru
+  cachedir="/home/$admin/.cache/paru/clone"
+fi
+
 pkgdirs=$(find "$cachedir" -mindepth 1 -maxdepth 1 -type d)
-removed="$(comm -23 <(echo $pkgdirs | xargs -r basename -a | sort) <({
-  yay -Qqm
-  echo 'catppuccin-grub-theme-git'
-  echo 'font-symbola'
-} | sort -u) | xargs -r printf "$cachedir/%s\n")"
+removed="$(comm -23 <(echo $pkgdirs | xargs -r basename -a | sort) <($CMD -Qqm | xargs -r expac -l '\n' '%e' | sort -u) | xargs -r printf "$cachedir/%s\n")"
 
-[[ -z $removed ]] || echo -e "\033[0;33m==>\033[0m Remove everything for uninstalled foreign packages" &&
+echo "==> Remove everything for uninstalled foreign packages"
+if [[ -n $removed ]]; then
   echo $removed | xargs -rt rm -r
+else
+  echo "==> no candidate packages found for pruning"
+fi
 
-echo -e "\033[0;32m==>\033[0m Keep latest version for uninstalled native packages"
-/usr/bin/paccache -ruk1
+echo "==> Keep latest version for uninstalled native packages"
+paccache -ruk1
