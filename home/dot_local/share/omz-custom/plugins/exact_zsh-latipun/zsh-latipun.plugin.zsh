@@ -57,7 +57,7 @@ if hash paru 2>/dev/null; then
   alias yeet='paru -Rns'
 fi
 
-if hash pacman 2>/dev/null && hash yay 2>/dev/null; then
+if hash pacman 2>/dev/null && type yay &>/dev/null; then
   function backup-packages-list() {
     comm -23 <(yay -Qqe | sort) <({ expac -l '\n' '%E' base base-devel } | sort -u) > "$HOME/Documents/packages.list"
   }
