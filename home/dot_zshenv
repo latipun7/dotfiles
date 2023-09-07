@@ -53,6 +53,9 @@ export HISTFILE="$XDG_STATE_HOME/zsh/history"
 # CUDA
 export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv"
 
+# Harmonoid
+export HARMONOID_CACHE_DIR="$XDG_CACHE_HOME/harmonoid"
+
 # ░█▀█░█▀█░▀█▀░█░█░█▀▀
 # ░█▀▀░█▀█░░█░░█▀█░▀▀█
 # ░▀░░░▀░▀░░▀░░▀░▀░▀▀▀
