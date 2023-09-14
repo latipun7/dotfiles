@@ -4,15 +4,13 @@
 # Assuming yay/paru is run by user with UID 1000
 admin="$(id -nu 1000)"
 
-CMD=yay
 cachedir="/home/$admin/.cache/yay"
 if hash paru 2>/dev/null; then
-  CMD=paru
   cachedir="/home/$admin/.cache/paru/clone"
 fi
 
 pkgdirs=$(find "$cachedir" -mindepth 1 -maxdepth 1 -type d)
-removed="$(comm -23 <(echo $pkgdirs | xargs -r basename -a | sort) <($CMD -Qqm | xargs -r expac -l '\n' '%e' | sort -u) | xargs -r printf "$cachedir/%s\n")"
+removed="$(comm -23 <(echo $pkgdirs | xargs -r basename -a | sort) <(pacman -Qqm | xargs -r expac -l '\n' '%e' | sort -u) | xargs -r printf "$cachedir/%s\n")"
 
 echo "==> Remove everything for uninstalled foreign packages"
 if [[ -n $removed ]]; then
