@@ -2,13 +2,14 @@
 
 (defvar osd_vol false)
 (defvar osd_bright false)
-(defvar music_reveal false)
+(defvar music_title_reveal false)
 (defvar network_reveal false)
 (defvar bright_reveal false)
 (defvar volume_reveal false)
 
 (defpoll time :interval "5s" `date +'{"hour": "%H", "minute": "%M", "day": "%A", "day_s": "%a", "date": "%d", "month_s": "%b", "year": "%Y"}'`)
 
+(deflisten music_reveal "bash ./scripts/music-reveal")
 (deflisten music "bash ./scripts/music")
 
 (deflisten title "eww-hyprbar title")
