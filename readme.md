@@ -41,7 +41,7 @@ Here's the list of what included in this dotfiles:
 Simply run:
 
 ```bash
-bash -c "$(curl -fsLS https://github.com/latipun7/dotfiles/raw/main/install.sh)"
+bash -c "$(curl -fsLS https://s.id/install-dotfiles)"
 ```
 
 For _**Windows, TBA**_.
