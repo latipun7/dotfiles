@@ -88,6 +88,12 @@
   urgency = low
   history_ignore = true
 
+[skip-flameshot-warning]
+  summary = "Flameshot Warning"
+  body = ".*grim's screenshot.*"
+  urgency = low
+  skip_display = true
+
 [urgency_low]
   background = "#1E1E2E"
   foreground = "#CDD6F4"
