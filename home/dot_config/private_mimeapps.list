@@ -1,6 +1,6 @@
 [Added Associations]
-application/json=lvim.desktop;
-application/pdf=org.libreoffice.LibreOffice.draw.desktop;org.gimp.GIMP.desktop;org.pwmt.zathura-pdf-poppler.desktop;
+application/json=lvim.desktop;nvim.desktop;
+application/pdf=firefoxdeveloperedition.desktop;microsoft-edge.desktop;org.libreoffice.LibreOffice.draw.desktop;org.gimp.GIMP.desktop;org.pwmt.zathura-pdf-poppler.desktop;
 application/x-extension-htm=firefoxdeveloperedition.desktop;
 application/x-extension-html=firefoxdeveloperedition.desktop;
 application/x-extension-shtml=firefoxdeveloperedition.desktop;
@@ -12,10 +12,10 @@ font/woff2=org.gnome.FontViewer.desktop;
 image/gif=microsoft-edge.desktop;
 image/heif=imv-dir.desktop;
 image/png=imv-dir.desktop;org.gimp.GIMP.desktop;org.ksnip.ksnip.desktop;
-image/svg+xml=lvim.desktop;microsoft-edge.desktop;imv-folder.desktop;
+image/svg+xml=lvim.desktop;nvim.desktop;microsoft-edge.desktop;imv-folder.desktop;
 image/webp=imv.desktop;imv-folder.desktop;
 inode/directory=xfce4-file-manager.desktop;
-text/plain=lvim.desktop;
+text/plain=lvim.desktop;nvim.desktop;
 text/html=firefoxdeveloperedition.desktop;
 video/mp4=io.github.celluloid_player.Celluloid.desktop;mpv.desktop;microsoft-edge.desktop;
 x-scheme-handler/http=microsoft-edge.desktop;firefoxdeveloperedition.desktop;
@@ -25,7 +25,7 @@ x-scheme-handler/trash=xfce4-file-manager.desktop;
 x-scheme-handler/chrome=firefoxdeveloperedition.desktop;
 
 [Default Applications]
-application/json=lvim.desktop
+application/json=nvim.desktop
 application/pdf=org.pwmt.zathura-pdf-poppler.desktop
 application/x-extension-htm=firefoxdeveloperedition.desktop
 application/x-extension-html=firefoxdeveloperedition.desktop
@@ -53,7 +53,7 @@ image/x-portable-pixmap=imv-dir.desktop
 image/x-tga=imv-dir.desktop
 image/x-xbitmap=imv-dir.desktop
 inode/directory=thunar.desktop
-text/plain=lvim.desktop
+text/plain=nvim.desktop
 video/3gpp=vlc.desktop
 video/3gpp2=vlc.desktop
 video/dv=vlc.desktop

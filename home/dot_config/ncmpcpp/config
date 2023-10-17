@@ -6,7 +6,7 @@ mpd_host = 127.0.0.1
 mpd_port = 6600
 
 # GENERAL
-external_editor = lvim
+external_editor = nvim
 message_delay_time = 1
 playlist_disable_highlight_delay = 2
 autocenter_mode = "yes"

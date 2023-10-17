@@ -1,0 +1,37 @@
+return {
+  {
+    "utilyre/barbecue.nvim",
+    event = "BufRead",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons",
+    },
+    opts = {
+      exclude_filetypes = {
+        "help",
+        "startify",
+        "dashboard",
+        "lazy",
+        "neo-tree",
+        "neogitstatus",
+        "NvimTree",
+        "Trouble",
+        "alpha",
+        "lir",
+        "Outline",
+        "spectre_panel",
+        "toggleterm",
+        "DressingSelect",
+        "Jaq",
+        "harpoon",
+        "dap-repl",
+        "dap-terminal",
+        "dapui_console",
+        "dapui_hover",
+        "lab",
+        "notify",
+        "noice",
+      },
+    },
+  },
+}

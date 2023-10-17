@@ -99,9 +99,6 @@ fi
 if [[ "${TERM_PROGRAM:-tty}" == *vscode* ]]; then
   export VISUAL="code --wait"
   export EDITOR="code --wait"
-elif hash lvim 2>/dev/null; then
-  export VISUAL=lvim
-  export EDITOR=lvim
 else
   export VISUAL=nvim
   export EDITOR=nvim
@@ -109,7 +106,7 @@ fi
 
 if [[ "$(hostnamectl chassis 2>/dev/null)" != 'server' ]]; then
   export TERMINAL=wezterm
-  export BROWSER=brave
+  export BROWSER=firefox-developer-edition
 else
   export BROWSER=lynx
 fi

@@ -29,7 +29,7 @@ Personally, I use `Cascadia Code` + `Symbols Nerd Font`.
 Here's the list of what included in this dotfiles:
 
 - [`Hyprland`](https://hyprland.org/) - Beautiful tiling Wayland compositor.
-- [`LunarVim`](https://www.lunarvim.org) - NeoVim as an IDE.
+- [`LazyVim`](https://www.lazyvim.org) - NeoVim as an IDE.
 - [`WezTerm`](https://wezfurlong.org/wezterm/) - Cross-platform terminal emulator.
 - [`tmux`](https://github.com/tmux/tmux) - Terminal multiplexer _(no Windows)_.
 - [`zsh`](https://zsh.sourceforge.io/) - Interactive unix-like shell _(no Windows)_.
