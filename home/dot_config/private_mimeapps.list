@@ -1,4 +1,5 @@
 [Added Associations]
+application/java-archive=userapp-java -jar-E2XBD2.desktop;org.gnome.FileRoller.desktop;
 application/json=lvim.desktop;nvim.desktop;
 application/pdf=firefoxdeveloperedition.desktop;microsoft-edge.desktop;org.libreoffice.LibreOffice.draw.desktop;org.gimp.GIMP.desktop;org.pwmt.zathura-pdf-poppler.desktop;
 application/x-extension-htm=firefoxdeveloperedition.desktop;
