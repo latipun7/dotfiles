@@ -52,7 +52,7 @@ www
 
 {{- if not .is_linux_gui }}
 # Ignore if not Linux GUI environment (Linx GUI only files)
-.config/{dunst,eww,gtk-2.0,gtk-3.0,gtk-4.0,hypr,mpd,mpDris2,ncmpcpp,zathura,mimeapps.list}
+.config/{dunst,eww,gtk-2.0,gtk-3.0,gtk-4.0,hypr,mpd,mpDris2,ncmpcpp,vimiv,zathura,mimeapps.list}
 .local/share/{mpd}
 {{- end }}
 
