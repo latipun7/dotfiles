@@ -4,7 +4,7 @@ return {
     opts = {
       news = {
         lazyvim = true,
-        neovim = true,
+        neovim = false,
       },
     },
   },
