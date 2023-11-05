@@ -5,11 +5,6 @@ function open() {
 
   if [ -z "$WORKSPACE" ]; then
     hyprctl dispatch -- exec "${@:2}"
-    if [[ "$1" == "chat" ]]; then
-      sleep 3.9 # NOTE: discord is long to open
-    else
-      sleep 0.9
-    fi
     hyprctl dispatch togglespecialworkspace "$1"
   elif [ "$WORKSPACE" == "special:$1" ]; then
     hyprctl dispatch togglespecialworkspace "$1"
@@ -18,18 +13,18 @@ function open() {
 
 function main() {
   case "$1" in
-    chat)
-      open "$1" discord
-      ;;
-    term)
-      open "$1" wezterm start --class scratch-term
-      ;;
-    calc)
-      open "$1" qalculate-gtk
-      ;;
-    *)
-      echo "no scratchpad with the name of $1"
-      ;;
+  chat)
+    open "$1" discord
+    ;;
+  term)
+    open "$1" wezterm start --class scratch-term
+    ;;
+  calc)
+    open "$1" qalculate-gtk
+    ;;
+  *)
+    echo "no scratchpad with the name of $1"
+    ;;
   esac
 }
 
