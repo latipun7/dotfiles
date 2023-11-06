@@ -1,8 +1,0 @@
-[options]
-background = checks
-scaling_mode = shrink
-upscaling_method = nearest_neighbour
-
-[binds]
-<Tab> = next 1
-<Shift+ISO_Left_Tab> = prev 1
