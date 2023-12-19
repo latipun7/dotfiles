@@ -225,4 +225,5 @@ return {
   -- general
   automatically_reload_config = true,
   scrollback_lines = 100000,
+  enable_wayland = false,
 }
