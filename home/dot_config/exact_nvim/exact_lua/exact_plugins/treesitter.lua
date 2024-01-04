@@ -4,16 +4,16 @@ return {
 
   -- Add Hyprland parser
   {
-    "luckasRanarison/tree-sitter-hypr",
+    "luckasRanarison/tree-sitter-hyprlang",
     ft = "hypr",
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
       opts = function(_, _)
         local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
         ---@diagnostic disable-next-line: inject-field
-        parser_config.hypr = {
+        parser_config.hyprlang = {
           install_info = {
-            url = "https://github.com/luckasRanarison/tree-sitter-hypr",
+            url = "https://github.com/luckasRanarison/tree-sitter-hyprlang",
             files = { "src/parser.c" },
             branch = "master",
           },
@@ -44,7 +44,7 @@ return {
         "graphql",
         "html",
         "http",
-        "hypr", -- hyprland parser from luckasRanarison/tree-sitter-hypr above
+        "hyprlang", -- hyprland parser from luckasRanarison/tree-sitter-hyprlang above
         "java",
         "javascript",
         "jsdoc",
