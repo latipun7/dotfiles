@@ -20,18 +20,14 @@ create_aucmd("User", {
 })
 
 -- Show alpha dashboard when buffer empty
--- deps: bufdelete, neo-tree, alpha
+-- deps: bufdelete, alpha
 create_aucmd("User", {
-  pattern = { "BDeletePost*" },
+  pattern = { "BDeletePre *" },
   group = create_augroup("alpha_on_empty"),
-  callback = function(event)
-    local fallback_name = vim.api.nvim_buf_get_name(event.buf)
-    local fallback_ft = vim.api.nvim_get_option_value("filetype", { buf = event.buf })
-    local fallback_on_empty = fallback_name == "" and fallback_ft == ""
-    if fallback_on_empty then
-      vim.cmd("Neotree close")
-      vim.cmd("Alpha")
-      vim.cmd(event.buf .. "bwipeout")
-    end
+  callback = function()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local name = vim.api.nvim_buf_get_name(bufnr)
+
+    if name == "" then vim.cmd([[:Alpha | bd#]]) end
   end,
 })
