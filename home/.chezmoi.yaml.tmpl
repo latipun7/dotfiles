@@ -2,15 +2,18 @@
 {{ $name := promptStringOnce . "name" "Full name" "Latif Sulistyo" -}}
 
 {{ $isServer := false -}}
+{{ $isWSL := (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
 
 {{- if eq .chezmoi.os "linux" -}}
-{{-   $chassis := output "hostnamectl" "chassis" | trim -}}
-{{-   if eq $chassis "server" -}}
-{{-     $isServer = true -}}
+{{-   if not $isWSL -}}
+{{-     $chassis := output "hostnamectl" "chassis" | trim -}}
+{{-     if eq $chassis "server" -}}
+{{-       $isServer = true -}}
+{{-     end -}}
 {{-   end -}}
 {{- end -}}
 
-{{ $isNoGUI := or (eq .chezmoi.os "android") $isServer -}}
+{{ $isNoGUI := or (eq .chezmoi.os "android") $isServer $isWSL -}}
 {{ $isGUI := and (not $isNoGUI) (eq .chezmoi.os "linux") -}}
 
 progress: true
@@ -27,4 +30,5 @@ data:
   is_no_gui: {{ $isNoGUI }}
   is_linux_gui: {{ $isGUI }}
   is_server: {{ $isServer }}
+  is_wsl: {{ $isWSL }}
   is_arch_linux: {{ not (not (and (eq .chezmoi.os "linux") (lookPath "pacman"))) }}
