@@ -51,7 +51,7 @@ function fail() {
 
 #===================================================0
 
-deps=(gzip chezmoi git wget curl tar lazygit fd rg nvim grep delta rbw)
+deps=(gzip chezmoi git wget curl tar lazygit fd rg nvim grep delta rbw unzip)
 
 function check_dependencies() {
   step "Checking dependencies..."
@@ -67,7 +67,7 @@ function check_dependencies() {
 
 function bootstrap_dotfiles() {
   step "Install dotfiles..."
-  chezmoi init latipun7 --apply --verbose
+  chezmoi init latipun7 --apply
 }
 
 function main() {
