@@ -24,6 +24,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 HIST_STAMPS="yyyy-mm-dd"
 
+zstyle ':omz:update' mode auto
 zstyle ':omz:update' frequency 7
 
 if hash vivid 2>/dev/null; then
