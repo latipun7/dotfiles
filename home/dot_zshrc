@@ -31,14 +31,18 @@ if hash vivid 2>/dev/null; then
   DISABLE_LS_COLORS=true
 fi
 
-# zsh-autocomplete configs
+# zsh-autocomplete plugin config
 zstyle ':autocomplete:*' min-input 1
 zstyle ':autocomplete:*' fzf-completion yes
 zstyle ':autocomplete:*' ignored-input '(\*\*|..)'
 
-# tmux
+# tmux plugin config
 ZSH_TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
 ZSH_TMUX_DEFAULT_SESSION_NAME="L"
+
+# ssh-agent plugin config
+zstyle :omz:plugins:ssh-agent quiet yes
+zstyle :omz:plugins:ssh-agent lazy yes
 
 plugins=(
   git
@@ -46,6 +50,7 @@ plugins=(
   rsync
   sudo
   tmux
+  ssh-agent
   zsh-autosuggestions
   zsh-autocomplete
   zsh-latipun

@@ -67,7 +67,7 @@ function check_dependencies() {
 
 function bootstrap_dotfiles() {
   step "Install dotfiles..."
-  chezmoi init latipun7 --apply
+  chezmoi init latipun7 --ssh --apply
 }
 
 function main() {
