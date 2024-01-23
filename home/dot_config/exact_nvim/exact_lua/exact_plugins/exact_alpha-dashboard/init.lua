@@ -31,7 +31,7 @@ return {
           .. "-"
           .. vim.version().prerelease
           .. "+"
-          .. vim.version().build
+          .. vim.version().build:sub(1, 7)
           .. " ─┘",
         opts = {
           position = "center",
