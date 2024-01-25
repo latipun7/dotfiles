@@ -2,7 +2,7 @@
 
 [credential]
 {{- if (or (eq .chezmoi.os "linux") (eq .chezmoi.os "android")) -}}
-{{-   if .is_server }}
+{{-   if (or .is_server .is_wsl) }}
   helper = cache --timeout=86400
 {{-   else }}
   helper = libsecret
@@ -10,6 +10,7 @@
 {{- else if eq .chezmoi.os "windows" -}}
   helper = manager
 {{- else }}
+  helper = manager
 {{- end }}
 
 [core]
