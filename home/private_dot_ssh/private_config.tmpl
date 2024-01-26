@@ -1,8 +1,8 @@
 Host *
   ServerAliveInterval 99
   AddKeysToAgent yes
-{{- /* ControlMaster not work on Windows yet */ -}}
 {{- /* NOTE: https://github.com/PowerShell/Win32-OpenSSH/issues/405 */ -}}
+{{- /* ControlMaster not work on Windows yet */ -}}
 {{- if ne .chezmoi.os "windows" }}
   ControlMaster auto
   ControlPath ~/.ssh/multiplex/%r@%h:%p

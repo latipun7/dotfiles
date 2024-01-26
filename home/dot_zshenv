@@ -148,7 +148,7 @@ fi
 # Invoking gpg-agent
 # https://www.gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html
 # GPG_TTY="$(tty)"
-# see: https://github.com/romkatv/powerlevel10k/issues/524
+# NOTE: https://github.com/romkatv/powerlevel10k/issues/524
 export GPG_TTY="$TTY"
 
 # Batman syntax highlight for man pages -> https://github.com/sharkdp/bat#man

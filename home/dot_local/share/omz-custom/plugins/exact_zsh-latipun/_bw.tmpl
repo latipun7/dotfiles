@@ -1,5 +1,5 @@
 {{ $bw := lookPath "bw" -}}
 {{ if $bw -}}
-{{/* see: https://github.com/bitwarden/clients/issues/2730#issuecomment-1231919006 */ -}}
+{{/* HACK: https://github.com/bitwarden/clients/issues/2730#issuecomment-1231919006 */ -}}
 {{ output $bw "completion" "--shell" "zsh" | replaceAllRegex "\\x1B\\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]" "" -}}
 {{ end -}}
