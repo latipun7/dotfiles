@@ -19,10 +19,16 @@ if vim.fn.has("wsl") then
     },
     paste = {
       ["+"] = {
-        'powershell.exe -noprofile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+        "powershell.exe",
+        "-noprofile",
+        "-c",
+        '[Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
       },
       ["*"] = {
-        'powershell.exe -noprofile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+        "powershell.exe",
+        "-noprofile",
+        "-c",
+        '[Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
       },
     },
     cache_enabled = false,
