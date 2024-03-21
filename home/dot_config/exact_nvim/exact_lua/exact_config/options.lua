@@ -11,7 +11,6 @@ opt.spellcapcheck = ""
 opt.spellfile = { vim.fn.expand(vim.fn.stdpath("config") .. "/spell/mix.utf-8.add") }
 
 if vim.fn.has("wsl") == 1 then
-  print("testing")
   vim.g.clipboard = {
     name = "WSL",
     copy = {
