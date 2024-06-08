@@ -45,7 +45,7 @@ www
 # Ignore if no GUI environment (desktop only files)
 .config/{awesome,copyq,fcitx5,imv,kitty,rofi*,simplescreenrecorder,wezterm,xsettingsd}
 .local/bin/{color-picker,xterm}
-.local/share/{fcitx5,mpd,rofimoji,Xresources*}
+.local/share/{applications,fcitx5,mpd,rofimoji,user-tmpfiles.d/discord.conf,Xresources*}
 .xprofile
 ###
 {{- end }}
