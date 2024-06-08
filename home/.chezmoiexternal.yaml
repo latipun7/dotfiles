@@ -6,9 +6,9 @@
 .config/bat/themes:
   type: archive
   url: https://github.com/catppuccin/bat/archive/refs/heads/main.zip
-  stripComponents: 1
+  stripComponents: 2
   refreshPeriod: 132h
-  include: ["*/*.tmTheme"]
+  include: ["*", "*/themes/*.tmTheme"]
 
 {{ if (and (ne .chezmoi.os "windows") (ne .chezmoi.os "android")) -}}
 # ╻ ╻┏┓╻╻╻ ╻   ┏┓╻┏━┓   ┏━┓┏┓╻╺┳┓┏━┓┏━┓╻╺┳┓

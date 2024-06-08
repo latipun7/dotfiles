@@ -1,6 +1,6 @@
 # -*-ini-*- vim:syntax=dosini
 
---theme="Catppuccin-mocha"
+--theme="Catppuccin Mocha"
 
 --pager="less --RAW-CONTROL-CHARS --quit-if-one-screen --ignore-case --mouse"
 
