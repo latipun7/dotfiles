@@ -56,11 +56,20 @@ deps=(gzip chezmoi git wget curl tar lazygit fd rg nvim grep delta rbw unzip)
 function check_dependencies() {
   step "Checking dependencies..."
 
+  missing_commands=""
+
   for dep in "${deps[@]}"; do
     type -p "$dep" &>/dev/null || {
-      fail "Could not find '${color6}${dep}${reset}', is it installed?" >&2
+      missing_commands+="$dep "
     }
   done
+
+  # Remove trailing space from missing_commands (if any)
+  missing_commands="${missing_commands% }"
+
+  if [ -n "$missing_commands" ]; then
+    fail "Could not find: $missing_commands\n    Is it installed?" >&2
+  fi
 
   info "OK!"
 }
