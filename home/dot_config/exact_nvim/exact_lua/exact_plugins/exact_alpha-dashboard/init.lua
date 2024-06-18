@@ -22,17 +22,29 @@ return {
 
       local plugin_count = {
         type = "text",
-        val = "└─   Ver: "
-          .. vim.version().major
-          .. "."
-          .. vim.version().minor
-          .. "."
-          .. vim.version().patch
-          .. "-"
-          .. vim.version().prerelease
-          .. "+"
-          .. vim.version().build:sub(1, 7)
-          .. " ─┘",
+        val = function()
+          if type(vim.version().build) == "string" then
+            return "└─   Ver: "
+              .. vim.version().major
+              .. "."
+              .. vim.version().minor
+              .. "."
+              .. vim.version().patch
+              .. "-"
+              .. vim.version().prerelease
+              .. "+"
+              .. vim.version().build:sub(1, 7)
+              .. " ─┘"
+          else
+            return "└─   Ver: "
+              .. vim.version().major
+              .. "."
+              .. vim.version().minor
+              .. "."
+              .. vim.version().patch
+              .. " - (latest)  ─┘"
+          end
+        end,
         opts = {
           position = "center",
           hl = "AlphaHeaderLabel",
