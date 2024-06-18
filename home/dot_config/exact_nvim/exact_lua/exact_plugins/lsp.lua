@@ -11,10 +11,6 @@ return {
     opts = function(_, opts)
       opts.ui = { border = "rounded", height = 0.8 }
       vim.list_extend(opts.ensure_installed, {
-        "stylua",
-        "shellcheck",
-        "shfmt",
-        "markdownlint",
         "eslint_d",
       })
     end,
@@ -36,14 +32,6 @@ return {
   },
 
   -- Linters & Formatters
-  {
-    "mfussenegger/nvim-lint",
-    opts = {
-      linters_by_ft = {
-        markdown = { "markdownlint" },
-      },
-    },
-  },
   {
     "stevearc/conform.nvim",
     opts = {

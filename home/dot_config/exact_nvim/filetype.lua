@@ -9,7 +9,6 @@ vim.filetype.add({
   },
   pattern = { -- regex
     [".*ignore"] = "gitignore",
-    [".*/.*hypr/.*%.conf"] = "hypr",
     [".conf"] = {
       priority = -math.huge,
       function(_, bufnr)
