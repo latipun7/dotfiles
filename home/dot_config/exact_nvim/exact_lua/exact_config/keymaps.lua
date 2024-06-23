@@ -32,5 +32,8 @@ map({ "i", "x", "n", "s" }, "<C-s>", "<Cmd>silent w<CR><Esc>", { desc = "Save fi
 vim.keymap.del("n", "<leader>qq")
 map("n", "<leader>q", "<Cmd>confirm qa<CR>", { desc = "󰗼  Quit all" })
 
---
+-- Search
 map("n", "<leader>snn", "<Cmd>Telescope notify<CR>", { desc = "List notify" })
+
+-- UI
+map("n", "<leader>ut", "<Cmd>set list!<CR>", { desc = " Toggle hidden characters" })

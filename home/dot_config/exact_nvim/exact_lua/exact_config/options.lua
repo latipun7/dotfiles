@@ -4,6 +4,8 @@
 
 local opt = vim.opt
 
+opt.list = false
+opt.listchars = [[space:·,tab:→→,eol:↲,nbsp:␣,trail:•,extends:›,precedes:‹]]
 opt.spell = true
 opt.spelllang = { "en", "id", "cjk" }
 opt.spelloptions = { "camel" }
