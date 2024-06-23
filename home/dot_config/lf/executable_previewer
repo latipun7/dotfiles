@@ -27,6 +27,13 @@
 CACHEDIR="${XDG_CACHE_HOME:-$HOME/.cache}/lf"
 CACHE="$CACHEDIR/thumbnail.$(stat --printf '%n\0%i\0%F\0%s\0%W\0%Y' -- "$(readlink -f "$1")" | sha256sum | awk '{print $1}')"
 COLS="${2:-$(tput cols)}"
+LF_TERM=${LF_TERM:-}
+
+if [[ -n "$TERM_PROGRAM" ]]; then
+  LF_TERM="$(echo "$TERM_PROGRAM" | tr '[:upper:]' '[:lower:]')"
+elif [[ -z "$TERM_PROGRAM" ]] && [[ -n "$SSH_CONNECTION" ]]; then
+  LF_TERM="${TERMINAL:-}"
+fi
 
 function exists() { hash "$1" 2>/dev/null; }
 
@@ -46,17 +53,26 @@ function handle_fallback() {
 }
 
 function image_preview() {
-  if [[ -z "$INFO" ]]; then
+  if [[ "$LF_TERM" == wezterm ]]; then
     if exists kitty; then
       kitten icat --transfer-mode=memory --stdin=no --place="$(($2 - 2))x$(($3 - 4))@${4}x$(($5 + 2))" "$1" </dev/null >/dev/tty
       exit 69
     elif exists chafa; then
-      chafa -s "$(($2 - 2))x$(($3 - 2))" -f symbols "$1" && exit 0
-    else
-      handle_fallback "$@"
+      chafa -s "$(($2 - 2))x$(($3 - 2))" -f sixel --animate off --polite on "$1" && exit 69
+    fi
+  elif [[ "$LF_TERM" == kitty ]]; then
+    kitten icat --transfer-mode=stream --stdin=no --place="$(($2 - 2))x$(($3 - 4))@${4}x$(($5 + 2))" "$1" </dev/null >/dev/tty
+    exit 69
+  elif [[ "$LF_TERM" == tmux ]]; then
+    if exists chafa; then
+      chafa -s "$(($2 - 2))x$(($3 - 2))" -f sixel --animate off --polite on "$1" && exit 69
     fi
   else
-    mediainfo "$1" || handle_fallback "$@"
+    if exists chafa; then
+      chafa -s "$(($2 - 2))x$(($3 - 2))" -f symbols "$1" && exit 69
+    else
+      mediainfo "$1" || handle_fallback "$@"
+    fi
   fi
 }
 
@@ -66,25 +82,25 @@ function generate_preview() {
   # if no image cache of this file, generate the image cache
   if [[ "$(compgen -G "${CACHE}.*")" == "" ]]; then
     case "$1" in
-      audio) ffmpeg -i "$2" -filter_complex "scale=iw*min(1\,min($3/iw\,ih)):-1" "${CACHE}.jpg" -y || handle_fallback "$2" ;;
-      djvu) ddjvu -format=ppm -page=1 "$2" "${CACHE}.jpg" || handle_fallback "$2" ;;
-      epub) gnome-epub-thumbnailer "$2" "${CACHE}.jpg" || handle_fallback "$2" ;;
-      font)
-        fontimage -o "${CACHE}.png" --pixelsize "60" --fontname --pixelsize "40" \
-          --text "  ABCDEFGHIJKLMNOPQRSTUVWXYZ  " \
-          --text "  abcdefghijklmnopqrstuvwxyz  " \
-          --text "  0123456789.:,;(*!?') ff fl fi ffi ffl  " \
-          --text "  The quick brown fox jumps over the lazy dog.  " \
-          "$2" || handle_fallback "$2"
-        convert "${CACHE}.png" "${CACHE}.jpg"
-        ;;
-      office)
-        libreoffice --convert-to jpg "$2" --outdir "$CACHEDIR/${2%/*}" &>/dev/null || handle_fallback "$2"
-        filename="$(printf "%s" "${2##*/}" | cut -d. -f1)"
-        mv "$CACHEDIR/${2%/*}/$filename.jpg" "$CACHE.jpg"
-        ;;
-      pdf) pdftoppm -jpeg -f 1 -singlefile "$2" "$CACHE" || handle_fallback "$2" ;;
-      video) ffmpegthumbnailer -m -s0 -i "$2" -o "${CACHE}.jpg" || handle_fallback "$2" ;;
+    audio) ffmpeg -i "$2" -filter_complex "scale=iw*min(1\,min($3/iw\,ih)):-1" "${CACHE}.jpg" -y || handle_fallback "$2" ;;
+    djvu) ddjvu -format=ppm -page=1 "$2" "${CACHE}.jpg" || handle_fallback "$2" ;;
+    epub) gnome-epub-thumbnailer "$2" "${CACHE}.jpg" || handle_fallback "$2" ;;
+    font)
+      fontimage -o "${CACHE}.png" --pixelsize "60" --fontname --pixelsize "40" \
+        --text "  ABCDEFGHIJKLMNOPQRSTUVWXYZ  " \
+        --text "  abcdefghijklmnopqrstuvwxyz  " \
+        --text "  0123456789.:,;(*!?') ff fl fi ffi ffl  " \
+        --text "  The quick brown fox jumps over the lazy dog.  " \
+        "$2" || handle_fallback "$2"
+      convert "${CACHE}.png" "${CACHE}.jpg"
+      ;;
+    office)
+      libreoffice --convert-to jpg "$2" --outdir "$CACHEDIR/${2%/*}" &>/dev/null || handle_fallback "$2"
+      filename="$(printf "%s" "${2##*/}" | cut -d. -f1)"
+      mv "$CACHEDIR/${2%/*}/$filename.jpg" "$CACHE.jpg"
+      ;;
+    pdf) pdftoppm -jpeg -f 1 -singlefile "$2" "$CACHE" || handle_fallback "$2" ;;
+    video) ffmpegthumbnailer -m -s0 -i "$2" -o "${CACHE}.jpg" || handle_fallback "$2" ;;
     esac
   fi
 
@@ -94,8 +110,8 @@ function generate_preview() {
   # otherwise display the info of that file
   else
     case "$1" in
-      audio | video) mediainfo "$2" || handle_fallback "$2" ;;
-      *) handle_fallback "$2" ;;
+    audio | video) mediainfo "$2" || handle_fallback "$2" ;;
+    *) handle_fallback "$2" ;;
     esac
   fi
 }
@@ -105,36 +121,36 @@ function handle_extension() {
   FILE_EXTENSION_LOWER="$(printf "%s" "${FILE_EXTENSION}" | tr '[:upper:]' '[:lower:]')"
 
   case "$FILE_EXTENSION_LOWER" in
-    7z | a | ace | alz | arc | arj | bz | cab | cpio | deb | jar | lha | lz | lzh | lzma | lzo | \
-      rar | rpm | rz | t7z | tar | tbz | tbz2 | tgz | tlz | txz | tz | tzo | war | xpi | xz | z | zip)
-      if exists atool; then
-        atool -l "$1" && exit 0
-      elif exists bsdtar; then
-        bsdtar -tvf "$1" && exit 0
-      fi
-      ;;
-    gz | bz2) tar -tvf "$1" && exit 0 ;;
-    htm | html | xhtml)
-      if exists w3m; then
-        w3m "$1" && exit 0
-      elif exists lynx; then
-        lynx "$1" && exit 0
-      elif exists elinks; then
-        elinks "$1" && exit 0
-      else
-        pager "$1" && exit 0
-      fi
-      ;;
-    md)
-      if exists glow; then
-        glow -s dark -w "$((COLS - 5))" "$1" && exit 0
-      elif exists lowdown; then
-        lowdown -Tterm "$1" && exit 0
-      else
-        pager "$1" && exit 0
-      fi
-      ;;
-    pdf) generate_preview pdf "$@" ;;
+  7z | a | ace | alz | arc | arj | bz | cab | cpio | deb | jar | lha | lz | lzh | lzma | lzo | \
+    rar | rpm | rz | t7z | tar | tbz | tbz2 | tgz | tlz | txz | tz | tzo | war | xpi | xz | z | zip)
+    if exists atool; then
+      atool -l "$1" && exit 0
+    elif exists bsdtar; then
+      bsdtar -tvf "$1" && exit 0
+    fi
+    ;;
+  gz | bz2) tar -tvf "$1" && exit 0 ;;
+  htm | html | xhtml)
+    if exists w3m; then
+      w3m "$1" && exit 0
+    elif exists lynx; then
+      lynx "$1" && exit 0
+    elif exists elinks; then
+      elinks "$1" && exit 0
+    else
+      pager "$1" && exit 0
+    fi
+    ;;
+  md)
+    if exists glow; then
+      glow -s dark -w "$((COLS - 5))" "$1" && exit 0
+    elif exists lowdown; then
+      lowdown -Tterm "$1" && exit 0
+    else
+      pager "$1" && exit 0
+    fi
+    ;;
+  pdf) generate_preview pdf "$@" ;;
   esac
 }
 
@@ -142,15 +158,15 @@ function handle_mime() {
   MIMETYPE="$(file --dereference --brief --mime-type "$1")"
 
   case "$MIMETYPE" in
-    application/epub* | application/*book*) generate_preview epub "$@" ;;
-    application/font* | application/*opentype | font/*) generate_preview font "$@" ;;
-    audio/*) generate_preview audio "$@" ;;
-    image/vnd.djvu) generate_preview djvu "$@" ;;
-    image/*) image_preview "$@" ;;
-    text/*) pager "$1" && exit 0 ;;
-    video/*) generate_preview video "$@" ;;
-    */*json) jq --color-output . "$1" && exit 0 ;;
-    */*office* | */*document* | */*msword | */*ms-excel) generate_preview office "$@" ;;
+  application/epub* | application/*book*) generate_preview epub "$@" ;;
+  application/font* | application/*opentype | font/*) generate_preview font "$@" ;;
+  audio/*) generate_preview audio "$@" ;;
+  image/vnd.djvu) generate_preview djvu "$@" ;;
+  image/*) image_preview "$@" ;;
+  text/*) pager "$1" && exit 0 ;;
+  video/*) generate_preview video "$@" ;;
+  */*json) jq --color-output . "$1" && exit 0 ;;
+  */*office* | */*document* | */*msword | */*ms-excel) generate_preview office "$@" ;;
   esac
 }
 

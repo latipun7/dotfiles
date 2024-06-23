@@ -18,6 +18,7 @@ set scrolloff 8
 set shell zsh
 set shellflag '-c'
 set shellopts '-ey'
+set sixel true
 set tabstop 2
 set truncatechar ''
 
