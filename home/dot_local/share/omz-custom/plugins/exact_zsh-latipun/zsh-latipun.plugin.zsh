@@ -70,11 +70,11 @@ if hash pacman 2>/dev/null && type yay &>/dev/null; then
   }
 fi
 
-# exa alias
-if hash exa 2>/dev/null; then
-  alias ls='exa --long --all --header --group-directories-first --icons --git'
-  alias ll='exa --long --all --header --group --group-directories-first --icons --git'
-  alias lt='exa --tree --all --header --group-directories-first --icons --git --ignore-glob ".git|node_modules"'
+# eza alias
+if hash eza 2>/dev/null; then
+  alias ls='eza --long --all --header --group-directories-first --icons --git'
+  alias ll='eza --long --all --header --group --group-directories-first --icons --git'
+  alias lt='eza --tree --all --header --group-directories-first --icons --git --ignore-glob ".git|node_modules"'
 fi
 
 # bat alias
