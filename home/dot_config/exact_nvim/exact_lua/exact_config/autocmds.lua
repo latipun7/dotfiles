@@ -31,3 +31,9 @@ create_aucmd("User", {
     if name == "" then vim.cmd([[:Alpha | bd#]]) end
   end,
 })
+
+-- Disable yaml LS diagnostics on `.chezmoiexternal.yaml` file
+create_aucmd({ "BufRead", "BufNewFile" }, {
+  pattern = "*chezmoiexternal*",
+  callback = function(ev) vim.diagnostic.enable(false, { bufnr = ev.buf }) end,
+})
