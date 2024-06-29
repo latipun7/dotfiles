@@ -143,7 +143,7 @@ function handle_extension() {
     ;;
   md)
     if exists glow; then
-      glow -s dark -w "$((COLS - 5))" "$1" && exit 0
+      glow -s ~/.config/glow/catppuccin-mocha.json -w "$((COLS - 5))" "$1" && exit 0
     elif exists lowdown; then
       lowdown -Tterm "$1" && exit 0
     else

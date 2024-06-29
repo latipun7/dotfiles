@@ -10,10 +10,10 @@
   refreshPeriod: 132h
   include: ["*", "*/themes/*.tmTheme"]
 
-{{ if (and (ne .chezmoi.os "windows") (ne .chezmoi.os "android")) -}}
 # ╻ ╻┏┓╻╻╻ ╻   ┏┓╻┏━┓   ┏━┓┏┓╻╺┳┓┏━┓┏━┓╻╺┳┓
 # ┃ ┃┃┗┫┃┏╋┛   ┃┗┫┃ ┃   ┣━┫┃┗┫ ┃┃┣┳┛┃ ┃┃ ┃┃
 # ┗━┛╹ ╹╹╹ ╹   ╹ ╹┗━┛   ╹ ╹╹ ╹╺┻┛╹┗╸┗━┛╹╺┻┛
+{{ if (and (ne .chezmoi.os "windows") (ne .chezmoi.os "android")) -}}
 
 .local/bin/vimv:
   type:  archive-file
@@ -27,16 +27,22 @@
   path: fnm
   executable: true
   refreshPeriod: 132h
+
 {{ end -}}
 
-{{ if ne .chezmoi.os "windows" -}}
 # ╻ ╻┏┓╻╻╻ ╻   ┏━┓┏┓╻╻  ╻ ╻
 # ┃ ┃┃┗┫┃┏╋┛   ┃ ┃┃┗┫┃  ┗┳┛
 # ┗━┛╹ ╹╹╹ ╹   ┗━┛╹ ╹┗━╸ ╹
+{{ if ne .chezmoi.os "windows" -}}
 
 .config/btop/themes/catppuccin-mocha.theme:
   type: file
   url: https://github.com/catppuccin/btop/raw/main/themes/catppuccin_mocha.theme
+  refreshPeriod: 132h
+
+.config/glow/catppuccin-mocha.json:
+  type: file
+  url: https://github.com/catppuccin/glamour/raw/main/themes/catppuccin-mocha.json
   refreshPeriod: 132h
 
 # oh-my-zsh [[[
@@ -104,12 +110,13 @@
   pull:
     args: ["--dry-run"] # update/pull manually
 # ]]]
+
 {{ end -}}
 
-{{ if .is_linux_gui -}}
 # ╻  ╻┏┓╻╻ ╻╻ ╻   ┏━╸╻ ╻╻   ┏━┓┏┓╻╻  ╻ ╻
 # ┃  ┃┃┗┫┃ ┃┏╋┛   ┃╺┓┃ ┃┃   ┃ ┃┃┗┫┃  ┗┳┛
 # ┗━╸╹╹ ╹┗━┛╹ ╹   ┗━┛┗━┛╹   ┗━┛╹ ╹┗━╸ ╹
+{{ if .is_linux_gui -}}
 
 .config/zathura:
   type: archive
@@ -138,12 +145,13 @@
   stripComponents: 2
   refreshPeriod: 132h
   include: ["*", "*/themes/*.conf"]
+
 {{- end }}
 
-{{ if .is_server -}}
 # ┏━┓┏━╸┏━┓╻ ╻┏━╸┏━┓   ┏━┓┏┓╻╻  ╻ ╻
 # ┗━┓┣╸ ┣┳┛┃┏┛┣╸ ┣┳┛   ┃ ┃┃┗┫┃  ┗┳┛
 # ┗━┛┗━╸╹┗╸┗┛ ┗━╸╹┗╸   ┗━┛╹ ╹┗━╸ ╹
+{{ if .is_server -}}
 
 .local/bin/godns:
   type: archive-file
@@ -169,12 +177,13 @@ www/adminer: # plugins
   refreshPeriod: 744h
   include: ["*/plugins/**"]
 # ]]]
+
 {{- end }}
 
-{{ if eq .chezmoi.os "windows" -}}
 # ╻ ╻╻┏┓╻╺┳┓┏━┓╻ ╻┏━┓   ┏━┓┏┓╻╻  ╻ ╻
 # ┃╻┃┃┃┗┫ ┃┃┃ ┃┃╻┃┗━┓   ┃ ┃┃┗┫┃  ┗┳┛
 # ┗┻┛╹╹ ╹╺┻┛┗━┛┗┻┛┗━┛   ┗━┛╹ ╹┗━╸ ╹
+{{ if eq .chezmoi.os "windows" -}}
 
 .local/bin/fnm.exe:
   type: archive-file
@@ -187,12 +196,13 @@ www/adminer: # plugins
   url: https://github.com/stedolan/jq/releases/latest/download/jq-win64.exe
   executable: true
   refreshPeriod: 744h
+
 {{- end }}
 
-{{ if eq .chezmoi.os "android" -}}
 # ┏━┓┏┓╻╺┳┓┏━┓┏━┓╻╺┳┓   ┏━┓┏┓╻╻  ╻ ╻
 # ┣━┫┃┗┫ ┃┃┣┳┛┃ ┃┃ ┃┃   ┃ ┃┃┗┫┃  ┗┳┛
 # ╹ ╹╹ ╹╺┻┛╹┗╸┗━┛╹╺┻┛   ┗━┛╹ ╹┗━╸ ╹
+{{ if eq .chezmoi.os "android" -}}
 
 .local/bin/chara:
   type: archive-file
@@ -209,4 +219,5 @@ www/adminer: # plugins
   type: archive
   url: https://drive.google.com/uc?export=download&id=1oKvdW1-7xrwOkyUqRiLjTK0KLDe2qNIZ
   refreshPeriod: 132h
+
 {{- end }}
