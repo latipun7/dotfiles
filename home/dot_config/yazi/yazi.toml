@@ -1,0 +1,17 @@
+"$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
+
+[manager]
+ratio = [1, 3, 4]
+sort_by = "natural"
+show_hidden = true
+
+[plugin]
+prepend_previewers = [
+  { name = "*.md", run = "glow" },
+  { mime = "audio/*", run = "exifaudio" },
+]
+
+[opener]
+extract = [
+  { run = 'atool --extract "$1"', desc = "Extract here", for = "unix" },
+]

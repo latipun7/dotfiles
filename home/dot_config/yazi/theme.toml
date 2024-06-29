@@ -1,0 +1,7 @@
+"$schema" = "https://yazi-rs.github.io/schemas/theme.json"
+
+[flavor]
+use = "catppuccin-mocha"
+
+[manager]
+syntect_theme = "~/.config/bat/themes/Catppuccin Mocha.tmTheme"

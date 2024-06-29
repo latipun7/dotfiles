@@ -31,6 +31,7 @@ Here's the list of what included in this dotfiles:
 - [`Hyprland`](https://hyprland.org/) - Beautiful tiling Wayland compositor.
 - [`LazyVim`](https://www.lazyvim.org) - NeoVim as an IDE.
 - [`WezTerm`](https://wezfurlong.org/wezterm/) - Cross-platform terminal emulator.
+- [`Yazi`](https://yazi-rs.github.io/) - Blazing fast terminal file manager.
 - [`tmux`](https://github.com/tmux/tmux) - Terminal multiplexer _(no Windows)_.
 - [`zsh`](https://zsh.sourceforge.io/) - Interactive unix-like shell _(no Windows)_.
 - [`lf`](https://github.com/gokcehan/lf) - Cross-platform terminal file manager.

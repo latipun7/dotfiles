@@ -117,6 +117,21 @@ if hash lf 2>/dev/null; then
   }
 fi
 
+# yazi alias
+if hash yazi 2>/dev/null; then
+  function yy() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+      cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
+  }
+  compdef _yazi yy
+
+  alias l=yy
+fi
+
 # lazygit alias
 if hash lazygit 2>/dev/null; then
   function lg() {

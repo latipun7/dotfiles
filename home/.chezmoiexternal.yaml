@@ -111,6 +111,55 @@
     args: ["--dry-run"] # update/pull manually
 # ]]]
 
+# yazi [[[
+.config/yazi/flavors/catppuccin-mocha.yazi/flavor.toml:
+  type: file
+  url: https://github.com/catppuccin/yazi/raw/main/themes/mocha.toml
+  refreshPeriod: 132h
+
+.config/yazi/plugins/full-border.yazi:
+  type: archive
+  url: https://github.com/yazi-rs/plugins/archive/refs/heads/main.zip
+  exact: true
+  stripComponents: 2
+  refreshPeriod: 132h
+  include: ["*", "*/full-border.yazi/**"]
+
+.config/yazi/plugins/chmod.yazi:
+  type: archive
+  url: https://github.com/yazi-rs/plugins/archive/refs/heads/main.zip
+  exact: true
+  stripComponents: 2
+  refreshPeriod: 132h
+  include: ["*", "*/chmod.yazi/**"]
+
+.config/yazi/plugins/max-preview.yazi:
+  type: archive
+  url: https://github.com/yazi-rs/plugins/archive/refs/heads/main.zip
+  exact: true
+  stripComponents: 2
+  refreshPeriod: 132h
+  include: ["*", "*/max-preview.yazi/**"]
+
+.config/yazi/plugins/smart-filter.yazi:
+  type: archive
+  url: https://github.com/yazi-rs/plugins/archive/refs/heads/main.zip
+  exact: true
+  stripComponents: 2
+  refreshPeriod: 132h
+  include: ["*", "*/smart-filter.yazi/**"]
+
+.config/yazi/plugins/exifaudio.yazi:
+  type: git-repo
+  url: https://github.com/Sonico98/exifaudio.yazi.git
+  refreshPeriod: 132h
+
+.config/yazi/plugins/fg.yazi:
+  type: git-repo
+  url: https://github.com/DreamMaoMao/fg.yazi.git
+  refreshPeriod: 132h
+# ]]]
+
 {{ end -}}
 
 # ╻  ╻┏┓╻╻ ╻╻ ╻   ┏━╸╻ ╻╻   ┏━┓┏┓╻╻  ╻ ╻

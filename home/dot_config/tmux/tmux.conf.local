@@ -234,6 +234,11 @@ set -g status-position top
 # override window status current
 setw -g window-status-current-format "#[fg=$tmux_conf_theme_status_bg,bg=$thm_status_current_index_bg,none]$tmux_conf_theme_left_separator_main#[fg=$thm_crust,bg=$thm_status_current_index_bg,$tmux_conf_theme_window_status_current_attr] $tmux_conf_theme_window_status_current_format #[fg=$tmux_conf_theme_window_status_current_bg,bg=$tmux_conf_theme_status_bg]$tmux_conf_theme_left_separator_main" #!important
 
+# yazi image preview
+set -g allow-passthrough on
+set -ga update-environment TERM
+set -ga update-environment TERM_PROGRAM
+
 
 # -- tpm -----------------------------------------------------------------------
 

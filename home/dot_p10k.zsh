@@ -19,6 +19,10 @@
 [[ ! -o 'no_brace_expand' ]] || p10k_config_opts+=('no_brace_expand')
 'builtin' 'setopt' 'no_aliases' 'no_sh_glob' 'brace_expand'
 
+function prompt_yazi() {
+  p10k segment -f 006 -i '' -t "Yazi ($YAZI_LEVEL)" -c "$YAZI_LEVEL"
+}
+
 () {
   emulate -L zsh -o extended_glob
 
@@ -90,6 +94,7 @@
     ranger                  # ranger shell (https://github.com/ranger/ranger)
     nnn                     # nnn shell (https://github.com/jarun/nnn)
     lf                      # lf shell (https://github.com/gokcehan/lf)
+    yazi                    # yazi shell (https://github.com/sxyazi/yazi)
     xplr                    # xplr shell (https://github.com/sayanarijit/xplr)
     vim_shell               # vim shell indicator (:sh)
     midnight_commander      # midnight commander shell (https://midnight-commander.org/)
