@@ -22,34 +22,72 @@ core:
 
 text:
   special:
+    - CHANGELOG
+    - CHANGELOG.md
+    - CHANGELOG.txt
+    - CODE_OF_CONDUCT
+    - CODE_OF_CONDUCT.md
+    - CODE_OF_CONDUCT.txt
+    - CONTRIBUTING
+    - CONTRIBUTING.md
+    - CONTRIBUTING.txt
     - CONTRIBUTORS
     - CONTRIBUTORS.md
     - CONTRIBUTORS.txt
-    - contributors.md
-    - contributors.txt
+    - FAQ
     - INSTALL
     - INSTALL.md
     - INSTALL.txt
-    - install.md
-    - install.txt
+    - LEGACY
+    - NOTICE
     - README
     - README.md
     - README.txt
+    - VERSION
+    - changelog
+    - changelog.md
+    - changelog.txt
+    - code_of_conduct
+    - code_of_conduct.md
+    - code_of_conduct.txt
+    - contributing
+    - contributing.md
+    - contributing.txt
+    - contributors
+    - contributors.md
+    - contributors.txt
+    - faq
+    - install
+    - install.md
+    - install.txt
+    - legacy
+    - notice
+    - readme
     - readme.md
     - readme.txt
+    - version
 
   todo:
     - TODO
     - TODO.md
     - TODO.txt
+    - todo
+    - todo.md
+    - todo.txt
 
   licenses:
     - COPYING
     - COPYRIGHT
+    - LICENCE
     - LICENSE
-    - license
     - LICENSE-APACHE
     - LICENSE-MIT
+    - copying
+    - copyright
+    - licence
+    - license
+    - license-apache
+    - license-mit
 
   configuration:
     generic:
@@ -60,6 +98,7 @@ text:
       - .json
       - .tml
       - .toml
+      - .webmanifest
       - .yaml
       - .yml
 
@@ -97,26 +136,31 @@ markup:
     - .xhtml
 
   other:
+    - ".1"
     - .csv
     - .markdown
     - .md
     - .mdown
+    - .info
     - .org
     - .rst
+    - .typ
     - .xml
 
 programming:
   source:
     actionscript: [.as]
+    ada: [.adb, .ads]
     applescript: [.applescript]
     asp: [.asa]
+    assembly: [.asm]
     awk: [.awk]
     basic: [.vb]
     cabal: [.cabal]
     clojure: [.clj]
     crystal: [.cr]
     csharp: [.cs, .csx]
-    css: [.css, .sass, .scss]
+    css: [.css]
     cxx:
       [
         .c,
@@ -130,6 +174,7 @@ programming:
         .hpp,
         .hxx,
         .h++,
+        .ino,
         .inc,
         .inl,
         .ipp,
@@ -143,13 +188,16 @@ programming:
     elm: [.elm]
     erlang: [.erl]
     fsharp: [.fs, .fsi, .fsx]
+    gcode: [.gcode]
     go: [.go]
     graphviz: [.dot, .gv]
     groovy: [.groovy, .gvy, .gradle]
+    hack: [.hack]
+    hare: [.ha]
     haskell: [.hs]
     ipython: [.ipynb]
     java: [.java, .bsh]
-    javascript: [.js, .htc]
+    javascript: [.js, .jsx, .htc]
     julia: [.jl]
     kotlin: [.kt, .kts]
     latex: [.tex, .ltx]
@@ -159,25 +207,33 @@ programming:
     lua: [.lua]
     mathematica: [.nb]
     matlab: [.matlab, .m, .mn]
+    mojo: [.mojo]
+    nim: [.nim, .nims, .nimble]
     ocaml: [.ml, .mli]
+    openscad: [.scad]
     pascal: [.pas, .p, .dpr]
     perl: [.pl, .pm, .pod, .t, .cgi]
     php: [.php]
     powershell: [.ps1, .psm1, .psd1]
+    prql: [.prql]
     puppet: [.pp, .epp]
     purescript: [.purs]
     python: [.py]
     r: [.r]
+    raku: [.raku]
     ruby: [.rb]
     rust: [.rs]
+    sass: [.sass, .scss]
     scala: [.scala, .sbt]
-    shell: [.sh, .bash, .zsh, .fish]
+    shell: [.sh, .bash, .nu, .bashrc, .bash_profile, .zsh, .fish]
     sql: [.sql]
     swift: [.swift]
     tablegen: [.td]
     tcl: [.tcl]
     typescript: [.ts, .tsx]
+    v: [.v, .vsh]
     viml: [.vim]
+    zig: [.zig]
 
   tooling:
     vcs:
@@ -186,6 +242,7 @@ programming:
         - .gitmodules
         - .gitattributes
         - .gitconfig
+        - .mailmap
 
       hg:
         - .hgrc
@@ -197,6 +254,7 @@ programming:
         - .ignore
         - .fdignore
         - .rgignore
+        - .tfignore
 
     build:
       cmake:
@@ -207,6 +265,7 @@ programming:
       make:
         - Makefile
         - .make
+        - .mk
 
       automake:
         - Makefile.am
@@ -223,11 +282,16 @@ programming:
         - requirements.txt
 
     packaging:
+      go:
+        - go.mod
       python:
         - MANIFEST.in
         - setup.py
+        - pyproject.toml
       ruby:
         - .gemspec
+      v:
+        - v.mod
 
     code-style:
       python:
@@ -237,8 +301,8 @@ programming:
         - .clang-format
 
     editors:
-      vscode:
-        - .vscode
+      editorconfig:
+        - .editorconfig
       qt:
         - .pro
       kdevelop:
@@ -251,36 +315,96 @@ programming:
 
     continuous-integration:
       - appveyor.yml
+      - azure-pipelines.yml
       - ci-cd.yaml
       - ci-cd.yml
+      - .cirrus.yml
       - .gitlab-ci.yml
       - .travis.yml
 
 media:
   image:
-    - .bmp
-    - .eps
-    - .gif
-    - .ico
-    - .jpeg
-    - .jpg
-    - .pbm
-    - .pgm
-    - .png
-    - .ppm
-    - .psd
-    - .svg
-    - .tif
-    - .tiff
-    - .webp
-    - .xcf
+    application:
+      - .ai # Illustrator
+      - .kra # Krita
+      - .psd # Photoshop
+      - .xvf # GIMP
+
+    bitmap:
+      - .avif
+      - .bmp
+      - .exr # OpenEXR
+      - .gif
+      - .heif
+      - .ico
+      - .jpeg
+      - .jpg
+      - .jxl
+      - .pbm
+      - .pcx
+      - .pgm
+      - .png
+      - .ppm
+      - .qoi
+      - .tga
+      - .tif
+      - .tiff
+      - .webp
+      - .xpm
+
+    raw: # Camera RAW files, based on https://en.wikipedia.org/wiki/Raw_image_format (.tif omitted to avoid duplication)
+      - .3fr
+      - .ari
+      - .arw
+      - .bay
+      - .braw
+      - .cap
+      - .cr2
+      - .cr3
+      - .crw
+      - .data
+      - .dcr
+      - .dcs
+      - .dng
+      - .drf
+      - .eip
+      - .erf
+      - .fff
+      - .gpr
+      - .iiq
+      - .k25
+      - .kdc
+      - .mdc
+      - .mef
+      - .mos
+      - .mrw
+      - .nef
+      - .nrw
+      - .obm
+      - .orf
+      - .pef
+      - .ptx
+      - .pxn
+      - .r3d
+      - .raf
+      - .raw
+      - .rw2
+      - .rwl
+      - .rwz
+      - .sr2
+      - .srf
+      - .srw
+      - .x3f
+
+    vector:
+      - .dxf
+      - .eps
+      - .svg
 
   audio:
+    - .aac
     - .aif
     - .ape
-    - .wma
-    - .wv
-    - .aac
     - .au
     - .flac
     - .m3u
@@ -290,12 +414,14 @@ media:
     - .mka
     - .mp3
     - .mpc
-    - .ogg
-    - .ra
-    - .wav
     - .oga
+    - .ogg
     - .opus
+    - .ra
     - .spx
+    - .wav
+    - .wma
+    - .wv
     - .xspf
 
   video:
@@ -308,6 +434,7 @@ media:
     - .mp4
     - .mpeg
     - .mpg
+    - .ogv
     - .rm
     - .swf
     - .vob
@@ -320,6 +447,37 @@ media:
     - .otf
     - .ttf
     - .woff
+    - .woff2
+
+  3d: # File formats relating to 3D data for computer graphics, CAD, 3D printing etc.
+    application:
+      - .blend # Blender scene file
+      - .hda # Houdini Digital Assets
+      - .hip # Houdini scene file
+      - .ma # Maya scene file
+      - .mb # Maya scene file
+      - .otl # Houdini Operator Type Library
+
+    mesh:
+      - .3ds
+      - .3mf # 3D manufacturing format
+      - .alembic
+      - .amf # Additive Manifacturing File
+      - .dae # Collada
+      - .fbx
+      - .iges
+      - .igs
+      - .mtl # material for .obj
+      - .obj
+      - .step
+      - .stl
+      - .stp
+      - .usd # Universal Scene Description (stores many things)
+      - .usda # .usd ASCII-format
+      - .usdc # .usd binary-format
+      - .usdz # .usd package
+      - .wrl # VRML
+      - .x3d
 
 office:
   document:
@@ -353,6 +511,7 @@ archives:
   packages:
     - .apk
     - .deb
+    - .msi
     - .rpm
     - .xbps
 
@@ -372,6 +531,7 @@ archives:
     - .arj
     - .bz
     - .bz2
+    - .db
     - .gz
     - .jar
     - .pkg
@@ -395,6 +555,7 @@ executable:
     - .so
     - .a
     - .dll
+    - .dylib
 
   linux:
     - .ko
@@ -411,6 +572,7 @@ unimportant:
       - Makefile.in
     rust:
       - .rlib
+      - .rmeta
     python:
       - .pyc
       - .pyd
@@ -446,15 +608,23 @@ unimportant:
     - .CFUserTextEncoding
     - .DS_Store
     - .localized
+    - Icon\r
 
   other:
     - "~"
     - .bak
+    - .ctags
     - .git # only works for '.git' files (submodules)
     - .lock
     - .log
     - .orig
     - .pid
     - .swp
+    - .timestamp
     - .tmp
+    - stderr
+    - stdin
+    - stdout
+    - bun.lockb
+    - go.sum
     - package-lock.json
