@@ -113,21 +113,8 @@ fi
 # lf alias
 if hash lf 2>/dev/null; then
   function lfcd() {
-    tmp="$(mktemp -t lf-cd-XXXXXX)"
-    lf -last-dir-path="$tmp" "$@"
-    if [ -f "$tmp" ]; then
-      dir="$(cat "$tmp")"
-      rm -f "$tmp"
-      if [ -d "$dir" ]; then
-        if [ "$dir" != "$(pwd)" ]; then
-          cd "$dir"
-        fi
-      fi
-    fi
+    cd "$(command lf -print-last-dir "$@")"
   }
-  compdef _lf lfcd
-
-  alias l=lfcd
 fi
 
 # lazygit alias
