@@ -90,16 +90,6 @@
   refreshPeriod: 132h
 # ]]]
 
-# LunarVim [[[
-.local/share/lunarvim/lvim:
-  type: git-repo
-  url: https://github.com/LunarVim/LunarVim.git
-  clone:
-    args: ["--depth", "1"]
-  pull:
-    args: ["--dry-run"] # Update via `lvim +LvimUpdate`
-# ]]]
-
 # oh-my-tmux [[[
 .local/share/oh-my-tmux:
   type: git-repo
