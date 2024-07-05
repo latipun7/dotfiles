@@ -16,6 +16,7 @@ Description = Clearing pacman & AUR cache...
 When = PostTransaction
 Exec = ${HOME}/.local/bin/yay-remove-hook
 Depends = pacman-contrib
+Depends = expac
 EOL
 
 sudo tee /usr/share/libalpm/hooks/cacheupgrade.hook > /dev/null << EOL
@@ -29,6 +30,7 @@ Description = Clearing pacman & AUR cache...
 When = PostTransaction
 Exec = ${HOME}/.local/bin/yay-upgrade-hook
 Depends = pacman-contrib
+Depends = expac
 EOL
 
 success "${color6}pacman hooks${reset} successfully installed!"
