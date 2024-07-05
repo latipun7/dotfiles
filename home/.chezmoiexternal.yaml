@@ -202,12 +202,6 @@
 # ┗━┛┗━╸╹┗╸┗┛ ┗━╸╹┗╸   ┗━┛╹ ╹┗━╸ ╹
 {{ if .is_server -}}
 
-.local/bin/godns:
-  type: archive-file
-  url: {{ template "godns-download-url" . }}
-  path: godns
-  refreshPeriod: 132h
-
 # Adminer [[[
 www/adminer/adminer.php:
   type: file
