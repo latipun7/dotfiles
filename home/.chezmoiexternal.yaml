@@ -143,11 +143,6 @@
   type: git-repo
   url: https://github.com/Sonico98/exifaudio.yazi.git
   refreshPeriod: 132h
-
-.config/yazi/plugins/fg.yazi:
-  type: git-repo
-  url: https://github.com/DreamMaoMao/fg.yazi.git
-  refreshPeriod: 132h
 # ]]]
 
 {{ end -}}
