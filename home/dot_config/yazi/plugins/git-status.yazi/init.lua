@@ -46,7 +46,7 @@ return {
     if opts ~= nil and opts.gitstatus_ignore ~= nil then st.opt_gitstatus_ignore = opts.gitstatus_ignore end
     if opts ~= nil and opts.enable_folder_size ~= nil then st.opt_enable_folder_size = opts.enable_folder_size end
 
-    function File:symlink(file)
+    function Entity:symlink(file)
       local git_span = {}
 
       if st.git_is_dirty ~= nil and st.git_is_dirty ~= "" then
@@ -95,15 +95,10 @@ return {
         or {}
       if st.cwd ~= cwd then
         st.cwd = cwd
-        ya.manager_emit(
-          "plugin",
-          {
-            st._name,
-            args = ya.quote(tostring(cwd)) .. " " .. tostring(ignore_caculate_size) .. " " .. tostring(
-              ignore_gitstatus
-            ),
-          }
-        )
+        ya.manager_emit("plugin", {
+          st._name,
+          args = ya.quote(tostring(cwd)) .. " " .. tostring(ignore_caculate_size) .. " " .. tostring(ignore_gitstatus),
+        })
       else
         local git_is_dirty = (st.git_is_dirty ~= nil and st.git_is_dirty ~= "") and "*" or ""
         git_span = (st.git_branch and st.git_branch ~= "")
