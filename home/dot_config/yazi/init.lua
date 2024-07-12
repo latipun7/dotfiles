@@ -1,4 +1,9 @@
 require("full-border"):setup()
+require("git-status"):setup({
+  folder_size_ignore = {},
+  gitstatus_ignore = {},
+  enable_folder_size = false,
+})
 
 function Header:host()
   if ya.target_family() ~= "unix" then return ui.Line({}) end
