@@ -31,12 +31,12 @@ return {
       {
         "<leader>Ss",
         function() require("telescope").extensions.persisted.persisted() end,
-        desc = "  Pick session to load",
+        desc = "Pick session to load",
       },
       {
         "<leader>St",
         function() require("persisted").toggle() end,
-        desc = "  Toggle sessions saving",
+        desc = "Toggle sessions saving",
       },
     },
     init = function()
