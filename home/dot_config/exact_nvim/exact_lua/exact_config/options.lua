@@ -11,6 +11,7 @@ opt.spelllang = { "en", "id", "cjk" }
 opt.spelloptions = { "camel" }
 opt.spellcapcheck = ""
 opt.spellfile = { vim.fn.expand(vim.fn.stdpath("config") .. "/spell/mix.utf-8.add") }
+opt.wrap = true
 
 if vim.fn.has("wsl") == 1 then
   vim.g.clipboard = {
