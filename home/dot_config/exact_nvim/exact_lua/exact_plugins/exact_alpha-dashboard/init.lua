@@ -23,7 +23,7 @@ return {
       local plugin_count = {
         type = "text",
         val = function()
-          if type(vim.version().build) == "string" then
+          if vim.version().prerelease == "dev" then
             return "└─   Ver: "
               .. vim.version().major
               .. "."
