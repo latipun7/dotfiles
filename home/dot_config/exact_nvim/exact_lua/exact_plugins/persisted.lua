@@ -1,26 +1,13 @@
-local function format_display(session_data)
-  local str
-  if session_data.branch ~= "" then
-    str = string.format("%s (branch: %s)", session_data.dir_path, session_data.branch)
-  else
-    str = session_data.dir_path
-  end
-  return str
-end
-
 return {
   { "folke/persistence.nvim", enabled = false },
   {
     "olimorris/persisted.nvim",
     event = "BufReadPre",
     opts = {
-      silent = true,
       use_git_branch = true,
-      autosave = true,
+      autostart = true,
       autoload = false,
-      allowed_dirs = nil,
-      ignored_dirs = nil,
-      should_autosave = function()
+      should_save = function()
         if vim.bo.filetype == "alpha" then return false end
         if vim.bo.filetype == "" and vim.api.nvim_buf_get_name(0) == "" then return false end
         if vim.api.nvim_buf_get_name(0):match("COMMIT_EDITMSG") then return false end
@@ -40,6 +27,63 @@ return {
       },
     },
     init = function()
+      local persisted = require("persisted")
+      local utils = require("persisted.utils")
+      local config = persisted.config
+
+      local function escape_pattern(str, pattern, replace, n)
+        pattern = string.gsub(pattern, "[%(%)%.%+%-%*%?%[%]%^%$%%]", "%%%1") -- escape pattern
+        replace = string.gsub(replace, "[%%]", "%%%%") -- escape replacement
+
+        return string.gsub(str, pattern, replace, n)
+      end
+
+      local function session_data()
+        local sep = utils.dir_pattern()
+
+        local session = persisted.current()
+        local session_name = escape_pattern(session, config.save_dir, "")
+          :gsub("%%", sep)
+          :gsub(vim.fn.expand("~"), sep)
+          :gsub("//", "")
+          :sub(1, -5)
+
+        if vim.fn.has("win32") == 1 then
+          session_name = escape_pattern(session_name, sep, ":", 1)
+          session_name = escape_pattern(session_name, sep, "\\")
+        end
+
+        local branch, dir_path
+
+        if string.find(session_name, "@@", 1, true) then
+          local splits = vim.split(session_name, "@@", { plain = true })
+          branch = table.remove(splits, #splits)
+          dir_path = vim.fn.join(splits, "@@")
+        else
+          dir_path = session_name
+        end
+
+        return {
+          ["name"] = session_name,
+          ["file_path"] = session,
+          ["branch"] = branch,
+          ["dir_path"] = dir_path,
+        }
+      end
+
+      local function format_display()
+        local data = session_data()
+
+        local str
+        if data.branch ~= "" then
+          str = string.format("%s (branch: %s)", data.dir_path, data.branch)
+        else
+          str = data.dir_path
+        end
+        return str
+      end
+
+      -- create autocmds
       local create_augroup = vim.api.nvim_create_augroup
       local create_aucmd = vim.api.nvim_create_autocmd
 
@@ -49,8 +93,8 @@ return {
       create_aucmd("User", {
         pattern = "PersistedLoadPost",
         group = persisted_hooks_group,
-        callback = function(session)
-          local str = format_display(session.data)
+        callback = function()
+          local str = format_display()
           vim.notify("Loaded session " .. str, vim.log.levels.INFO, { title = title })
         end,
       })
@@ -58,8 +102,8 @@ return {
       create_aucmd("User", {
         pattern = "PersistedTelescopeLoadPre",
         group = persisted_hooks_group,
-        callback = function(session)
-          local path = session.data.dir_path
+        callback = function()
+          local path = session_data().dir_path
           if string.find(path, "/") ~= 1 then
             vim.cmd("cd " .. vim.fn.expand("~") .. "/" .. path)
             vim.cmd("tcd " .. vim.fn.expand("~") .. "/" .. path)
