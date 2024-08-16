@@ -21,13 +21,6 @@
   path: vimv
   refreshPeriod: 132h
 
-.local/bin/fnm:
-  type: archive-file
-  url: {{ template "fnm-download-url" . }}
-  path: fnm
-  executable: true
-  refreshPeriod: 132h
-
 {{ end -}}
 
 # ╻ ╻┏┓╻╻╻ ╻   ┏━┓┏┓╻╻  ╻ ╻
@@ -221,12 +214,6 @@ www/adminer: # plugins
 # ┃╻┃┃┃┗┫ ┃┃┃ ┃┃╻┃┗━┓   ┃ ┃┃┗┫┃  ┗┳┛
 # ┗┻┛╹╹ ╹╺┻┛┗━┛┗┻┛┗━┛   ┗━┛╹ ╹┗━╸ ╹
 {{ if eq .chezmoi.os "windows" -}}
-
-.local/bin/fnm.exe:
-  type: archive-file
-  url: {{ template "fnm-download-url" . }}
-  path: fnm.exe
-  refreshPeriod: 132h
 
 .local/bin/jq.exe:
   type: file
