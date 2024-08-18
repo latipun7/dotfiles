@@ -1,7 +1,7 @@
 "$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
 
 [[manager.prepend_keymap]]
-on = ["<C-s>"]
+on = ["<A-Enter>"]
 run = 'shell "$SHELL -l" --block --confirm'
 desc = "Open shell here"
 
@@ -16,9 +16,14 @@ run = "plugin chmod"
 desc = "Chmod on selected files"
 
 [[manager.prepend_keymap]]
-on = ["i"]
+on = ["<Tab>"]
 run = "plugin --sync max-preview"
 desc = "Maximize or restore preview"
+
+[[manager.prepend_keymap]]
+on = ["i"]
+run = "shell --confirm --block 'bat --paging=never --color=always --style=numbers,grid \"$0\" | less -Ri'"
+desc = "Show text on pager"
 
 [[manager.prepend_keymap]]
 on = ["F"]
