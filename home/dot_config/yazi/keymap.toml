@@ -1,5 +1,7 @@
 "$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
 
+### Custom ###
+
 [[manager.prepend_keymap]]
 on = ["<A-Enter>"]
 run = 'shell "$SHELL -l" --block --confirm'
@@ -11,6 +13,13 @@ run = 'shell "$EDITOR" --block --confirm'
 desc = "Open editor for current working directory"
 
 [[manager.prepend_keymap]]
+on = ["i"]
+run = "shell --confirm --block 'bat --paging=never --color=always --style=numbers,grid \"$0\" | less -Ri'"
+desc = "Show text on pager"
+
+### Plugins ###
+
+[[manager.prepend_keymap]]
 on = ["c", "m"]
 run = "plugin chmod"
 desc = "Chmod on selected files"
@@ -19,11 +28,6 @@ desc = "Chmod on selected files"
 on = ["<Tab>"]
 run = "plugin --sync max-preview"
 desc = "Maximize or restore preview"
-
-[[manager.prepend_keymap]]
-on = ["i"]
-run = "shell --confirm --block 'bat --paging=never --color=always --style=numbers,grid \"$0\" | less -Ri'"
-desc = "Show text on pager"
 
 [[manager.prepend_keymap]]
 on = ["F"]
@@ -44,6 +48,13 @@ desc = "find file by content (ripgrep match)"
 on = ["f", "f"]
 run = "plugin fzf-fg --args='fzf'"
 desc = "find file by filename"
+
+[[manager.prepend_keymap]]
+on = ["C"]
+run = "plugin ouch --args=zip"
+desc = "Compress with ouch"
+
+### Bookmarks ###
 
 [[manager.prepend_keymap]]
 on = ["g", "H"]
