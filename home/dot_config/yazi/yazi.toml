@@ -20,3 +20,13 @@ extract = [
   { run = 'ouch d -y "%*"', desc = "Extract here with ouch", for = "windows" },
   { run = 'ouch d -y "$@"', desc = "Extract here with ouch", for = "unix" },
 ]
+
+[[plugin.prepend_fetchers]]
+id = "git"
+name = "*"
+run = "git"
+
+[[plugin.prepend_fetchers]]
+id = "git"
+name = "*/"
+run = "git"

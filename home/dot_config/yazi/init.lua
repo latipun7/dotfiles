@@ -1,5 +1,6 @@
 require("full-border"):setup()
 require("githead"):setup()
+require("git"):setup()
 
 function Header:host()
   if ya.target_family() ~= "unix" then return ui.Line({}) end
