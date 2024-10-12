@@ -1,18 +1,17 @@
 gui:
   showIcons: true
-  nerdFontsVersion: 3
+  nerdFontsVersion: "3"
   authorColors:
     "Latif Sulistyo": magenta
   theme:
     selectedLineBgColor: [reverse]
-    selectedRangeBgColor: [reverse]
 
 git:
   branchLogCmd: "git log --graph --color=always --pretty='%Cred%h%Creset -%C(auto)% d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' {{branchName}} --"
   allBranchesLogCmd: "git log --graph --color=always --pretty='%Cred%h%Creset -%C(auto)% d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --all"
   paging:
     colorArg: always
-    pager: delta --paging=never
+    pager: delta --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
 
 customCommands:
   - key: "D"
