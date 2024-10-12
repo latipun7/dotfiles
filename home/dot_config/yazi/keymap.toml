@@ -3,7 +3,7 @@
 ### Custom ###
 
 [[manager.prepend_keymap]]
-on = ["<A-Enter>"]
+on = ["!"]
 run = 'shell "$SHELL -l" --block --confirm'
 desc = "Open shell here"
 
