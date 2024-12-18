@@ -10,7 +10,7 @@ return {
         {
           mode = { "n" },
           {
-            "<leader>X",
+            "<leader>ux",
             "<Cmd>CellularAutomaton make_it_rain<CR>",
             desc = "See it yourself!",
             icon = { icon = "󰇹 ", color = "yellow" },
@@ -18,10 +18,5 @@ return {
         },
       })
     end,
-  },
-  {
-    "folke/zen-mode.nvim",
-    cmd = "ZenMode",
-    keys = { { "<leader>z", "<cmd>ZenMode<cr>", desc = "Zen Mode" } },
   },
 }

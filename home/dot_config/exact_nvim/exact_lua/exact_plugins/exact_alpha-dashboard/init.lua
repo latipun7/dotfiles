@@ -63,13 +63,16 @@ return {
 
       dashboard.section.header.val = require("plugins.alpha-dashboard.banners").dashboard()
       dashboard.section.buttons.val = {
-        dashboard.button("f", " " .. " Find file", "<Cmd>Telescope find_files<CR>"),
+        dashboard.button("f", " " .. " Find file", "<Cmd>lua Snacks.dashboard.pick('files')<CR>"),
         dashboard.button("n", " " .. " New file", "<Cmd>ene <Bar> startinsert<CR>"),
-        dashboard.button("r", " " .. " Recent files", "<Cmd>Telescope oldfiles<CR>"),
-        dashboard.button("g", " " .. " Find text", "<Cmd>Telescope live_grep<CR>"),
-        dashboard.button("c", " " .. " Config", "<Cmd>e $MYVIMRC<CR>"),
+        dashboard.button("r", " " .. " Recent files", "<Cmd>lua Snacks.dashboard.pick('oldfiles')<CR>"),
+        dashboard.button("g", " " .. " Find text", "<Cmd>lua Snacks.dashboard.pick('live_grep')<CR>"),
+        dashboard.button(
+          "c",
+          " " .. " Config",
+          "<Cmd>lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})<CR>"
+        ),
         dashboard.button("s", " " .. " Restore Session", "<Cmd>lua require('persisted').load()<CR>"),
-        dashboard.button("p", " " .. " Projects", ":Telescope projects <CR>"),
         dashboard.button("l", "󰒲 " .. " Lazy", "<Cmd>Lazy<CR>"),
         dashboard.button("q", " " .. " Quit", "<Cmd>qa<CR>"),
       }
