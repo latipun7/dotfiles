@@ -1,0 +1,42 @@
+[[plugin.deps]]
+use = "yazi-rs/plugins:full-border"
+rev = "600614a"
+hash = "882ed23839778f82dc137248979c8681"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:chmod"
+rev = "600614a"
+hash = "4c7e8fd0266eedee7b619d966bd2d025"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:smart-filter"
+rev = "600614a"
+hash = "ea24edab4a62c94dbd205adfb6f2c08d"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:max-preview"
+rev = "600614a"
+hash = "9bc26d10d2f6e2aa93b10905b1b76979"
+
+[[plugin.deps]]
+use = "Sonico98/exifaudio"
+rev = "d794614"
+hash = "a8e15d3c21c02a5af41d46ed04778a02"
+
+[[plugin.deps]]
+use = "ndtoan96/ouch"
+rev = "083d564"
+hash = "1e4c0ac1fca31a23412324710193358a"
+
+[[plugin.deps]]
+use = "llanosrocas/githead"
+rev = "45bd61e"
+hash = "49f2baf77a7e779d06b7521a02ebc253"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:git"
+rev = "600614a"
+hash = "e9cf1bfc03de7fee0f1d4260da0d1dfd"
+
+[flavor]
+deps = []
