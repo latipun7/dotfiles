@@ -1,13 +1,25 @@
 local M = {}
 
 function M:peek()
+  local output = Command("jq")
+    :args({
+      "-C",
+      "--tab",
+      ".",
+      tostring(self.file.url),
+    })
+    :stdout(Command.PIPED)
+    :output()
+
+  if not output then return self:fallback_to_builtin() end
+
   local child = Command("bat")
     :args({
       "--paging=never",
       "--color=always",
       "--style=numbers,grid",
       "--terminal-width=" .. tostring(self.area.w),
-      tostring(self.file.url),
+      tostring(output.stdout),
     })
     :stdout(Command.PIPED)
     :stderr(Command.PIPED)

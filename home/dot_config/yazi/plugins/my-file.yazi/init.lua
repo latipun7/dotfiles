@@ -2,7 +2,7 @@ local M = {}
 
 function M:peek()
   local cmd = os.getenv("YAZI_FILE_ONE") or "file"
-  local output, code = Command(cmd):args({ "-bL", tostring(self.file.url) }):stdout(Command.PIPED):output()
+  local output, code = Command(cmd):args({ "-Lb", tostring(self.file.url) }):stdout(Command.PIPED):output()
   local output_mime, code_mime = Command(cmd):args({ "-Lib", tostring(self.file.url) }):stdout(Command.PIPED):output()
 
   local p
