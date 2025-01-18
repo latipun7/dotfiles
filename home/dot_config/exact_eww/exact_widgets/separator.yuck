@@ -1,3 +1,0 @@
-(defwidget separator []
-  (box :vexpand "false" :hexpand "false"
-    (label :class "separator" :text "|")))

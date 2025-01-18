@@ -1,3 +1,0 @@
-(defwidget launcher []
-  (eventbox :class "launcher-widget" :cursor "pointer" :onclick "ydotool key 125:1 32:1 32:0 125:0" ; onclick "Super+d"
-    (image :path "assets/arch-linux.png" :image-width 32)))

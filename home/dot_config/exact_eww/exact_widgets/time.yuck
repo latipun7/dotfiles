@@ -1,7 +1,0 @@
-(defwidget time []
-  (eventbox :onclick "${EWW_CMD} open --toggle calendar" :cursor "pointer"
-    (box :class "time-widget" :space-evenly "false" :orientation "horizontal" :spacing "3"
-      (label :class "time-hour" :text {time.hour})
-      (label :class "time-sep" :text "󰇙")
-      (label :class "time-minute" :text {time.minute})
-      (label :class "time-date" :text "${time.day_s}, ${time.month_s} ${time.date}"))))
