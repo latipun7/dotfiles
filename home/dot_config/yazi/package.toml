@@ -1,0 +1,52 @@
+[[plugin.deps]]
+use = "yazi-rs/plugins:full-border"
+rev = "ceb053f"
+hash = "9dce00232a0e0e2502565c7aa2b0ed4e"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:chmod"
+rev = "ceb053f"
+hash = "2f1053f89d1a301a648ab181d0948e38"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:smart-filter"
+rev = "ceb053f"
+hash = "f0c4b41b5d19a3144958383333eff6e7"
+
+[[plugin.deps]]
+use = "Sonico98/exifaudio"
+rev = "7ff7141"
+hash = "666ccba55119fba4c25b8ad354b2855c"
+
+[[plugin.deps]]
+use = "ndtoan96/ouch"
+rev = "ce6fb75"
+hash = "ed6c185514109d7c5463f609282b220c"
+
+[[plugin.deps]]
+use = "llanosrocas/githead"
+rev = "2375024"
+hash = "f46c42b1146bed331c7000b1efd076f5"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:git"
+rev = "ceb053f"
+hash = "bcbf72738d4b7fb9a03cac84465b9ba4"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:toggle-pane"
+rev = "ceb053f"
+hash = "812fd49667ab6823250f0411f8cf793a"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:diff"
+rev = "ceb053f"
+hash = "7a08e303167d5b655c06da6d570f0333"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:mount"
+rev = "ceb053f"
+hash = "dd97eede8e20e59cd2604e8006e470e2"
+
+[flavor]
+deps = []

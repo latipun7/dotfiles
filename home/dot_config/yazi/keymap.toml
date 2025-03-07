@@ -3,18 +3,18 @@
 ### Custom ###
 
 [[manager.prepend_keymap]]
-on = ["!"]
-run = 'shell "$SHELL -l" --block --confirm'
+on = "!"
+run = 'shell "$SHELL -l" --block'
 desc = "Open shell here"
 
 [[manager.prepend_keymap]]
-on = ["e"]
-run = 'shell "$EDITOR" --block --confirm'
+on = "e"
+run = 'shell "$EDITOR" --block'
 desc = "Open editor for current working directory"
 
 [[manager.prepend_keymap]]
-on = ["i"]
-run = "shell --confirm --block 'bat --paging=never --color=always --style=numbers,grid \"$0\" | less -Ri'"
+on = "i"
+run = "shell 'bat --paging=never --color=always --style=numbers,grid \"$0\" | less -Ri' --block"
 desc = "Show text on pager"
 
 ### Plugins ###
@@ -25,34 +25,23 @@ run = "plugin chmod"
 desc = "Chmod on selected files"
 
 [[manager.prepend_keymap]]
-on = ["<Tab>"]
-run = "plugin --sync max-preview"
-desc = "Maximize or restore preview"
+on = "<Tab>"
+run = "plugin toggle-pane max-preview"
+desc = "Maximize or restore the preview pane"
 
 [[manager.prepend_keymap]]
-on = ["F"]
+on = "F"
 run = "plugin smart-filter"
 desc = "Smart filter"
 
 [[manager.prepend_keymap]]
-on = ["f", "g"]
-run = "plugin fzf-fg"
-desc = "find file by content (fuzzy match)"
-
-[[manager.prepend_keymap]]
-on = ["f", "G"]
-run = "plugin fzf-fg --args='rg'"
-desc = "find file by content (ripgrep match)"
-
-[[manager.prepend_keymap]]
-on = ["f", "f"]
-run = "plugin fzf-fg --args='fzf'"
-desc = "find file by filename"
-
-[[manager.prepend_keymap]]
-on = ["C"]
-run = "plugin ouch --args=zip"
+on = "C"
+run = "plugin ouch zip"
 desc = "Compress with ouch"
+
+[[manager.prepend_keymap]]
+on = "M"
+run = "plugin mount"
 
 ### Bookmarks ###
 
