@@ -48,5 +48,10 @@ use = "yazi-rs/plugins:mount"
 rev = "ceb053f"
 hash = "dd97eede8e20e59cd2604e8006e470e2"
 
+[[plugin.deps]]
+use = "Lil-Dank/lazygit"
+rev = "9f924e3"
+hash = "2b0c33928986f126d5c5a4cac31a6b46"
+
 [flavor]
 deps = []

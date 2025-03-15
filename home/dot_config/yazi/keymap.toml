@@ -42,6 +42,12 @@ desc = "Compress with ouch"
 [[manager.prepend_keymap]]
 on = "M"
 run = "plugin mount"
+desc = "Mount with fuse"
+
+[[manager.prepend_keymap]]
+on = ["g", "i"]
+run = "plugin lazygit"
+desc = "Run lazygit"
 
 ### Bookmarks ###
 
