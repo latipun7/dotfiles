@@ -17,7 +17,7 @@ return {
     keys = {
       {
         "<leader>Ss",
-        function() require("telescope").extensions.persisted.persisted() end,
+        function() require("persisted").select() end,
         desc = "Pick session to load",
       },
       {
@@ -29,7 +29,7 @@ return {
     init = function()
       local persisted = require("persisted")
       local utils = require("persisted.utils")
-      local config = persisted.config
+      local config = require("persisted.config")
 
       local function escape_pattern(str, pattern, replace, n)
         pattern = string.gsub(pattern, "[%(%)%.%+%-%*%?%[%]%^%$%%]", "%%%1") -- escape pattern
@@ -100,23 +100,18 @@ return {
       })
 
       create_aucmd("User", {
-        pattern = "PersistedTelescopeLoadPre",
+        pattern = { "PersistedTelescopeLoadPre", "PersistedSelectPre" },
         group = persisted_hooks_group,
         callback = function()
-          local path = session_data().dir_path
-          if string.find(path, "/") ~= 1 then
-            vim.cmd("cd " .. vim.fn.expand("~") .. "/" .. path)
-            vim.cmd("tcd " .. vim.fn.expand("~") .. "/" .. path)
-          else
-            vim.cmd("cd " .. path)
-            vim.cmd("tcd " .. path)
-          end
+          -- Save the currently loaded session passing in the path to the current session
+          require("persisted").save({ session = vim.g.persisted_loaded_session })
 
+          -- Delete all of the open buffers
           local status_ok, _ = pcall(require, "bufdelete")
           if status_ok then
-            vim.api.nvim_input("<Esc><Cmd>bufdo Bdelete<CR>")
+            vim.api.nvim_input("<Esc><Cmd>bufdo Bdelete!<CR>")
           else
-            vim.api.nvim_input("<Esc><Cmd>%bd<CR>")
+            vim.api.nvim_input("<Esc><Cmd>%bd!<CR>")
           end
         end,
       })
