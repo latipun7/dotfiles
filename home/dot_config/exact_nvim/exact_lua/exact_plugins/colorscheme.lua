@@ -10,6 +10,10 @@ return {
         background = { light = "latte", dark = "mocha" },
         term_colors = true,
         transparent_background = true,
+        float = {
+          transparent = true,
+          solid = false,
+        },
         integrations = {
           alpha = true,
           barbecue = { dim_dirname = true },
@@ -21,7 +25,10 @@ return {
           indent_blankline = { enabled = true, colored_indent_levels = true },
           lsp_trouble = true,
           mason = true,
-          mini = true,
+          mini = {
+            enabled = true,
+            indentscope_color = "",
+          },
           native_lsp = {
             enabled = true,
             underlines = {

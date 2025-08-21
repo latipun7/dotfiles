@@ -1,6 +1,12 @@
 return {
   {
     "akinsho/bufferline.nvim",
+    -- TODO: Remove this once https://github.com/LazyVim/LazyVim/pull/6354 is merged
+    init = function()
+      local bufline = require("catppuccin.groups.integrations.bufferline")
+      bufline.get = bufline.get_theme
+    end,
+    after = "catppuccin",
     ---@param opts bufferline.UserConfig
     opts = function(_, opts)
       local bufferline_groups = require("bufferline.groups")
@@ -12,7 +18,7 @@ return {
         local colors = require("catppuccin.palettes").get_palette()
 
         if colors ~= nil then
-          return catppuccin.get({
+          return catppuccin.get_theme({
             buffer_selected = { bold = true, italic = true },
             custom = {
               all = {
