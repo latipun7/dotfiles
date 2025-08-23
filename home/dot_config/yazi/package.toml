@@ -1,57 +1,57 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "ceb053f"
-hash = "9dce00232a0e0e2502565c7aa2b0ed4e"
+rev = "e95c7b3"
+hash = "3996fc74044bc44144b323686f887e1"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:chmod"
-rev = "ceb053f"
-hash = "2f1053f89d1a301a648ab181d0948e38"
+rev = "e95c7b3"
+hash = "1adc12c2b2b025411ab61eb8f0879574"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-filter"
-rev = "ceb053f"
-hash = "f0c4b41b5d19a3144958383333eff6e7"
+rev = "e95c7b3"
+hash = "e56b7abf3c06e8ce496eadcca168c093"
 
 [[plugin.deps]]
 use = "Sonico98/exifaudio"
-rev = "7ff7141"
-hash = "666ccba55119fba4c25b8ad354b2855c"
+rev = "4506f9d"
+hash = "4761fffb60a12d37096c34a356380cdf"
 
 [[plugin.deps]]
 use = "ndtoan96/ouch"
-rev = "ce6fb75"
-hash = "ed6c185514109d7c5463f609282b220c"
+rev = "0742fff"
+hash = "2bd799b42b8e42b8ef100310be71f8d1"
 
 [[plugin.deps]]
 use = "llanosrocas/githead"
-rev = "2375024"
-hash = "f46c42b1146bed331c7000b1efd076f5"
+rev = "76fe4b8"
+hash = "10c3bc6cd6f3223e18f2483320a9e24a"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "ceb053f"
-hash = "bcbf72738d4b7fb9a03cac84465b9ba4"
+rev = "e95c7b3"
+hash = "63b6c222bf2103b3023389dde5e2ecfe"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "ceb053f"
-hash = "812fd49667ab6823250f0411f8cf793a"
+rev = "e95c7b3"
+hash = "d6f60c24d8c0cf57a855bf46115b2502"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:diff"
-rev = "ceb053f"
-hash = "7a08e303167d5b655c06da6d570f0333"
+rev = "e95c7b3"
+hash = "47865a70cade14a0b9b6bc6a54f16bdb"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "ceb053f"
-hash = "dd97eede8e20e59cd2604e8006e470e2"
+rev = "e95c7b3"
+hash = "e1de3054c0d1a2d8dc6f007eadc0fa31"
 
 [[plugin.deps]]
 use = "Lil-Dank/lazygit"
-rev = "9f924e3"
-hash = "2b0c33928986f126d5c5a4cac31a6b46"
+rev = "8f37dc5"
+hash = "ee71543790f0ce3951161045a3787abd"
 
 [flavor]
 deps = []
