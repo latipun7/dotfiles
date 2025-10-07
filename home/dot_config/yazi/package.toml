@@ -1,17 +1,17 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "e95c7b3"
+rev = "d1c8baa"
 hash = "3996fc74044bc44144b323686f887e1"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:chmod"
-rev = "e95c7b3"
-hash = "1adc12c2b2b025411ab61eb8f0879574"
+rev = "d1c8baa"
+hash = "8ad3e90b079190b4905f24a44f4ca06b"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-filter"
-rev = "e95c7b3"
-hash = "e56b7abf3c06e8ce496eadcca168c093"
+rev = "d1c8baa"
+hash = "bcda8eeb3f4013bae156aecabfc745e8"
 
 [[plugin.deps]]
 use = "Sonico98/exifaudio"
@@ -30,23 +30,23 @@ hash = "10c3bc6cd6f3223e18f2483320a9e24a"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "e95c7b3"
-hash = "63b6c222bf2103b3023389dde5e2ecfe"
+rev = "d1c8baa"
+hash = "3cce60031b27cbce80b50f68ca319c0a"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "e95c7b3"
-hash = "d6f60c24d8c0cf57a855bf46115b2502"
+rev = "d1c8baa"
+hash = "8a7c58225816a163a6e8730c0adafbc8"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:diff"
-rev = "e95c7b3"
-hash = "47865a70cade14a0b9b6bc6a54f16bdb"
+rev = "d1c8baa"
+hash = "82376c3381ae915fd799d40f4dd4c6cd"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "e95c7b3"
-hash = "e1de3054c0d1a2d8dc6f007eadc0fa31"
+rev = "d1c8baa"
+hash = "435a2af56ecfb3d05755fd5e24977d8b"
 
 [[plugin.deps]]
 use = "Lil-Dank/lazygit"

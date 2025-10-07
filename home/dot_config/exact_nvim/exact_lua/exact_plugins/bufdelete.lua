@@ -1,5 +1,5 @@
 return {
-  { "echasnovski/mini.bufremove", enabled = false },
+  { "nvim-mini/mini.bufremove", enabled = false },
   {
     "famiu/bufdelete.nvim",
     event = "BufReadPre",

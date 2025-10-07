@@ -1,5 +1,5 @@
 return {
-  { "echasnovski/mini.surround", enabled = false },
+  { "nvim-mini/mini.surround", enabled = false },
   {
     "kylechui/nvim-surround",
     version = "*",

@@ -7,7 +7,7 @@ return {
     },
   },
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = function(_, opts)
       opts.ui = { border = "rounded", height = 0.8 }
       vim.list_extend(opts.ensure_installed, {
