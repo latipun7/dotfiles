@@ -2,56 +2,56 @@
 
 ### Custom ###
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = "!"
-run = 'shell "$SHELL -l" --block'
+run = 'shell --block -- $SHELL -l'
 desc = "Open shell here"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = "e"
-run = 'shell "$EDITOR" --block'
+run = 'shell --block "$EDITOR"'
 desc = "Open editor for current working directory"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = "i"
-run = "shell 'bat --paging=never --color=always --style=numbers,grid \"$0\" | less -Ri' --block"
+run = 'shell --block -- bat --paging=never --color=always --style=numbers,grid "$1" | less -Ri'
 desc = "Show text on pager"
 
 ### Plugins ###
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["c", "m"]
 run = "plugin chmod"
 desc = "Chmod on selected files"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = "<Tab>"
 run = "plugin toggle-pane max-preview"
 desc = "Maximize or restore the preview pane"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = "F"
 run = "plugin smart-filter"
 desc = "Smart filter"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = "C"
 run = "plugin ouch zip"
 desc = "Compress with ouch"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = "M"
 run = "plugin mount"
 desc = "Mount with fuse"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["g", "i"]
 run = "plugin lazygit"
 desc = "Run lazygit"
 
 ### Bookmarks ###
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["g", "H"]
 run = "cd ~/.local/share/chezmoi"
 desc = "Go to chezmoi source directory"

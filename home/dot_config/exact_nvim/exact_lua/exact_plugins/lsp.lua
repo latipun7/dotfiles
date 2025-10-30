@@ -7,6 +7,14 @@ return {
     },
   },
   {
+    "folke/lazydev.nvim",
+    opts = {
+      library = {
+        { path = "~/.config/yazi/plugins/", words = { "ya%." } },
+      },
+    },
+  },
+  {
     "mason-org/mason.nvim",
     opts = function(_, opts)
       opts.ui = { border = "rounded", height = 0.8 }

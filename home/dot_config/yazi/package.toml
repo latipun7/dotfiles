@@ -1,16 +1,16 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "d1c8baa"
+rev = "9a52857"
 hash = "3996fc74044bc44144b323686f887e1"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:chmod"
-rev = "d1c8baa"
+rev = "9a52857"
 hash = "8ad3e90b079190b4905f24a44f4ca06b"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-filter"
-rev = "d1c8baa"
+rev = "9a52857"
 hash = "bcda8eeb3f4013bae156aecabfc745e8"
 
 [[plugin.deps]]
@@ -30,28 +30,38 @@ hash = "10c3bc6cd6f3223e18f2483320a9e24a"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "d1c8baa"
+rev = "9a52857"
 hash = "3cce60031b27cbce80b50f68ca319c0a"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "d1c8baa"
+rev = "9a52857"
 hash = "8a7c58225816a163a6e8730c0adafbc8"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:diff"
-rev = "d1c8baa"
+rev = "9a52857"
 hash = "82376c3381ae915fd799d40f4dd4c6cd"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "d1c8baa"
-hash = "435a2af56ecfb3d05755fd5e24977d8b"
+rev = "9a52857"
+hash = "4fccaaf10c36dc2466e2438a386ff017"
 
 [[plugin.deps]]
 use = "Lil-Dank/lazygit"
 rev = "8f37dc5"
 hash = "ee71543790f0ce3951161045a3787abd"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:types"
+rev = "8f1d971"
+hash = "1e047e1b13b5e3fc6ab1f5d0d04a14e2"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:piper"
+rev = "8f1d971"
+hash = "64713dcd74daf9ec644883a5895e5d1"
 
 [flavor]
 deps = []
