@@ -24,31 +24,45 @@ return {
           illuminate = true,
           indent_blankline = { enabled = true, colored_indent_levels = true },
           lsp_trouble = true,
+          lualine = {
+            all = function(colors)
+              ---@type CtpIntegrationLualineOverride
+              return {
+                normal = { b = { bg = colors.surface0 } },
+                insert = { b = { bg = colors.surface0 } },
+                visual = { b = { bg = colors.surface0 } },
+                replace = { b = { bg = colors.surface0 } },
+                command = { b = { bg = colors.surface0 } },
+                inactive = { b = { bg = colors.crust } },
+                inactive_insert = { b = { bg = colors.crust } },
+                inactive_visual = { b = { bg = colors.crust } },
+                inactive_replace = { b = { bg = colors.crust } },
+                inactive_command = { b = { bg = colors.crust } },
+              }
+            end,
+          },
           mason = true,
           mini = {
             enabled = true,
             indentscope_color = "",
-          },
-          native_lsp = {
-            enabled = true,
-            underlines = {
-              errors = { "undercurl" },
-              hints = { "undercurl" },
-              warnings = { "undercurl" },
-              information = { "undercurl" },
-            },
           },
           navic = { enabled = true, custom_bg = "NONE" },
           neotree = true,
           notify = true,
           neotest = true,
           noice = true,
-          semantic_tokens = true,
           symbols_outline = true,
           telescope = true,
-          treesitter = true,
           treesitter_context = true,
           which_key = true,
+        },
+        lsp_styles = {
+          underlines = {
+            errors = { "undercurl" },
+            hints = { "undercurl" },
+            warnings = { "undercurl" },
+            information = { "undercurl" },
+          },
         },
         highlight_overrides = {
           mocha = function(mocha)
@@ -72,11 +86,14 @@ return {
       return setup
     end,
   },
-
   {
-    "LazyVim/LazyVim",
+    "folke/tokyonight.nvim",
     opts = {
-      colorscheme = "catppuccin",
+      transparent = true,
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
+      },
     },
   },
 }

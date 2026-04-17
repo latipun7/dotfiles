@@ -10,7 +10,7 @@ return {
     "folke/lazydev.nvim",
     opts = {
       library = {
-        { path = "~/.config/yazi/plugins/", words = { "ya%." } },
+        { path = "~/.config/yazi/plugins/types.yazi/", words = { "ya%." } },
       },
     },
   },

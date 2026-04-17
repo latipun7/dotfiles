@@ -1,27 +1,15 @@
 return {
   {
     "nvim-lualine/lualine.nvim",
-    opts = function(_, opts)
-      local ok, catppuccin = pcall(require, "lualine.themes.catppuccin")
-      if not ok then return opts end
-
+    opts = function()
       local components = require("plugins.lualine.components")
-      local colors = require("catppuccin.palettes").get_palette()
-
-      if colors ~= nil then
-        catppuccin.normal.b.bg = colors.surface0
-        catppuccin.insert.b.bg = colors.surface0
-        catppuccin.command.b.bg = colors.surface0
-        catppuccin.visual.b.bg = colors.surface0
-        catppuccin.replace.b.bg = colors.surface0
-      end
 
       local config = {
         options = {
           icons_enabled = true,
           component_separators = "",
           section_separators = { left = "", right = "" },
-          theme = catppuccin,
+          theme = "catppuccin-nvim",
           disabled_filetypes = { "dashboard", "alpha" },
           ignore_focus = { "NvimTree", "neo-tree" },
           always_divide_middle = true,

@@ -2,6 +2,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
+      colorscheme = "catppuccin-nvim",
       news = {
         lazyvim = true,
         neovim = false,
