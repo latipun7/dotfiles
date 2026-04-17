@@ -23,3 +23,16 @@ map("n", "<leader>q", "<Cmd>confirm qa<CR>", { desc = "Quit all" })
 
 -- UI
 map("n", "<leader>ut", "<Cmd>set list!<CR>", { desc = "Toggle hidden characters" })
+
+-- Only for neovide
+if vim.g.neovide then
+  local function neovideScale(amount)
+    local temp = vim.g.neovide_scale_factor + amount
+    if temp < 0.5 then return end
+    vim.g.neovide_scale_factor = temp
+  end
+
+  map("n", "<C-=>", function() neovideScale(0.1) end, { desc = "Increase font size" })
+  map("n", "<C-->", function() neovideScale(-0.1) end, { desc = "Decrease font size" })
+  map("n", "<C-S-=>", function() vim.g.neovide_scale_factor = 1 end, { desc = "Reset font size" })
+end

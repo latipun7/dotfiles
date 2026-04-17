@@ -37,3 +37,8 @@ if vim.fn.has("wsl") == 1 then
     cache_enabled = false,
   }
 end
+
+if vim.g.neovide then
+  vim.o.guifont = "Cascadia Code NF:h13"
+  vim.g.neovide_cursor_vfx_mode = "railgun"
+end
