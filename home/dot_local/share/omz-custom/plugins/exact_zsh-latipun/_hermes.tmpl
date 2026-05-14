@@ -1,0 +1,4 @@
+{{ $hermes := lookPath "hermes" -}}
+{{ if $hermes -}}
+{{ output $hermes "completion" "zsh" -}}
+{{ end -}}
