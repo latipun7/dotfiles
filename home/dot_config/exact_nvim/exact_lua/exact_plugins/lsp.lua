@@ -27,6 +27,13 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       inlay_hints = { enabled = true },
+      servers = {
+        taplo = {
+          filetypes = { "toml" },
+          -- IMPORTANT: this is required for taplo LSP to work in non-git repositories
+          root_dir = require("lspconfig.util").root_pattern("*.toml", ".git"),
+        },
+      },
     },
   },
   {
