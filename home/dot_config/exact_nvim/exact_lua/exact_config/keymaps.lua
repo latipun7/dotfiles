@@ -11,7 +11,7 @@ map("i", "<C-k>", "<C-o>k")
 map("i", "<C-l>", "<C-o>l")
 
 -- Paste still contains yanked words
-map("v", "p", [["_dP]])
+map("v", "p", [["_dp]])
 map("v", "P", [["_dP]])
 
 -- Save file
