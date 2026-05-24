@@ -79,7 +79,7 @@ hash cargo 2>/dev/null && cargoexe="$CARGO_HOME/bin"
 hash go 2>/dev/null && goexe="$GOPATH/bin"
 brewpythonexe=$(hash brew 2>/dev/null && echo "$(brew --prefix)/opt/python/libexec/bin")
 
-pathexe=("$homeexe" "$cargoexe" "$goexe" "$brewpythonexe" "$PATH")
+pathexe=("$cargoexe" "$goexe" "$brewpythonexe" "$homeexe" "$PATH")
 
 PATH=$(concat ":" "${pathexe[@]}")
 export PATH
@@ -87,7 +87,9 @@ export PATH
 # Node global module require path
 if hash node 2>/dev/null; then
   nodelink=$(readlink -e "$(which node)")
-  NODE_PATH=$(cd "${nodelink:0:-4}../lib/node_modules" && pwd)
+  # Get installation root: dirname of node binary = bin/, dirname of that = install root
+  install_root=$(dirname "$(dirname "$nodelink")")
+  NODE_PATH="$install_root/lib/node_modules"
   export NODE_PATH
 fi
 
@@ -104,10 +106,7 @@ else
   export EDITOR=nvim
 fi
 
-if [[ "$(hostnamectl chassis 2>/dev/null)" != 'server' ]]; then
-  export TERMINAL=wezterm
-  export BROWSER=firefox-developer-edition
-else
+if [[ "$(hostnamectl chassis 2>/dev/null)" == 'server' ]]; then
   export BROWSER=lynx
 fi
 
@@ -167,6 +166,10 @@ export FORCE_COLOR=true
 
 if [ -f "$HOME/.zshenv.private" ]; then
   source "$HOME/.zshenv.private"
+fi
+
+if [ -f "$HOME/.hermes/.env" ]; then
+  export $(grep -E "^DISCORD_BOT_TOKEN=" "$HOME/.hermes/.env" | sed 's/DISCORD_BOT_TOKEN/DISCORD_TOKEN/')
 fi
 
 # ░█▀▀░█░█░█▀▀░▀█▀░█▀█░█▄█░░░█▀▀░█▀█░█░█
