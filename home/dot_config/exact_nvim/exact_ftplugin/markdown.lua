@@ -2,7 +2,6 @@ local ok, nvim_surround = pcall(require, "nvim-surround")
 if not ok then return end
 
 local surr_utils = require("nvim-surround.config")
-local ts_utils = require("nvim-treesitter.ts_utils")
 
 ---@diagnostic disable: missing-fields
 nvim_surround.buffer_setup({
@@ -35,7 +34,7 @@ nvim_surround.buffer_setup({
     -- custom function surrounds per code block
     ["f"] = {
       add = function()
-        local cur = ts_utils.get_node_at_cursor(0, true)
+        local cur = vim.treesitter.get_node_at_cursor(0, true)
         while cur and cur:type() ~= "fenced_code_block" do
           cur = cur:parent()
         end
