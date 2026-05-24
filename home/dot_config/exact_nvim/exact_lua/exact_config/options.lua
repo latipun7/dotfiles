@@ -39,6 +39,15 @@ if vim.fn.has("wsl") == 1 then
 end
 
 if vim.g.neovide then
+  -- Transparency
+  vim.g.neovide_opacity = 1
+  vim.g.neovide_normal_opacity = 0.2
+
+  -- Optional floating window blur
+  vim.g.neovide_floating_blur_amount_x = 3.0
+  vim.g.neovide_floating_blur_amount_y = 3.0
+
+  -- Extras
   vim.o.guifont = "Cascadia Code NF:h13"
   vim.g.neovide_cursor_vfx_mode = "railgun"
 end
