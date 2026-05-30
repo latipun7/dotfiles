@@ -1,4 +1,4 @@
-"$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
+#:schema https://yazi-rs.github.io/schemas/yazi.json
 
 [mgr]
 ratio = [1, 3, 4]
@@ -7,7 +7,7 @@ show_hidden = true
 
 [plugin]
 prepend_previewers = [
-  { name = "*.md", run = 'piper -- CLICOLOR_FORCE=1 glow -w=$w -s=~/.config/glow/catppuccin-mocha.json "$1"' },
+  # { name = "*.md", run = 'piper -- CLICOLOR_FORCE=1 glow -w=$w -s=$HOME/.config/glow/catppuccin-mocha.json "$1"' },
   { mime = "audio/*", run = "exifaudio" },
 
   # Archive previewer
@@ -15,18 +15,18 @@ prepend_previewers = [
   { mime = "application/x-{tar,bzip*,7z-compressed,xz,rar,iso9660-image}", run = "ouch" },
 ]
 
+[[plugin.prepend_fetchers]]
+group = "git"
+url = "*"
+run = "git"
+
+[[plugin.prepend_fetchers]]
+group = "git"
+url = "*/"
+run = "git"
+
 [opener]
 extract = [
   { run = 'ouch d -y "%*"', desc = "Extract here with ouch", for = "windows" },
   { run = 'ouch d -y "$@"', desc = "Extract here with ouch", for = "unix" },
 ]
-
-[[plugin.prepend_fetchers]]
-id = "git"
-name = "*"
-run = "git"
-
-[[plugin.prepend_fetchers]]
-id = "git"
-name = "*/"
-run = "git"

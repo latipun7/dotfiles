@@ -1,10 +1,10 @@
-"$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
+#:schema https://yazi-rs.github.io/schemas/keymap.json
 
 ### Custom ###
 
 [[mgr.prepend_keymap]]
 on = "!"
-run = 'shell --block -- $SHELL -l'
+run = "shell --block -- $SHELL -l"
 desc = "Open shell here"
 
 [[mgr.prepend_keymap]]

@@ -1,17 +1,17 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "9a52857"
-hash = "3996fc74044bc44144b323686f887e1"
+rev = "5d5c480"
+hash = "7b625412411be411153886894d9acaf"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:chmod"
-rev = "9a52857"
-hash = "8ad3e90b079190b4905f24a44f4ca06b"
+rev = "5d5c480"
+hash = "f0c8c378184d5f8abd1b095a443d336d"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-filter"
-rev = "9a52857"
-hash = "bcda8eeb3f4013bae156aecabfc745e8"
+rev = "5d5c480"
+hash = "c887903a63a2ff520081b6d90a4b3392"
 
 [[plugin.deps]]
 use = "Sonico98/exifaudio"
@@ -20,48 +20,48 @@ hash = "4761fffb60a12d37096c34a356380cdf"
 
 [[plugin.deps]]
 use = "ndtoan96/ouch"
-rev = "0742fff"
-hash = "2bd799b42b8e42b8ef100310be71f8d1"
+rev = "406ce6c"
+hash = "f5afc904d5106ee368c8aa2ded43bd74"
 
 [[plugin.deps]]
 use = "llanosrocas/githead"
-rev = "76fe4b8"
-hash = "10c3bc6cd6f3223e18f2483320a9e24a"
+rev = "317d09f"
+hash = "41dc37a724b2afd21da4f1ea6c1182d8"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "9a52857"
-hash = "3cce60031b27cbce80b50f68ca319c0a"
+rev = "5d5c480"
+hash = "88e56a64b7ce7c4314427452343fef17"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "9a52857"
-hash = "8a7c58225816a163a6e8730c0adafbc8"
+rev = "5d5c480"
+hash = "9c7987da2d2a2120dac33abb64132004"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:diff"
-rev = "9a52857"
-hash = "82376c3381ae915fd799d40f4dd4c6cd"
+rev = "5d5c480"
+hash = "8b1af6b5a69797ee951f2a80ce570818"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "9a52857"
-hash = "4fccaaf10c36dc2466e2438a386ff017"
+rev = "5d5c480"
+hash = "e3260d0b1feded8c8e3ae3afa1169e30"
 
 [[plugin.deps]]
 use = "Lil-Dank/lazygit"
-rev = "8f37dc5"
-hash = "ee71543790f0ce3951161045a3787abd"
+rev = "e73fd74"
+hash = "6ea5f37c7f219671ec504cb8311f889d"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:types"
-rev = "8f1d971"
-hash = "1e047e1b13b5e3fc6ab1f5d0d04a14e2"
+rev = "5d5c480"
+hash = "9105494e98299f392aee95340066da9f"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:piper"
-rev = "8f1d971"
-hash = "64713dcd74daf9ec644883a5895e5d1"
+rev = "5d5c480"
+hash = "384464b6df8cb807425c521f8cd790f3"
 
 [flavor]
 deps = []
