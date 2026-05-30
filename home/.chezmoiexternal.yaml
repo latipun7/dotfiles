@@ -94,13 +94,6 @@
     args: ["--dry-run"] # update/pull manually
 # ]]]
 
-# yazi [[[
-.config/yazi/flavors/catppuccin-mocha.yazi/flavor.toml:
-  type: file
-  url: https://github.com/catppuccin/yazi/raw/refs/heads/main/themes/mocha/catppuccin-mocha-sapphire.toml
-  refreshPeriod: 132h
-# ]]]
-
 {{ end -}}
 
 # ╻  ╻┏┓╻╻ ╻╻ ╻   ┏━╸╻ ╻╻   ┏━┓┏┓╻╻  ╻ ╻
