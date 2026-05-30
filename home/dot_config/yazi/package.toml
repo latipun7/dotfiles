@@ -59,9 +59,9 @@ rev = "c2c16c8"
 hash = "9105494e98299f392aee95340066da9f"
 
 [[plugin.deps]]
-use = "yazi-rs/plugins:piper"
-rev = "c2c16c8"
-hash = "d99cfbc3812e7738505f9e4bedb759cd"
+use = "alberti42/faster-piper"
+rev = "8b794bf"
+hash = "fac71f8ce9447ad509b5aad9e0d8c694"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"

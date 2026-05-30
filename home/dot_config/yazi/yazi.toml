@@ -6,8 +6,14 @@ sort_by = "natural"
 show_hidden = true
 
 [plugin]
+prepend_preloaders = [
+  { url = "*.md", run = 'faster-piper -- CLICOLOR_FORCE=1 glow -w=$w -s=$HOME/.config/glow/catppuccin-mocha.json "$1"' },
+  { mime = "application/sqlite3", run = 'faster-piper -- sqlite3 "$1" ".schema --indent"' },
+]
+
 prepend_previewers = [
-  # { name = "*.md", run = 'piper -- CLICOLOR_FORCE=1 glow -w=$w -s=$HOME/.config/glow/catppuccin-mocha.json "$1"' },
+  { url = "*.md", run = "faster-piper --rely-on-preloader" },
+  { mime = "application/sqlite3", run = "faster-piper --rely-on-preloader" },
   { mime = "audio/*", run = "exifaudio" },
 
   # Archive previewer
