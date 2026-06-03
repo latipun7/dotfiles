@@ -5,14 +5,13 @@ gui:
     "Latif Sulistyo": magenta
   theme:
     selectedLineBgColor: [reverse]
-
 git:
   branchLogCmd: "git log --graph --color=always --pretty='%Cred%h%Creset -%C(auto)% d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' {{branchName}} --"
-  allBranchesLogCmd: "git log --graph --color=always --pretty='%Cred%h%Creset -%C(auto)% d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --all"
-  paging:
-    colorArg: always
-    pager: delta --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
-
+  pagers:
+    - colorArg: always
+      pager: delta --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
+  allBranchesLogCmds:
+    - git log --graph --color=always --pretty='%Cred%h%Creset -%C(auto)% d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --all
 customCommands:
   - key: "D"
     context: "tags"
