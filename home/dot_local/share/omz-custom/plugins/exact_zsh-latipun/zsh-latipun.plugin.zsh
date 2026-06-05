@@ -146,6 +146,10 @@ if hash lazygit 2>/dev/null; then
   }
 fi
 
+if hash lazydocker 2>/dev/null; then
+  alias lzd=lazydocker
+fi
+
 # bitwarden alias
 if hash bw 2>/dev/null; then
   alias bw-login='eval "export BW_SESSION=$(bw login --raw)"'
