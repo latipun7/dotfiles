@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Wrapper to execute fnm's default npm binary reliably
+
+FNM_DIR="$HOME/.local/share/fnm"
+DEFAULT_ALIAS="$FNM_DIR/aliases/default"
+
+# Resolve fnm default node via static symlinks
+if [ -L "$DEFAULT_ALIAS" ]; then
+  # Follow all symlinks to get the actual installation path
+  TARGET=$(readlink -f "$DEFAULT_ALIAS")
+  NPM_PATH="$TARGET/bin/npm"
+  if [ -x "$NPM_PATH" ]; then
+    exec "$NPM_PATH" "$@"
+  fi
+fi
+
+# Fallback to known version if symlinks fail
+NPM_PATH="$FNM_DIR/node-versions/v26.1.0/installation/bin/npm"
+if [ -x "$NPM_PATH" ]; then
+  exec "$NPM_PATH" "$@"
+fi
+
+echo "Error: Could not find fnm npm binary" >&2
+exit 1
