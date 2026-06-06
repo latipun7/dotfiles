@@ -14,7 +14,7 @@ desc = "Open editor for current working directory"
 
 [[mgr.prepend_keymap]]
 on = "i"
-run = 'shell --block -- bat --paging=never --color=always --style=numbers,grid "$1" | less -Ri'
+run = 'shell --block -- bat --paging=always --pager=less --style=numbers,grid "$1"'
 desc = "Show text on pager"
 
 ### Plugins ###
@@ -55,3 +55,8 @@ desc = "Run lazygit"
 on = ["g", "H"]
 run = "cd ~/.local/share/chezmoi"
 desc = "Go to chezmoi source directory"
+
+[[mgr.prepend_keymap]]
+on = ["g", "p"]
+run = "cd ~/Documents/projects"
+desc = "Go to projects directory"
