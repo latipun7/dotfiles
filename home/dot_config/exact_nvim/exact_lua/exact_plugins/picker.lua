@@ -7,7 +7,6 @@ return {
           keys = {
             ["<c-h>"] = { "toggle_hidden", mode = { "i", "n" } },
             ["<c-i>"] = { "toggle_ignored", mode = { "i", "n" } },
-            ["<c-f>"] = { "toggle_follow", mode = { "i", "n" } },
             ["H"] = { "toggle_hidden", mode = { "n" } },
             ["I"] = { "toggle_ignored", mode = { "n" } },
             ["F"] = { "toggle_follow", mode = { "n" } },
