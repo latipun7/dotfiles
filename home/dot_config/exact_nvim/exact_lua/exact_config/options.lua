@@ -15,23 +15,23 @@ opt.wrap = true
 
 if vim.fn.has("wsl") == 1 then
   vim.g.clipboard = {
-    name = "WSL",
+    name = "WSL-Unicode",
     copy = {
-      ["+"] = { "clip.exe" },
-      ["*"] = { "clip.exe" },
+      ["+"] = { "sh", "-c", "iconv -f utf8 -t utf16 | clip.exe" },
+      ["*"] = { "sh", "-c", "iconv -f utf8 -t utf16 | clip.exe" },
     },
     paste = {
       ["+"] = {
-        "powershell.exe",
-        "-noprofile",
-        "-c",
-        '[Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+        "pwsh.exe",
+        "-NoProfile",
+        "-Command",
+        '[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; [Console]::Write((Get-Clipboard -Raw).Replace("`r", ""))',
       },
       ["*"] = {
-        "powershell.exe",
-        "-noprofile",
-        "-c",
-        '[Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+        "pwsh.exe",
+        "-NoProfile",
+        "-Command",
+        '[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; [Console]::Write((Get-Clipboard -Raw).Replace("`r", ""))',
       },
     },
     cache_enabled = false,
