@@ -7,7 +7,7 @@ show_hidden = true
 
 [plugin]
 prepend_preloaders = [
-  { url = "*.md", run = 'faster-piper -- glow -w=$w -s=$HOME/.config/glow/catppuccin-mocha.json "$1"' },
+  { url = "*.md", run = 'faster-piper -- CLICOLOR_FORCE=1 glow -w=$w -s=$HOME/.config/glow/catppuccin-mocha.json "$1"' },
   { mime = "application/sqlite3", run = 'faster-piper -- sqlite3 "$1" ".schema --indent"' },
 ]
 
