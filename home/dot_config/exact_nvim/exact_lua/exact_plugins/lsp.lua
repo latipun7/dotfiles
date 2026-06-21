@@ -28,6 +28,13 @@ return {
     opts = {
       inlay_hints = { enabled = true },
       servers = {
+        rust_analyzer = {
+          settings = {
+            ["rust-analyzer"] = {
+              check = { command = "clippy" },
+            },
+          },
+        },
         taplo = {
           filetypes = { "toml" },
           -- IMPORTANT: this is required for taplo LSP to work in non-git repositories
