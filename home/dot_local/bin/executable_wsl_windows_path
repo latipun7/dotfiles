@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+# Get Windows PATH and convert to WSL paths
+# This is sourced from .zshenv to set up Windows PATH in WSL
+
+get_windows_path() {
+  local win_path=""
+
+  # Use full path to PowerShell to avoid PATH issues
+  if [ -f "/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe" ]; then
+    # Get Machine + User PATH from Windows
+    win_path=$(/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive -Command "
+            \$machinePath = [System.Environment]::GetEnvironmentVariable('PATH', 'Machine')
+            \$userPath = [System.Environment]::GetEnvironmentVariable('PATH', 'User')
+            if (\$userPath) { \$machinePath + ';' + \$userPath } else { \$machinePath }
+        " 2>/dev/null | tr -d '\r')
+  fi
+
+  if [ -z "$win_path" ]; then
+    return 1
+  fi
+
+  # Convert Windows paths to WSL paths
+  echo "$win_path" | tr ';' '\n' | while read -r winpath; do
+    if [ -n "$winpath" ]; then
+      # Convert to WSL path, skip if conversion fails
+      wslpath -u "$winpath" 2>/dev/null || echo "$winpath"
+    fi
+  done | grep -v '^$' | paste -sd:
+}
+
+# Only run in WSL
+if [ -f "/proc/sys/kernel/osrelease" ] && grep -q "microsoft" /proc/sys/kernel/osrelease 2>/dev/null; then
+  # Cache file for performance (update every hour)
+  CACHE_FILE="$HOME/.cache/windows_path_cache"
+  CACHE_MAX_AGE=3600 # 1 hour
+
+  mkdir -p "$(dirname "$CACHE_FILE")"
+
+  # Check if cache is valid
+  if [ -f "$CACHE_FILE" ]; then
+    cache_age=$(($(date +%s) - $(stat -c %Y "$CACHE_FILE" 2>/dev/null || echo 0)))
+    if [ $cache_age -lt $CACHE_MAX_AGE ]; then
+      WINDOWS_PATH=$(cat "$CACHE_FILE")
+    fi
+  fi
+
+  # If no valid cache, fetch and cache
+  if [ -z "$WINDOWS_PATH" ]; then
+    WINDOWS_PATH=$(get_windows_path)
+    if [ -n "$WINDOWS_PATH" ]; then
+      printf "%s\n" "$WINDOWS_PATH" >"$CACHE_FILE"
+    fi
+  fi
+
+  # Append Windows PATH to current PATH
+  # Only append if Windows PATH is not already in current PATH
+  if [ -n "$WINDOWS_PATH" ]; then
+    # Check if a Windows path is already in PATH (to avoid doubling)
+    if [[ "$PATH" != *"/mnt/c/"* ]]; then
+      export PATH="${PATH}:${WINDOWS_PATH}"
+    fi
+  fi
+fi

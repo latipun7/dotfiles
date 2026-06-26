@@ -1,0 +1,14 @@
+[Unit]
+Description=Hermes WebUI — Community Dashboard
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/hermes-webui-wrapper
+WorkingDirectory=%h/.local/share/hermes-webui
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target

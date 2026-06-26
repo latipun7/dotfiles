@@ -1,7 +1,5 @@
 # -*-zsh-*- vim:ft=zsh
 
-source "$HOME/.local/bin/_functions"
-
 # ░█░█░█▀▄░█▀▀░░░█▀▄░█▀█░█▀▀░█▀▀░░░█▀▄░▀█▀░█▀▄
 # ░▄▀▄░█░█░█░█░░░█▀▄░█▀█░▀▀█░█▀▀░░░█░█░░█░░█▀▄
 # ░▀░▀░▀▀░░▀▀▀░░░▀▀░░▀░▀░▀▀▀░▀▀▀░░░▀▀░░▀▀▀░▀░▀
@@ -73,15 +71,14 @@ elif [[ "$OSTYPE" == darwin* ]]; then
     eval "$(/usr/local/bin/brew shellenv)"
 fi
 
-# Custom path
-! (echo "$PATH" | grep -q "$HOME/.local/bin") && homeexe="$HOME/.local/bin"
-hash cargo 2>/dev/null && cargoexe="$CARGO_HOME/bin"
-hash go 2>/dev/null && goexe="$GOPATH/bin"
-brewpythonexe=$(hash brew 2>/dev/null && echo "$(brew --prefix)/opt/python/libexec/bin")
-
-pathexe=("$cargoexe" "$goexe" "$brewpythonexe" "$homeexe" "$PATH")
-
-PATH=$(concat ":" "${pathexe[@]}")
+# Custom path — zsh-native tied array: $path syncs to $PATH automatically
+path=(
+  $CARGO_HOME/bin(N-/)
+  $GOPATH/bin(N-/)
+  $HOME/.local/bin(N-/)
+  $path
+)
+typeset -U path
 export PATH
 
 # Node global module require path
@@ -144,11 +141,12 @@ if hash fzf 2>/dev/null; then
   fi
 fi
 
-# Invoking gpg-agent
+# Invoking gpg-agent — interactive terminals only
 # https://www.gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html
-# GPG_TTY="$(tty)"
 # NOTE: https://github.com/romkatv/powerlevel10k/issues/524
-export GPG_TTY="$TTY"
+if [[ -o interactive ]]; then
+  export GPG_TTY="$TTY"
+fi
 
 # Batman syntax highlight for man pages -> https://github.com/sharkdp/bat#man
 if hash bat 2>/dev/null; then
@@ -168,14 +166,18 @@ if [ -f "$HOME/.zshenv.private" ]; then
   source "$HOME/.zshenv.private"
 fi
 
-if [ -f "$HOME/.hermes/.env" ]; then
-  export $(grep -E "^DISCORD_BOT_TOKEN=" "$HOME/.hermes/.env" | sed 's/DISCORD_BOT_TOKEN/DISCORD_TOKEN/')
-fi
-
 # ░█▀▀░█░█░█▀▀░▀█▀░█▀█░█▄█░░░█▀▀░█▀█░█░█
 # ░█░░░█░█░▀▀█░░█░░█░█░█░█░░░█▀▀░█░█░▀▄▀
 # ░▀▀▀░▀▀▀░▀▀▀░░▀░░▀▀▀░▀░▀░░░▀▀▀░▀░▀░░▀░
 
 if [ -f "$HOME/.zshenv.custom" ]; then
   source "$HOME/.zshenv.custom"
+fi
+
+# ░█░█░█▀▀░█░░
+# ░█▄█░▀▀█░█░░
+# ░▀░▀░▀▀▀░▀▀▀
+# Load Windows PATH in WSL (for non-interactive shell)
+if [ -f "$HOME/.local/bin/wsl_windows_path" ]; then
+  source "$HOME/.local/bin/wsl_windows_path"
 fi

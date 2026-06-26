@@ -38,6 +38,12 @@
   url: https://github.com/catppuccin/glamour/raw/main/themes/catppuccin-mocha.json
   refreshPeriod: 132h
 
+.local/share/hermes-webui:
+  type: git-repo
+  url: https://github.com/nesquena/hermes-webui.git
+  pull:
+    args: ["--dry-run"] # update from WebUI or manually
+
 # oh-my-zsh [[[
 .local/share/oh-my-zsh:
   type: git-repo

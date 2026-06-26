@@ -1,0 +1,20 @@
+#!/usr/bin/env zsh
+# Hermes WebUI service wrapper — sources ~/.zshenv for full environment parity
+#
+# Systemd user services don't source shell profiles. This wrapper
+# sources ~/.zshenv (XDG vars, PATH, EDITOR, Windows paths, etc.)
+# before exec-ing into the WebUI bootstrap — DRY and auto-follows
+# any future changes to ~/.zshenv.
+
+set -euo pipefail
+
+source "$HOME/.zshenv" 2>/dev/null
+
+export HERMES_HOME="$HOME/.hermes"
+export VIRTUAL_ENV="$HERMES_HOME/hermes-agent/venv"
+export HERMES_WEBUI_EXTENSION_DIR="$HERMES_HOME/webui/extensions"
+export PATH="$VIRTUAL_ENV/bin:$HERMES_HOME/hermes-agent/node_modules/.bin:$PATH"
+
+exec /home/latipun/.hermes/hermes-agent/venv/bin/python3 \
+  /home/latipun/.local/share/hermes-webui/bootstrap.py \
+  --no-browser --foreground --host 0.0.0.0 8787
