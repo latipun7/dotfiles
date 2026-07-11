@@ -1,14 +1,12 @@
 # -*-zsh-*- vim:ft=zsh
 
-# push prompt to the bottom of screen
-printf '\n%.0s' {1..$(( $(tput lines) ))}
-
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
+# Enable Powerlevel10k instant prompt. MUST stay at the absolute top of ~/.zshrc.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
+
+# Push prompt to the bottom of screen (placed after p10k instant prompt)
+printf '\n%.0s' {1..$(( ${LINES:-$(tput lines 2>/dev/null || echo 24)} ))}
 
 # ┏━┓┏┳┓╺━┓   ┏━┓┏━╸╺┳╸╺┳╸╻┏┓╻┏━╸┏━┓
 # ┃ ┃┃┃┃┏━┛   ┗━┓┣╸  ┃  ┃ ┃┃┗┫┃╺┓┗━┓
@@ -27,7 +25,7 @@ HIST_STAMPS="yyyy-mm-dd"
 zstyle ':omz:update' mode auto
 zstyle ':omz:update' frequency 7
 
-if hash vivid 2>/dev/null; then
+if (( $+commands[vivid] )); then
   DISABLE_LS_COLORS=true
 fi
 
@@ -54,20 +52,22 @@ plugins=(
   zsh-autocomplete
   fzf
   zsh-latipun
-  zsh-syntax-highlighting # need to load last
+  zsh-syntax-highlighting # must be loaded last
 )
 
-# Functions path
-# NOTE: https://github.com/zsh-users/zsh-completions/issues/603
+# Functions path setup
 
-# add brew completions path to fpath
-if hash brew 2>/dev/null; then
-  fpath=("$(brew --prefix)/share/zsh/site-functions" $fpath)
-fi
+typeset -U fpath
+
+# Add Homebrew completion paths without spawning slow $(brew --prefix) subshells
+fpath=(
+  {/opt/homebrew,/home/linuxbrew/.linuxbrew}/share/zsh/site-functions(N-/)
+  $fpath
+)
 
 # zsh-completions
-fpath=("${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-completions/src" $fpath)
+fpath=("${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-completions/src"(N-/) $fpath)
 
-source $ZSH/oh-my-zsh.sh
+source "$ZSH/oh-my-zsh.sh"
 
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ ! -f "$HOME/.p10k.zsh" ]] || source "$HOME/.p10k.zsh"

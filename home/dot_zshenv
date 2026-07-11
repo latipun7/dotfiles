@@ -20,9 +20,9 @@ export YARN_GLOBAL_FOLDER="$XDG_DATA_HOME/yarn"
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 
-# NCureses
+# NCurses
 export TERMINFO="$XDG_DATA_HOME/terminfo"
-export TERMINFO_DIRS="$XDG_DATA_HOME/terminfo":/usr/share/terminfo
+export TERMINFO_DIRS="$XDG_DATA_HOME/terminfo:/usr/share/terminfo"
 
 # Go
 export GOPATH="$XDG_DATA_HOME/go"
@@ -39,13 +39,13 @@ export WAKATIME_HOME="$XDG_CONFIG_HOME/wakatime"
 # PM2
 export PM2_HOME="$XDG_CACHE_HOME/pm2"
 
-# postgreSQL
+# PostgreSQL
 export PSQLRC="$XDG_CONFIG_HOME/pg/psqlrc"
 export PGPASSFILE="$XDG_CONFIG_HOME/pg/pgpass"
 export PSQL_HISTORY="$XDG_STATE_HOME/psql_history"
 export PGSERVICEFILE="$XDG_CONFIG_HOME/pg/pg_service.conf"
 
-# zsh
+# Zsh history
 export HISTFILE="$XDG_STATE_HOME/zsh/history"
 
 # CUDA
@@ -58,43 +58,32 @@ export HARMONOID_CACHE_DIR="$XDG_CACHE_HOME/harmonoid"
 # ░█▀▀░█▀█░░█░░█▀█░▀▀█
 # ░▀░░░▀░▀░░▀░░▀░▀░▀▀▀
 
-# Make homebrew PATH available
-if hash brew 2>/dev/null; then
-  eval "$(brew shellenv)"
-elif [[ "$OSTYPE" == linux-gnu ]]; then
-  [ -d "/home/linuxbrew/.linuxbrew" ] &&
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-  [ -d "$HOME/.linuxbrew" ] &&
-    eval "$("$HOME/.linuxbrew/bin/brew" shellenv)"
-elif [[ "$OSTYPE" == darwin* ]]; then
-  [ -d "/usr/local/Cellar" ] &&
-    eval "$(/usr/local/bin/brew shellenv)"
-fi
+typeset -U path
+
+# Make Homebrew PATH available
+for brew in {/opt/homebrew,/usr/local,$HOME/.linuxbrew,/home/linuxbrew/.linuxbrew}/bin/brew(N-*); do
+  eval "$("$brew" shellenv)"
+  break
+done
 
 # Custom path — zsh-native tied array: $path syncs to $PATH automatically
 path=(
-  $CARGO_HOME/bin(N-/)
-  $GOPATH/bin(N-/)
-  $HOME/.local/bin(N-/)
+  ${CARGO_HOME:+"$CARGO_HOME/bin"}(N-/)
+  ${GOPATH:+"$GOPATH/bin"}(N-/)
+  "$HOME/.local/bin"(N-/)
   $path
 )
-typeset -U path
-export PATH
 
-# Node global module require path
-if hash node 2>/dev/null; then
-  nodelink=$(readlink -e "$(which node)")
-  # Get installation root: dirname of node binary = bin/, dirname of that = install root
-  install_root=$(dirname "$(dirname "$nodelink")")
-  NODE_PATH="$install_root/lib/node_modules"
-  export NODE_PATH
+# Node global module require path (Pure Zsh resolution, zero process forks)
+if (( $+commands[node] )); then
+  export NODE_PATH="${commands[node]:A:h:h}/lib/node_modules"
 fi
 
 # ░█▀▄░█▀▀░█▀▀░█▀█░█░█░█░░░▀█▀░█▀▀
 # ░█░█░█▀▀░█▀▀░█▀█░█░█░█░░░░█░░▀▀█
 # ░▀▀░░▀▀▀░▀░░░▀░▀░▀▀▀░▀▀▀░░▀░░▀▀▀
 
-# Editor
+# Editor selection
 if [[ "${TERM_PROGRAM:-tty}" == *vscode* ]]; then
   export VISUAL="code --wait"
   export EDITOR="code --wait"
@@ -103,7 +92,7 @@ else
   export EDITOR=nvim
 fi
 
-if [[ "$(hostnamectl chassis 2>/dev/null)" == 'server' ]]; then
+if (( $+commands[hostnamectl] )) && [[ "$(hostnamectl chassis 2>/dev/null)" == 'server' ]]; then
   export BROWSER=lynx
 fi
 
@@ -112,21 +101,20 @@ fi
 # ░░▀░░▀░▀░▀▀▀░▀░▀░▀░▀░▀▀▀
 
 # `fnm` setup
-if hash fnm &>/dev/null; then
+if (( $+commands[fnm] )); then
   export FNM_DIR="$XDG_DATA_HOME/fnm"
-
   eval "$(fnm env --use-on-cd)"
 fi
 
 # fzf configs
-if hash fzf 2>/dev/null; then
-  # catppuccin mocha colors
+if (( $+commands[fzf] )); then
+  # Catppuccin Mocha colors
   export FZF_DEFAULT_OPTS="--border --tabstop=2 \
     --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
     --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
     --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
 
-  if hash fd 2>/dev/null; then
+  if (( $+commands[fd] )); then
     export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
 
     _fzf_compgen_path() {
@@ -142,19 +130,17 @@ if hash fzf 2>/dev/null; then
 fi
 
 # Invoking gpg-agent — interactive terminals only
-# https://www.gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html
-# NOTE: https://github.com/romkatv/powerlevel10k/issues/524
 if [[ -o interactive ]]; then
   export GPG_TTY="$TTY"
 fi
 
-# Batman syntax highlight for man pages -> https://github.com/sharkdp/bat#man
-if hash bat 2>/dev/null; then
+# Batman syntax highlight for man pages
+if (( $+commands[bat] )); then
   export MANPAGER="sh -c 'col -bx | bat -l man -p'"
   export MANROFFOPT="-c"
 fi
 
-# Misc
+# Misc flags
 export LESS='--RAW-CONTROL-CHARS --ignore-case'
 export FORCE_COLOR=true
 
@@ -162,22 +148,16 @@ export FORCE_COLOR=true
 # ░█▀▀░█▀▄░░█░░▀▄▀░█▀█░░█░░█▀▀░░░█▀▀░█░█░▀▄▀
 # ░▀░░░▀░▀░▀▀▀░░▀░░▀░▀░░▀░░▀▀▀░░░▀▀▀░▀░▀░░▀░
 
-if [ -f "$HOME/.zshenv.private" ]; then
-  source "$HOME/.zshenv.private"
-fi
+[[ -f "$HOME/.zshenv.private" ]] && source "$HOME/.zshenv.private"
 
 # ░█▀▀░█░█░█▀▀░▀█▀░█▀█░█▄█░░░█▀▀░█▀█░█░█
 # ░█░░░█░█░▀▀█░░█░░█░█░█░█░░░█▀▀░█░█░▀▄▀
 # ░▀▀▀░▀▀▀░▀▀▀░░▀░░▀▀▀░▀░▀░░░▀▀▀░▀░▀░░▀░
 
-if [ -f "$HOME/.zshenv.custom" ]; then
-  source "$HOME/.zshenv.custom"
-fi
+[[ -f "$HOME/.zshenv.custom" ]] && source "$HOME/.zshenv.custom"
 
 # ░█░█░█▀▀░█░░
 # ░█▄█░▀▀█░█░░
 # ░▀░▀░▀▀▀░▀▀▀
 # Load Windows PATH in WSL (for non-interactive shell)
-if [ -f "$HOME/.local/bin/wsl_windows_path" ]; then
-  source "$HOME/.local/bin/wsl_windows_path"
-fi
+[[ -f "$HOME/.local/bin/wsl_windows_path" ]] && source "$HOME/.local/bin/wsl_windows_path"
