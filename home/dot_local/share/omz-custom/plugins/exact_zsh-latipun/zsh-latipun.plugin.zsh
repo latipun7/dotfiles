@@ -11,16 +11,6 @@ umask 022
 # Activate zoxide
 (( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
 
-# NPM completion (cached for faster startup)
-if (( $+commands[npm] )); then
-  local npm_cache="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/npm_completion"
-  if [[ ! -f "$npm_cache" ]]; then
-    mkdir -p "${npm_cache:h}"
-    npm completion > "$npm_cache" 2>/dev/null
-  fi
-  source "$npm_cache"
-fi
-
 # Populate LS_COLORS via vivid (cached and auto-updated when config changes)
 if (( $+commands[vivid] )); then
   local vivid_theme="${XDG_CONFIG_HOME:-$HOME/.config}/vivid/catppuccin-mocha.yml"
