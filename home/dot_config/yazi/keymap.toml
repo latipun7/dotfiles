@@ -8,14 +8,24 @@ run = "shell --block -- $SHELL -l"
 desc = "Open shell here"
 
 [[mgr.prepend_keymap]]
-on = "e"
-run = 'shell --block "$EDITOR"'
-desc = "Open editor for current working directory"
+on = "i"
+run = "shell --block -- bat --paging=always --pager=less --style=numbers,grid %h"
+desc = "Show text on pager"
 
 [[mgr.prepend_keymap]]
-on = "i"
-run = 'shell --block -- bat --paging=always --pager=less --style=numbers,grid "$1"'
-desc = "Show text on pager"
+on = ["e", "v"]
+run = 'shell --block -- "$EDITOR"'
+desc = "Open editor in CWD"
+
+[[mgr.prepend_keymap]]
+on = ["e", "d"]
+run = "shell --block -- git diff --no-index %s1 %s2 || true"
+desc = "Diff first 2 selected files"
+
+[[mgr.prepend_keymap]]
+on = ["e", "r"]
+run = "shell -- chezmoi re-add"
+desc = "Re-add all files to chezmoi"
 
 ### Plugins ###
 
@@ -45,7 +55,7 @@ run = "plugin mount"
 desc = "Mount with fuse"
 
 [[mgr.prepend_keymap]]
-on = ["g", "i"]
+on = ["e", "g"]
 run = "plugin lazygit"
 desc = "Run lazygit"
 
@@ -60,3 +70,14 @@ desc = "Go to chezmoi source directory"
 on = ["g", "p"]
 run = "cd ~/Documents/projects"
 desc = "Go to projects directory"
+
+[[mgr.prepend_keymap]]
+on = ["g", "t"]
+run = "cd /tmp"
+desc = "Go to temp directory"
+for = "linux"
+
+[[mgr.prepend_keymap]]
+on = ["g", "s"]
+run = "cd ~/.local/share"
+desc = "Go to data share directory"
