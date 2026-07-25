@@ -68,13 +68,12 @@ done
 
 # Custom path — zsh-native tied array: $path syncs to $PATH automatically
 path=(
-  ${CARGO_HOME:+"$CARGO_HOME/bin"}(N-/)
-  ${GOPATH:+"$GOPATH/bin"}(N-/)
   "$HOME/.local/bin"(N-/)
+  "${XDG_DATA_HOME:-$HOME/.local/share}/mise/shims"(N-/)
   $path
 )
 
-# Node global module require path (Pure Zsh resolution, zero process forks)
+# Node global module require path
 if (( $+commands[node] )); then
   export NODE_PATH="${commands[node]:A:h:h}/lib/node_modules"
 fi
@@ -99,12 +98,6 @@ fi
 # ░▀█▀░█░█░█▀▀░█▀█░█░█░█▀▀
 # ░░█░░█▄█░█▀▀░█▀█░█▀▄░▀▀█
 # ░░▀░░▀░▀░▀▀▀░▀░▀░▀░▀░▀▀▀
-
-# `fnm` setup
-if (( $+commands[fnm] )); then
-  export FNM_DIR="$XDG_DATA_HOME/fnm"
-  eval "$(fnm env --use-on-cd)"
-fi
 
 # fzf configs
 if (( $+commands[fzf] )); then

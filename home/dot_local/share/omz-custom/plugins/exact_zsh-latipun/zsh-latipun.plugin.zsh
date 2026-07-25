@@ -5,11 +5,11 @@
 # Default file and folder mask permission
 umask 022
 
-# Activate node if defined as a function
-(( $+functions[node] )) && node -v &>/dev/null
-
 # Activate zoxide
 (( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
+
+# Activate mise
+(( $+commands[mise] )) && eval "$(mise activate zsh)"
 
 # Populate LS_COLORS via vivid (cached and auto-updated when config changes)
 if (( $+commands[vivid] )); then
