@@ -6,19 +6,19 @@
 umask 022
 
 # Activate zoxide
-(( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
+(($+commands[zoxide])) && eval "$(zoxide init zsh)"
 
 # Activate mise
-(( $+commands[mise] )) && eval "$(mise activate zsh)"
+(($+commands[mise])) && eval "$(mise activate zsh)"
 
 # Populate LS_COLORS via vivid (cached and auto-updated when config changes)
-if (( $+commands[vivid] )); then
+if (($+commands[vivid])); then
   local vivid_theme="${XDG_CONFIG_HOME:-$HOME/.config}/vivid/catppuccin-mocha.yml"
   local vivid_cache="${XDG_CACHE_HOME:-$HOME/.cache}/vivid_colors"
 
   if [[ ! -f "$vivid_cache" || "$vivid_theme" -nt "$vivid_cache" ]]; then
     mkdir -p "${vivid_cache:h}"
-    vivid generate "$vivid_theme" > "$vivid_cache" 2>/dev/null
+    vivid generate "$vivid_theme" > "$vivid_cache" 2> /dev/null
   fi
 
   export LS_COLORS="$(< "$vivid_cache")"
@@ -42,18 +42,18 @@ alias v='$VISUAL'
 alias cm=chezmoi
 
 # Utility aliases
-(( $+commands[btop] )) && alias top=btop
-(( $+commands[asciiquarium] )) && alias fishes='asciiquarium --transparent'
+(($+commands[btop])) && alias top=btop
+(($+commands[asciiquarium])) && alias fishes='asciiquarium --transparent'
 
 # Paru / Pacman aliases & functions
-if (( $+commands[paru] )); then
+if (($+commands[paru])); then
   alias yay=paru
   alias yeet='paru -Rns'
 fi
 
-if (( $+commands[pacman] )) && (( $+commands[yay] || $+commands[paru] )); then
+if (($+commands[pacman])) && (($+commands[yay] || $+commands[paru])); then
   backup-packages-list() {
-    comm -23 <(yay -Qqe | sort) <({ expac -l '\n' '%E' base base-devel 2>/dev/null } | sort -u) > "$HOME/Documents/packages.list"
+    comm -23 <(yay -Qqe | sort) <({ expac -l '\n' '%E' base base-devel 2> /dev/null; } | sort -u) > "$HOME/Documents/packages.list"
   }
 
   get-packages-list() {
@@ -63,14 +63,14 @@ if (( $+commands[pacman] )) && (( $+commands[yay] || $+commands[paru] )); then
 fi
 
 # Eza alias
-if (( $+commands[eza] )); then
+if (($+commands[eza])); then
   alias ls='eza --long --all --header --group-directories-first --icons --git'
   alias ll='eza --long --all --header --group --group-directories-first --icons --git'
   alias lt='eza --tree --all --header --group-directories-first --icons --git --ignore-glob ".git|node_modules"'
 fi
 
 # Bat alias & log helpers
-if (( $+commands[bat] )); then
+if (($+commands[bat])); then
   alias cat=bat
   alias catp='bat -pp'
 
@@ -103,7 +103,7 @@ elif [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
 fi
 
 # LF integration
-if (( $+commands[lf] )); then
+if (($+commands[lf])); then
   lfcd() {
     local dir
     dir="$(command lf -print-last-dir "$@")" && cd -- "$dir"
@@ -111,7 +111,7 @@ if (( $+commands[lf] )); then
 fi
 
 # Yazi integration
-if (( $+commands[yazi] )); then
+if (($+commands[yazi])); then
   yy() {
     local tmp cwd
     tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
@@ -126,28 +126,53 @@ if (( $+commands[yazi] )); then
 fi
 
 # Lazygit integration
-if (( $+commands[lazygit] )); then
+if (($+commands[lazygit])); then
   lg() {
     export LAZYGIT_NEW_DIR_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/lazygit/newdir"
     lazygit "$@"
     if [[ -f "$LAZYGIT_NEW_DIR_FILE" ]]; then
       cd -- "$(< "$LAZYGIT_NEW_DIR_FILE")"
-      rm -f -- "$LAZYGIT_NEW_DIR_FILE" >/dev/null
+      rm -f -- "$LAZYGIT_NEW_DIR_FILE" > /dev/null
     fi
   }
 fi
 
-(( $+commands[lazydocker] )) && alias lzd=lazydocker
+(($+commands[lazydocker])) && alias lzd=lazydocker
 
 # Bitwarden functions
-if (( $+commands[bw] )); then
+if (($+commands[bw])); then
   bw-login() { export BW_SESSION="$(bw login --raw)"; }
   bw-unlock() { export BW_SESSION="$(bw unlock --raw)"; }
 fi
 
 # WSL-specific settings
 if [[ -n "$WSL_DISTRO_NAME" ]]; then
-  alias cbcopy="iconv -f utf8 -t utf16 | clip.exe"
+  # UTF-8/Emoji-safe Windows clipboard copy for WSL
+  clip() {
+    local ps=${commands[pwsh.exe]:-${commands[powershell.exe]:-powershell.exe}}
+
+    # PowerShell command string
+    local ps_cmd='[Console]::InputEncoding = [System.Text.Encoding]::UTF8; Set-Clipboard -Value ([Console]::In.ReadToEnd())'
+
+    # 2. Check if receiving stdin from a pipe vs arguments
+    if [[ -t 0 ]]; then
+      if (($# > 0)); then
+        if [[ -f $1 && $# -eq 1 ]]; then
+          # If passed a file path: clip filename.txt
+          "$ps" -NoProfile -NonInteractive -Command "$ps_cmd" < "$1"
+        else
+          # If passed raw text: clip "Hello World"
+          print -rn -- "$*" | "$ps" -NoProfile -NonInteractive -Command "$ps_cmd"
+        fi
+      else
+        print -u2 "Usage: clip [FILE|TEXT] or pipe via stdin (e.g., echo 'text' | clip)"
+        return 1
+      fi
+    else
+      # 3. Piped stdin input: echo "⚙️ test" | clip
+      "$ps" -NoProfile -NonInteractive -Command "$ps_cmd"
+    fi
+  }
 fi
 
 # ░█░█░█▀▀░█░█░█▀▄░▀█▀░█▀█░█▀▄░█▀▀
@@ -155,13 +180,13 @@ fi
 # ░▀░▀░▀▀▀░░▀░░▀▀░░▀▀▀░▀░▀░▀▀░░▀▀▀
 
 clear-scrollback-buffer() {
-  clear && printf '\e[3J' && printf '\n%.0s' {1..$(( $(tput lines) - 1 ))}
+  clear && printf '\e[3J' && printf '\n%.0s' {1..$(($(tput lines) - 1))}
   zle && zle .reset-prompt && zle -R
 }
 zle -N clear-scrollback-buffer
 
 push-viewport() {
-  printf '\n%.0s' {1..$(( $(tput lines) ))}
+  printf '\n%.0s' {1..$(($(tput lines)))}
   zle && zle .reset-prompt && zle -R
 }
 zle -N push-viewport
