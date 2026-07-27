@@ -156,19 +156,14 @@ vim.treesitter.query.add_directive("set-chezmoi-injection-language!", function(_
 end, { force = true })
 
 vim.filetype.add({
-  extensions = {
-    tfstate = "json",
-    mdx = "markdown",
-  },
   filename = {
-    ["rc.lua.test"] = "lua",
     ["dunstrc"] = "confini",
     [".chezmoiignore"] = "chezmoitmpl.gitignore",
     [".chezmoiremove"] = "chezmoitmpl.gitignore",
     [".chezmoiroot"] = "text",
     [".chezmoiversion"] = "text",
   },
-  pattern = { -- regex
+  pattern = {
     [".*ignore"] = "gitignore",
     [".*%.conf"] = {
       function(_, bufnr)
@@ -184,10 +179,14 @@ vim.filetype.add({
           return "conf"
         end
       end,
-      priority = -math.huge,
+      { priority = -math.huge },
     },
-    [".*%.tmpl"] = { resolve_chezmoi_ft, priority = math.huge },
-    [".*/%.chezmoi.*"] = { resolve_chezmoi_ft, priority = math.huge },
-    [".*/local/share/chezmoi/.*"] = { resolve_chezmoi_ft, priority = math.huge },
+    [".*%.tmpl"] = { resolve_chezmoi_ft, { priority = math.huge } },
+    [".*/%.chezmoi.*"] = { resolve_chezmoi_ft, { priority = math.huge } },
+    [".*/%.local/share/chezmoi/.*"] = { resolve_chezmoi_ft, { priority = math.huge } },
+  },
+  extensions = {
+    tfstate = "json",
+    mdx = "markdown",
   },
 })
