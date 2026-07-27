@@ -1,7 +1,7 @@
 return {
+  { "alker0/chezmoi.vim", enabled = false },
   { "camnw/lf-vim" },
   { "elkowar/yuck.vim" },
-  { "alker0/chezmoi.vim" },
   {
     "eraserhd/parinfer-rust",
     ft = { "yuck", "lisp", "clojure" },

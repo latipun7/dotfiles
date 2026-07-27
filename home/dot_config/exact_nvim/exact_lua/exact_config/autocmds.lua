@@ -35,5 +35,5 @@ create_aucmd("User", {
 -- Disable yaml LS diagnostics on `.chezmoiexternal.yaml` file
 create_aucmd({ "BufRead", "BufNewFile" }, {
   pattern = "*chezmoiexternal*",
-  callback = function(ev) vim.diagnostic.enable(false, { bufnr = ev.buf }) end,
+  callback = function(event) vim.diagnostic.enable(false, { bufnr = event.buf }) end,
 })
