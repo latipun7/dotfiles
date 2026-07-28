@@ -1,12 +1,10 @@
-# -*-zsh-*- vim:ft=zsh
-
 # Enable Powerlevel10k instant prompt. MUST stay at the absolute top of ~/.zshrc.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Push prompt to the bottom of screen (placed after p10k instant prompt)
-printf '\n%.0s' {1..$(( ${LINES:-$(tput lines 2>/dev/null || echo 24)} ))}
+# Push prompt to the bottom of screen
+printf '\n%.0s' {1..$((${LINES:-$(tput lines 2> /dev/null || echo 24)}))}
 
 # ┏━┓┏┳┓╺━┓   ┏━┓┏━╸╺┳╸╺┳╸╻┏┓╻┏━╸┏━┓
 # ┃ ┃┃┃┃┏━┛   ┗━┓┣╸  ┃  ┃ ┃┃┗┫┃╺┓┗━┓
@@ -25,7 +23,7 @@ HIST_STAMPS="yyyy-mm-dd"
 zstyle ':omz:update' mode auto
 zstyle ':omz:update' frequency 7
 
-if (( $+commands[vivid] )); then
+if (($+commands[vivid])); then
   DISABLE_LS_COLORS=true
 fi
 

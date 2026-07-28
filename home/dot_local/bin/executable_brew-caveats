@@ -11,7 +11,7 @@
 
 set -euo pipefail
 
-if hash brew &>/dev/null; then
+if hash brew &> /dev/null; then
   if [ $# -eq 0 ]; then
     for formula in $(brew list --formula); do
       caveat=$(brew info "$formula" | sed '/==> Caveats/,/==>/!d;//d')

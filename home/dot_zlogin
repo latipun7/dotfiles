@@ -1,12 +1,10 @@
-# -*-zsh-*- vim:ft=zsh
-
 #=======================#
 #     Login Command     #
 #=======================#
 
-if (( $+commands[fortune] && $+commands[chara] )); then
-  local width=$(( ${COLUMNS:-55} - 8 ))
-  if (( $+commands[lolcat] )); then
+if (($+commands[fortune] && $+commands[chara])); then
+  local width=$((${COLUMNS:-55} - 8))
+  if (($+commands[lolcat])); then
     fortune | lolcat -f | chara say --random --width=$width
   else
     fortune | chara say --random --width=$width

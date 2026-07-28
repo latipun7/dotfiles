@@ -8,9 +8,9 @@ CITY="${CITY:-Godean}"
 DateColumn=34 # Default is 27 for 80 character line, 34 for 92 character line
 TimeColumn=61 # Default is 49 for   "   "   "   "    61 "   "   "   "
 
-curl -fsLSm3 "wttr.in/$CITY?0" >/tmp/now-weather
+curl -fsLSm3 "wttr.in/$CITY?0" > /tmp/now-weather
 
-readarray aWeather </tmp/now-weather
+readarray aWeather < /tmp/now-weather
 rm -f /tmp/now-weather
 
 # Was valid weather report found or an error message?
@@ -50,8 +50,8 @@ fi
 
 # -h needed to turn off formating: https://askubuntu.com/questions/1013954/bash-substring-stringoffsetlength-error/1013960#1013960
 # -h not supported in Ubuntu 18.04. Use second answer: https://askubuntu.com/a/1028566/307523
-cal >/tmp/terminal1
-tr -cd '\11\12\15\40\60-\136\140-\176' </tmp/terminal1 >/tmp/terminal
+cal > /tmp/terminal1
+tr -cd '\11\12\15\40\60-\136\140-\176' < /tmp/terminal1 > /tmp/terminal
 
 CalLineCnt=1
 Today=$(date +"%e")
@@ -80,7 +80,7 @@ while IFS= read -r Cal; do
   tput cud1            # Down one line
   tput cuf $DateColumn # Move columns right
   CalLineCnt=$((++CalLineCnt))
-done </tmp/terminal
+done < /tmp/terminal
 
 printf "\033[00m"
 echo ""
@@ -95,13 +95,13 @@ i=0
 while [ $((++i)) -lt 9 ]; do tput cuu1; done
 tput cuf $TimeColumn # Move columns right
 
-if hash toilet 2>/dev/null; then
-  echo " $(date +"%I:%M %P") " |
-    toilet -f future --filter border >/tmp/terminal
-elif hash figlet 2>/dev/null; then
-  date +"%I:%M %P" | figlet -f future >/tmp/terminal
+if hash toilet 2> /dev/null; then
+  echo " $(date +"%I:%M %P") " \
+    | toilet -f future --filter border > /tmp/terminal
+elif hash figlet 2> /dev/null; then
+  date +"%I:%M %P" | figlet -f future > /tmp/terminal
 else
-  date +"%I:%M %P" >/tmp/terminal
+  date +"%I:%M %P" > /tmp/terminal
 fi
 
 while IFS= read -r Time; do
@@ -109,7 +109,7 @@ while IFS= read -r Time; do
   printf "%s" "$Time"
   tput cud1            # Up one line
   tput cuf $TimeColumn # Move columns right
-done </tmp/terminal
+done < /tmp/terminal
 
 tput rc # Restore saved cursor position.
 

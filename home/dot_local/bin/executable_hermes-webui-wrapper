@@ -8,7 +8,7 @@
 
 set -euo pipefail
 
-source "$HOME/.zshenv" 2>/dev/null
+source "$HOME/.zshenv" 2> /dev/null
 
 export HERMES_HOME="$HOME/.hermes"
 export VIRTUAL_ENV="$HERMES_HOME/hermes-agent/venv"

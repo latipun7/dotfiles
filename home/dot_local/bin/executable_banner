@@ -22,7 +22,7 @@ banner() {
   while true; do
     echo "${top}"
     for line in "${buf[@]}"; do
-      figl <<<"${line}" | lolcat
+      figl <<< "${line}" | lolcat
     done
     setterm --cursor off
     sleep 1

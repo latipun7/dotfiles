@@ -5,7 +5,7 @@
 admin="$(id -nu 1000)"
 
 cachedir="/home/$admin/.cache/yay"
-if hash paru 2>/dev/null; then
+if hash paru 2> /dev/null; then
   cachedir="/home/$admin/.cache/paru/clone"
 fi
 

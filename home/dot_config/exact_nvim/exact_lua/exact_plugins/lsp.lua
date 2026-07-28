@@ -71,6 +71,18 @@ return {
     opts = {
       formatters_by_ft = {
         rust = { "rustfmt" },
+        sh = { "shfmt" },
+        bash = { "shfmt" },
+        zsh = { "shfmt" },
+      },
+      formatters = {
+        shfmt = {
+          prepend_args = function(_, ctx)
+            local args = { "-i", "2", "-ci", "-bn", "-sr" }
+            if vim.bo[ctx.buf].filetype:find("zsh", 1, true) then vim.list_extend(args, { "-ln", "zsh" }) end
+            return args
+          end,
+        },
       },
     },
   },
