@@ -73,8 +73,14 @@ local function detect_templated_interpreter(bufnr)
     if line:find("#!", 1, true) then
       local ft = parse_hashbang_line(line)
       if ft then return ft end
-    elseif not shell_flag_found and (line:find("set -", 1, true) or line:find("pipefail", 1, true)) then
-      shell_flag_found = true
+    else
+      local shell = line:match("^#%s*shellcheck%s+shell=(%S+)")
+      if shell then
+        shell = shell:gsub("{{.-}}", ""):match("^%s*(.-)%s*$")
+        if shell ~= "" then return shell end
+      elseif not shell_flag_found and (line:find("set -", 1, true) or line:find("pipefail", 1, true)) then
+        shell_flag_found = true
+      end
     end
   end
   return shell_flag_found and "sh" or nil
