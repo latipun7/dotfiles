@@ -14,21 +14,33 @@ opt.spellfile = { vim.fn.expand(vim.fn.stdpath("config") .. "/spell/mix.utf-8.ad
 opt.wrap = true
 
 if vim.fn.has("wsl") == 1 then
+  local powershell = vim.fn.executable("pwsh.exe") == 1 and "pwsh.exe" or "powershell.exe"
+
   vim.g.clipboard = {
     name = "WSL-Unicode",
     copy = {
-      ["+"] = { "sh", "-c", "iconv -f utf8 -t utf16 | clip.exe" },
-      ["*"] = { "sh", "-c", "iconv -f utf8 -t utf16 | clip.exe" },
+      ["+"] = {
+        powershell,
+        "-NoProfile",
+        "-Command",
+        "[Console]::InputEncoding = [System.Text.Encoding]::UTF8; Set-Clipboard -Value ([Console]::In.ReadToEnd())",
+      },
+      ["*"] = {
+        powershell,
+        "-NoProfile",
+        "-Command",
+        "[Console]::InputEncoding = [System.Text.Encoding]::UTF8; Set-Clipboard -Value ([Console]::In.ReadToEnd())",
+      },
     },
     paste = {
       ["+"] = {
-        "pwsh.exe",
+        powershell,
         "-NoProfile",
         "-Command",
         '[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; [Console]::Write((Get-Clipboard -Raw).TrimStart([char]0xFEFF).Replace("`r", ""))',
       },
       ["*"] = {
-        "pwsh.exe",
+        powershell,
         "-NoProfile",
         "-Command",
         '[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; [Console]::Write((Get-Clipboard -Raw).TrimStart([char]0xFEFF).Replace("`r", ""))',
