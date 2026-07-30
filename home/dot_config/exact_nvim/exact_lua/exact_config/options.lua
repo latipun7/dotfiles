@@ -13,43 +13,6 @@ opt.spellcapcheck = ""
 opt.spellfile = { vim.fn.expand(vim.fn.stdpath("config") .. "/spell/mix.utf-8.add") }
 opt.wrap = true
 
-if vim.fn.has("wsl") == 1 then
-  local powershell = vim.fn.executable("pwsh.exe") == 1 and "pwsh.exe" or "powershell.exe"
-
-  vim.g.clipboard = {
-    name = "WSL-Unicode",
-    copy = {
-      ["+"] = {
-        powershell,
-        "-NoProfile",
-        "-Command",
-        "[Console]::InputEncoding = [System.Text.Encoding]::UTF8; Set-Clipboard -Value ([Console]::In.ReadToEnd())",
-      },
-      ["*"] = {
-        powershell,
-        "-NoProfile",
-        "-Command",
-        "[Console]::InputEncoding = [System.Text.Encoding]::UTF8; Set-Clipboard -Value ([Console]::In.ReadToEnd())",
-      },
-    },
-    paste = {
-      ["+"] = {
-        powershell,
-        "-NoProfile",
-        "-Command",
-        '[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; [Console]::Write((Get-Clipboard -Raw).TrimStart([char]0xFEFF).Replace("`r", ""))',
-      },
-      ["*"] = {
-        powershell,
-        "-NoProfile",
-        "-Command",
-        '[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; [Console]::Write((Get-Clipboard -Raw).TrimStart([char]0xFEFF).Replace("`r", ""))',
-      },
-    },
-    cache_enabled = false,
-  }
-end
-
 if vim.g.neovide then
   -- Transparency
   vim.g.neovide_opacity = 1
