@@ -67,13 +67,20 @@ return {
 
   -- Linters & Formatters
   {
+    "mfussenegger/nvim-lint",
+    opts = {
+      linters = {
+        ["markdownlint-cli2"] = {
+          stdin = false,
+        },
+      },
+    },
+  },
+  {
     "stevearc/conform.nvim",
     opts = {
       formatters_by_ft = {
         rust = { "rustfmt" },
-        sh = { "shfmt" },
-        bash = { "shfmt" },
-        zsh = { "shfmt" },
       },
       formatters = {
         shfmt = {
