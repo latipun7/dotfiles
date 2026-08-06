@@ -145,35 +145,63 @@ if (($+commands[bw])); then
   bw-unlock() { export BW_SESSION="$(bw unlock --raw)"; }
 fi
 
-# WSL-specific settings
+# Resolve the clipboard backend ONCE at shell startup (0ms runtime overhead)
+typeset -g -a _CLIP_CMD
+
 if [[ -n "$WSL_DISTRO_NAME" ]]; then
-  # UTF-8/Emoji-safe Windows clipboard copy for WSL
-  clip() {
-    local ps=${commands[pwsh.exe]:-${commands[powershell.exe]:-powershell.exe}}
-
-    # PowerShell command string
-    local ps_cmd='[Console]::InputEncoding = [System.Text.Encoding]::UTF8; Set-Clipboard -Value ([Console]::In.ReadToEnd())'
-
-    # 2. Check if receiving stdin from a pipe vs arguments
-    if [[ -t 0 ]]; then
-      if (($# > 0)); then
-        if [[ -f $1 && $# -eq 1 ]]; then
-          # If passed a file path: clip filename.txt
-          "$ps" -NoProfile -NonInteractive -Command "$ps_cmd" < "$1"
-        else
-          # If passed raw text: clip "Hello World"
-          print -rn -- "$*" | "$ps" -NoProfile -NonInteractive -Command "$ps_cmd"
-        fi
-      else
-        print -u2 "Usage: clip [FILE|TEXT] or pipe via stdin (e.g., echo 'text' | clip)"
-        return 1
-      fi
-    else
-      # 3. Piped stdin input: echo "⚙️ test" | clip
-      "$ps" -NoProfile -NonInteractive -Command "$ps_cmd"
-    fi
-  }
+  # --- Inside WSL (wl-copy -> win32yank.exe -> powershell) ---
+  if (($+commands[wl-copy])); then
+    _CLIP_CMD=(wl-copy)
+  elif (($+commands[win32yank.exe])); then
+    _CLIP_CMD=(win32yank.exe -i --crlf)
+  else
+    _CLIP_CMD=(
+      ${commands[pwsh.exe]:-${commands[powershell.exe]:-powershell.exe}}
+      -NoProfile -NonInteractive -Command
+      '[Console]::InputEncoding = [System.Text.Encoding]::UTF8; Set-Clipboard -Value ([Console]::In.ReadToEnd())'
+    )
+  fi
+else
+  # --- Outside WSL (Native Linux/Wayland, macOS, X11) ---
+  if (($+commands[wl-copy])); then
+    _CLIP_CMD=(wl-copy)
+  elif (($+commands[pbcopy])); then
+    _CLIP_CMD=(pbcopy)
+  elif (($+commands[xclip])); then
+    _CLIP_CMD=(xclip -selection clipboard)
+  elif (($+commands[xsel])); then
+    _CLIP_CMD=(xsel --clipboard --input)
+  fi
 fi
+
+# Optimized Zsh clipboard function
+clip() {
+  if ((${#_CLIP_CMD} == 0)); then
+    print -u2 "Error: No suitable clipboard backend found on this system."
+    return 1
+  fi
+
+  # Fast path: Piped stdin input (e.g., echo "⚙️ test" | clip)
+  if [[ ! -t 0 ]]; then
+    "${_CLIP_CMD[@]}"
+    return
+  fi
+
+  # Single file argument (e.g., clip filename.txt)
+  if (($# == 1)) && [[ -f $1 ]]; then
+    "${_CLIP_CMD[@]}" < "$1"
+    return
+  fi
+
+  # Raw string arguments (e.g., clip "Hello World")
+  if (($# > 0)); then
+    print -rn -- "$*" | "${_CLIP_CMD[@]}"
+    return
+  fi
+
+  print -u2 "Usage: clip [FILE|TEXT] or pipe via stdin (e.g., echo 'text' | clip)"
+  return 1
+}
 
 # ░█░█░█▀▀░█░█░█▀▄░▀█▀░█▀█░█▀▄░█▀▀
 # ░█▀▄░█▀▀░░█░░█▀▄░░█░░█░█░█░█░▀▀█
