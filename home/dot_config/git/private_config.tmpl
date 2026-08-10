@@ -59,10 +59,16 @@
   diffFilter = delta --color-only
 
 [delta]
-  features = side-by-side line-numbers decorations navigate
+  features = default line-numbers-style decorations
+
+[delta "default"]
+  navigate = true
+  side-by-side = true
   syntax-theme = Catppuccin Mocha
   plus-style = syntax auto
   minus-style = syntax auto
+  wrap-max-lines = unlimited
+  max-line-length = 0
 
 [delta "decorations"]
   file-style = bold yellow ul
@@ -70,7 +76,8 @@
   commit-decoration-style = bold yellow box ul
   hunk-header-decoration-style = cyan box ul
 
-[delta "line-numbers"]
+[delta "line-numbers-style"]
+  line-numbers = true
   line-numbers-left-style = cyan
   line-numbers-right-style = cyan
   line-numbers-minus-style = 124
