@@ -1,0 +1,4 @@
+{{ $mise := lookPath "mise" -}}
+{{ if $mise -}}
+{{ output $mise "completion" "zsh" -}}
+{{ end -}}
