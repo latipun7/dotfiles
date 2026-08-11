@@ -1,0 +1,4 @@
+{{ $rustup := lookPath "rustup" -}}
+{{ if $rustup -}}
+{{ output $rustup "completions" "zsh" "cargo" -}}
+{{ end -}}
