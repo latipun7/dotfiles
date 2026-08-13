@@ -81,3 +81,9 @@ for = "linux"
 on = ["g", "s"]
 run = "cd ~/.local/share"
 desc = "Go to data share directory"
+
+[[mgr.prepend_keymap]]
+on = ["g", "r"]
+run = "cd /"
+desc = "Go to root"
+for = "linux"
