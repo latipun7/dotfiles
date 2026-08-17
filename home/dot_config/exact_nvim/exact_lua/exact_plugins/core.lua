@@ -11,6 +11,7 @@ return {
   },
   {
     "folke/flash.nvim",
+    commit = "c92888d432bebeb145dad09c07ab65cc7c577184",
     keys = function()
       return {
         { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
