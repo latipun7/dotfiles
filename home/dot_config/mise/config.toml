@@ -1,3 +1,14 @@
 [tools]
+glow = "latest"
 node = "latest"
-rust = "1.97.1"
+rust = "latest"
+usage = "latest"
+
+[settings]
+registry_floating = true
+
+[settings.cargo]
+binstall_quickinstall = true
+
+[settings.aqua]
+registry_cache_ttl = "24h"
