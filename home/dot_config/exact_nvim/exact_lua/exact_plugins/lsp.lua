@@ -81,14 +81,26 @@ return {
     opts = {
       formatters_by_ft = {
         rust = { "rustfmt" },
+        zsh = { "shuck" },
       },
       formatters = {
         shfmt = {
           prepend_args = function(_, ctx)
             local args = { "-i", "2", "-ci", "-bn", "-sr" }
             if vim.bo[ctx.buf].filetype:find("zsh", 1, true) then vim.list_extend(args, { "-ln", "zsh" }) end
+            if vim.bo[ctx.buf].filetype:find("bash", 1, true) then vim.list_extend(args, { "-ln", "bash" }) end
             return args
           end,
+        },
+        shuck = {
+          command = "shuck",
+          args = function(_, ctx)
+            local args = { "format", "--stdin-filename", "$FILENAME" }
+            if vim.bo[ctx.buf].filetype:find("zsh", 1, true) then vim.list_extend(args, { "--dialect", "zsh" }) end
+            if vim.bo[ctx.buf].filetype:find("bash", 1, true) then vim.list_extend(args, { "--dialect", "bash" }) end
+            return args
+          end,
+          cwd = require("conform.util").root_file({ ".shuck.toml", "shuck.toml", ".git" }),
         },
       },
     },
