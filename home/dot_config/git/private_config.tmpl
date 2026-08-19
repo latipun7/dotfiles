@@ -15,9 +15,6 @@
 
 [core]
   pager = delta
-{{- if eq .chezmoi.os "windows" }}
-  editor = code --wait
-{{- end }}
 
 [user]
   email = {{ .email }}

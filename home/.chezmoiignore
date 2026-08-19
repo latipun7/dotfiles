@@ -13,9 +13,10 @@
 
 {{- if eq .chezmoi.os "windows" }}
 # Ignore this in windows (*nix only files)
-.config/{btop,kitty,paru,certbot,fcitx5,godns,rofi,tmux,wgetrc}
+.config/{copyq,kitty,lf,paru,pg,certbot,rofi,systemd,tmux,vimiv,zathura,mimeapps.list,rofimoji.rc,wgetrc}
 .local/bin
-.local/share/{fcitx5,omz-custom,Xresources*}
+.local/share
+!.local/share/vsicons-custom-icons
 .p10k.zsh
 .xprofile
 .zlogin

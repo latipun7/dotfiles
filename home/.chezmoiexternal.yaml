@@ -10,6 +10,16 @@
   refreshPeriod: 132h
   include: ["*", "*/themes/*.tmTheme"]
 
+.config/btop/themes/catppuccin-mocha.theme:
+  type: file
+  url: https://github.com/catppuccin/btop/raw/main/themes/catppuccin_mocha.theme
+  refreshPeriod: 132h
+
+.config/glow/catppuccin-mocha.json:
+  type: file
+  url: https://github.com/catppuccin/glamour/raw/main/themes/catppuccin-mocha.json
+  refreshPeriod: 132h
+
 # ╻ ╻┏┓╻╻╻ ╻   ┏┓╻┏━┓   ┏━┓┏┓╻╺┳┓┏━┓┏━┓╻╺┳┓
 # ┃ ┃┃┗┫┃┏╋┛   ┃┗┫┃ ┃   ┣━┫┃┗┫ ┃┃┣┳┛┃ ┃┃ ┃┃
 # ┗━┛╹ ╹╹╹ ╹   ╹ ╹┗━┛   ╹ ╹╹ ╹╺┻┛╹┗╸┗━┛╹╺┻┛
@@ -27,16 +37,6 @@
 # ┃ ┃┃┗┫┃┏╋┛   ┃ ┃┃┗┫┃  ┗┳┛
 # ┗━┛╹ ╹╹╹ ╹   ┗━┛╹ ╹┗━╸ ╹
 {{ if ne .chezmoi.os "windows" -}}
-
-.config/btop/themes/catppuccin-mocha.theme:
-  type: file
-  url: https://github.com/catppuccin/btop/raw/main/themes/catppuccin_mocha.theme
-  refreshPeriod: 132h
-
-.config/glow/catppuccin-mocha.json:
-  type: file
-  url: https://github.com/catppuccin/glamour/raw/main/themes/catppuccin-mocha.json
-  refreshPeriod: 132h
 
 .local/share/hermes-webui:
   type: git-repo
@@ -167,19 +167,6 @@ www/adminer: # plugins
   refreshPeriod: 744h
   include: ["*/plugins/**"]
 # ]]]
-
-{{- end }}
-
-# ╻ ╻╻┏┓╻╺┳┓┏━┓╻ ╻┏━┓   ┏━┓┏┓╻╻  ╻ ╻
-# ┃╻┃┃┃┗┫ ┃┃┃ ┃┃╻┃┗━┓   ┃ ┃┃┗┫┃  ┗┳┛
-# ┗┻┛╹╹ ╹╺┻┛┗━┛┗┻┛┗━┛   ┗━┛╹ ╹┗━╸ ╹
-{{ if eq .chezmoi.os "windows" -}}
-
-.local/bin/jq.exe:
-  type: file
-  url: https://github.com/stedolan/jq/releases/latest/download/jq-win64.exe
-  executable: true
-  refreshPeriod: 744h
 
 {{- end }}
 
