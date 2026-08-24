@@ -59,7 +59,7 @@ function check_dependencies() {
   missing_commands=""
 
   for dep in "${deps[@]}"; do
-    type -p "$dep" &>/dev/null || {
+    type -p "$dep" &> /dev/null || {
       missing_commands+="$dep "
     }
   done

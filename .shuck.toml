@@ -1,0 +1,17 @@
+[per-file-shell]
+"dot_z*" = "zsh"
+"private_dot_z*" = "zsh"
+
+[lint.per-file-ignores]
+"**/*p10k.zsh" = ["ALL"] # generated file
+
+[format]
+indent-style = "space"
+indent-width = 2
+binary-next-line = true
+switch-case-indent = true
+space-redirects = true
+keep-padding = false
+function-next-line = false
+never-split = false
+exclude = ["**/*p10k.zsh"] # generated file
