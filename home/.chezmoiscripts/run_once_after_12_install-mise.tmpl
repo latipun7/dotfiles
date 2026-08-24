@@ -1,4 +1,4 @@
-{{ if not .chezmoi.os "windows" -}}
+{{ if ne .chezmoi.os "windows" -}}
 #!/usr/bin/env sh
 
 curl https://mise.run | sh
