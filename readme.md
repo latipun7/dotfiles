@@ -37,15 +37,19 @@ Here's the list of what included in this dotfiles:
 - [`lf`](https://github.com/gokcehan/lf) - Cross-platform terminal file manager.
 - And [many more](./home).
 
-## Installation
+## Installation / Bootstrap
 
 Simply run:
 
 ```bash
-bash -c "$(curl -fsLS https://s.id/install-dotfiles)"
+bash -c "$(curl -fsLS https://s.id/bootstrap-dotfiles)"
 ```
 
-For _**Windows, TBA**_.
+For Windows (powershell), run:
+
+```powershell
+iwr -useb https://s.id/bootstrap-windows-dotfiles | iex
+```
 
 ## Resources
 
@@ -62,7 +66,7 @@ and this list is what actually inspired me to get started with it.
 <!-- Variables -->
 
 [discord-image]: https://img.shields.io/discord/758271814153011201?label=Developers%20Indonesia&logo=discord&style=flat-square
-[discord-url]: https://discord.gg/njSj2Nq "Chat and discuss at Developers Indonesia"
-[awe-dot]: https://github.com/webpro/awesome-dotfiles#readme "Awesome Dotfiles"
-[bash]: https://www.gnu.org/software/bash/manual/bash.html "Bash Manual"
-[nerd-fonts]: https://www.nerdfonts.com/ "NerdFonts"
+[discord-url]: https://discord.gg/njSj2Nq 'Chat and discuss at Developers Indonesia'
+[awe-dot]: https://github.com/webpro/awesome-dotfiles#readme 'Awesome Dotfiles'
+[bash]: https://www.gnu.org/software/bash/manual/bash.html 'Bash Manual'
+[nerd-fonts]: https://www.nerdfonts.com/ 'NerdFonts'
