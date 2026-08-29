@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+NC='\033[0m'
+
+log() { echo -e "${BLUE}==>${NC} ${GREEN}$1${NC}"; }
+
+# mise config hash: {{ include "dot_config/mise/config.toml" | sha256sum }}
+log "Running mise install script..."
+mise install
+
+log "Checking for mise outdated tools..."
+mise outdated --bump

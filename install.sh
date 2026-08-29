@@ -1,88 +1,80 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC2154
-
 set -euo pipefail
 
-esc="\033"
-reset="${esc}[0m"
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+YELLOW='\033[1;33m'
+RED='\033[0;31m'
+NC='\033[0m'
 
-# 256 Colors Foreground
-for color in {0..255}; do
-  declare "color${color}=${esc}[38;5;${color}m"
+log() { echo -e "${BLUE}==>${NC} ${GREEN}$1${NC}"; }
+warn() { echo -e "${YELLOW}==>${NC} ${YELLOW}$1${NC}"; }
+err() { echo -e "${RED}==>${NC} ${RED}$1${NC}"; }
+
+# 1. Check dependencies
+log "Checking required dependencies..."
+DEPS=("curl" "git" "unzip" "tar")
+MISSING_DEPS=()
+
+for dep in "${DEPS[@]}"; do
+  if ! command -v "$dep" > /dev/null 2>&1; then
+    MISSING_DEPS+=("$dep")
+  fi
 done
 
-# 256 Colors Background
-for bg in {0..255}; do
-  declare "bg${bg}=${esc}[48;5;${bg}m"
-done
+if [ ${#MISSING_DEPS[@]} -ne 0 ]; then
+  err "Missing required dependencies: ${MISSING_DEPS[*]}"
+  warn "Please install them using your system's package manager and try again."
+  exit 1
+fi
+log "All basic dependencies met."
 
-function print_help() {
-  echo
-}
+# 2. Install mise
+if ! command -v mise > /dev/null 2>&1; then
+  log "Installing mise..."
+  curl https://mise.run | sh
+else
+  log "mise is already installed."
+fi
 
-function die() {
-  local _ret="${2:-1}"
-  if [[ $_ret != 0 ]]; then
-    test "${_PRINT_HELP:-no}" = yes && print_help >&2
-    echo -e "$1" >&2
-  else
-    test "${_PRINT_HELP:-no}" = yes && print_help
-    echo -e "$1"
+# Ensure mise and its shims are in PATH for this script session
+export PATH="$HOME/.local/bin:$HOME/.local/share/mise/shims:$PATH"
+
+# 3. Install bitwarden and chezmoi via mise
+log "Ensuring bitwarden and chezmoi are installed..."
+mise use --global bitwarden@latest chezmoi@latest
+
+# 4. Handle Bitwarden Authentication
+log "Checking Bitwarden status..."
+if ! command -v bw > /dev/null 2>&1; then
+  err "Bitwarden CLI (bw) not found in PATH."
+  exit 1
+fi
+
+BW_STATUS=$(bw status | grep -o '"status":"[^"]*"' | cut -d'"' -f4 || echo "unknown")
+
+if [ "$BW_STATUS" = "unauthenticated" ]; then
+  log "Bitwarden is unauthenticated. Logging in..."
+  BW_SESSION=$(bw login --raw)
+  export BW_SESSION
+elif [ "$BW_STATUS" = "locked" ]; then
+  log "Bitwarden is locked. Unlocking..."
+  BW_SESSION=$(bw unlock --raw)
+  export BW_SESSION
+elif [ "$BW_STATUS" = "unlocked" ]; then
+  log "Bitwarden is already unlocked."
+  if [ -z "${BW_SESSION:-}" ]; then
+    warn "BW_SESSION is not set in the environment. Chezmoi might fail if secrets are required."
   fi
+else
+  err "Failed to determine Bitwarden status."
+  exit 1
+fi
 
-  exit "${_ret}"
-}
+log "Bitwarden session exported."
 
-function info() {
-  echo -e "\n${color14}==>${reset} $1 ℹ\n"
-}
+# 5. Initialize and apply dotfiles
+log "Initializing dotfiles via chezmoi..."
+chezmoi init latipun7 --apply
 
-function step() {
-  echo -e "\n${color13}==>${reset} $1 👟\n"
-}
-
-function success() {
-  echo -e "\n${color2}==>${reset} $1 ✔\n"
-}
-
-function fail() {
-  die "\n${color1}==>${reset} $1 ❌\n" 1
-}
-
-#===================================================0
-
-deps=(gzip chezmoi git wget curl tar lazygit fd rg nvim grep delta rbw unzip)
-
-function check_dependencies() {
-  step "Checking dependencies..."
-
-  missing_commands=""
-
-  for dep in "${deps[@]}"; do
-    type -p "$dep" &> /dev/null || {
-      missing_commands+="$dep "
-    }
-  done
-
-  # Remove trailing space from missing_commands (if any)
-  missing_commands="${missing_commands% }"
-
-  if [ -n "$missing_commands" ]; then
-    fail "Could not find: $missing_commands\n    Is it installed?" >&2
-  fi
-
-  info "OK!"
-}
-
-function bootstrap_dotfiles() {
-  step "Install dotfiles..."
-  chezmoi init latipun7 --apply
-}
-
-function main() {
-  check_dependencies
-  bootstrap_dotfiles
-  success "All done 👏\n    Please restart your terminal 🎉"
-}
-
-main
+log "Bootstrap completed successfully!"

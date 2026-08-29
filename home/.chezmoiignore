@@ -13,6 +13,7 @@
 
 {{- if eq .chezmoi.os "windows" }}
 # Ignore this in windows (*nix only files)
+.chezmoiscripts/*.sh*
 .config/{copyq,kitty,lf,paru,pg,certbot,rofi,systemd,tmux,vimiv,zathura,mimeapps.list,rofimoji.rc,wgetrc}
 .local/bin
 .local/share
@@ -29,6 +30,7 @@ www
 
 {{- if ne .chezmoi.os "windows" }}
 # Ignore this outside windows (windows only files)
+.chezmoiscripts/*.ps1*
 .config/oh-my-posh
 AppData
 Documents/PowerShell

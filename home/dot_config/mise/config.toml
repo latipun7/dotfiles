@@ -1,4 +1,6 @@
 [tools]
+bitwarden = "latest"
+chezmoi = "latest"
 glow = "latest"
 node = "latest"
 rust = "latest"
