@@ -2,13 +2,16 @@
 {{ $name := promptStringOnce . "name" "Full name" "Latif Sulistyo" -}}
 
 {{ $isServer := false -}}
-{{ $isWSL := (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
+{{ $isWSL := false -}}
 
 {{- if eq .chezmoi.os "linux" -}}
+{{-   $isWSL = (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
 {{-   if not $isWSL -}}
-{{-     $chassis := output "hostnamectl" "chassis" | trim -}}
-{{-     if eq $chassis "server" -}}
-{{-       $isServer = true -}}
+{{-     if lookPath "hostnamectl" -}}
+{{-       $chassis := output "hostnamectl" "chassis" | trim -}}
+{{-       if eq $chassis "server" -}}
+{{-         $isServer = true -}}
+{{-       end -}}
 {{-     end -}}
 {{-   end -}}
 {{- end -}}

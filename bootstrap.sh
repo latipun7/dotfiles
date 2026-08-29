@@ -73,8 +73,13 @@ fi
 
 log "Bitwarden session exported."
 
-# 5. Initialize and apply dotfiles
-log "Initializing dotfiles via chezmoi..."
-chezmoi init latipun7 --apply
+# 5. Initialize or update dotfiles
+if [ ! -d "$(chezmoi source-path 2> /dev/null || echo "$HOME/.local/share/chezmoi")" ]; then
+  log "Initializing dotfiles via chezmoi..."
+  chezmoi init latipun7 --apply
+else
+  log "Chezmoi is already initialized. Updating and applying latest changes..."
+  chezmoi update --init
+fi
 
 log "Bootstrap completed successfully!"

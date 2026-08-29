@@ -74,8 +74,23 @@ if ($bwStatus -eq "unauthenticated") {
 
 Write-LogInfo "Bitwarden session exported."
 
-# 5. Initialize and apply dotfiles
-Write-LogInfo "Initializing dotfiles via chezmoi..."
-chezmoi init latipun7 --apply
+# 5. Initialize or update dotfiles
+$chezmoiSource = (chezmoi source-path 2>$null)
+if ([string]::IsNullOrEmpty($chezmoiSource)) {
+    $chezmoiSource = "$env:HOME\.local\share\chezmoi"
+}
+
+if (-not (Test-Path $chezmoiSource)) {
+    Write-LogInfo "Initializing dotfiles via chezmoi..."
+    chezmoi init latipun7 --apply
+} else {
+    Write-LogInfo "Chezmoi is already initialized. Updating and applying latest changes..."
+    chezmoi update --init
+}
+
+if ($LASTEXITCODE -ne 0) {
+    Write-LogErr "Chezmoi encountered an error (Exit Code: $LASTEXITCODE)."
+    exit $LASTEXITCODE
+}
 
 Write-LogInfo "Bootstrap completed successfully!"
