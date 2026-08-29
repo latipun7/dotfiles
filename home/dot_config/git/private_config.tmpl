@@ -1,13 +1,13 @@
 # https://git-scm.com/docs/git-config/
 
 [credential]
-{{- if (or (eq .chezmoi.os "linux") (eq .chezmoi.os "android")) -}}
+{{- if (or (eq .chezmoi.os "linux") (eq .chezmoi.os "android")) }}
 {{-   if (or .is_server .is_wsl) }}
   helper = cache --timeout=86400
 {{-   else }}
   helper = libsecret
 {{-   end }}
-{{- else if eq .chezmoi.os "windows" -}}
+{{- else if eq .chezmoi.os "windows" }}
   helper = manager
 {{- else }}
   helper = manager
