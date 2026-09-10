@@ -180,7 +180,7 @@
         "source": "Windows.Terminal.VisualStudio"
       },
       {
-        "commandline": "%UserProfile%\\scoop\\shims\\nu.exe",
+        "commandline": "%UserProfile%\\scoop\\shims\\nu.exe -l",
         "guid": "{29b968d0-ed46-468a-b4b6-26f02450c20b}",
         "hidden": false,
         "name": "Nu"
