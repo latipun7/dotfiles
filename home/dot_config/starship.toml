@@ -1,0 +1,360 @@
+# Starship config equivalent to p10k-lean-8colors
+# 2 lines, disconnected, no frame, sparse, many icons, concise
+# Based on Powerlevel10k config
+
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Add blank line between prompts
+add_newline = true
+
+# Bump command timeout to avoid warnings on slow shell spawns (default 500ms)
+command_timeout = 1000
+
+# 2-line lean prompt layout:
+# Line 1 left:  os dir git_branch git_status
+# Line 1 right: status cmd_duration jobs [language versions...]
+# Line 2:       character (❯)
+format = """
+$os\
+$directory\
+$git_branch\
+$git_status\
+$fill\
+$status\
+$cmd_duration\
+$jobs\
+$direnv\
+$conda\
+$python\
+$nodejs\
+$bun\
+$rust\
+$ruby\
+$java\
+$golang\
+$lua\
+$perl\
+$php\
+$haskell\
+$scala\
+$kubernetes\
+$terraform\
+$aws\
+$gcloud\
+$azure\
+$nix_shell\
+$package\
+${custom.yazi}\
+${custom.yazi_unix}\
+${custom.yazi_macos}\
+$line_break\
+$character"""
+
+# Fill module - space between left and right
+[fill]
+symbol = " "
+
+# ============================================================================
+# OS icon
+# ============================================================================
+[os]
+disabled = false
+style = "bold white"
+format = "[$symbol]($style) "
+
+[os.symbols]
+Arch = "󰣇"
+CachyOS = ""
+Windows = ""
+Macos = ""
+Linux = ""
+Ubuntu = ""
+
+# ============================================================================
+# Directory
+# ============================================================================
+[directory]
+style = "bold blue"
+format = "[  $path]($style)[$read_only]($read_only_style) "
+truncation_length = 5
+truncate_to_repo = false
+truncation_symbol = ""
+read_only = "🔒"
+read_only_style = "bold red"
+
+# ============================================================================
+# Git branch
+# ============================================================================
+[git_branch]
+style = "bold green"
+format = " [$symbol$branch(:$remote_branch)]($style) "
+symbol = " "
+truncation_length = 32
+truncation_symbol = "…"
+
+# ============================================================================
+# Git status
+# Colors: clean=green, modified=yellow, untracked=blue, conflicted=red
+# ============================================================================
+[git_status]
+style = "bold green"
+format = '([$conflicted$stashed$deleted$renamed$modified$typechanged$staged$untracked]($style)[$ahead_behind]($style))'
+conflicted = "[=${count}](bold red) "
+ahead = "[⇡${count}](bold green) "
+behind = "[⇣${count}](bold green) "
+diverged = "[⇡${ahead_count}⇣${behind_count}](bold green) "
+untracked = "[?${count}](bold blue) "
+stashed = "[*${count}](bold green) "
+modified = "[!${count}](bold yellow) "
+staged = "[+${count}](bold yellow) "
+renamed = "[»${count}](bold yellow) "
+deleted = "[✘${count}](bold yellow) "
+typechanged = "[↝${count}](bold yellow) "
+
+# ============================================================================
+# Character / prompt symbol
+# Green ❯ on success, red ❯ on error
+# ============================================================================
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold green)"
+vimcmd_replace_one_symbol = "[❮](bold purple)"
+vimcmd_replace_symbol = "[❮](bold purple)"
+vimcmd_visual_symbol = "[V](bold yellow)"
+
+# ============================================================================
+# Status
+# ============================================================================
+[status]
+disabled = false
+style = "bold red"
+symbol = " "
+success_symbol = ""
+format = '([$symbol$status]($style) )'
+map_symbol = true
+not_found_symbol = "🔍"
+not_executable_symbol = "🚫"
+sigint_symbol = "🧱"
+signal_symbol = "⚡"
+
+# ============================================================================
+# Command duration
+# ============================================================================
+[cmd_duration]
+style = "bold yellow"
+min_time = 1000
+format = "took [$duration]($style) "
+
+# ============================================================================
+# Jobs
+# ============================================================================
+[jobs]
+style = "bold red"
+symbol = ""
+number_threshold = 1
+format = "[$symbol$number]($style) "
+
+# ============================================================================
+# Direnv
+# ============================================================================
+[direnv]
+disabled = false
+style = "bold yellow"
+format = '[$symbol$loaded/$allowed]($style) '
+symbol = " "
+
+# ============================================================================
+# Python
+# ============================================================================
+[python]
+style = "bold cyan"
+pyenv_version_name = true
+format = '[${symbol}${pyenv_prefix}(\($virtualenv\) )$version]($style) '
+symbol = " "
+
+# ============================================================================
+# Conda
+# ============================================================================
+[conda]
+style = "bold cyan"
+format = '[$symbol$environment]($style) '
+ignore_base = true
+symbol = " "
+
+# ============================================================================
+# Node.js
+# ============================================================================
+[nodejs]
+style = "bold green"
+format = '[$symbol$version]($style) '
+symbol = " "
+
+# ============================================================================
+# Bun
+# ============================================================================
+[bun]
+style = "bold white"
+format = '[$symbol$version]($style) '
+symbol = " "
+
+# ============================================================================
+# Rust
+# ============================================================================
+[rust]
+style = "bold blue"
+format = '[$symbol$version]($style) '
+symbol = " "
+
+# ============================================================================
+# Ruby
+# ============================================================================
+[ruby]
+style = "bold red"
+format = '[$symbol$version]($style) '
+symbol = " "
+
+# ============================================================================
+# Java
+# ============================================================================
+[java]
+style = "bold blue"
+format = '[$symbol$version]($style) '
+symbol = " "
+
+# ============================================================================
+# Go
+# ============================================================================
+[golang]
+style = "bold cyan"
+format = '[$symbol$version]($style) '
+symbol = " "
+
+# ============================================================================
+# Lua
+# ============================================================================
+[lua]
+style = "bold blue"
+format = '[$symbol$version]($style) '
+symbol = " "
+
+# ============================================================================
+# Perl
+# ============================================================================
+[perl]
+style = "bold cyan"
+format = '[$symbol$version]($style) '
+symbol = " "
+
+# ============================================================================
+# PHP
+# ============================================================================
+[php]
+style = "bold purple"
+format = '[$symbol$version]($style) '
+symbol = " "
+
+# ============================================================================
+# Haskell
+# ============================================================================
+[haskell]
+style = "bold yellow"
+format = '[$symbol$version]($style) '
+symbol = " "
+
+# ============================================================================
+# Scala
+# ============================================================================
+[scala]
+style = "bold red"
+format = '[$symbol$version]($style) '
+symbol = " "
+
+# ============================================================================
+# Kubernetes
+# ============================================================================
+[kubernetes]
+disabled = false
+style = "bold purple"
+format = '[$symbol$context( \($namespace\))]($style) '
+symbol = " "
+
+# ============================================================================
+# Terraform
+# ============================================================================
+[terraform]
+style = "bold blue"
+format = '[$symbol$workspace]($style) '
+symbol = " "
+
+# ============================================================================
+# AWS
+# ============================================================================
+[aws]
+style = "bold yellow"
+format = '[$symbol($profile )(\($region\) )]($style)'
+symbol = " "
+
+# ============================================================================
+# Google Cloud
+# ============================================================================
+[gcloud]
+style = "bold blue"
+format = '[$symbol$account(\($region\))]($style) '
+symbol = " "
+
+# ============================================================================
+# Azure
+# ============================================================================
+[azure]
+style = "bold blue"
+format = '[$symbol$subscription]($style) '
+symbol = " "
+
+# ============================================================================
+# Nix shell
+# ============================================================================
+[nix_shell]
+style = "bold blue"
+format = '[$symbol$state( \($name\))]($style) '
+symbol = " "
+
+# ============================================================================
+# Package
+# ============================================================================
+[package]
+style = "bold cyan"
+symbol = " "
+format = '[$symbol$version]($style) '
+
+# ============================================================================
+# Custom: Yazi shell indicator (cross-platform)
+# Shows when $YAZI_LEVEL env var is set
+# Uses 'os' field to run platform-specific commands
+# ============================================================================
+
+# Windows version (cmd.exe)
+[custom.yazi]
+os = 'windows'
+when = 'cmd /c "set YAZI_LEVEL 2>nul && exit 0 || exit 1"'
+command = "cmd /c echo  Yazi (%YAZI_LEVEL%)"
+style = "bold cyan"
+format = "[$output]($style) "
+description = "Shows when inside a Yazi file manager shell (Windows)"
+
+# Unix version (sh) — Linux, macOS, WSL
+[custom.yazi_unix]
+os = 'linux'
+when = 'test -n "$YAZI_LEVEL"'
+command = "echo  Yazi ($YAZI_LEVEL)"
+style = "bold cyan"
+format = "[$output]($style) "
+description = "Shows when inside a Yazi file manager shell (Linux)"
+
+[custom.yazi_macos]
+os = 'macos'
+when = 'test -n "$YAZI_LEVEL"'
+command = "echo  Yazi ($YAZI_LEVEL)"
+style = "bold cyan"
+format = "[$output]($style) "
+description = "Shows when inside a Yazi file manager shell (macOS)"
