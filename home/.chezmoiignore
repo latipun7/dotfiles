@@ -13,6 +13,7 @@
 
 {{- if eq .chezmoi.os "windows" }}
 # Ignore this in windows (*nix only files)
+AppData/Roaming/nushell/{history*,vendor}
 .chezmoiscripts/*.sh*
 .config/{copyq,kitty,lf,paru,pg,certbot,rofi,systemd,tmux,vimiv,zathura,mimeapps.list,rofimoji.rc,wgetrc}
 .local/bin
