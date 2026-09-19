@@ -39,36 +39,36 @@
   "initialRows": 37,
   "keybindings": [
     {
-      "id": "Terminal.CopyToClipboard",
-      "keys": "ctrl+c"
+      "id": "User.scrollDownPage",
+      "keys": "ctrl+shift+d"
     },
     {
       "id": "User.scrollUp.0",
       "keys": "ctrl+shift+k"
     },
     {
-      "id": "User.scrollDownPage",
-      "keys": "ctrl+shift+d"
-    },
-    {
-      "id": "Terminal.PasteFromClipboard",
-      "keys": "ctrl+v"
+      "id": "Terminal.CopyToClipboard",
+      "keys": "ctrl+c"
     },
     {
       "id": "User.togglePaneZoom",
       "keys": "ctrl+shift+z"
     },
     {
+      "id": "Terminal.PasteFromClipboard",
+      "keys": "ctrl+v"
+    },
+    {
       "id": "User.scrollDown.0",
       "keys": "ctrl+shift+j"
     },
     {
-      "id": "User.scrollUpPage",
-      "keys": "ctrl+shift+u"
-    },
-    {
       "id": "Terminal.ResizePaneDown",
       "keys": "ctrl+shift+down"
+    },
+    {
+      "id": "User.scrollUpPage",
+      "keys": "ctrl+shift+u"
     },
     {
       "id": null,
@@ -123,7 +123,7 @@
   ],
   "profiles": {
     "defaults": {
-      "backgroundImage": "C:\\Users\\latif\\OneDrive\\Pictures\\dyah-latif.small.png",
+      "backgroundImage": "C:\\Users\\latif\\OneDrive\\Pictures\\Logo\\dyah-latif.small.png",
       "backgroundImageAlignment": "topRight",
       "backgroundImageOpacity": 0.32,
       "backgroundImageStretchMode": "none",
