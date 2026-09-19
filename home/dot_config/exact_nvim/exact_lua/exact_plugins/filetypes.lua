@@ -17,7 +17,7 @@ return {
 
       return {
         dependencies_bin = {
-          ["tinymist"] = tinymist_path,
+          tinymist = tinymist_path,
         },
       }
     end,
