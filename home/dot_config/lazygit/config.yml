@@ -1,10 +1,11 @@
 gui:
   showIcons: true
-  nerdFontsVersion: "3"
-  authorColors:
-    "Latif Sulistyo": magenta
+  nerdFontsVersion: '3'
   theme:
     selectedLineBgColor: [reverse]
+    authorColors:
+      'Latif Sulistyo': magenta
+
 git:
   branchLogCmd: "git log --graph --color=always --pretty='%Cred%h%Creset -%C(auto)% d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' {{branchName}} --"
   diffRenderers:
@@ -13,14 +14,14 @@ git:
   allBranchesLogCmds:
     - git log --graph --color=always --pretty='%Cred%h%Creset -%C(auto)% d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --all
 customCommands:
-  - key: "D"
-    context: "tags"
-    description: "Delete tag on both remote and local"
-    command: "git push --delete {{ index .PromptResponses 0 }} {{ index .SelectedTag.Name }} && git tag --delete {{ index .SelectedTag.Name }}"
+  - key: 'D'
+    context: 'tags'
+    description: 'Delete tag on both remote and local'
+    command: 'git push --delete {{ index .PromptResponses 0 }} {{ index .SelectedTag.Name }} && git tag --delete {{ index .SelectedTag.Name }}'
     prompts:
-      - type: "menuFromCommand"
+      - type: 'menuFromCommand'
         title: 'Remote to delete tag "{{ index .SelectedTag.Name }}" from:'
-        command: "git remote show"
-        filter: "(?P<remote>.*)"
-        valueFormat: "{{ .remote }}"
-    loadingText: "Deleting tag"
+        command: 'git remote show'
+        filter: '(?P<remote>.*)'
+        valueFormat: '{{ .remote }}'
+    loadingText: 'Deleting tag'
