@@ -1,0 +1,72 @@
+{{ if eq .chezmoi.os "windows" -}}
+$IsAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+
+if (-not $IsAdmin) {
+    Write-Warning "Requesting Administrator privileges via UAC for symlink creation..."
+
+    Start-Process powershell.exe -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs -Wait
+    exit 0
+}
+
+# --- ELEVATED SESSION STARTS HERE ---
+$LogFile = Join-Path $env:TEMP "setup-games-symlink.log"
+Start-Transcript -Path $LogFile -Append | Out-Null
+
+try {
+    $ErrorActionPreference = 'Stop'
+
+    # Print path to verify env:USERPROFILE hasn't shifted to the 'Administrator' profile
+    $SyncDir = Join-Path $env:USERPROFILE "OneDrive\GameSaves"
+    Write-Host "Target OneDrive: $SyncDir" -ForegroundColor Yellow
+
+    $GameMappings = @(
+        @{
+            Name   = "Insaniquarium! Deluxe"
+            Link   = "$env:ProgramData\Steam\Insaniquarium\userdata"
+            Target = Join-Path $SyncDir "Insaniquarium"
+        }
+    )
+
+    if (-not (Test-Path $SyncDir)) {
+        Write-Host "Creating base GameSaves folder in OneDrive..."
+        New-Item -ItemType Directory -Path $SyncDir | Out-Null
+    }
+
+    foreach ($Game in $GameMappings) {
+        Write-Host "Processing: $($Game.Name)" -ForegroundColor Cyan
+
+        $Link =$Game.Link
+        $Target =$Game.Target
+
+        if (-not (Test-Path $Target)) {
+            if (Test-Path $Link -PathType Container) {
+                Write-Host "  Moving existing save to OneDrive..."
+                Move-Item -Path $Link -Destination $Target -Force
+            } else {
+                Write-Host "  Creating new folder in OneDrive..."
+                New-Item -ItemType Directory -Path $Target | Out-Null
+            }
+        }
+
+        if (-not (Test-Path $Link)) {
+            Write-Host "  Creating Junction: $Link -> $Target"
+            New-Item -ItemType Junction -Path $Link -Target $Target | Out-Null
+        } else {
+            $Item = Get-Item $Link -Force
+            if ($Item.LinkType -eq "Junction") {
+                Write-Host "  Junction already exists. Skipping." -ForegroundColor DarkGray
+            } else {
+                Write-Host "  WARNING: $Link is not a junction. Check manually." -ForegroundColor Yellow
+            }
+        }
+    }
+
+    Write-Host "`n[SUCCESS] All processes completed successfully." -ForegroundColor Green
+} catch {
+    Write-Host "`n[ERROR] An error occurred: $_" -ForegroundColor Red
+} finally {
+    Stop-Transcript | Out-Null
+    Write-Host "Log saved to: $LogFile" -ForegroundColor Cyan
+    Read-Host "Press Enter to close this window..."
+}
+{{ end -}}

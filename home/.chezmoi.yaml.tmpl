@@ -38,3 +38,8 @@ data:
   is_server: {{ $isServer }}
   is_wsl: {{ $isWSL }}
   is_arch_linux: {{ not (not (and (eq .chezmoi.os "linux") (lookPath "pacman"))) }}
+
+interpreters:
+  ps1:
+    command: "pwsh"
+    args: ["-NoLogo", "-NoProfile", "-ExecutionPolicy", "Bypass"]
